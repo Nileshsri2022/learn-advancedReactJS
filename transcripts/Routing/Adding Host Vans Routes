@@ -1,0 +1,140 @@
+
+Transcript
+0:00
+The next thing we'll be working on is the host vans page.
+0:03
+This is different than the vans page that we have in the nav bar, the main nav bar up here, because that lists all the vans on our entire van life site.
+0:11
+Going into the host kind of submenu, the vans page here just is supposed to list the vans that this particular host is the owner of.
+0:20
+Keep in mind we don't have any kind of authentication so this is all a bit contrived, but the idea is the host would only see this host link when they're actually logged in if they're a host, and they would only then be able to get to this dashboard and navigation for hosts.
+0:34
+But that's beside the point.
+0:36
+Your challenge is to start off by creating these first two pages.
+0:39
+You'll see there's a van list page.
+0:41
+Again, the vans that this host owns.
+0:43
+Clicking on one of those will send you to the van detail page.
+0:47
+And that van detail page has details, pricing, and photos.
+0:50
+We're not going to worry about pricing and photos.
+0:52
+We're actually not going to worry about any of the user interface that you see here because the challenge is to add those routes and to add the vans link in the host navbar.
+1:02
+Right now we just have dashboard income and reviews.
+1:04
+We need to add the vans link there.
+1:07
+Like it says, just create a stubbed out version of the pages that return an h one for now and don't worry about adding the navigation from host vans to the host vans detail.
+1:17
+In other words, because you're just going to have an h one that says host vans page here, there isn't going to be a way to have a link to the individual vans quite yet.
+1:25
+Don't Don't worry, we'll get there soon.
+1:27
+As a part of this challenge you'll need to decide whether or not you'll be using nested routes and I want you to keep in mind what will or won't be shared between these two pages.
+1:35
+You can take a look here.
+1:37
+Remember that the navigation bar is being provided by the host layout component, not the host vans component.
+1:44
+So I'll leave that up to you.
+1:45
+And I think that's all the primer you need, so pause now and work on this challenge.
+1:55
+We already have the slash host slash host slash income and the slash host slash reviews pages, so all we need to do is create another route here for slash host slash vans.
+2:07
+When that page is reached, let's create an element that we'll call maybe host vans.
+2:13
+And for now, we'll just create that component in our host folder here.
+2:16
+We'll call it host vans dot JSX, and we'll set it up like normal.
+2:25
+As I mentioned, for now, it's just going to return an h one.
+2:28
+We'll have it say host vans list page.
+2:30
+Let's go ahead and import that over here so we don't get that broken.
+2:34
+And actually let's copy this reviews one and we'll just make the change there.
+2:39
+We'll say host bands and that's the same name we already chose for our element.
+2:45
+So well we can hit save.
+2:47
+We don't have any kind of navigation there but I should be able to change the URL to say slash host slash vans and we're at the host vans list page.
+2:55
+Awesome.
+2:55
+Let's add that to our host navigation before we worry about the host vans ID page, or the host vans detail page you could say.
+3:04
+This navigation bar, if you remember, is under host layout.
+3:07
+And I will simply well let's look at the design.
+3:10
+The design has dashboard income, then vans, then reviews.
+3:14
+So let's just follow that.
+3:15
+That means I will copy this income and put one right below it.
+3:19
+We'll change it to slash host slash vans, and we'll change this to say vans.
+3:24
+Hit save.
+3:25
+Awesome.
+3:26
+Now we can actually navigate between these pages.
+3:28
+Now I imagine the biggest struggle was trying to figure out if you should nest the vans, or rather host vans slash ID as a child of this route, or if it should just be a sibling route like this.
+3:42
+And if you remember, our decision up here in not nesting was because they didn't share any user interface.
+3:49
+And that's actually the case here as well.
+3:51
+We look at these two, there's nothing that's shared between these two that isn't already being shared from a layout route above.
+3:58
+In which case it would be a lot more trouble to try and nest these.
+4:01
+So in my opinion I'm just going to say I'm going to have a van slash colon ID and that will be a sibling route to the vans route and we will call this host van detail.
+4:13
+Doesn't exist yet but we'll create it.
+4:15
+We'll copy this host vans and change it to host van detail and then create this component in our host pages.
+4:24
+So we'll say host van detail dot JSX,
+4:28
+Import react from react and get everything else set up like normal.
+4:32
+Alright.
+4:33
+Let's hit save.
+4:34
+No errors.
+4:34
+That's good.
+4:35
+Again we don't have a way to link over there quite yet, so in the navigation bar I'm just going to say host van slash one, and there we go.
+4:44
+Host van detail page.
+4:45
+It was a little bit subtle between the two because this one says vans list page and this one at slash one says vans nope that didn't work.
+4:53
+Slash one van detail page.
+4:56
+And that just about does it for the whole challenge.
+4:59
+Yeah we finished everything here.
+5:01
+Awesome.
+5:01
+Let's clean this up.
+5:03
+Alright this gives us a good start.
+5:04
+The next thing we'll be working on is getting these nested routes implemented as well.
+5:09
+So that's what we'll jump into next.
