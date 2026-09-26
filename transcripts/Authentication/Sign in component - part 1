@@ -1,0 +1,196 @@
+
+Transcript
+0:00
+Okay.
+0:00
+We now have a user in auth dot users.
+0:03
+So let's now work on our sign in component so they can use the email and password and sign in to our app.
+0:10
+I've added some front end code here in the sign in dot JSX component.
+0:15
+It's looking like this now.
+0:17
+We have a form.
+0:18
+We've got an email and a password and a button.
+0:22
+Just have a look down here.
+0:23
+We've got a few comments to remind us what we need to do.
+0:27
+Like, we need to add a link for this sign up here, and we need to add some accessibility and an error message at the bottom.
+0:35
+But do pause and have a look through this if you want to in more detail.
+0:39
+We're gonna be using the new use action state hook from React nineteen, which we used for the new deal form in the last section of the course.
+0:48
+Since I explained it and wrote it back then, now it's your turn.
+0:52
+If you need a refresher, do click on this slide, and it'll take you to that scrim, and you can rewatch that.
+0:59
+But if you're feeling confident, let's go.
+1:01
+So we've got the action prop here on the form.
+1:04
+That's important.
+1:05
+And anytime you want to have a quick peek at when we used this hook before, you can have a little look in here.
+1:15
+So I'm gonna be asking you to set up the use action state hook, and then I'll finish it in the next scrim.
+1:21
+Here's our challenge text then.
+1:23
+So I'd like to import the use action state hook.
+1:26
+I'd like you to call the hook at the top level of our component, destructuring three values.
+1:32
+We've got error.
+1:33
+We've got submit action, and we've got is pending.
+1:38
+Now this is the state that we're controlling here.
+1:40
+It's gonna be the error if we get one back from super base, which we will eventually render down here in the error message on the UI.
+1:49
+Submit action, that's the form action function, and then is pending is our loading state Boolean.
+1:54
+Now we're gonna pass two arguments to use action state.
+1:58
+The first argument is the asynchronous arrow function with two parameters, and the second is the initial state value of null.
+2:06
+Okay?
+2:07
+Now I've not given you these two parameters here, so you will have to either look that up, see if you can remember, or have a peek in form.
+2:15
+And then inside the async function, I want you to extract the email and password into variables.
+2:21
+So if we have a look down here, here's our email input, and then below, here's our password input.
+2:28
+And then I'd like you to add the submit action to the form's action prop.
+2:34
+So I realize this might be a bit daunting.
+2:36
+Take it slow.
+2:37
+Either have a little look in form or bring up the slides.
+2:41
+That's command y.
+2:44
+And click on that link to watch a little bit of the previous scrim or use Google or AI.
+2:50
+Good luck.
+2:51
+See you in a minute.
+2:56
+Okay.
+2:57
+I hope that went well.
+2:58
+Let's start it at the top.
+3:00
+Let's import the hook at the top.
+3:03
+Number one, done.
+3:05
+Call the hook at the top level of the component.
+3:09
+Destructuring three values.
+3:12
+Error, submit action, and is pending.
+3:18
+Number two.
+3:18
+Done.
+3:20
+Pass two arguments to use action state.
+3:23
+The first argument is an async arrow function.
+3:27
+Okay.
+3:27
+So we go async.
+3:29
+Here's our arrow, curly brackets.
+3:32
+There's our async arrow function.
+3:34
+And the second, the initial state value of null.
+3:39
+There we go.
+3:40
+Now the async arrow function has to have two parameters.
+3:44
+Now we think back to when we did this before, and we remember that the first parameter is the previous state in case we want to use it in the function body.
+3:54
+So let's call that previous state.
+3:57
+And then the second one was that form data, the object containing all the form's input values.
+4:04
+There we go.
+4:05
+Brilliant.
+4:06
+Number three done.
+4:07
+Inside the async function, extract the email and password into variables.
+4:11
+So we're gonna be using this form data object now.
+4:15
+So if we want to extract them in Let's make email, and let's define password.
+4:21
+And then here's where form data comes into play.
+4:24
+And we use that dot get, don't we?
+4:28
+And then it's whatever we called these inputs.
+4:32
+So the name of this input is email,
+4:38
+and the name of the password one is almost certainly password.
+4:44
+Okay.
+4:45
+Number four.
+4:46
+Done.
+4:47
+Number five.
+4:48
+Add the submit action to the form's action prop.
+4:53
+So we can uncomment this now, and then let's curly brace this guy.
+4:58
+Yeah.
+4:59
+Okay.
+5:01
+So we're gonna have to do a lot in this.
+5:02
+So let's just put a comment here and say, the first thing we've done is extract the form data.
+5:10
+Okay.
+5:11
+Fantastic.
+5:12
+Challenge complete.
+5:13
+Tidying this up.
+5:14
+K.
+5:14
+We're in a good place now.
+5:16
+As you can imagine, we've got lots more to do with this email and password variables here, but I'll do that in the next screen.
+5:24
+So well done for remembering about the use action state hook.
+5:28
+If you had to get some help, don't worry about it.
+5:30
+It's all repetition, repetition, repetition.
+5:33
+Okay.
+5:34
+I'll see you in the next scrim where I'll continue where we left off.
+5:37
+See you there.
