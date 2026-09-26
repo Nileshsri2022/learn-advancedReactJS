@@ -1,0 +1,208 @@
+
+Transcript
+0:00
+Okay.
+0:00
+I've started coding up a new feature here, and I'm just gonna walk you through the code I wrote so that it's not as confusing just tossing you right into the middle of it.
+0:08
+We have a new piece of state here called selected product, and the idea is that when the user clicks on one of the products in this list, it's simply going to set the ID in selected product and style it in a slightly different way.
+0:21
+I've even coded up the selected styles right here.
+0:24
+All it does is change the background color to a green color.
+0:28
+And down below, let's see, inside of our map here, we are just checking if the current product that we're iterating over in our dot map is the selected product by checking if the product ID from the product that we're mapping over is equal to the ID that's being saved in state.
+0:44
+If it is, then I've changed our style a little bit to include all of the product styles, but then to kind of overwrite the background color with the one that we wrote here in the selected styles.
+0:56
+If it's not, then it's just going to use the object product styles, which we are already memoizing here with our use memo.
+1:02
+The part that's not working yet is the actual clicking of the product.
+1:07
+So I have a challenge in two parts for you and I will just put that right here.
+1:12
+Okay the first part of this challenge is to try passing this setter function that we get from the react dot use state call, pass it down to the product component through props, and then over in the product component, I want you to set it up so that when this div right here is clicked, calls the set selected product function that you passed it through props, and it puts the product dot ID as the parameter of that function.
+1:36
+As of right now, I don't want you to worry about use callback.
+1:39
+This is more of a challenge to think about how you would accomplish this in React.
+1:44
+Then after you do that, you should be able to click on one of the products and have it change to the background color of green.
+1:50
+And I want you to check if there is a performance problem like we've seen in the past when you passed this set selected product function down.
+1:58
+And then I want you to think why was there a problem or why was there not a problem.
+2:02
+Okay.
+2:03
+Pause now and work on part one of this challenge.
+2:11
+Okay let's go down here and maybe just right here below style maybe let's choose a prop we'll call it choose product I don't know.
+2:19
+Naming things is hard.
+2:21
+But we will pass the function of set selected product.
+2:24
+Again, this is the one that was given to us by React when we created the use state for the selected product okay let's go over to our product just so the prop name is actually choose product so that's what we are going to pull in I don't know maybe that's a little bit confusing.
+2:39
+And then here on the div I'm going to set up an on click.
+2:42
+No, I don't want to just call choose product because I can't pass an ID to it this way.
+2:48
+If I put parentheses here it's going to call it every time one of these product components is created.
+2:53
+So I'm going to wrap this in a little anonymous arrow function like this and I'm going to pass the product dot ID.
+3:01
+Okay.
+3:01
+Let's hit save and okay.
+3:04
+Clicking these is working.
+3:06
+It's turning green and it doesn't seem to be causing any performance issues.
+3:10
+You can see I can increment and decrement the count pretty quickly and switching between them is really fast.
+3:17
+Interesting.
+3:17
+Even though we are passing a function down to a child component, just like we saw before, now we're not having to use useCallback here.
+3:25
+Why do you think that is?
+3:29
+Well, because the set selected product function was given to us by React up here, React is maintaining a reference to this function for us.
+3:39
+Yes, I don't know this for certain, but it seems possible that under the hood, it's using a useCallback or at least a similar concept to useCallback to maintain a referential equality from one render to the next of this particular function.
+3:52
+So if that's all we needed to do then this works great.
+3:55
+We don't even have to set up our own use callback.
+3:58
+However, let's assume we need to do a little bit more work when we click on a selected product.
+4:03
+I don't know.
+4:03
+Maybe something is being sent out to the server that says this particular user that's let's pretend they're logged in, is interested in this product, and then you might need to follow-up via email and try to sell them on this product if they don't buy it now.
+4:16
+I don't know.
+4:17
+Whatever it is, let's pretend there's more work than just setting the state for the selected product.
+4:21
+Okay.
+4:22
+That brings us to part two of this challenge.
+4:25
+Okay.
+4:26
+Part two of this challenge is to create your own function.
+4:29
+Maybe we'll call it choose product and that function should take an ID parameter and then before calling set selected product it should first log to the console something trivial like new product selected Really this is just representing other real work that might need to occur before changing the state.
+4:47
+And then after that console log, have it call set selected product passing it the ID that you gave to the choose product function.
+4:54
+After doing that, I want you to test the performance and see if it is having a performance problem or not having a performance problem.
+5:01
+And if you want to, you can try to think ahead of time if you think it will have a performance problem or not.
+5:06
+Okay.
+5:06
+Pause now and work on part two of the challenge.
+5:14
+Alright.
+5:15
+Let's get rid of this and we are going to create a function called choose product.
+5:22
+It's going to take an ID.
+5:25
+The first thing it'll do is it'll console log new product selected, and then it's going to call set selected product and pass in the ID that it was given as a function.
+5:36
+Again, this console log is meant to be like a placeholder for other real work that needs to happen like making some kind of call out to a server and a database or something like that.
+5:45
+Okay.
+5:45
+So let's change what we're sending down to our function here.
+5:50
+Choose product is not going to be set selected product, but choose product instead.
+5:55
+And over in our products, let's see, we already are calling it choose product over here.
+6:00
+Everything here should be okay.
+6:02
+So let's hit save and we'll choose one of these and I can already see that there is a delay happening from when I click it and when it actually switches.
+6:10
+And this is probably more highlighted when I try to quickly
+6:22
+three of three of the challenge is to cache this choose product function so that it doesn't get recreated on every render.
+6:28
+Then check again to see if the performance has improved because of what you did.
+6:32
+Pause now and work on part three of this challenge.
+6:40
+In order to cache a function we are going to use, big surprise, the use callback hook.
+6:47
+So I'm going to create choose product.
+6:49
+That's going to be the function that comes back when I use use callback as a hook.
+6:54
+I pass use callback a function and an array of dependencies.
+6:59
+And let's open up the body of this function first.
+7:01
+I'm just going to move these two items up there.
+7:04
+We can get rid of the function definition.
+7:07
+And strictly speaking, I need to include my set selected product function inside of my dependencies array.
+7:13
+Let's clean up the challenge text.
+7:15
+And everything else should be the same because I chose the same function name.
+7:20
+So let's hit save.
+7:21
+And, uh-oh, I bet a number of you fell into the same trap that I just fell into.
+7:26
+One thing we haven't explicitly talked about is that although I have an anonymous function here as my first parameter to use callback, I can include parameters.
+7:36
+So I needed to remember to include my ID since when I'm calling the function choose product, it does need to receive an ID in its parameter.
+7:44
+So let's try this again.
+7:45
+We'll hit save and awesome.
+7:48
+Okay.
+7:48
+And it's much snappier.
+7:50
+Counting up and counting down is working much smoother.
+7:53
+Awesome.
+7:54
+And that pretty much does it for useCallback.
+7:56
+I will get on my soapbox once again and remind you that sending a new version of the function down every time something is rendered in and of itself is not that big of a deal.
+8:06
+Remember, we have a lot of products.
+8:09
+I can't even remember.
+8:10
+Right now, we're doing three hundred products.
+8:12
+Each one of which is manually being slowed down for one millisecond, which means every time I make a change, there's going to be a three hundred millisecond delay.
+8:21
+If I simply get rid of this sleep one and actually this I guess will be kind of fun.
+8:26
+Let's go ahead and undo these changes.
+8:29
+Keep our choose product the way it was just for a second.
+8:34
+We can see that it's actually pretty snappy without any of the delays that I manually put on it and without me having to actually do the use callback.
+8:43
+When we're talking about performance, a lot of times I do have to introduce silly little manual slowdowns like this, sort of put obstacles in our way just to force us to consider the performance?
+8:54
+That said, it still is a good idea every now and then, open up your dev tools, slow down your CPU, slow down your network speed, and try to mimic what some of your users may be experiencing with a lower power device and or a slower connection to the internet.
+9:07
+Now there are a few more topics that I just wanted to touch on briefly regarding performance, but assuming you have followed along until now, great job.
+9:15
+Pat yourself on the back.
+9:16
+We are really wrapping up the last section in this course.
