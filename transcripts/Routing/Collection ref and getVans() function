@@ -1,0 +1,122 @@
+
+Transcript
+0:00
+Right from the get go, I'm going to link you to the Firestore documentation.
+0:04
+You can click on the screenshot to go to that documentation.
+0:07
+It's a pretty good way to get an overview of the different functions and functionality that you have with Firestore.
+0:14
+If we look closely, we can see that in web version nine, which is what we are using, it uses quite a few functions that will come from our Firestore package, and they tend to all be kind of nested together.
+0:26
+I don't know about you, but I tend to get a little bit confused when I'm looking at functions inside of functions inside of functions.
+0:32
+And so one thing that I'm going to do, which isn't really found very often in the documentation, is make a reference to the collection by calling this collection function that we see here.
+0:43
+So I'm going to do that separately by just creating a reference to that collection.
+0:47
+Maybe I'll call it fans collection ref, and I'll set that equal to what we just saw here, collection, and then pass in the database and the name of our collection.
+0:57
+So I'm going to call collection, which is a function that comes from Firebase.
+1:02
+So we do need to make sure that we import it before we forget to do that.
+1:06
+And the first parameter is the database that I want to get the collection from, and the second parameter is a string of the name of the collection that we're trying to get.
+1:15
+This string name comes from, if we look a while back right here, I created a collection in my Firestore database that was called vans.
+1:23
+And so that's where the name comes from right here.
+1:26
+Now that I have this as a separate variable, I can just reuse this and it'll be a bit easier to reason about than, at least for me, what I see here with these nested function calls.
+1:36
+And now that we have that, it's time for us to refactor our function.
+1:40
+I think I'm just going to comment out the original get fans in case I needed access to this for some reason.
+1:46
+And before we go any further down this road, there is something that I just remembered, and that has to do with some trouble that I ran into when I was first practicing this.
+1:54
+To save you a ton of trouble, the culprit ended up being Mirage JS.
+1:58
+For as much as I love Mirage JS, this really made me pull my hair out quite a bit when I was trying to figure this out.
+2:04
+You see what was happening is I was trying to make requests to Firestore and it was never making the request out to Firestore.
+2:10
+In fact not even in my browser developer tools in the network tab did it show that it was making any kind of requests at all.
+2:17
+And the reason ended up being because Mirage JS intercepts all outgoing fetch requests in order to return its own responses instead of letting them go forward to whatever real API you were trying to call out to.
+2:29
+Fortunately, Mirage JS makes it pretty easy for us to whitelist any requests that we do want it to allow to pass through.
+2:36
+And that's by adding a property called this dot pass through and including any URL that you want to allow to sort of pass the sieve or the filter of Mirage JS.
+2:46
+So by doing this, it means that any requests using the Firebase SDK that we're using in our API JS file, those requests will be allowed to go through.
+2:55
+So now that we have this in here, I'm gonna hit save just to make sure that worked.
+2:59
+And then we have errors because we commented out our get fans function.
+3:03
+So I'm going to just take this line just so I don't have to retype it.
+3:08
+And while it was kind of fun to overload this function to work for both getting the array of vans and also a single van if we provide the ID, I think it's probably better to on the side of having a function do one job and doing that one job really well.
+3:22
+So I'm going to get rid of the ID and we're going to focus our get vans function on just getting the array of vans.
+3:28
+Which means we will have to separately create a function called get van which does take an ID and gets a single van.
+3:34
+There's a bit of an ulterior motive here and that's because in Firebase it's different enough to get a single document versus a collection of documents that this function would just start to look a bit ugly.
+3:45
+So let's focus on getting the array of vans.
+3:48
+Now I can get a snapshot of my data by calling a function called get docs, and that returns a promise.
+3:55
+So I'm going to await a call to get docs, and I need to make sure that I import get docs.
+4:01
+Because this is plural, it's an indication to us that it will get an array of documents, which means I need to pass in the collection that I want to get the array of documents from.
+4:11
+And when I just pass in the entire collection like we've done here by passing in the reference to that collection, it will go and get every document from this collection.
+4:19
+Now this snapshot of data is going to look a bit different than what we were getting from our Mirage JS server.
+4:24
+So we do need to spend a little bit of effort rearranging this data so that it is in the same shape as what our components are expecting.
+4:32
+I can do that by taking the snapshot, accessing the docs property of it.
+4:37
+These docs are specifically the six documents of our vans that we have saved in our Firestore database, and those documents are not in the same shape as what we got from our Mirage JS server.
+4:48
+They have additional meta properties that Firebase adds to it, but what I can do is map over it.
+4:54
+And for each document, I can rearrange the shape of that document to give us an array that our components is expecting back.
+5:01
+So for every document, I'm going to return a new object that I'm creating, and I need to wrap this in parenthesis so that JavaScript doesn't think I'm just trying to open up the body of the function.
+5:11
+And I can access the actual data properties of this document by calling a method that comes with the document called data.
+5:18
+This is going to return an object and I don't want it to be a nested object inside of this, and so I'm going to spread doc dot data out so that the object I'm creating in my array has properties that are equivalent to the ones that are in the Firestore database.
+5:33
+One property that Firestore does not treat the same is the ID property.
+5:38
+And so this data will not include the ID and we know that we need those IDs because that's what we're using in our URLs.
+5:44
+And so I'm also going to add an explicitly declared ID property, and this will be found on doc dot ID.
+5:52
+Currently I'm mapping over the documents here and rearranging the shape and creating a new array, but I'm not actually saving it anywhere.
+5:58
+So I'll just call this my vans array, or rather the variable name will just be vans.
+6:03
+And then let's go ahead and console log our vans to see what that looks like.
+6:07
+We're going to still be broken because I'm not returning anything quite yet, but we'll just see what this looks like.
+6:12
+I'll go to vans.
+6:14
+Let's open up our console and yeah we get some errors but we can see in the console that we have an array of objects that looks identical to what we had from our server.
+6:23
+Js.
+6:24
+So instead of console logging that let's go ahead and return that array and I think this should get us what we want.
+6:30
+So we'll hit save and there we go.
+6:32
+It's actually a little bit hard to even tell if it's working, but we know that this data is coming from Firebase.
+6:38
+Now because I'm not overloading my getvans function anymore, if I click in here we're not gonna have the right data, so in the next scrim let's focus on getting this data back and working but coming from Firebase this time.
