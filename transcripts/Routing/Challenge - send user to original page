@@ -1,0 +1,178 @@
+
+Transcript
+0:00
+Okay.
+0:00
+I have another doozy of a challenge for you, but don't let that scare you.
+0:04
+This is where the real learning and growth happens.
+0:07
+Our task is to make it so that after the user is redirected to the login page after trying to get to a protected route, that they are then redirected back to the same page that they were trying to get to originally.
+0:19
+Currently, we have it hard coded to send them to the slash host route whether or not they were trying to get to the slash host route in the future.
+0:26
+However, in our example, if the user were trying to get to slash host slash vans maybe slash two and then they were redirected to the login page because they weren't logged in and that is part of a protected route.
+0:38
+When they're done logging in, they'll just be sent to slash host.
+0:41
+They won't go back to slash host slash van slash two.
+0:44
+This might not seem like a big deal right now, but as the app grows and we have more and more protected routes and maybe we have users sending each other links to different protected routes, it will no longer make basically any sense at all to always send them to slash host if maybe the route had nothing to do with the host routes in the first place.
+1:02
+Now I'm not just going to leave you to your own devices.
+1:05
+I do have some helpful resources here that should give you a good leg up.
+1:09
+First of all, this one is a bit of a hint.
+1:11
+We're going to make use of the use location hook.
+1:13
+So here's a link to the documentation for that.
+1:16
+And second of all, this is an example from the React router documentation.
+1:19
+They have a whole GitHub full of different examples.
+1:22
+This one specifically is for the authentication example.
+1:25
+If you click this link, it will take you to their GitHub, and at the bottom, there's a link to Stackblitz where you can actually see the code in action.
+1:32
+It's all kind of mashed together into one big file in order to make it a little bit easier to parse, but you will have to go through and really try to make sense of what's there and internalize it in order for it to make sense.
+1:45
+Now don't let any of this build up scare you.
+1:47
+The truth is you're only going to be writing a few lines of code.
+1:50
+The only reason I'm saying this is difficult is because I'm not going to start the code for you.
+1:55
+It will require you to understand what we have talked about so far and be able to use what you've learned in a unique and creative way.
+2:04
+One last thing before we jump to the challenge.
+2:06
+In order to test whether or not this is working, you'll first need to try to access something that isn't just slash host.
+2:13
+So maybe most simply slash host slash vans.
+2:17
+Hit enter.
+2:18
+Make sure you're logged out so that it will redirect you to the login page like it just did here.
+2:22
+And then you will log in with b at b dot com and p one two three as the password.
+2:27
+Now the way the code is currently written, when I click log in here, it will just take me to the slash host route because that's what we have hard coded.
+2:34
+But for you, when everything is working, it should take you to slash host slash vans or whatever route you were attempting to get to before it redirected you to the login page.
+2:43
+By the way, in the challenge text, you'll also see that if the person does try to just go to the login page and type in the credentials, then it should still take them to slash host by default.
+2:53
+Okay.
+2:53
+Make sure you read this challenge text carefully, including this hint.
+2:56
+Pause now and work on the challenge.
+3:04
+Okay.
+3:04
+Hopefully, that wasn't too difficult for you.
+3:06
+If you had a chance to go through the React Router auth example that is over on Stackblitz, you may have found that in the wrapper for the authentication, ours we're calling auth required, what they did is they grabbed the location from the use location hook and they passed that location path name through state.
+3:24
+That way when the user gets to the login page, they can access that state to find out where the user was trying to come to originally before being redirected to login.
+3:33
+So let's start on that first part.
+3:35
+I'm going to grab the use location hook and create a location object by calling use location.
+3:43
+And for now, we can just console log location.
+3:45
+That will help us get a better understanding of what's there.
+3:48
+Now I'm currently writing code in auth required, but my browser is in slash login.
+3:52
+Slash login does not need to go through auth required.
+3:56
+So when I hit refresh oh well I guess it's logged in here let me log out I'll click login we don't see anything in our console but when I try to go to host okay now we get our path name of slash host if I type in manually slash host slash vans and hit return okay we can see that the path name says slash host slash vans so location dot path name gives us access to where the user was trying to go to So let me pass that through state.
+4:23
+I can call this whatever I want.
+4:24
+Maybe we'll call it, I don't know, we can keep it simple and say from as in the user is coming from this location dot path name.
+4:33
+And by doing this over in my login page, I should have access to I think it's location dot state dot from just like we were doing location dot state dot what was it I think path name or no.
+4:48
+Sorry.
+4:48
+Message.
+4:48
+Yeah.
+4:49
+Location dot state dot message.
+4:50
+Let me clean up these spaces here.
+4:52
+In this case, remember, we're using optional chaining as a way to make sure that state exists before we try to access a property of null.
+5:00
+So we can do something similar, but in this case, let's get rid of the challenge text here.
+5:05
+I'm going to create a new variable.
+5:06
+Let's call it from again.
+5:08
+It's gonna show up as orange because from is also a reserved keyword up here, but I don't think it'll give us any code problems.
+5:14
+So we'll say const from equals location dot state, and then that may be null.
+5:21
+So I'm going to use an optional chaining here, and Scrimba, at the time of recording, is going to complain, but it's still gonna work.
+5:27
+Don't worry.
+5:28
+And then we called it from.
+5:29
+Now just because Scrimba is struggling a little bit with these optional chaining, I'm gonna do something you won't see me do very often and that is to put a semicolon at the end here.
+5:38
+That way this semicolon can absorb that red squiggly and it won't make it look like there's a problem with the function if you're watching this at some point in the future when optional chaining is working and you have no idea what I'm talking about then even better Now there is a chance that state won't exist just like we saw when the user goes directly to the login page.
+5:56
+So I am going to create a default with an or operator and we'll say that the default is still going to be slash host.
+6:03
+Okay.
+6:04
+Now that we have that set up, I should be able to just change my navigate from slash host to the new variable that I created called from we still want replace true to be there let's go ahead and test this out so in the login page I'll go to host okay it takes me to the login page and we do get our console log and the place is slash host Remember, in order to test this, I'm going to do slash host and then let's do slash vans and maybe we'll get crazy and say slash one as well.
+6:31
+So I tried to go to slash host slash vans slash one.
+6:35
+It sent me to the login page, and then I will put in my b at b dot com and p one two three.
+6:41
+Now hitting login should take me to slash host slash van slash one and not to just slash host.
+6:46
+Let's give it a shot.
+6:47
+Log in.
+6:49
+Perfect.
+6:49
+Slash host slash band slash one.
+6:50
+That's exactly what we wanted.
+6:52
+Now hopefully you were able to complete that.
+6:54
+If you were able to complete it on your own, then you deserve some major props.
+6:58
+Give yourself a pat on the back and maybe do something to celebrate.
+7:01
+If not though, that's completely okay.
+7:03
+This is a more challenging task.
+7:05
+That said, if you weren't able to do it on your own, now's the perfect time to scrub back to the beginning and try it again all by yourself.
+7:12
+I know that you can do it, and I know that by doing it, you'll become an even stronger developer.
+7:17
+The last thing to do, just as a good point of hygiene, is to clean up our console log.
+7:22
+So we'll go ahead and remove that line there.
+7:24
+And perfect.
+7:26
+Now that you've done all that hard work, I have a little bit of a surprise for you.
+7:30
+So that's what you have to look forward to in the next scrim.
