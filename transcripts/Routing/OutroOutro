@@ -1,0 +1,58 @@
+
+Transcript
+0:00
+And there you have it folks.
+0:01
+Great job at getting to the end of this section.
+0:04
+Hopefully, by doing all of the challenges, building the van life app, doing the quizzes and exercises and everything that I threw at you, you have a strong appreciation for client side routing with React Router.
+0:15
+This would be a great time to head over to the today I did channel in Discord and just post a message about how you were able to complete this section, maybe show a link to your van life app, And if you had a chance to make any tweaks, design changes, improvements, or anything like that, you should deploy that using something like Netlify and share that here on Discord.
+0:33
+So what should you do now?
+0:35
+Well, you're in the middle of this advanced React course, so of course you could just continue on in the advanced React course.
+0:40
+However, if you felt like spending a little extra time with React Router, you could teach yourself how to add real authentication to the app.
+0:48
+Authentication is one of those things that isn't trivial to learn about, but it is really important because almost every real web application you use will have some form of authentication included.
+0:59
+You also could use your new found knowledge to build something completely unique.
+1:03
+I know a lot of students will take what they have learned with React router, and they will include it in their own personal portfolios so that they can build it with React, but still route around as if it were multiple pages.
+1:10
+Another idea, and this one's a little bit out there, but you could just erase everything that we have here and completely little bit out there, but you could just erase everything that we have here and completely build van life again from scratch.
+1:21
+I know that probably seems totally crazy, but if you really wanted to drill in what we've been learning about then that would be a really great way to do so.
+1:29
+Your final product might end up being completely different than the way that we wrote it, but that's okay.
+1:34
+There's nothing that says that the way that we wrote it is the right way.
+1:37
+Now this course that you just watched actually had kind of a branching point earlier in the course, which diverged a bit from the standalone version of this course.
+1:46
+And that's because at the time of recording, this concept of loaders and actions is relatively new to React router.
+1:52
+So if you do want to dive deeper into some of the newer concepts with React router regarding loaders and actions, you can click on the link here that says loaders and actions.
+2:01
+That will take you to the standalone version of this React Router six course, and you could skip the first probably half of the course.
+2:07
+Go down to the section where you start learning about loaders and from there on the course does diverge quite a bit from the one that you just saw.
+2:14
+And then as I've mentioned multiple times, React Router six is a major component in the Remix framework, and Remix is a great choice if you want to start diving into full stack frameworks that also use React which you've been learning about.
+2:27
+Knowing the concepts especially those that are presented here in the standalone version of the course when you start learning about Lotus and actions can really make the transition to learning Remix much easier.
+2:38
+If, alternatively, you just want to keep moving forward in the advanced React course here in the front end developer career path, that also is completely okay.
+2:45
+There's no pressure at all to do any of these things.
+2:48
+It's just a few ideas that I think might be good if you're starting to feel worn down by the career path.
+2:53
+We've learned a lot, and the weight of that education can be a little bit heavy at times.
+2:58
+Along those lines, I want to say congratulations for reaching the end of this section.
+3:02
+You've done a lot of hard work and that is definitely something to be celebrated.
+3:06
+So great job and I will see you in the next one.
