@@ -1,0 +1,128 @@
+
+Transcript
+0:00
+It's time for another solo project.
+0:02
+I love these solo projects, and hopefully you have learned to love them too, because this is where some of the best learning happens in this course.
+0:09
+For this solo project, we are going to continue building out our component library with some awesome new components.
+0:14
+These components are going to increase in difficulty as you progress through them, hopefully will prove to be an excellent experience in understanding reusability in React.
+0:24
+The first component you'll work on should be a nice easy introduction to components.
+0:27
+You're going to be building a badge component.
+0:30
+I know each one of these says the word badge in it, but of course you should be able to include any text you want there.
+0:36
+And you can see that there are a lot of different color options as well as two different styles, a square badge and a pill badge.
+0:42
+As a side note, as we go through these components, you'll see that I included this open in Figma link and a Figma icon.
+0:48
+You can click on either of these to go to this specific page in the Figma design so that you can see all of the specific details about these components like the colors, the text, the border radius, and so forth.
+0:59
+The second component you'll be building is a banner component.
+1:02
+This is a great way to display some information to the user, and you can see that there are a number of different variations here as well.
+1:09
+There's a style that just contains the title.
+1:11
+This should be an editable title, of course.
+1:13
+And there's a style if you need to give more information to the user that has a little paragraph below the title.
+1:18
+And as you can see, there's also four different variations on the color schemes.
+1:22
+Depending on the style of the banner, whether it's success, warning, neutral, or danger, it will include these colors and this icon.
+1:30
+But the developer using this banner component should be able to change the title and the text if it exists.
+1:35
+Again, you can click the Figma icon here in order to go look at that design.
+1:39
+The next component you'll build is a card component.
+1:42
+Cards are a great way to encapsulate small amounts of information, especially if you are going to be repeating these and you have a number of different cards that you want to display at once.
+1:51
+The Figma design for this card also includes a hover state that you'll want to make sure you check out.
+1:56
+And then we'll come to the testimonial component.
+1:59
+You can see that this component has a desktop and a mobile version, as well as a version with an image and a version without an image.
+2:06
+Now to make it so things aren't absolutely crazy for you, I wouldn't necessarily recommend creating one testimonial component that is able to completely change its styles like you see between these two.
+2:17
+So if you'd like to make both, I would probably recommend making two different components, or if you'd like you can just choose one to make and stick with that.
+2:25
+Now if you're able to get through those four components in the component library, library, there are some stretch goals that I've included.
+2:30
+If you'd like, you can work on this tooltip component as well as this toast pop up component.
+2:35
+Tooltips are a great way to focus the user's attention on a specific part of your page and provide some extra information about whatever element it's pointing to on the page.
+2:45
+And a Toast is a great way to present some temporary information.
+2:48
+Usually, a Toast pops up on the screen, displays that information like you see here, and then goes away after four or five seconds.
+2:55
+Because I consider this a stretch goal, if you really struggled with the first four components in the solo project, then I would maybe consider skipping these, but I'm gonna leave that part up to you.
+3:04
+As I mentioned, there is a Figma design for each one of these components.
+3:08
+If you're not super familiar with Figma, then don't be too concerned because I have a video that I created on our YouTube channel that walks you through all the basics that you need to know as a developer using Figma.
+3:18
+This video is only about ten minutes long.
+3:20
+It doesn't go into actually designing on Figma.
+3:22
+It's specifically dedicated to helping you understand how to use it as a developer so that you can can grab the information from the styles that you need and continue with your coding.
+3:31
+Once you arrive there in Figma, you'll see on the left side of the page, I've organized each of the components into a different page in the Figma design.
+3:39
+So that's how you'll navigate between them.
+3:40
+Then over on the right hand side, if you click the drop down arrow near the zoom percentage, you'll see this option for multiplayer cursors.
+3:48
+Here you can see that I do not have the check mark next to it, which means I have turned off multiplayer cursors.
+3:53
+Because there's a lot of Scrimba students and there will likely be more than one person looking at this design at any given time, by default this multiplayer cursors is turned on and you can see all the other people in the Scrimba community that are moving their mouse around, selecting different parts of the page, and it can get a little bit distracting.
+4:10
+So if you'd like you can head up here and turn those off so you feel a little more isolated.
+4:15
+While we're up here in the upper right portion of the Figma window you'll see that there's this toggle.
+4:20
+And if you're not new to Figma, this might be new to you.
+4:23
+Figma introduced a feature called developer mode.
+4:25
+And when you turn this on, it changes the right panel to have some more helpful information.
+4:30
+It talks about some really cool plugins that you can use and it makes some slight changes to how interacting with the Figma window works.
+4:37
+Because you don't have edit access to these designs, it won't make that big of a difference.
+4:41
+But I have found it really helpful in the designs that I do have edit access for because it means that I can't drag things around on the screen and screw up the design accidentally.
+4:50
+Okay.
+4:50
+Let's take a quick look at the requirements.
+4:52
+As we've been doing so far, I want each of the components you create to be exported from its own containing folder over here inside of the components folder, just like we've been doing with the button and the menu, so you can use those as your template.
+5:04
+You will likely want to use index dot JSX here as your playground in order to test your components as you're building them.
+5:11
+And I have built a specific info page that contains some additional information and some suggestions and hints that you can find right here.
+5:19
+So I would open this in another tab and just reference it as you are working on this project.
+5:23
+Now even though we call this a solo project, it shouldn't be done by yourself.
+5:28
+I highly recommend that you both share your work when you're finished and also ask for help when you need it.
+5:33
+If you click the discord icon that will take you to the I built this channel, but then of course you can go ask some questions in any of the help channels there as well.
+5:41
+And if you click this Twitter icon, it will pre populate a tweet for you that you can use to share your work in public on Twitter.
+5:48
+This is a super fun project.
+5:49
+And I'd say more importantly, this is very similar to what you might do on the job as a React developer.
+5:55
+So put on those headphones, get in the zone, and good luck.
