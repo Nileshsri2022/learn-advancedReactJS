@@ -1,0 +1,140 @@
+
+Transcript
+0:00
+The first place I want to actually get our hands on code doesn't, I guess, strictly have to do with increasing performance, but it is a great way to decrease the number of bugs that you have, specifically ones that tend to occur when you're kind of coding in some anti patterns in React.
+0:15
+What do I mean by an anti pattern?
+0:17
+Really it just means that you're writing your code in a way that kind of goes against the standard expected way to write your code in React.
+0:25
+And the thing I'm talking about is something called strict mode.
+0:28
+Before I jump into it, you can click on the screenshot here to go to the React docs on strict mode to learn a little bit more.
+0:34
+And let's just jump right in.
+0:36
+So the idea of strict mode is that you wrap your application in this component that's actually called strict mode, and it will provide a few, I guess you could call them checks, along the way to make sure that you're writing your code in the React way.
+0:50
+We'll get a chance to see exactly what I'm talking about in a minute.
+0:53
+But strict mode will do a few things.
+0:55
+And at first glance, it might seem like this is a bit counterintuitive.
+0:59
+First of all, it's going to double render any functions you have that should be pure functions.
+1:05
+Again, when we jump into the code this will make a little bit more sense.
+1:08
+But since we will be talking in this performance section about how to reduce unnecessary renders and such, I thought it made sense to show you that this strict mode option will actually purposefully double render your components.
+1:21
+And I guess I could say it will double run all of your functions, including double rendering your functional components.
+1:27
+It also will take any side effects using use effect that you have, and it will rerun them twice in every one of your components.
+1:34
+Again this might seem counterintuitive even if you have a set of dependencies that has not changed, strict mode is going to run those effects twice.
+1:42
+And in the end what that essentially does is it surfaces any hidden bugs that you might have so that they become a bit more obvious when you're in the development process before you push anything out to production.
+1:54
+And lastly, it will also give warnings for any deprecated react APIs that you have.
+1:59
+If you want to learn more about those, you can click on the screenshot and this last link down here will tell you exactly which API's they will be checking for.
+2:08
+Okay.
+2:08
+Let's look at some real examples.
+2:10
+Now we're gonna be referring to this app a little bit throughout this section, and in the future we're going to have thousands of these little product cards that are rendering.
+2:19
+But for now, I've reduced it to just have three.
+2:22
+And if we go over to our index dot JSX, we're going to ignore the counter for now.
+2:27
+We'll see that I'm pulling in the products data from my data file.
+2:32
+This is just using something called faker to create a number of fake objects.
+2:37
+And actually in our case, we're not really using a bunch of these properties.
+2:40
+All we are really caring about at this time is the ID and the name, and this is creating a product name.
+2:46
+So I've changed this array to only show three so that we're not overwhelmed by the number of items on the screen.
+2:51
+And what I'm doing here in my app component is I am grabbing that product's data and then I am mutating it directly with the dot push method.
+2:59
+In this case, the reason I'm doing that is so that I can add another product here.
+3:03
+It's not really a product, but it's something that says create new item.
+3:07
+Now hopefully for those of you with even a little bit of experience in React can see that this just feels a bit wrong.
+3:14
+Sometimes this is called a code smell, where it just feels like it's not quite right, or you could say it kind of smells like bad code, but stick with me here.
+3:23
+As I mentioned, it's going to check for any impure functions that should be pure.
+3:28
+And in this case, we have an app component that if it were to get rerendered is suddenly going to have a bit of an issue, because we're directly modifying this product's data at the top level of our app component, and we really shouldn't be doing that.
+3:42
+However, just looking at our page, it kind of looks like it worked okay.
+3:46
+Even refreshing this component or refreshing this app is going to show that things look like we might expect.
+3:53
+Now fortunately for us, we are lucky that we also happen to have an extra piece of state here.
+3:58
+And this isn't strictly a challenge, but what I'd like you to do is to pause the screencast and go ahead and increment the counter and just see what happens.
+4:06
+In fact, if you want an extra challenge, you can pause, try to figure out what would happen if you click one of these buttons, and then actually click them and see if your suspicions were right.
+4:15
+So pause now and play around with this a little bit.
+4:23
+Well, changing the state of our app is going to rerender our app, and rerendering our app involves rerunning this entire function, which means that our products data is going to push another item.
+4:35
+And so because we were lucky enough to have some state on the screen that we can change, we can see that every time I increase my count I'm getting a new item that's being pushed to my array.
+4:46
+So what does this have to do with strict mode?
+4:48
+Well if strict mode is going to immediately double render our components, we just need to wrap we'll wrap the entire app in React dot strict mode.
+4:58
+And because we've done that, when I hit refresh we'll see that it got double rendered and we can immediately identify that there's a problem going on here.
+5:06
+We have, without even changing our state, to create new item boxes here.
+5:12
+Now there's a number of ways we could actually fix this, but the primary thing is our component currently is not a pure component because it's making a modification to some data outside of itself, and it's doing that every time it gets run.
+5:25
+The first fix that comes to mind is that, well, we shouldn't be adding this box to our list of products data in the first place.
+5:31
+We could simply put this box down here below or above our products data dot map so that we're not making any kind of modification to products data.
+5:40
+But if for whatever reason it was pretty important for us to add this box as an item in our products data, then we should probably make a copy of the products data array first in order to push to that copy.
+5:52
+That way every time our component re renders, we are making a copy of the products data as it exists in data dot JS, which is not going to be mutated.
+6:01
+Let me show you what I mean.
+6:02
+So this would simply look like maybe, we'll say, products copy.
+6:07
+And we can make a copy by just spreading the original products data into this array, and then we can just push to products copy instead of the original products data.
+6:18
+Okay.
+6:18
+And now that we're pushing to products copy, let's go ahead and change our dot map down here to refer to products copy.
+6:25
+We're getting this double rendering because we were mutating the original array.
+6:29
+Let's see if writing it in this more pure way is a bit better.
+6:33
+So I'll hit save, and now we just have one create new item.
+6:37
+And of course incrementing and decrementing the state will not make any changes to this because every time our component renders, it makes a fresh copy of the original data that is unmutated.
+6:47
+Again, this probably isn't how I would solve this problem, but I just wanted to show you that by changing this back into something that's a bit more pure, in other words, it will return the same result every time it's run, we can fix this problem and strict mode helped us identify that problem without having to add any other states to our component.
+7:06
+You could say in this case we got lucky because we could identify the problems by having other state in this component, but if we didn't then we might have only found this bug someplace in production.
+7:16
+While we're talking about this I think it's important to note that strict mode is only going to run-in development mode.
+7:22
+Once your React app has been built and put into production mode, strict mode is no longer going to create this double rendering effect.
+7:30
+And therefore strict mode by itself isn't going to cause some of these weird bugs in your final app, but instead it's going to help surface those bugs before you push anything to production.
+7:40
+Okay, this one's gotten a bit long.
+7:41
+Let's look at this second one where it reruns all effects in the next scrim.
