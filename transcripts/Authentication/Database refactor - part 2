@@ -1,0 +1,196 @@
+
+Transcript
+0:00
+Here are the two problems we talked about in the last scrim.
+0:04
+Where are we gonna store the account type for each user when they sign up?
+0:07
+We want two to start with, rep, sales rep, and admin.
+0:12
+It's not secure to store it in the JWT's user metadata part if we're gonna base RLS policies on it.
+0:20
+And then number two, we've got this sales deals row ownership issue.
+0:24
+Let me talk a little bit more about that now.
+0:26
+In general, setting a text field as the ownership of a row is not great practice.
+0:32
+Since it's only a text field, any text could be added.
+0:35
+Since it's from the user, it's not made by the database.
+0:38
+There could be typos.
+0:40
+It's just not secure.
+0:41
+Since we now have signed up users who each have that unique UID, which is created by the database, here it is for Dwight.
+0:50
+There it is.
+0:51
+So that was created by the database when I signed him up.
+0:55
+And it's these users, or the rep ones anyway, when we can associate them with an account type, who are making the deals in sales deals table.
+1:04
+It would be a much better idea to replace the name column.
+1:08
+Here's our sales deals table.
+1:10
+So we'd replace this name column with a user ID column, which corresponds to that UID from the auth dot users table.
+1:19
+Then the ownership of each row in this table would be down to the UID that the database created, much more secure, not just a string.
+1:29
+But then where would we store name?
+1:31
+We do need the name for each deal somewhere so that we can populate our bar chart.
+1:37
+The default auth dot users table is managed by Superbase and contains only basic fields, and we've already talked about why we can't store name in user metadata if we're gonna base RLS policies on it.
+1:50
+So it's actually better practice to have a separate table.
+1:54
+Let's call it user profiles here in the middle.
+1:57
+In addition to the default auth dot users table provided by Superbase, a separate table lets you store custom fields like account type.
+2:07
+You could have, like, an avatar URL, preferences, teams, much better for scalability.
+2:15
+You can easily populate this when a new user signs up.
+2:19
+We'll talk about this in a minute.
+2:21
+And then we can easily join our business tables like sales deals with this user profiles table and join it on the ID.
+2:29
+So you see this line connecting it.
+2:31
+FK stands for foreign key here.
+2:33
+So user ID in the sales deals would be a foreign key to ID in user profiles, which in turn would be a foreign key to the ID in users.
+2:45
+Here's this ID that we saw in the table called UID created by Supabase when a user signs up.
+2:51
+And this format would make it easy to display user information in dashboards like our chart.
+2:58
+The ownership of each row in sales deals is based on the user ID.
+3:03
+And then if we want to know the name of each row, we just do a join to the user profiles table.
+3:09
+And the important thing here is we can secure this with RLS.
+3:13
+This user profiles table can't be updated by the user.
+3:17
+Remember, said if we based RLS on part of the user metadata, this can be updated by the user.
+3:24
+We could then pretty much easily limit reps to only adding deals for their own IDs Because when they try and add a deal into sales deals, we can say check the user ID of the JWT, so who's making the request?
+3:38
+Check it in this table.
+3:40
+Does that ID in user profiles table have an account type of rep?
+3:44
+If it does, make sure the ID of the deal they're trying to add is equal to the ID from the JWT, I e who's doing the adding.
+3:54
+And then for admins, if we want them to be able to add a deal for any of the reps, what we can do is we can fetch a list of all these user profiles, their ID and name.
+4:05
+And then when the admin selects a name, we can say get the ID of that name and insert a row into sales deals with that ID.
+4:17
+And you can see here, this new format, we've removed the name column from sales deals.
+4:22
+So if we're gonna go for something like this, we need to work on how to get the name and account type into this user profiles table.
+4:32
+We have two options.
+4:33
+We can either write an insert request straight after sign up.
+4:36
+This is pretty simple, but it would require two operations.
+4:40
+Right?
+4:40
+A sign up function and then an insert request.
+4:44
+Our other option is to use a super base trigger, which happens immediately after sign up.
+4:50
+This is an automatic part of super base.
+4:52
+We wouldn't have to make it happen in the application level, but it is a little bit more complex.
+4:57
+We'd have to learn how to write super based triggers.
+5:00
+So the trigger takes the new record from the auth dot users table and inserts it into the user profiles table.
+5:08
+It wouldn't be two operations.
+5:09
+It would just be the one sign up, and then the trigger would automatically fire.
+5:13
+This approach is more consistent with the super based design patterns and best practices, and it does create nice separation of concerns.
+5:21
+But you might be thinking, well, Jonathan, if we wanted to trigger it from users to user profiles, we don't have name and account type in the users right now.
+5:31
+Well, I mentioned the user metadata part of the users table earlier.
+5:35
+I stress it's not a good idea to store auth data that we base RLS on, but what if we don't base RLS on it, but use it as a sort of parcel to take data from the app, the sign up form, into auth dot users, and then let the trigger populate user profiles, and then base the RLS on this table.
+5:58
+This sounds like a good plan.
+6:01
+Of our two choices, I think I'm gonna make the decision of going for the trigger.
+6:06
+It may be more complex, but we do have an opportunity to learn more about Superbase.
+6:11
+So we're gonna use this user metadata part as a sort of temporary transport way to get the extra data, the name and account type, into this database table at the moment of user creation.
+6:24
+As long as we don't base any RLS policies on the user metadata part of auth dot users, we're gonna be okay.
+6:31
+We're gonna copy using the trigger the relevant data into the user profiles table where we control access and integrity.
+6:39
+So even if somebody could change and tamper with their user metadata part, it's not gonna affect the app security or permissions.
+6:46
+So I know this looks like a lot, but let me go through it slowly.
+6:50
+The user's gonna sign up.
+6:51
+They're gonna include their name and choose their account type.
+6:55
+The user is added to auth dot users.
+6:57
+That's automatic.
+6:58
+And then the trigger you write is going to transfer the name and account type and the ID into user profile.
+7:05
+Because signing up also signs them in, Superbase will send the JWT to the client, which will create the session object.
+7:13
+We are then going to fetch all of the users from that user profiles table in our application.
+7:19
+If the user is a rep, we're gonna find the current user from the users table using their ID.
+7:25
+We're then gonna set form input value as the name of that current user.
+7:30
+This is the UX limitation we said on the new deal form.
+7:34
+They would only need to choose a value because the name part would be read only.
+7:38
+If they do choose a value, we would find the user ID of that submitted name from the users that we fetched here.
+7:45
+We then insert that deal, the user ID this time, not name, and value into sales deals, and our real time subscription fetch the new data from sales deals, aggregate it, be joined with user profiles, so that's where we get the name part, and then we visualize it on the table.
+8:02
+If the user is an admin, we still can populate the drop down, the new deal drop down from all of the users that we fetched here.
+8:11
+They can choose a name of only the reps and a value, and we do the same to populate the sales deals table.
+8:20
+Do pause on here if you need to go through that again yourself.
+8:23
+We'll be referencing this as we go about refactoring, so don't worry.
+8:27
+So to make that happen, here is our refactored to do list.
+8:30
+We need to create this new user profiles table and appropriate RLS.
+8:34
+We need to update our sign up component so that it includes name and account type.
+8:38
+We need to write our trigger.
+8:40
+We need to update the sales deals table and new RLS.
+8:44
+We need to fetch all of the user profiles, and we need to update the form component, and then update the fetch metrics function, which will populate our bar chart.
+8:54
+Lots to do.
+8:56
+Let's get on it.
+8:56
+See you in the next scrim.
