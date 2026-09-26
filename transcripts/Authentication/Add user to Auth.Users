@@ -1,0 +1,55 @@
+Transcript
+0:00
+Now that we have the get session method checking for the session object in local storage and the on all state change, checking for any all changes, we need to be able to sign in so that Superbase issues the JWT and the client library creates that session object.
+0:17
+Superbase creates a user's table in the auth schema when a project is created.
+0:23
+Since we don't yet have functionality to sign up a user and add them into that table, Let's manually add a user to this table now.
+0:31
+So follow along with me and do as I do.
+0:34
+I'd like you to navigate to your project dashboard.
+0:37
+Here's mine.
+0:38
+And then on the left, we're looking for the authentication part.
+0:41
+That's the thumb up.
+0:42
+It's the fifth icon down on the left.
+0:45
+Click that, and we should get to this authentication page.
+0:48
+And immediately, you see this auth dot users table, empty of users at the moment.
+0:54
+We're gonna go on to the right and click the green add user, and then create new user, and you should see this pop up here.
+1:02
+Now because of my The Office theme, I'm gonna add a user, Dwight.
+1:07
+And my company is called Paper Like a Boss, so I'm going for Dwight at p l a b dot com.
+1:13
+And to keep things simple, for my password so I don't forget them, I'm just gonna go for the name three times, which is Dwight Dwight Dwight.
+1:21
+If you have another system, that's fine, but you may want to adopt mine.
+1:25
+And then we definitely need to make sure that auto confirm user is clicked because this is not a real email address.
+1:32
+We can't have an email going to it and a link in that email needing to be clicked before they can be confirmed.
+1:39
+Alright.
+1:39
+Great.
+1:40
+And then green, create user, and here is Dwight in the user's table.
+1:45
+Superbase has automatically created them a UID.
+1:48
+This is like a unique identifier for this user.
+1:52
+Fantastic.
+1:53
+So now we've got a user.
+1:54
+Let's work on the signing component in our app so that Dwight can actually sign in to our application.
+2:00
+See you in the next screen.
