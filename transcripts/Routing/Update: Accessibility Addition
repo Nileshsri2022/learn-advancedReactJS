@@ -1,0 +1,25 @@
+Transcript
+0:00
+Before moving on, I'm coming back to improve the accessibility a little bit of the different parts of the apps that I've built.
+0:06
+One of the really easy and impactful changes that we can make regarding accessibility with this part of our app is indicating to any assistive technology like a screen reader that we are changing what is showing up in the Dom.
+0:17
+We have our early returns here with our loading states and our error states, and we can instruct screen readers to announce these changing parts of the DOM by simply adding an attribute called aria live.
+0:29
+Now back to back, these are great examples of the different options that we can use for aria live.
+0:34
+When we're loading, we would want it to be polite.
+0:37
+In In other words, it's going to wait for any other screen reading updates to finish before it announces that the text currently says loading.
+0:44
+However, with the error, we want it to be a little bit more assertive, and so we will use the value of assertive so that it actually will interrupt any other updates that are happening because this error is probably the most important thing to announce.
+0:57
+There are likely other ARIA lives that we could add to the app here, but adding these two are going to be the most impactful in improving the accessibility of our Vans page.
+1:06
+Because I'm coming back and recording this after I have already recorded the rest of this section, These ARIA live additions that we just made, unfortunately, won't be included in the future code.
+1:15
+But I did think it was important enough to come back and show this edition so that we can keep in mind the importance of remembering accessibility from the very first time that we're writing our code.
+1:24
+Okay.
+1:25
+Now let's move on and learn about protected routes.
