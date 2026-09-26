@@ -1,0 +1,148 @@
+
+Transcript
+0:00
+Okay, I lied.
+0:00
+Before we get to doing this nested navigation bar, we need to spend a minute to talk about relative links.
+0:07
+We've covered relative route paths.
+0:09
+For example, here we have our main route, which is the path of slash, which enables us to put all of its nested routes as just about Instead of specifying slash about, because its parent is slash, the slash is sort of assumed.
+0:23
+A more obvious version of this is when we come down to the host ones, where we have the path just says income, but this is not slash income, it's slash host slash income.
+0:34
+These are relative paths Because this is a nested route inside of its parent route, it assumes a known path leading to all of the parents above it, or rather it's assumed that when we say income here it's referring to the absolute path of slash host slash income.
+0:52
+Down here we had to specify vans and not just colon ID because we did not nest this route as a child of this route.
+1:00
+And therefore we need to be a little bit more explicit in the path leading up to it.
+1:04
+However, it's still relative because the URL is not slash vans slash ID, it's slash host slash vans slash ID.
+1:13
+So that brings me to what I actually wanted to talk about and that's over in our host layout.
+1:17
+When we created these nav links we created them as absolute paths.
+1:22
+We said that this path, this nav link, goes to slash host, slash host slash income, slash host slash vans, and so forth.
+1:28
+However, the truth is we actually don't need to do this.
+1:31
+And that's because this host layout is getting rendered right here in this route, and this route is already a child of the slash route.
+1:40
+Because our element is part of the route for path of host the element can assume the path of host in all of its links.
+1:49
+So if I come back to my host layout element, this one that's being rendered on the slash host route, I can change these to just say income, vans, and reviews.
+1:59
+I'm going to talk about this top one in just a second.
+2:01
+But let's go ahead and hit save.
+2:04
+And I can see that this is going to take me to, well this is the one that we didn't change because that's our dashboard.
+2:10
+Let's go to income.
+2:11
+Okay, the link is still working.
+2:12
+Slash host slash income, slash host slash vans, slash host slash reviews.
+2:16
+And once again, the reason that's working is because this host layout is rendered or nested inside of the slash host path.
+2:24
+This means that if we have links inside of the income component here, we don't need to specify the whole path leading up to income, slash host slash income.
+2:33
+In fact let's see that just for the sake of learning.
+2:36
+I'm going to import a link from react router dom and let's say that we are rendering both an h1 and a link.
+2:45
+Let's see what happens if we put, I don't know, just something here.
+2:49
+Let's hit save, we have our click me.
+2:51
+I want you to think for a second, where is this route actually going to take me to in the URL?
+2:55
+Again if we look at the route hierarchy we have, this income is nested inside of slash, also inside of host, and it's already rendering on the income subroute, so slash host slash income.
+3:08
+So if I just say that the link is going to take me to this string of something, it's going to take me to slash host slash income slash something.
+3:17
+So that's the idea behind relative routes.
+3:19
+Let's get rid of these changes.
+3:21
+Okay, and we'll come back to our index file.
+3:24
+Actually let's come back to our host layout file.
+3:28
+So this is why all of these relative paths are working.
+3:31
+Something that's pretty pertinent to what we're about to work on is how to handle this nav link here that takes us to the dashboard.
+3:38
+Because our route is not slash host slash dashboard, it's just slash host, whereas these other ones the routes are actually nested as one layer deeper in the URL, we need to do something different.
+3:50
+Well I guess we don't need to.
+3:52
+I could just leave this as slash host.
+3:54
+But one of the benefits of using relative routes and relative links is if for whatever reason I decided I wanted to change what this was called, maybe I don't want it to say host I wanted to say admin, Let me navigate to maybe the about page and then hit save.
+4:08
+I'll click on host, well actually that one we didn't fix.
+4:11
+Let me fix that in the header this one is, oh these are also using absolute paths.
+4:17
+So let's say this is going to admin and this will say admin.
+4:21
+Okay so So I click admin, and now when I click income, my link isn't broken.
+4:25
+Because it's a relative path, I only had to make a couple small changes.
+4:29
+I didn't have to make a change on every link that leads to slash admin slash something else.
+4:35
+However, my dashboard is still broken because it's linked to an absolute path of slash host.
+4:40
+So let's undo these changes because I don't want to name it slash admin, and we'll come back to our host layout.
+4:47
+These nav links are all fine, so what exactly should we put here?
+4:50
+When basically what we want to say is I want to link to this route, the route you're currently on, just slash host.
+4:58
+Well if you've had a chance to practice using your terminal on your computer, if you want to reference the prior directory you can use something like dot dot.
+5:07
+It's a shorthand for the parent directory of the directory you're currently in using your terminal.
+5:12
+For example, if I wanted to change directory to the previous directory I would say CD space and then dot dot which represents the parent directory.
+5:20
+Well in a UNIX terminal you also can say CD space dot and that represents the current directory.
+5:25
+CD space dot does absolutely nothing, it changes into your current directory.
+5:30
+But that little history can hopefully help you understand what I'm about to teach, which is if we just want to link to the route that we're currently inside of, I can just say dot.
+5:40
+This isn't by mistake or really has anything to do with the directory hierarchy, it's just something that React Router has implemented into the React Router package.
+5:48
+And as a sneak peek very soon we're going to see when we might want to use dot dot, but that's for the next lesson.
+5:54
+So for now we're going to say I want the dashboard to link me to the current route where the host layout is being rendered.
+6:00
+And again the host layout is being rendered on the path of slash host.
+6:05
+So let's go ahead and hit refresh.
+6:08
+I can hit income.
+6:09
+That takes me to host income.
+6:10
+Let me come back out here to the host layout.
+6:13
+So income is a relative path, vans is a relative path, reviews is a relative path, and now dashboard is a relative path to slash host.
+6:21
+If I were to go back and change host to say admin I would really just have to change it here in this top navigation and in the path right here.
+6:30
+Other than that all of my relative links would still be working.
+6:33
+Hopefully you can see that there's a benefit in doing that, and I've spent a lot longer talking about this than I originally planned.
+6:38
+But hopefully that gives us a quick primer into the next thing we're going to work on, which I know I said would be this navigation bar, but it's actually going to be this back to all vans button.
+6:47
+I purposefully didn't teach this when we were doing these vans list here because there's a little bit more we need to learn.
+6:53
+But when it comes to these vans right here, adding a little back to all vans button is something we now are capable of doing.
+6:59
+So buckle up, that's where we're going next.
