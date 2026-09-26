@@ -1,0 +1,60 @@
+
+Transcript
+0:00
+As we practiced earlier, this button should not be taking its text through a prop like this.
+0:05
+Instead, it should be using children to display the string sports.
+0:09
+Instead it should be using children to display sports as the text of the button.
+0:13
+So your challenge is reminiscent of what we did in the button component when we created it, but that is to change the menu button, the code of the menu button here in this file so that instead of taking a button text it will take a children prop and then come back here and fix the menu button so that it will display sports as the child of the opening and closing menu button component tags.
+0:35
+I'm really hoping this is straightforward since we've already done this a number of times before, so pause now and work on this challenge.
+0:47
+I might actually work on this one backwards, so let's get rid of the button text, and we will not self close the menu button, but create a separate closing tag.
+0:57
+And then we'll pass sports as the text or the child of the menu button.
+1:02
+Then over in menu button, instead of receiving button text, we'll receive children, so props dot children, and the text here will just be children.
+1:11
+Remember, we're using the button element that we created earlier from our component library, so technically we also could choose to put something like a variant or a size on here if we wanted.
+1:21
+In fact let's go ahead and change this to large and then I'll just hit save.
+1:26
+And we can see we have a larger button and everything seems to be working just fine.
+1:30
+Maybe to be a little more obvious that this is our original button we'll say the variant is success.
+1:37
+Awesome.
+1:37
+We got the green button there.
+1:39
+Now that looks a little funny to me, so I'm actually just going to take both of these off.
+1:42
+Off.
+1:43
+But the point is it's working and it's composing together the button that we already created with our new menu button.
+1:48
+Awesome.
+1:48
+Again, still broken, but we're gonna fix that soon.
+1:51
+Now if you did struggle with this challenge, that's completely okay.
+1:55
+I totally understand.
+1:56
+But I do want to encourage you to just go back and to revisit some of the things we did.
+2:00
+Maybe it's been a little while since you were able to do one of those earlier lessons.
+2:04
+That's completely okay.
+2:05
+Don't be afraid to repeat lessons.
+2:07
+It's not a step backward.
+2:08
+It's just going to be more difficult moving forward if you don't understand those things.
+2:12
+If you were able to complete this challenge fairly easily then awesome job.
+2:16
+Next we're going to do a little more refactoring to our menu drop down, so when you're ready let's jump into the next scrim.
