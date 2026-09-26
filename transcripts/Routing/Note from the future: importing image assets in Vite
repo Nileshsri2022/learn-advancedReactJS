@@ -1,0 +1,54 @@
+
+Transcript
+0:00
+I am coming to you from the future.
+0:02
+I've actually already finished recording and editing the end of this course, but I did become aware of an issue that you'll likely come across time and again throughout the remainder of this course.
+0:12
+It's relatively minor, it's not that big of a deal, but I did figure out what was going on and thought it would be good to give you a quick update on that.
+0:20
+So you'll notice that right now I just imported this avatar image and everything seems to be working fine, But if I go a couple levels nested deeper into my URL and then hit refresh, you'll see that the image breaks.
+0:34
+Now in the past, Scrumba has done okay to just put the relative path to the assets right here inside of the source of an image element.
+0:42
+And in the past I've had to do that because the bundler that was bundling this code under the hood inside of Scrimbo was Webpack, and I guess it was just kind of able to make this work.
+0:52
+However, this was a constant source of questions from students because when you're following along on your local machine, you'll find that this just really doesn't work very well.
+1:00
+Now a quick fix here on Scrimba that I guess I could have done is just get rid of the relative path and have it be absolute to the root of the project.
+1:07
+So if I hit save, you'll see that now my avatar image comes back.
+1:11
+That said, now we are bundling all of our projects with Vite.
+1:14
+It is much faster and it's just overall better than Webpack.
+1:18
+And now that means that I can inside of Scrumba actually do things in a bit more of a realistic or correct way.
+1:24
+Because when my project gets bundled up, my assets might end up moving or getting renamed and having this hard coded string here really won't handle the shifting around of our files very well.
+1:36
+And so the real way to do this is to import any assets that you need to use inside of your markup.
+1:42
+And I can do that by just saying I want to import, let's call it image URL from, and then we will just grab the absolute path to the image and put it in there.
+1:52
+And of course, this is different than what you might be used to seeing because we're used to importing JavaScript functions and components and everything like that.
+2:00
+Here we're importing from an NPM package, and elsewhere we're importing from our own JavaScript or JSX files.
+2:04
+But just know under the hood Vite is able to handle this and apparently, I didn't know this until recently,
+2:11
+but apparently, Scrumba is also able to handle this internally.
+2:14
+So if I just take this image URL, I can now use this as my source and that way when it gets bundled, it will just have the correct path and file name and everything so that it works just fine.
+2:25
+So even though we're still in this nested path, I can hit refresh and my avatar is still showing up.
+2:31
+So if you are following along locally, then please just do it this way.
+2:34
+Ignore the silly way that I had it before and excuse any times in the remainder of this course that you see the little broken image icon up there.
+2:42
+Doesn't happen terribly often, but it does happen sometimes.
+2:45
+Okay.
+2:46
+Let's keep forging ahead.
