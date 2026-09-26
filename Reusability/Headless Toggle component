@@ -1,0 +1,69 @@
+Transcript
+0:00
+The next portion of our component library will be working on something called a headless component.
+0:05
+Simply put, a headless component is one that doesn't have any styled user interface of its own to display.
+0:12
+It's purely intended to provide some kind of functionality to your app.
+0:17
+This might seem a little counterintuitive because up until now you've likely been doing everything in React where each component has some kind of user interface to display.
+0:26
+I threw together this simple example that's using the menu that we've been working on so far.
+0:31
+You can see it's exactly the same as it was, but I also threw in a pretty hastily designed star where if you were to try and star something or like something on some website you might have a similar functionality that if we go into the code you can see is doing something almost identical to what we have the menu doing.
+0:49
+In other words, it's just keeping track of a boolean state, and it has a toggle function that turns it on and off.
+0:56
+If you feel like reading the textbook ahead of time, you're welcome to jump into this toggle component, which I already have here.
+1:02
+This is what we're going to be working on in the next few scrims.
+1:06
+And since I have it here through the magic of editing, I'm going to reimplement what we have here using this toggle function that we're going to be working on.
+1:13
+So I'll do that right now.
+1:15
+Okay and here's the code after we've refactored it using our new headless toggle component.
+1:20
+At first glance it might seem a little more complicated but there's a little more to the story.
+1:24
+First of all, I was completely able to get rid of my star component that I originally had in a separate place, and that's because the logic for the star component was so simple that everything is encapsulated inside of my toggle component.
+1:38
+And so I could just import my toggle directly from here and then determine what needs to go inside.
+1:44
+This may look totally bonkers at first, but as we learn about the toggle function, this will make more sense.
+1:49
+Down below, I did keep my menu component.
+1:52
+Now with my menu component, which you might remember is essentially doing the same toggle functionality as my star up here, I opted not to completely erase my menu component, but instead to compose my menu component with the toggle functionality that we get from the toggle component.
+2:09
+So instead of my menu component creating its own context and receiving that context in its children and everything that we had done up until now, that functionality is being handled by toggle, and we can simply render the toggle and let the toggle handle all of the logic that happens under the hood.
+2:27
+So our menu is pretty simple now.
+2:29
+It renders a toggle or rather it wraps a toggle around the children.
+2:33
+The menu button uses toggle dot button, and we're still using our styled button from the beginning of this section.
+2:39
+The menu drop down is now using a sub component called toggle dot on, and this is going to make more sense when we look at it later, don't worry.
+2:47
+But you can see that my menu drop down is now significantly simplified compared to what it was because I was able to offload the logic handling to my toggle component.
+2:57
+Now the last thing I wanted to touch on before we start diving deep into this idea of headless components is to remember that there is such a thing as abstracting your code much too early.
+3:08
+This is a link again to the programming by Kent C.
+3:12
+Dodds.
+3:13
+Stands for avoid hasty abstractions.
+3:15
+You can read the article to get a little more insight into what I mean there.
+3:19
+You might have noticed that in this section we haven't actually learned that much new about React specifically.
+3:25
+Instead, we've been using the tools that we have available to us in React in certain patterns that have become prevalent in the React community.
+3:34
+And learning about this headless toggle component that we'll be working on is going to be another example of that.
+3:40
+I think it's good to expose you to different ways that your program can be structured to make it as reusable, but maybe even more importantly as maintainable as possible.
+3:50
+So with that behind us, let's jump right into the world of headless components.
