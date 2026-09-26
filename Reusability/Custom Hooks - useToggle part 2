@@ -1,0 +1,81 @@
+Transcript
+0:00
+Okay, I lied.
+0:00
+This is parts three four and five of this challenge.
+0:04
+First of all, you might have noticed that we're using react but we're not importing it, so that's part three is just to add the missing import there.
+0:10
+And then the main part of this challenge is part four.
+0:12
+I want you to return from our function an array where the first parameter, oh and these should say index not parameter, where the first index of that array is the on value that we created right here, and the second index is the toggle function that we created right here.
+0:29
+And then finally over in toggle JS you'll need to import our use toggle so that we don't get the same error where it says use toggle is not defined.
+0:36
+Okay.
+0:36
+Pause now and work on the remainder of this challenge.
+0:45
+Okay, we know we need to import React from react.
+0:49
+That was actually just an oversight of mine when we copy and pasted the code from the toggle JS file.
+0:54
+But sometimes it's nice to check things off really easy.
+0:57
+Part four, we are going to return an array and the first value is going to be the on state that we created here.
+1:05
+The second value is going to be our toggle function.
+1:08
+In truth toggle is a super simple function.
+1:10
+It's just using set on that we got from use state and then flipping the boolean.
+1:14
+But set on has no idea that we're saving a boolean per se and so just calling set on we would have to write this out every time.
+1:22
+So calling toggles a little bit easier, and we'll just pass that as our second index to this array.
+1:28
+Now actually using use toggle is going to look very similar to use state.
+1:32
+And just like use state, because we're destructuring an array here, we actually could call this whatever we want and then change this to, you know, set whatever we want or blah or something like that because it's an array.
+1:45
+If it were an object we would have to use the exact same keys that were returned from use toggle.
+1:50
+Truthfully, there's plenty of custom hooks that return objects instead of arrays.
+1:55
+In our case, because it's very similar to state, I'm just going to call it on and toggle keeping the naming convention that's used inside of use toggle.
+2:03
+But just so you know, it's completely arbitrary.
+2:05
+You could choose different names if you want.
+2:07
+Okay.
+2:07
+But we still have the error where we're not importing our use toggle.
+2:10
+So let's go ahead and import that.
+2:12
+Actually I'm going to copy this line and just change both of these to use toggle.
+2:17
+And I think that's it.
+2:18
+Let's hit save.
+2:19
+Okay.
+2:20
+And then our star is working.
+2:22
+Look at that.
+2:23
+Now like I mentioned, this is just a minor update.
+2:25
+It saved us a little bit of code here inside of our toggle component.
+2:29
+But if you look closely enough, you'll notice that what we're doing inside of toggle is setting up context and a provider, and the values that we're giving it are the exact values that we're getting from calling on toggle.
+2:41
+Which means all the children have a bunch of code that is pulling in like the toggle function or the on value so that it can correctly display things.
+2:50
+And toggle dot display especially is using render props, which can be a really useful pattern.
+2:55
+But in this case we're gonna see that it can all be dramatically simplified with the use toggle hook that we just created.
+3:02
+So let's clean up our challenge text and we are going to get ready to do some major hacking apart of our toggle component and seeing how we can dramatically simplify our code using our new hook.
