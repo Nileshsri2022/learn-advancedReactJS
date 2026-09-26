@@ -1,0 +1,80 @@
+
+Transcript
+0:00
+Let's take a look at another way that we can set the search parameters in our app.
+0:04
+The way we have our links set up is a really really simple way to do this.
+0:08
+There's some caveats with it that we're going to talk about soon, but first I want to comment these out.
+0:13
+Actually I'll move them outside of my components so I can comment them out, And I'm going to show you another way.
+0:20
+Instead of linking to the query parameter that we want we can use the state setter function that we received when we initialized our search params.
+0:28
+So this function here set search params just like in use state is a setter where we can tell it what the new search params are going to be.
+0:35
+So let me create a couple buttons here.
+0:38
+Okay the form factor is going to be a little bit different so I'll hit save and we have buttons instead of links.
+0:43
+Of course we could style these however we want.
+0:45
+So this time around, because buttons are not part of the React router ecosystem like link is, we are simply going to use an on click event handler in order to call our set search params function.
+0:58
+So I'll create an on click for each of these, and these will have a callback function, and that function is going to run set search params.
+1:09
+Just like with use state, the setter function can either take a new value for the search params, which will completely replace the old value, or it can take a callback function.
+1:19
+First, we'll look at just passing in a new value.
+1:22
+One thing I've learned with set search params is that it's very flexible.
+1:26
+We can pass any value into here that the URL search params, this object here, can take.
+1:32
+And if you look at the documentation here I think there's four different types of parameters that you could pass in for it to generate search params.
+1:39
+One of the ways that you can initialize new search params is by passing in a string that represents the new search params you want.
+1:47
+So this is actually almost identical to what we had with our links.
+1:50
+And the URL search params object is smart enough to figure out if there's a question mark at the beginning so it actually doesn't matter.
+1:57
+You can either say type equals and then we'll say Jedi, this one will say Sith, and then this one will actually just say we want to set the search params to an empty string.
+2:07
+Or I could put question marks here and it's smart enough to figure it out.
+2:11
+So let's see with the question marks.
+2:13
+Jedi shows Jedi.
+2:14
+We see in the URL type equals Jedi.
+2:17
+Sith is the same.
+2:18
+Clear clears them out and without the question marks it does the same.
+2:23
+Okay so yes this works to pass in a string like this.
+2:26
+However I don't oftentimes see this string initialization used very often.
+2:32
+More commonly I will see a record initialization or what you could just think of it as being an object initialization.
+2:39
+And this is very similar where the object has keys and values just like our search parameters have keys and values.
+2:45
+And so I can say that the type is going to be, and then I can pass in my Jedi Sith, and then here we're just going to pass in an empty object which says I don't want any search parameters.
+2:58
+Okay, we'll hit save, Jedi.
+3:01
+We see that that translated into the query string just like we would have expected, and that's happening by the URL search params object under the hood.
+3:10
+Sith does the same thing, and clear clears them out.
+3:12
+Now truth be told, there's actually other ways that we can initialize this exact same thing.
+3:17
+Each one has their own use case, but more often than not if you're typing it in you're probably going to see people using an object like this.
+3:24
+So that's what we're going to stick with.
+3:26
+Okay, time to practice this.
+3:27
+Let's go over to the van life app and you'll get your chance to practice.
