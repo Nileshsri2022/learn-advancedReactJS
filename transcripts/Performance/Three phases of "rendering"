@@ -1,0 +1,121 @@
+Transcript
+0:00
+Oftentimes we talk about the re render or the render process as if it were just one thing that represented the beginning of a render, like from a state change, all the way through the DOM actually updating for the user to see the changes.
+0:14
+The truth is rendering in React actually happens in three phases.
+0:18
+Now for simplicity's sake, we are going to assume that the re rendering is triggered based on a state change.
+0:24
+In reality, it can happen also based on context change or you could say that it happens based on a props change.
+0:31
+But assuming that what's triggering our re renders here is a state change is good enough for our discussion.
+0:37
+After a state change happens, as I mentioned, there are three phases that React goes through in order to update the DOM for the user to see those changes reflected.
+0:46
+The first phase, which is what we usually end up calling the entire process, is called the render phase.
+0:51
+We're going to talk about what each one of these is in just a second, But after the render phase comes a phase called reconciliation.
+0:57
+And after reconciliation comes the actual process of committing changes to the DOM.
+1:02
+Now I think that in order to understand this process, it can be helpful for us to look at an analogy.
+1:08
+So imagine that you are an architect and your job is to update a building plan to make it more modern or bring it up to code or whatever it might be.
+1:16
+So let's imagine that there are three phases to this task of updating this building.
+1:21
+The first thing is the architect will pull up the old blueprints and make a new version of the blueprints that includes the changes that they want.
+1:29
+Secondly, the architect might then make a list of changes that actually need to be implemented to the building.
+1:35
+Just because there's a whole new updated blueprint that the architect just made, of course, it doesn't mean that the whole building should be rebuilt from scratch.
+1:43
+And thirdly, that list of changes is passed off to the contractor and their team to make the actual building updates as indicated by the blueprints.
+1:51
+The contractor is going to want to do as little work as possible so that they can save time and money.
+1:57
+Now let's bring this analogy back and use it to help us understand how React is going through these three phases.
+2:03
+First of all, in the rendering phase, we have rendering.
+2:06
+And this is when all of the components in a specific branch of the tree, the branch that is started with the state change, all of those components are called again.
+2:15
+In other words, if we have functional components, every function is called again.
+2:19
+And therefore, any calculations, any function creations, any side effects that we have, they will all get run again in JavaScript.
+2:26
+This results in a new version of the virtual DOM model.
+2:30
+I guess this is redundant having DOM model, which is given to React.
+2:34
+Then React goes to the second phase, which is the reconciliation phase.
+2:38
+And this is where React uses what they call a diffing algorithm in order to check what is different between the old virtual DOM that they used to have and the new virtual DOM that was just created in the rendering process.
+2:51
+This way during the reconciliation phase, React can determine what actually was updated from the last render.
+2:58
+And then lastly comes the commit phase.
+3:00
+Phase.
+3:01
+And this is where the changes that were determined by the reconciliation phase are actually committed or painted, you could say, to the DOM.
+3:09
+Okay.
+3:09
+That's a lot of words on the page.
+3:11
+Let's bring this to our diagram so we can see a little bit more visually what's going on here.
+3:16
+Let's imagine that this parent component over here has some sort of state change.
+3:20
+And by the way, when I fill this in with green, that's going to represent a component that gets re rendered during that first phase of rendering.
+3:27
+So there's a state change in this parent and React is going to rerender the components again recursively just like it did the first render and effectively build a new blueprint for that section of the app that was affected by the state change.
+3:41
+Now even though I have left these green ones here in the main tree, keep in mind that this is not yet part of the dom.
+3:48
+It's not even part of the original virtual dom.
+3:51
+Instead, it has created a new small section of the virtual DOM.
+3:55
+And in the second phase of reconciliation, React is going to look just at that specific old virtual DOM and compare it to the new virtual DOM that has been created through the render phase.
+4:07
+Remember, reconciliation is where the diffing takes place.
+4:11
+So at this point, React is going to determine what is different from the old small section of the blueprint with the new section of the blueprint in order to figure out the smallest amount of work possible to make changes to the actual visible DOM.
+4:25
+Now remember how we triggered that state change in our parent?
+4:28
+Let's imagine that that parent is not passing that state down to its children in any way.
+4:33
+We'll demonstrate that here with this orange fill color.
+4:36
+This is what the state is actually affecting.
+4:39
+In this case, even though the entire subtree was re rendered during the reconciliation phase, React is going to know that this parent component is the only one that actually needs to be committed to the DOM.
+4:51
+So effectively React will ignore these other parts and then it will take that one parent component and it will commit it down to your actual document and that will finally complete the three phase re rendering process for React.
+5:05
+Now I don't actually have a diagram for this, but let's imagine that maybe the parent component was passing that changed state down to this child component.
+5:13
+In that case, the commit process would include both updating this parent and this child and the other components that were technically re rendered would not get recommitted to the DOM.
+5:24
+Now let's come back to our analogy here with the building updates.
+5:29
+Just like how updating blueprints and listing changes is going to be a relatively quick process for the architect to complete, the actual building process is where most of the time ends up getting taken up.
+5:41
+Similarly, in the three phases for rerendering in React, the rendering and reconciliation phases are actually pretty fast.
+5:48
+It's the commit phase where usually the bottlenecks occur.
+5:51
+Now committing to the DOM in and of itself is not necessarily slow, but some changes to the DOM are.
+5:57
+And therefore, usually the bottlenecks in the rendering process happen during the commit phase.
+6:03
+Okay.
+6:03
+That was a ton of information to take in.
+6:05
+Please feel free to go back and rewatch this.
+6:07
+We are going to take a quick quiz just to make sure we're on the same page with terminology, and then we will have a great stage set for us to dive deeper into understanding how we can improve performance in a React app that maybe isn't performing as well as we would want.
