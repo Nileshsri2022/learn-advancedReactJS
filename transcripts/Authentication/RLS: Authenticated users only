@@ -1,0 +1,166 @@
+
+Transcript
+0:00
+Okay.
+0:01
+Let's enable RLS and write our first policy.
+0:04
+So when we created sales deals, we turned RLS off.
+0:08
+So we now need to turn it on.
+0:10
+If you could follow along with me here, if you can navigate to your project dashboard, here's mine.
+0:15
+And the same place we went to when we added a user to auth dot users, we need the thumb up authentication part, which is the fifth icon down on the left.
+0:25
+And then on the left underneath configuration, we're looking for policies.
+0:29
+Here's our sales deals table, and it says a warning because it's not great to have this disabled.
+0:36
+So we are gonna click enable RLS.
+0:39
+And, again, this is gonna lock down all the data by default.
+0:43
+And then we're gonna write a policy to limit any interaction with our data to only those who are logged in authenticated.
+0:50
+So we confirm it with the green confirm.
+0:54
+And then on the right, if you could click create policy, that should take you to this screen.
+0:59
+So it's gonna ask us for a name.
+1:01
+It already has our table there because we've asked it to create a policy on this table.
+1:06
+So I'd like you to add the name authenticated users only.
+1:13
+You don't need to touch the table.
+1:15
+Permissive is the default policy behavior, and that means we're allowing requests with these details that we're about to put in here.
+1:23
+Okay?
+1:24
+To start with, we're gonna write a policy for all commands.
+1:29
+So if you click all on the right here, I mentioned you can specify a particular request, but we're gonna go for all now, quite a broad policy.
+1:37
+And then at the bottom, if you could untick use check expression.
+1:41
+So we should be looking like this.
+1:43
+And then this using clause is really important.
+1:47
+We're saying people who have a role on their JWT certificate of authenticated are allowed access to the sales deals table.
+1:58
+So we do that using Superbase's function auth dot role.
+2:03
+That returns the user's role from the JWT, and we're saying that has to equal authenticated.
+2:09
+Remember, role is either a non for an unauthenticated request or authenticated, and this is actually a Postgres role.
+2:17
+So I mentioned that permissive is default.
+2:20
+You can write these as restrictive.
+2:22
+That's the opposite.
+2:23
+It denies access if this condition is true, but we are allowing access if this condition here is true.
+2:31
+Another way we could have written the using is instead of using auth dot role, we could have used auth dot UID.
+2:38
+We could have said auth dot UID is not null.
+2:41
+The reason this would work is because only authenticated users would have a UID.
+2:46
+That's that unique ID that Superbase gives every user in the auth dot users table.
+2:52
+We saw it on Dwight in my project.
+2:55
+So they would have worked the same.
+2:56
+Here, we're saying the role part of the JWT has to be authenticated.
+3:00
+We could have said the UID part has to be something, I e, not null.
+3:05
+So now if we try and make any request to sales deals and we're not logged in, I e, we have a role of a non, it should not allow us.
+3:15
+The bouncer will say, no way.
+3:17
+K.
+3:17
+Click the green save policy.
+3:20
+So now we have this RLS around the database, and the bouncer has been told allow any action on sales deals to authenticated roles only.
+3:30
+So here is the JWT being sent and the request.
+3:34
+So this is the full letter.
+3:35
+The JWT, remember, is the certificate that proves who is doing the requesting.
+3:41
+And in the request, it might say what they're doing, to which table, what data might be being inserted, and how.
+3:49
+So if the JWT has a role of authenticated, then the door will become unlocked, and the bouncer will allow the letter through.
+3:57
+So another example of a policy based on the data being sent, inserted, could be this one.
+4:03
+Allow authenticated roles to insert their rows into sales deals.
+4:09
+So their own rows, this means, I e, the name of the row being inserted has to be the same as their name, the person doing the inserting.
+4:20
+Not that we have a name part in the JWT.
+4:23
+Remember, it's only their email, their unique ID, and their role.
+4:27
+So this might foreshadow an issue we're gonna come across later.
+4:31
+Maybe there's a better way to identify the deals in sales deals maybe by their ID.
+4:38
+Currently, remember we have name and value in the sales deals table.
+4:42
+Have a look in your project if you want.
+4:44
+But maybe that's not a great way of identifying whose deals is who with the name because currently in our database, we don't have name stored.
+4:54
+There is a name obviously in the email, but not sure how secure that is.
+4:58
+Anyway, I'm getting a bit ahead of myself.
+5:00
+So if any request does not satisfy the bouncer, it's not getting through.
+5:05
+Okay.
+5:06
+It's time to test.
+5:08
+So now if I navigate to dashboard again, not being logged in, we do get there, but there's no data.
+5:17
+We see in my dev tools in the network tab, I see a four zero four not found.
+5:23
+But if I now go back to our home and I sign in, meaning that the request to sales deals will include a certificate with role of authenticated.
+5:35
+Fantastic.
+5:36
+There we see our data.
+5:38
+So the RLS bouncer has said, let's have a look at your certificate in that letter.
+5:43
+Yep.
+5:43
+It's got the correct role.
+5:45
+You're welcome to take all of the data.
+5:48
+Okay.
+5:48
+Brilliant.
+5:49
+I hope that made sense.
+5:50
+I recommend reading up more about RLS in the super base docs and elsewhere.
+5:55
+Okay.
+5:56
+Next up, we're gonna be working on a redirect from our home route.
+6:00
+If a user's logged in, we want them to always be directed to slash dashboard.
+6:05
+See you then.
