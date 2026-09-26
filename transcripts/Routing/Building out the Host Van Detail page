@@ -1,0 +1,232 @@
+
+Transcript
+0:00
+This challenge marks the start of embarking on, I think, the most complicated part of this app, so we're just going to take it one little step at a time.
+0:07
+That said, most of the things that we'll be covering should be things that you already know.
+0:11
+We're going to add some new knowledge along the way, but in the meantime most of this should be doable.
+0:16
+And if it is a really big struggle for you that's a good indication that it's time to go back and just to review some of the things that we've learned already.
+0:24
+The challenge here is to start building out the shared UI portion of the host VAN detail page.
+0:30
+So that's this section right here at the top.
+0:32
+And if you remember from, let's see, one of these past slides, here, these last three pages are really all we have left to build.
+0:39
+This one, it's a little hard to see because it's so small, but this one is the detail page that we're working on in this challenge, or rather just this top portion.
+0:47
+And that top portion is what's going to remain constant through the host fans ID pricing and the host fans ID photos page as well.
+0:54
+Let's go back here to a little bit better of a view.
+0:57
+Hopefully it rings a bell that because this is going to be some shared user interface between those pages, the pricing and the photos page and the details page, you'll remember that we will end up using a layout route for this.
+1:09
+So eventually we'll have an outlet that we need to use.
+1:11
+For this challenge, don't really worry too much about that.
+1:14
+You'll make it so that this appears when you're on the what is it?
+1:17
+Host vans and then the ID of the van.
+1:20
+So building this page out is not the optional part of this challenge, but there is an optional portion and that's to style it so that it looks just like this.
+1:27
+If you don't feel like you need to practice your CSS at this time, then you can just get all of this information displaying on the page, and then I'm gonna handle the CSS part on my end.
+1:37
+We're going to fine tune how the data gets into this page, but for now just make a request to slash API slash host slash vans slash and then whatever the ID is in the URL, so the ID of this van.
+1:50
+The server is hardcoded just to only pull when the ID is equal to the ID you pass in and the host ID is one two three.
+1:57
+So that's really already handled for you.
+1:59
+This is obviously not exactly how it would work in the real world, but it's close enough for our purposes in learning React Router.
+2:06
+So again you will just be building this top portion.
+2:08
+Don't worry about changing the routes we have in our index or anything to set up for this bottom portion.
+2:14
+That's what we'll be working on in the next challenge.
+2:16
+Okay, it's your turn to get your hands on the keyboard.
+2:18
+Pause now and work on the challenge.
+2:21
+Okay let's set up some state for holding the current van.
+2:25
+So we'll say current van and set current van is react dot use state, and until that data comes in we could initialize it as null or I suppose we could initialize it as an empty object.
+2:37
+Let's go ahead and do null for now.
+2:39
+Then we will do a useEffect which is where we will grab our data.
+2:43
+We'll set up the dependency array and we'll leave it empty for now, just saying if this component ever loads then we want you to run this effect.
+2:52
+And we will send out our fetch request.
+2:54
+So this will be to let's see, I'm going to use a template string because I know that I need a dynamic access to the ID on the current URL.
+3:03
+So that's going to be actually let me just copy this part right here.
+3:06
+Okay and then I will use a template string to inject some JavaScript.
+3:11
+Now I need to figure out what the current URL is.
+3:14
+And if you remember way back, we can get that from the params.
+3:18
+So I need to import use params from react router dom, and then I can grab the params by calling use params.
+3:27
+And let's see, in our index JS I think we've called everything ID.
+3:31
+Yep, so whatever, I guess you could call it variable name, we put here if I said this were colon whatever, then over in our hostname detail page, params would have a property called whatever.
+3:42
+So it'd be params dot whatever.
+3:44
+That's too silly.
+3:45
+So let's take that back and this will be params dot ID or if I wanted to I could just destructure it when I pull it in and say I only care about the ID property.
+3:54
+So So then we could just say ID here.
+3:56
+Okay.
+3:57
+And then we will get the response and get the JSON turned into a JavaScript object, and then we will have access to the data.
+4:05
+And if you know me, I'm gonna console log this data before we get too far down this rabbit hole.
+4:10
+So let's hit save, open up our console.
+4:13
+Not JSON parentheses, we need res dot JSON.
+4:17
+Cool.
+4:17
+Okay so we get an object with a vans property.
+4:20
+And oh, this is interesting.
+4:21
+I guess this is the way that the server is returning the data.
+4:24
+The vans property is an array, but because of the way that I wrote this server endpoint, it's always going to return only one item just because the IDs are unique and especially when you take into regard the host ID.
+4:38
+So in that case I guess I could just always console log let's say data, oops at, no that's zero, uh dot vans at the index of zero which would always be the first object because I just know that it's always going to be one object.
+4:52
+Let's just see what that looks like.
+4:53
+Okay so that is the van that we care about and hopefully you were able to figure that part out.
+4:59
+Because I am the creator of this server and I'm just going to cheat.
+5:02
+So I'm just going to put my index of zero on the server because to be frank I probably should have done that in the first place.
+5:08
+So let's take off the index of zero here because now data dot vans oops nope that's gonna be let's see it's gonna be that dot vans at the index of zero.
+5:18
+Okay let's see if this even works.
+5:19
+This might not even work.
+5:20
+Let's say the data nope that's not gonna work.
+5:24
+Okay bear with me here.
+5:25
+I'm actually going to change this from dot where to something called find by, and then we'll take this out.
+5:31
+The find by method allows me to pass in an object with a bunch of key value pairs that it will find and return the first instance in our quote unquote database that matches these parameters.
+5:43
+So let's go back to host van detail, and now let's see what comes in.
+5:48
+Okay cool.
+5:48
+That's pretty much what we wanted.
+5:50
+It's still got a vans property, so we'll just say dot vans.
+5:53
+Cool.
+5:53
+Okay.
+5:54
+Again, because I hadn't made that change before you did the challenge, this is I guess outside of the purview of what we did for the challenge.
+6:01
+This makes a little more sense to me though.
+6:02
+Okay.
+6:03
+Well we don't want to console log data dot vans.
+6:05
+We want to set the current van to data dot vans.
+6:10
+And then in our markup, the challenge just says that we need to display all the data.
+6:15
+So let's just stuff it into a div for now and then I'm just going to paste in the CSS and the markup that I used in creating this myself to speed up our process here.
+6:24
+So let's get an image.
+6:26
+We'll set the source equal to current van dot image URL.
+6:31
+And I can already see that there's going to be a problem here because we're initializing our current van state as null, and so null dot image URL or trying to access the image URL property on null is going to throw an error.
+6:44
+So again hit save and we'll see I cannot read properties of null.
+6:48
+A quick kind of band aid for this would be to conditionally render everything, or maybe even better is just to say if there isn't a current van then we'll early return, and we'll say return h one that just says loading.
+7:02
+Like I mentioned before, we probably would want a real loading state to include here instead of just assuming that if there isn't a current van it's because it's loading and not because there's some kind of network error or some other problem.
+7:15
+But we're taking a few happy path shortcuts here so this will work for now.
+7:18
+Okay let's try this again loading and then we get this massive image.
+7:22
+Okay we're gonna fix that.
+7:23
+In fact I'll just throw a band aid on it and say that the width is equal to, I don't know, one hundred and fifty.
+7:29
+Okay let's see what else.
+7:30
+It said display the van image, name, price, and type.
+7:33
+So we should be able to just kind of throw those in.
+7:36
+We'll say current van dot let's see.
+7:38
+Is it name?
+7:39
+Yeah.
+7:39
+There it is.
+7:40
+Okay.
+7:41
+Name and let's just stuff these into a paragraph for now.
+7:44
+Current van dot price and we'll say current van dot type.
+7:48
+Okay, it's obviously not the form factor that we want, but that is a great start for us.
+7:54
+If you weren't able to get to this point, then I would recommend pausing and going back, reviewing what we've done here.
+8:00
+Honestly everything we've done so far except for the use params should not really be too new to you in React.
+8:06
+This might be a good time to mention that there's kind of a shift away from using useEffect to do your fetches these days.
+8:13
+There's other methods that we're actually going to cover a little bit later in this course, and some new really cool React APIs that are coming out in the near future that will make this a lot easier to write and to reason about.
+8:25
+And you know what?
+8:25
+Because this has actually been a bit of a challenge already, it's taken a fair amount of time, I think this last portion, what we'll do right here, is actually going to be something we work on in the next challenge.
+8:36
+If you are able to do this little navigation bar then that's perfect.
+8:40
+That's really really good.
+8:41
+We're going to do that in the next challenge.
+8:43
+If again you already did it then you can skip doing that challenge, and you can just watch me do it over there in that lesson.
+8:49
+Okay.
+8:49
+Great work.
+8:50
+Hopefully that went okay.
+8:51
+And if not, you know what to do.
+8:53
+Let's move on.
