@@ -1,0 +1,180 @@
+
+Transcript
+0:01
+We've done all the setup.
+0:02
+We have a Superbase project and table.
+0:05
+We've seeded that table with our data.
+0:08
+We have imported the Superbase client library, and we've set it up in a new file ready to be used.
+0:15
+We're ready to start seeing a response back from Superbase.
+0:19
+So first, let me show you the boilerplate code that we're starting with.
+0:23
+We have a header at the top and then a dashboard component below.
+0:28
+So the header is just the icon and then this h one, and the dashboard is just an h two right now.
+0:36
+But this is where we're gonna be coding in this scrim, and this is also where the bar chart eventually will live.
+0:42
+Superbase provides us with a translator where we can type SQL into the browser, and it will translate it into the Superbase client code that we can use in our app.
+0:53
+So please click the slide.
+0:54
+It will take you to the translator as you'll be using it very shortly.
+0:59
+Now before we start talking about querying the database for our bar chart, we're gonna start one step before that.
+1:07
+I'm gonna talk through how we query and we find the largest deal in our table.
+1:12
+So the reason I asked you to make sure one row of the table had a rep that had a deal larger than everybody else, that's the one we're going to be querying now.
+1:22
+So I think about the SQL I need for this, and I've gone for select name and value from sales deals.
+1:31
+Because I want the highest deal at the top, I'm going to order by value and then use the desk and then only limit by one so that I only get the one highest deal.
+1:42
+I scroll down and I click JavaScript, and it gives me the client code here.
+1:47
+It's a similar syntax to SQL.
+1:49
+We've got a dot from for the table name.
+1:51
+We've got a dot select.
+1:53
+Here, it's got name and value.
+1:55
+And then we've got a dot order, and it gives us ordering by value, and then it's got an ascending false and then dot limit.
+2:03
+Now the dot select part here, and later we're gonna be using dot insert, are actual methods available in the client library.
+2:10
+If you want to know more about that, do check out the super base docs.
+2:15
+Now I copy and paste this into the dashboard component.
+2:19
+Now the backticks here are purely formatting so that we can have the name and value on separate lines.
+2:25
+It would work equally well if we just had it on one line with regular inverted commas like this.
+2:32
+Now this super base word here is actually the client instance that we exported here in the separate file in the last scrim.
+2:41
+So we need to import that at the top here, and we can use the dot because this dashboard component is in the same level as the super base dash client dot j s file.
+2:52
+And then we see the await word, which implies this function needs to be asynchronous.
+2:57
+Now why is this?
+2:59
+Well, we need to pause the execution of the function that we're gonna wrap this in in a minute until data is fetched and available.
+3:08
+We don't wanna use it before the super base query resolves.
+3:11
+Then since we want this query to only happen on first render, we need to think about a way to do that.
+3:18
+And the industry standard way in React is to use the use effect hook.
+3:23
+If you need to brush up on the use effect hook, please click this slide and have a read of the React docs.
+3:29
+Or better still, click this slide to check out the use effect lesson in Bob's fantastic free learn React course here at Scrimba.
+3:38
+So it's a challenge time for you to get your hands on the keyboard.
+3:42
+I'd like you to import the super base client at the top.
+3:45
+I've removed it.
+3:46
+You're welcome.
+3:47
+And then number two, we're gonna wrap this client code in a function.
+3:52
+I'd like it to be called fetch metrics, and it needs to be asynchronous.
+3:56
+Then I'd like you to import useEffect at the top and add the useEffect hook up here at the top of the dashboard component.
+4:05
+And I'd like you to call the fetch metrics function that you've just written as the effect in the hook and have it run only once after initial render.
+4:14
+You may need a Google for that.
+4:16
+Then I'd like you to log the response from Superbase to the console.
+4:20
+Now right now, the response is being destructed into these variables.
+4:24
+What I recommend is you comment out this and then and create a new variable called response.
+4:32
+And then below this, I'm giving you a lot of help now, you can just console log the response variable here.
+4:40
+Okay?
+4:40
+That's the way I would do it.
+4:42
+But let me remove this so you can have a go yourself.
+4:45
+And then in the past, if you've used Scrimba before, you may be used to just refreshing the mini browser to run the code.
+4:53
+But now in the new Scrimba, it's gonna be a control or command s to save, and that will run it again.
+4:59
+And you can bring up the console and check if we're getting a response from Superbase.
+5:04
+Good luck.
+5:09
+Okay.
+5:10
+I hope that went well.
+5:11
+Let's go through it step by step.
+5:13
+So we're going to import super base here.
+5:17
+There we have it.
+5:18
+And then we're gonna make an asynchronous function here.
+5:22
+So we say async, and we're gonna call it fetch metrics.
+5:29
+And we're gonna wrap all of this in here.
+5:32
+Now we need to import useEffect at the top.
+5:36
+There we go.
+5:37
+And add the hook at the top.
+5:39
+So we just call useEffect, And then in here, we need an arrow function, and this is where the effect is.
+5:48
+And then here, we need a dependencies array.
+5:51
+So if the dependencies array is empty, then this will only run after first render and not on every rerender.
+5:58
+So I've asked you to call the effect metrics function as the effect here.
+6:02
+So let's do that.
+6:04
+And then number five, log the response to the console and save.
+6:08
+So I recommended that we commented out the destructuring.
+6:13
+We then assign this to a response variable.
+6:18
+And then below, we just console dot log that response variable.
+6:24
+So we can see everything coming back from Superbase.
+6:28
+I'm gonna go for command s, and then I check my console.
+6:33
+And, hey, presto.
+6:35
+This is everything we're getting back in the response.
+6:38
+We've got an error property.
+6:39
+We've got a data property.
+6:41
+Those are the two that we're interested in, and that's why Superbase suggests we destructure these into data and error variables.
+6:49
+Do check the React docs if you need to brush up on the destructuring assignment.
+6:54
+Fantastic.
+6:54
+So in the next scrim, we're gonna be querying the database for the data we need for our bar chart, which is the end goal in this project.
+7:02
+See you then.
