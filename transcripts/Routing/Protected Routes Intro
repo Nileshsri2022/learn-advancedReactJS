@@ -1,0 +1,35 @@
+Transcript
+0:00
+Before we dive into any code I want to just talk about the concept of protected routes as a high level overview.
+0:06
+The purpose of creating protected routes is for us to stop any data fetching of sensitive information.
+0:13
+That way only the logged in user is allowed to access their data as opposed to write
+0:21
+access
+0:25
+write access to the data to make changes to it.
+0:28
+I guess the first example of this that comes to mind is something like YouTube.
+0:31
+You want other people to see your video, but you don't want them to have the ability to edit your video.
+0:37
+So the approach we'll take with protected routes is by preventing any rendering of components that are fetching data.
+0:43
+So the logical flow is if the user isn't logged in, then we need to stop the data fetching by just blocking components from rendering, and instead send them to the login page.
+0:53
+In this case, since fetching is happening inside of the components, if those components never rendered in react then the fetching will never kick off.
+1:01
+So a visual representation of this might look something like this.
+1:04
+We'd have this set of nested routes.
+1:07
+In our case, we plan to protect everything from host on down.
+1:11
+So anything that starts with slash host will require the user to be logged in first.
+1:16
+In order to do that, we are going to be wrapping a parent route around our host routes that is a layout route.
+1:22
+And we'll call this layout route auth required and its sole purpose is to check if the user is logged in and if they are to then render these host routes or remember in order to render the children, we will render the outlet inside of our layout route, or if they're not then we will not render those and instead redirect the user to the login route.
+1:43
+So that's a high level overview of what we will be working on starting in the next lesson.
