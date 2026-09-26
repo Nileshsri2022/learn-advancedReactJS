@@ -1,0 +1,98 @@
+
+Transcript
+0:00
+Alright.
+0:00
+Let's dive right into, let's call it a moderately involved challenge.
+0:04
+I've tried to outline all the steps that you need to take and give you some notes along the way.
+0:09
+Also notice that in the menu.
+0:10
+Js file I've written some notes for you here.
+0:13
+But essentially what we're going to do is take the knowledge that we've learned about rendering children and apply it to these components so that we can make compound components.
+0:21
+Read the text of the challenge very carefully, work through it step by step, and I'm sure you'll be able to complete this challenge.
+0:26
+If you get stuck, don't just immediately resort to watching me do it.
+0:30
+Go ask the community, see if you can get help, do some Googling, maybe even take a walk and come back and try to think through it again.
+0:36
+I really want you to put a solid effort into this before just skipping ahead and watching me do it.
+0:41
+That said, if you get completely stuck, we will be walking through this together.
+0:44
+So pause now and work on the challenge.
+0:53
+Okay, step number one is to convert the menu component to use props dot children instead of an items prop.
+0:59
+Right now we're passing this items prop down, and of course we're passing this button text prop down.
+1:04
+And if we go to Menu JS it's receiving those and it's doing some logic and setting up some state and everything.
+1:11
+In our case, we are going to start by removing these props, and it's just going to take children.
+1:16
+And then I can just get rid of the menu button and this conditional rendering of menu drop down, and we'll just say just render your children.
+1:24
+Do a little bit of work with setting up this class name and everything.
+1:28
+Again, like I said in the note, we're going to get rid of this stuff even.
+1:31
+So for now just render your children and wrap it in a div with the class name of menu.
+1:36
+One of the difficult things about refactoring something like this is when I hit save everything's gonna be broken.
+1:42
+But that's okay, we're gonna fix it.
+1:43
+Back in Index.
+1:44
+Js, step number two tells us that we need to import the menu button and the menu drop down.
+1:50
+So let's go ahead and do that.
+1:52
+We'll import the menu button and the menu drop down.
+1:57
+And then instead of having a menu that self closes, I'm gonna leave that here so I have my items and my button text still, let's render a menu that does not self close but instead takes children.
+2:11
+And then I'm going to render my menu button, and my menu drop down.
+2:18
+And you can start to see that what I've done is I've sort of flattened the structure, so to speak.
+2:23
+Because now instead of passing items to my menu, which then would need to pass the items to the menu drop down, I have sort of opened up this black box and exposed the menu drop down itself.
+2:35
+And now I can pass items directly to the menu drop down.
+2:38
+So let me just actually take this whole array and pass it in there.
+2:43
+My menu button is also expecting button text, I believe.
+2:48
+Let's go to the menu button real quick.
+2:49
+Yeah it's receiving button text.
+2:51
+It's also getting on click but we're gonna fix the on click thing later.
+2:54
+For now it's gonna be broken.
+2:56
+Um, let's hit save and see what happens.
+2:58
+Okay, our menu is showing up.
+2:59
+Again, it's broken.
+3:00
+Clicking the button doesn't actually do anything, and well this menu probably shouldn't be here anymore because it's not going to be rendering, it's not getting any children that it can render, so let's delete that.
+3:10
+And right now I'm only rendering one thing on the page.
+3:12
+I'm going to get rid of these fragment tags and outdent this a little bit.
+3:17
+Awesome.
+3:17
+Now that's the first part of the challenge.
+3:19
+We've refactored it a little bit and you can start to see a glimpse of how this is going to work.
+3:24
+We're going to keep this up by doing another very short challenge.
+3:27
+So once you've had a chance to process what you've seen here and maybe practice it again if you didn't get it through the challenge on your own, then let's move forward and we'll do one quick challenge regarding the menu button.
