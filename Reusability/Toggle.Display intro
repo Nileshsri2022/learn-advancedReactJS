@@ -1,0 +1,32 @@
+
+Transcript
+0:00
+Okay, let's finally bring this back to our toggle component and see why we even care about using render props.
+0:06
+Using the toggle component I threw together this really simple box.
+0:10
+When you click it, it's very much like the star that we're using, except in this case it isn't switching between two different SVG elements that we're getting from react icons, but instead it's just applying this filled class.
+0:23
+So when the toggle is on it is rendering this div and when it's off it's rendering this div.
+0:29
+In the CSS I've tried to make it so that my transition for the background color will be a little bit less jarring.
+0:36
+However, when I click it you can see it's just immediately switching back and forth, and my transition is not applying at all.
+0:42
+Take a look at what we have here and see if you can reason through why the transition isn't occurring.
+0:53
+This one might have been tricky to figure out, but it's not difficult to understand.
+0:57
+Remember, our toggle on and our toggle off are conditionally rendering whatever children it has based on the toggle state.
+1:05
+Which means even though we made this div and this div look very similar, except for the filled class that's different on the on version, under the hood React is not just adding a class name, it's completely removing this div and adding this div as a new element on the screen.
+1:22
+So the CSS isn't able to perform any kind of transition on this element because the element got completely removed.
+1:29
+So really what we need to do is we need to conditionally render this filled class name based on the internal state of our toggle.
+1:37
+But currently we have no way to expose the internal state of our toggle, which is where render props are going to come into play.
+1:44
+So in the next lesson we're going to create our final toggle sub component, which will be called toggle dot display, and its purpose will be to use a render prop so that we can expose the 'on' state of the toggle in case the user of our toggle component needs access to that internal state to make decisions about what should be displayed.
+2:02
+So that's what we'll do next.
