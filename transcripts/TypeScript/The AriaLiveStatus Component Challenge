@@ -1,0 +1,69 @@
+Transcript
+0:00
+In this scrim, we're going to have a look at ARIA live status.
+0:04
+This is a component that will definitely return a JSX element.
+0:07
+It's got four props, and all of them have types that we can work out just by looking at the app component.
+0:13
+In the return statement itself, we also have a TypeScript warning here for letter.
+0:18
+Although this code is inside of the return statement, the typing works the same way.
+0:22
+Now you actually already know enough TypeScript and React to be able to fully type this component.
+0:27
+So here is your challenge.
+0:29
+First, explicitly type the ARIA live status component's return value.
+0:33
+Then type the component's props using a custom type.
+0:36
+And then finally, type any variables in the functional component itself.
+0:40
+Give it a go, and I'll catch you on the other side.
+0:46
+Welcome back.
+0:47
+Let's work through these challenges.
+0:49
+First, we'll explicitly type the component's return value.
+0:53
+We're going to import JSX.
+0:55
+Import type JSX from React, and then we're gonna use it directly here to type the return value of ARIA live status.
+1:03
+So JSX dot element.
+1:05
+Then we'll handle these four props.
+1:07
+We're going to create a new custom type right under the import statement, and we're gonna call it aria live status props.
+1:14
+As its value, we'll have an object literal that targets each one of these props and assigns each of them a type.
+1:20
+So current word is a string.
+1:22
+Last guest letter is a string.
+1:25
+Guest letters is an array, but it's a string array.
+1:30
+And num guesses left is a number.
+1:33
+And now that we have our custom type, we can use it down here to type all of our props.
+1:37
+Aria live status props.
+1:40
+Now that we've done that, some eagle eye students may have noticed that the warning that we had under letter has disappeared.
+1:47
+And that's because current word is now explicitly typed.
+1:50
+It was an any type before, which means that this letter was also an any, which we know that TypeScript doesn't like.
+1:57
+And since there's no harm in explicitly typing this letter, let's do that as well.
+2:02
+So letter itself is a string, and this callback function will return a string type.
+2:07
+And now our ARIA live status component is strongly and fully typed.
+2:11
+Let's move right along and type our next component in the next scrim.
+2:16
+I'll see you there.
