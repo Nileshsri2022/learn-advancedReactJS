@@ -1,0 +1,202 @@
+
+Transcript
+0:00
+Alright.
+0:00
+This challenge is going to be a little bit of a doozy.
+0:03
+So I've tried to give you the hints and the preparation you might need just to make this a little bit easier for you.
+0:09
+That being said, just because it's a more difficult challenge, it doesn't mean that you're not prepared for it.
+0:14
+Assuming you've been following along and doing all the challenges, you should have all the tools and knowledge you need to complete this challenge.
+0:21
+So what exactly are we doing?
+0:22
+We're not yet working on the navigation bar.
+0:24
+Instead we're going to create a route or the routes that we need for these views underneath what we've already created to display.
+0:32
+So this view over here shows you the three different views that we're creating side by side.
+0:37
+Up at top you can see the three different routes that we're expecting to use in order to see these views.
+0:42
+And so that's what your challenge is.
+0:44
+It's to set up the routes that you need here in our index file that are necessary so that we can access the host vans ID pricing and the host vans ID photos views.
+0:55
+Part of this challenge will be for you to add some stubbed out components in separate files.
+0:59
+I've already created these files for you.
+1:01
+We have the host band info, the host band photos, and the host van pricing components.
+1:06
+They're just empty files right now.
+1:08
+So that's part of your challenge is to fill those out.
+1:11
+But they can just be stubbed out.
+1:12
+Like I said, you just maybe add an h two that says pricing view goes here or whatever.
+1:16
+My first hint that I'll give you is that you need to use a special tool from React Router so that we can keep all of this top info that you see over here in view while we navigate between the different sub views or sub routes that we are going to be creating.
+1:31
+This is going to require some slight changes in the host VAN detail page, and I've tried to indicate where that will be exactly in that component.
+1:39
+Now since we don't have the navbar yet you can test them manually by navigating in the URL bar by actually just typing in the path that you want to go to.
+1:47
+And actually as you might have noticed the slash host slash van slash ID view or path will display the information down here at the bottom.
+1:57
+Currently we're not doing that but we are at that path.
+1:59
+So you should be able to start out by just adding what you need in order to display the information, or more importantly for this challenge just a stubbed out version of that.
+2:08
+Because this is a little bit more of an involved challenge I did include a hints dot MD file.
+2:13
+I'm not going to click on it here because it'll give away the first hint.
+2:16
+Try not to go there if you don't need it, but if you do start feeling stuck then feel free to go to the hints.
+2:21
+I have two hints that are separated by a lot of space so you have to scroll to see hint number two.
+2:26
+Okay.
+2:26
+Lean on your instinct, remember what you've learned, rely on the community if you're really feeling stuck, turn to the hints if you need them, but I believe in you.
+2:34
+You've got this.
+2:35
+Pause now and work on this challenge.
+2:38
+Okay.
+2:39
+Well the first thing I'm going to do is take this route here and turn it into a parent route to other routes.
+2:46
+Currently it's self closing.
+2:47
+Let's go ahead and not make it self closing and we will add a closing route element or tag here.
+2:54
+Now the reason I'm doing that here again is because this van slash ID or rather slash host slash van slash ID, is going to essentially become a layout route for the children routes that I'm going to create.
+3:06
+We're starting to sort of conflate what we're actually referring to when we talk about a page.
+3:12
+Because if you think about it, we're not really creating new pages here per se.
+3:15
+We're just swapping out a small portion of our UI.
+3:19
+But for the time being we're calling it pages.
+3:21
+Maybe this is where a good refactor of our folder structure would make a lot of sense.
+3:25
+I'm not gonna do that now because it's outside the scope of what this challenge is.
+3:29
+But by doing this I'm turning this element, this host van detail element, what we see here, into sort of a layout route or a layout component.
+3:37
+And when I have a layout component where I have child routes that need to be displayed, I need to use the outlet component.
+3:44
+So before we even work on creating these nested routes, let's go over to the hostman detail component and my changes are going to go here.
+3:53
+This is where I'm going to include an outlet component.
+3:56
+I need to make sure that I import that from react router dom, so we'll import the outlet.
+4:02
+I think hitting save should change nothing at this point.
+4:05
+Now let's go back to our index and let's create our child route.
+4:09
+This one will be self closing for the time being we're not going to have any more children nested which hopefully makes you a little bit happy about getting closer to the end here.
+4:18
+We're going to say that the path is equal to and actually you know what this is not going to have a path.
+4:23
+Instead this is going to be the index route.
+4:26
+As I mentioned, the slash host slash van slash ID route should automatically, and by default, display this information.
+4:34
+So we're not saying it's slash host slash van slash ID slash details or anything like that, it's just what will automatically be displayed on this route.
+4:42
+So that's when I would use an index.
+4:44
+We'll say the element is going to be well you know what, instead of going down the whole path of creating the stubbed out version here and importing it, let me just kind of skip that for just a second and we will just render, let's say an h2 that says the detailed info goes here.
+5:02
+Assuming we have this set up correctly it's not probably going to be pretty but let's hit save and look at that we have inside of the layout here the detailed info goes here.
+5:11
+Perfect.
+5:12
+But if I navigate to slash host slash van slash one slash photos, well because that route doesn't exist it's just going to give us a blank page so we're not quite there.
+5:22
+Fortunately I can just make copies of this.
+5:25
+We'll change this one to have a path of pricing and let's say the pricing goes here and we'll change this to a path of photos or foods, nope, photos.
+5:38
+And we'll say that the photos, uh, that'll be go here.
+5:43
+Alright, let's cross our fingers, hit save, detailed info goes here, we'll manually go to slash photos, hit enter.
+5:50
+Oh and for some reason the URL did not listen to me.
+5:54
+Sometimes this can be a little bit tricky.
+5:55
+I don't know.
+5:56
+Let's try a refresh.
+5:57
+Okay.
+5:57
+That took a minute but here we go.
+5:59
+We have photos go here.
+6:00
+This has been quite a bit the rest of this is just kind of procedural.
+6:04
+So I'm going to import let's see I'll just copy this one since that's most closely related.
+6:10
+Need a third one.
+6:11
+So we'll bring in the host van info, host van pricing, and host van photos components.
+6:21
+Okay.
+6:22
+And then I'll just, uh, let's just copy this and replace each one of these.
+6:28
+Okay those components have nothing in them so we need to fill them out.
+6:32
+Okay so I created this one for the host van info and we will cheat and copy this over to the host van what is this one photos photos go here and pricing say pricing info goes here and I think we should essentially be where we were before.
+6:51
+So let's go ahead and hit save.
+6:53
+Okay photos go yeah because we're at the photos route.
+6:56
+We'll see if this even works.
+6:57
+Pricing, hit enter.
+6:58
+Okay that takes me to the pricing page.
+7:00
+And then if I just go back to slash one and hit enter, detailed info goes here.
+7:05
+Now because I'm entering this in the URL bar and hitting enter, it's actually doing a full page refresh.
+7:10
+But in the next challenge where we add our navigation bar, that will take us from one page to the next without the whole full page refresh and flicker happening.
+7:19
+Okay.
+7:19
+Take a deep breath.
+7:20
+Hopefully that was okay.
+7:22
+I completely understand if it wasn't, even if you have been doing all the challenges.
+7:26
+I think this is probably the most involved challenge that we've had so far.
+7:29
+If you were able to do it, pat yourself on the back.
+7:31
+That's a big congratulations.
+7:33
+If not, again, that's completely okay.
+7:35
+At this point I would scrub back to the beginning of this scrim and try doing it again from scratch.
+7:40
+As always that muscle memory is only going to set in if you are actually typing with your hands on the keyboard, working through it in your mind, trying your very best to get it done.
+7:49
+No matter what happened, great job or good effort, and now it's time to really tidy everything up by putting this navigation bar in.
+7:56
+And next we'll be working on adding the navigation bar and then figuring out how to make the actual information show up instead of these silly little stubbed out versions.
