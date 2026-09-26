@@ -1,0 +1,94 @@
+
+Transcript
+0:00
+As I mentioned, we are no longer overloading this getVANS function, so we need to create a new function.
+0:05
+We'll go ahead and export an async function called getVAN.
+0:10
+And get VAN will take an ID because we're just trying to get a single VAN.
+0:14
+And this time instead of trying to get an array of documents, we only care to get a single document.
+0:19
+We'll start to see a pattern here with Firebase where first we can get a reference to the thing that we're trying to get, and then we can use a function that will actually make the API call out to Firebase to get that thing.
+0:30
+In this case, we have a collection and we're getting all of the docs from that collection.
+0:34
+When we're getting a single document, we can create a reference to that document by using the doc function.
+0:40
+So just like collection gets us a reference to the collection, the doc function will get us a reference to the document.
+0:46
+I'm going to go ahead and import doc so that we can actually use this function.
+0:51
+And where the collection function needs two items in its parameters, the entire database and then the string of the collection name that we want to get a reference to, our doc is going to go even one level deeper.
+1:05
+We still need to pass in the database so that it knows which database it's trying to get a doc from.
+1:10
+We also need to pass it the name of the collection that we're reaching into, but this time we also need to give it the ID of the document that's in that collection that we're trying to get to.
+1:19
+Just calling this function isn't terribly helpful to us so I'm going to save it as maybe we'll call it doc ref.
+1:25
+And then just like before when we had a reference to what we wanted, we called this function get docs and passed in the reference.
+1:31
+We are going to use a new one called get doc.
+1:35
+Again, pretty self explanatory what it's doing.
+1:37
+I'm going to pass in the document reference here, and then of course we need to save it.
+1:41
+And just like before let's call it snapshot.
+1:44
+I need to make sure I import get doc, so I'll do that right here after get docs.
+1:49
+And I'll go ahead and put each of these on their own lines just since this is getting a bit wide.
+1:55
+Great.
+1:55
+And the last thing before I forget is because this is a call to a database, I'm going to await that returned promise.
+2:03
+At this point, we're in a pretty similar scenario.
+2:05
+We have a single document.
+2:07
+This is akin to this document that we found inside of our map from before.
+2:12
+And so I think this would be a good time to finally get your hands on the keyboard.
+2:16
+I know I've been doing a lot of talking and have a bit of a challenge for you.
+2:20
+Okay.
+2:20
+Your challenge is to figure out what we need to return from this getvan function.
+2:24
+You can obviously use this get vans function up above as a reference.
+2:29
+Once again, remembering that what we're calling snapshot here is the same thing as this document right here inside of our map.
+2:35
+We only have a single document, and we're only supposed to return a single document, but it needs to be in the same shape as what our server JS file was returning before.
+2:44
+And then because this is a brand new function, you need to go over to the VAN detail page and use get VAN instead of the other one get VANs that it's currently using.
+2:53
+So pause now and work on this challenge.
+3:01
+What we can return is a new object, and that object is going to have all of the data from snapshot dot data.
+3:08
+And then we're going to explicitly define an ID property that we can grab from snapshot dot ID.
+3:14
+Before we can hit save and make sure that's working, I'm going over to my van detail page.
+3:19
+Instead of pulling in get vans, I'm going to just pull it in get van.
+3:23
+And then inside of my use effect here, I'm going to see where is it right here get vans needs to be get van.
+3:31
+Alright let's hit save and good news we can see our van again.
+3:35
+Let's go back to APIJS.
+3:37
+We'll clean up the challenge text.
+3:39
+Let's also clean up our old function here.
+3:42
+We no longer need it.
+3:43
+That's good news.
+3:44
+So now let's work on refactoring our get host vans function so that we are getting the host vans from Firebase instead of from our Mirage JS server.
