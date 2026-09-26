@@ -1,0 +1,51 @@
+Transcript
+0:00
+Something React related that we can explicitly type with TypeScript are React components themselves, especially if we're using a functional component.
+0:09
+Now our assembly endgame project does use functional components, so it's the perfect candidate for us to type.
+0:15
+I've got open here header dot t s x to explore this since it's a pretty static component and doesn't take any props at all.
+0:23
+It just renders the h one and the p tags that we see at the top of the app.
+0:27
+Just as it is right now, HypeScript will infer the type of the header component by itself.
+0:33
+We can see this in action by hovering over header where we can see that it's of the type React JSX element.
+0:40
+And this is exactly what this function is returning right here, a React JSX element.
+0:45
+And if we try to change the return statement to something like true and now hover over header, we'll see that TypeScript has now inferred the return value to be a boolean, which is technically true, but we won't do that.
+0:58
+So as long as we're returning a JSX element like we would for most functional components, we won't need to type a React component, but we could if we wanted to.
+1:07
+Like, if we're working with a large code base or we want to make sure we don't accidentally return anything but a JSX element.
+1:14
+To do that, we're going to need to import the JSX type from React and then use it to type this element.
+1:20
+So we're going to import the type of JSX from React, and then we'll use it to type the return value.
+1:27
+So JSX dot element.
+1:29
+Now some React programmers do this and some don't.
+1:32
+It's really up to you and how tightly you want to type things.
+1:35
+But since we are learning about TypeScript right now, we will keep doing this throughout all of our components as we get to them just to form that TypeScripting habit.
+1:44
+Now here's a quick note.
+1:46
+If you are looking at React projects out there that are using TypeScript, you might also see components defined and typed like this.
+1:53
+Now here we can see React dot f c.
+1:56
+This is a generic type that can also take a generic argument of props.
+2:01
+It automatically types the return value as a JSX element, which is great, but the slight downside is that it does include children in props by default even if it's not used.
+2:11
+That last point along with a few others like default props and child typing is why TypeScript users are now defining components with JSX element instead.
+2:20
+So we will be sticking with the version up here for the rest of this TypeScript section.
+2:25
+So now we have our very first component typed.
+2:28
+It was super straightforward, but it's only gonna get more exciting from here starting from the next scrim.
