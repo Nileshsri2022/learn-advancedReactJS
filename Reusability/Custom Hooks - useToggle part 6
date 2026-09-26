@@ -1,0 +1,131 @@
+Transcript
+0:00
+Okay.
+0:00
+At the end of this challenge you should have a working menu again at least to some degree.
+0:06
+I also made it a little bit vague so that it requires you to really dig deep, try to remember what we've learned, go back to the past lessons if you need to.
+0:14
+But your task is to access the context values, which we're passing right here in the provider, in both the menu button component and the menu drop down component.
+0:23
+In each one of those components, see if you can remember, or you might have to figure it out again, how those values are used.
+0:30
+And then you'll know that you've done it successfully if your menu starts working again, again, except like I mentioned for the on open callback, which we're gonna be working on soon.
+0:38
+Okay.
+0:39
+Pause now and work on this part of the challenge.
+0:47
+Okay.
+0:47
+Let's head over to menu button and we know we need to bring in our context because we're going to be using react dot use context and we have to give it the correct context.
+0:57
+So let's pull in the menu context from our menu component.
+1:02
+And at the top here we're going to use react dot use context providing the menu context.
+1:10
+And this is going to give us access to our values, which we can destructure.
+1:15
+And in this case the menu button is really only concerned with toggling the state and we called that toggle open.
+1:22
+So we will grab toggle open from context and then on click we will have our button run the toggle open function.
+1:32
+Okay, this isn't going to help us a whole lot yet because we can click the button but we probably won't have any kind of feedback as to whether or not this function is actually running.
+1:42
+I guess we could go into use toggle and right here with our toggle function let's console log toggled and click the menu.
+1:51
+Awesome.
+1:51
+This is making its way all the way down to the menu button just fine.
+1:55
+Okay, we can get rid of that.
+1:57
+Now let's go over to the menu drop down and we will just do the same thing.
+2:01
+Let me pull in menu context and I'll actually grab this line as well.
+2:06
+And let's see, menu context we will paste in here.
+2:10
+And we're gonna have to make a change to our toggle open because in this case we don't care about toggling open we just care about the open state, That boolean on whether or not this should be open.
+2:21
+Okay.
+2:21
+So I guess I could do this in one of two ways.
+2:24
+I could either conditionally render the children based on this open state.
+2:28
+Although I'm not entirely certain what is going to happen with this div, and this div will get rendered if I don't conditionally render it.
+2:35
+So I'm actually going to wrap this whole thing in the conditional render and I'll probably have some things to fix.
+2:42
+So let's go open.
+2:44
+If open is true then I want to render this div.
+2:48
+Oh these parentheses are really getting out of hand.
+2:50
+Let's fix this really quick.
+2:53
+Otherwise I will just render null cause I don't want anything to get rendered.
+2:57
+Okay and then react needs me to render some kind of element so I'm just gonna wrap this in a fragment and format.
+3:05
+Okay.
+3:05
+It's a little crazy with the curly braces and parentheses and angle brackets and everything, but I believe that this should work.
+3:12
+If I hit save, my menu is gone.
+3:14
+That's good.
+3:15
+I'm conditionally rendering, in this case, no, which won't render anything.
+3:19
+Now clicking the menu button should, awesome.
+3:22
+That displays my drop down and the menu is working again.
+3:26
+Now on the one hand, this might seem a little more complex than what we had before.
+3:30
+My menu has to create some context and I have to pass it to my menu button and my menu drop down.
+3:36
+But one thing that we're overlooking is now what I can do is I can start deleting my toggle component.
+3:42
+Of course don't get too trigger happy.
+3:44
+If you think you would need this in the future for some reason then you of course could always keep it.
+3:49
+But for the sake of really demonstrating what we have benefited by using our custom hook, I am going to delete all the files in that folder.
+3:57
+Oh, well we we are still referencing toggle here.
+4:00
+Let's see if there's anywhere else we're still referencing it.
+4:03
+It doesn't look like it.
+4:04
+We are working again I think.
+4:06
+Yes.
+4:07
+Awesome.
+4:07
+Okay.
+4:08
+This might be a perfect time to go grab some ice cream or something to celebrate because we've been through quite a roller coaster in this section so far.
+4:15
+Now we're technically back to opening and closing the menu and working, but we still do have a couple things to fix.
+4:21
+For example, we used to expose the ability to run some kind of functionality when the menu got changed or we could maybe call this, I don't know, on open or something.
+4:30
+But as it stands we have no way to actually do that.
+4:34
+Actually let's look at the menu.
+4:35
+It's pulling okay it is on open.
+4:37
+We have no way to actually do that when we're using our hook.
+4:41
+So if I try to run a function of course I'll hit save and doing that doesn't actually call my console log.
+4:49
+Fortunately it's gonna be pretty easy for us to set this up again with our custom hook.
+4:53
+So that's what we'll do next.
