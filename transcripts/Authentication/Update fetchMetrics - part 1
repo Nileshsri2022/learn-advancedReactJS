@@ -1,0 +1,109 @@
+Transcript
+0:00
+Time to update our fetch metrics function.
+0:02
+We're so close to finishing this big refactor.
+0:05
+So before we can see the visualized data in our chart, we need the aggregated data to be fetched from sales deals joined with user profiles.
+0:15
+So remember, we're now taking the metrics that we need for the chart from both sales deals table and the user profiles table.
+0:23
+And the join we need is going to be on the ID column of user profiles to the user ID column of sales deals.
+0:30
+If anyone's wondering what these three lines are going into sales deals, well, on this ERD, this is showing that we have a one to many relationship.
+0:39
+So one user profile can make many deals of different values.
+0:45
+Right?
+0:46
+Here, it's a one to one relationship because each user in users will only correspond to one of the profiles in user profiles.
+0:54
+But one user profile, one name in here can make many deals.
+0:59
+So because we don't need the name column, the old name column from sales deals, we can now delete that.
+1:04
+So if you can navigate your table editor in Superbase, click sales deals, find the name column.
+1:11
+There's a little arrow down next to it.
+1:12
+Click that, and then delete column.
+1:15
+Right.
+1:16
+In dashboard, we can look at our fetch metrics function.
+1:20
+Here is the old code that we used using name.
+1:23
+We need to update this, so we select the name from user profiles and the aggregated value from sales deals.
+1:30
+And I've already told you we'll do that with a join.
+1:33
+Remember when we created user profiles, we also created a foreign key relationship between the ID column of user profiles and the user ID column in sales deals.
+1:45
+See this f k?
+1:46
+That's foreign key.
+1:48
+This ensures data integrity.
+1:50
+We can't create a deal in sales deals for a user ID which doesn't exist as an ID in user profiles.
+1:59
+So this is what we're looking for for our updated SQL query, which we can then translate into super base client code.
+2:06
+So we need to select the sum of the value from sales deals, not forgetting the group by because it's an aggregate, and the name from user profiles.
+2:14
+We're gonna need an inner join, and it's gonna be on sales deals dot user ID connected with user profiles dot ID.
+2:23
+There we see that again.
+2:25
+So I've just made a quick query dot SQL file here, and let's revise the join syntax.
+2:32
+So let's say I wanted to join, just an example, a courses table, say, of super base courses, and it's gonna be on the teacher column with a teacher's table on the name column because the teachers of the courses will refer to the name of the teachers.
+2:51
+Yeah?
+2:53
+So for a join, we always have one table after from and then another table after the word join.
+2:59
+So our first table here is courses, and our second table here is teachers.
+3:05
+Then we use this onward to specify how they're connected, and we go for the table after from first, and we put dot which column, and I said the teacher column.
+3:17
+And we say equals, and now we use the table after join dot, and on which column in that table, name.
+3:25
+There we go.
+3:26
+So let's finish this query so we have a full example query.
+3:30
+Let's imagine we're selecting some columns from this join.
+3:34
+So the courses table will have the title of each course, and the teachers table might have a location of that teacher.
+3:43
+Now to be really clear, why don't we specify which table?
+3:48
+So it's courses dot title and it's teachers dot location.
+3:54
+But in SQL, let me write another comment here.
+3:57
+We don't need to specify which table if it's a unique column name.
+4:05
+So if there's only a title column in one of our two tables, like, there wouldn't be a title in the teacher's table, we can actually get rid of the table name.
+4:17
+Similarly, there's not gonna be a location column in the courses table, so we can get rid of that.
+4:23
+So this is in SQL.
+4:25
+We're gonna see in the next screen that we do need to be really specific when we translate SQL into the super base client code.
+4:34
+Speaking of translator, if you could click this slide to go to this SQL to REST API translator ready for the next scrim.
+4:43
+Let me copy in our previous query because that might be helpful to reference.
+4:48
+There we go.
+4:49
+Okay.
+4:49
+So now we've had a little revision of the join syntax.
+4:53
+In the next scrim, it's gonna be your challenge to write our new updated SQL query.
+5:03
+See you there.
