@@ -1,0 +1,35 @@
+Transcript
+0:00
+Before we jump right into getting the on open callback to work, I'm actually going to delete this for now.
+0:05
+We're first going to look at how we might be able to provide some additional information to use toggle when we call it.
+0:12
+Just like any other function we can pass parameters to use toggle And so a really easy way for us to, I guess, practice this is to of course have a quick challenge.
+0:21
+In this challenge you are going to pass a parameter called initial value to our custom hook.
+0:26
+Using default parameters, you should set its default to be false just in case the parameter is not provided when use toggle is called.
+0:33
+And then inside our use toggle, you'll want to initialize state with the initial value parameter that is passed.
+0:39
+So pause now and work on this challenge.
+0:47
+Okay, just like any regular function we can take a parameter here and we'll call it initial value.
+0:55
+I can give it a default of false just in case it's not passed.
+0:58
+And then for number two we're just instead of hard coding false here we're going to use initial value.
+1:04
+Because we gave it a default parameter I should be able to hit save and everything should work just fine.
+1:09
+However, if I go to my menu when I create my instance of use toggle, or rather when I call use toggle, I can pass a different default value like true and this should make it be open in the beginning.
+1:21
+Awesome.
+1:21
+And we can still toggle it just like normal.
+1:24
+Okay.
+1:24
+Now using that same concept of passing parameters to our custom hook, we can make another modification to use toggle so that we can, just like we had before, actually provide some kind of handler function that should run when the toggle value is changed.
+1:39
+So that's what we'll be working on next.
