@@ -1,0 +1,66 @@
+
+Transcript
+0:00
+The simplest way that I can think of to add search parameters is to simply use a link element.
+0:05
+At this point we're pretty familiar with using link to send us to a specific path, like if we were going to the slash about page or something like that.
+0:14
+But we also can use a link to not specify a new path that we're going to, but instead to specify a query.
+0:20
+So I can simply say question mark type equals Jedi and have this link be when it gets clicked the way that we add the query to the top.
+0:32
+I'll just create a duplicate of this.
+0:34
+We'll say Sith and Sith.
+0:37
+Let's hit save.
+0:38
+Ah, and we do need to import link, so we will import link right here.
+0:43
+Let's try that again.
+0:44
+Okay it's not much to look at but we do have these links here and when I click Jedi, well everything's just kind of working.
+0:51
+We can see that it put the question mark type equals Jedi in the URL, and because it started with a question mark React Router knew that it wasn't changing routes per se.
+1:00
+It's still the slash characters route, but it is adding some search params.
+1:04
+And because these search parameters changed, the component re rendered.
+1:08
+It reran our code that got the type and it did the filtering and everything like that.
+1:13
+So again it's just kind of working out of the box by adding question mark type equals Jedi or type equals Sith.
+1:18
+Let's hit Sith and we can see that's working as well.
+1:21
+Now let me throw in a quick challenge here.
+1:24
+Okay, your challenge is to see if you can add another link just right here next to the other ones that clears out the search params.
+1:31
+So in other words right now I'm filtered down by type equals Sith, I should be able to press a button or a link that says clear and have it show me everything in the list again.
+1:40
+I haven't specifically taught how to do this, but I'm hoping that your intuition will kick in and you'll be able to figure it out.
+1:46
+So pause now and give this a shot.
+1:53
+I've found actually two different ways to do this, and I'm sure there's plenty more, but I'm just going to duplicate the link.
+2:00
+We'll change this to say clear.
+2:01
+And one way I found that works is just to say that the two is equal to an empty string.
+2:06
+We'll hit save.
+2:08
+I click clear, and that clears out the search parameters and shows everything again.
+2:13
+The other way that I thought about doing this is to say that I want this to go to dot.
+2:17
+And if you remember, dot represents the current path or the current route.
+2:21
+So let's hit save.
+2:22
+I'll hit Sith to filter it down, and then we'll hit clear again, and sure enough that seems to work as well.
+2:28
+I'm honestly not sure which one I prefer, so I think either way is going to be fine.
+2:32
+I'll probably just leave it here as a dot because I suppose you could argue that it's a little more explicit as to what we're doing.
