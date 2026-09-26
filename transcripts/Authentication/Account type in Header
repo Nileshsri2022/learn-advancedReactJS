@@ -1,0 +1,154 @@
+
+Transcript
+0:00
+Now that the big refactor is complete, let's improve the UI.
+0:06
+Now we have a name property in the objects in this user's array.
+0:11
+In our header, we can actually improve just rendering the email.
+0:16
+It's a little impersonal an email, so let's change it to their name.
+0:21
+And we can also render their account type after the name.
+0:24
+So we need to get that user's array in this header component.
+0:29
+You guessed it.
+0:30
+It's challenge time.
+0:31
+I'd like you to destructure users from the use auth hook.
+0:35
+We already have it here.
+0:37
+I'd like you to find the current user's profile by using the dot find method on the user's array.
+0:43
+Match the user's ID with the session dot user dot ID.
+0:48
+We did this in form, didn't we?
+0:55
+Store the result in a current user variable.
+0:58
+I'm gonna just put a little comment here.
+1:01
+Current user is gonna go there.
+1:04
+And then log the current user variable to the console and log in to our app to test.
+1:09
+And the hint there, consider what is required to prevent an error if the session hasn't loaded yet.
+1:16
+We've talked about this a few times now.
+1:18
+Okay.
+1:19
+Good luck.
+1:19
+See you in a minute.
+1:24
+Alright.
+1:25
+I hope that was alright.
+1:26
+So destructure users.
+1:28
+So where's our user auth hook?
+1:29
+Here we go.
+1:30
+So along with sign out and session, we can add users.
+1:34
+Now that's available in this component.
+1:37
+Find the current user's profile.
+1:39
+So I can get rid of this comment, and we can say current user.
+1:44
+And we go through users and we use dot find, and we need an arrow function.
+1:51
+And we say, look for a user where the user's ID, user dot ID, equals session dot user dot ID, and session is available through context there.
+2:08
+And our hint says, consider what is required to prevent an error if session hasn't loaded yet.
+2:13
+Well, we don't want React to be looking in session dot user or in session if session hasn't loaded.
+2:22
+So to prevent a runtime error, we can use our question mark after both.
+2:26
+We've done this in the past, haven't we?
+2:29
+Here.
+2:31
+And then I asked you to log the current user variable to the console.
+2:36
+So I save header, and I'm gonna log in.
+2:41
+And we check the console, and we see we've got ID, name, and account type from the users array.
+2:49
+So here's our current user object.
+2:53
+Nice.
+2:55
+Now you might wonder why we've not used the optional chaining after users.
+2:59
+Because if users hasn't loaded yet, if we do dot find, is that gonna cause a problem?
+3:04
+Well, actually, that is safe because calling dot find on an empty array is safe.
+3:10
+It just returns undefined.
+3:12
+Remember, we initialized users in auth context as an empty array.
+3:19
+So under here, what we need to now do is work on what we want to actually render for the account type in the header.
+3:27
+So we're gonna make a little object.
+3:30
+Let's call it account type map.
+3:35
+And we're gonna say, if the account type of the current user is rep, then we're gonna say, what do we want to render?
+3:43
+Well, let's say a nice sales rep with capital s and r.
+3:47
+But if it's admin, instead of just rendering a string of that, let's put a nice capital a admin like that.
+3:56
+And then let's work out what the displayed account type's gonna be.
+4:01
+So let's call that display account type, and we're gonna use our current user from up here.
+4:09
+And we say, we have a current user, we're gonna access the account type property.
+4:15
+And we use the question mark, so we say, if this is available, then we want to render either sales rep or admin.
+4:23
+So we use our account type map, and we use our square brackets.
+4:27
+And to get either rep or admin, we have to go into current user and get the account type from here.
+4:34
+So remember, this will be either rep or admin.
+4:38
+And by using the square brackets, we can then access the value of that property.
+4:44
+Now because current user might be undefined when the component first renders or if the user isn't found, which is unlikely, we're gonna again use our optional chaining.
+4:56
+And we've got a question mark, which means we definitely need our colon.
+5:01
+For if this isn't available, we can do a little null check and say render an empty string.
+5:07
+This prevents the UI from breaking while the data is loading.
+5:10
+So now we can use our display account type in the return.
+5:15
+And after this, we can use smooth brackets.
+5:20
+And then because we need to access some JSX, we use our curlies, and we just write display account type.
+5:28
+Because we don't want to render the email anymore, we want to render the name of the current user.
+5:34
+So we say current user, and again, using the chaining dot name.
+5:39
+So this should be Dwight, and then in brackets, it should say sales rep.
+5:45
+We save, and we see that, yes, in the header, we've got Dwight, and in brackets, his account type of sales rep.
+5:51
+Fantastic.
+5:52
+That brings us to the end of section two.
+5:55
+See you in the final scrim.
