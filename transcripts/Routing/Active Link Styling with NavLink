@@ -1,0 +1,86 @@
+
+Transcript
+0:00
+Let's apply what we just learned about the nav link element to our van life app.
+0:04
+We have a few different places throughout our app because we have multiple navigation bars in these nested routes.
+0:10
+So we're going to work on those one at a time and there's going to be an extra thing or two that we learn along the way.
+0:15
+To start we'll do this easiest one and that is for us to style the main navigation header up here.
+0:21
+I've given you the CSS rules that you should apply to the link if that's the currently active route that the application is on.
+0:28
+And I made a little note too that we don't need to style this link that goes to the home page, mostly because that's kind of our logo right now.
+0:35
+In fact, I should probably get rid of this underline that's happening.
+0:38
+So only worry about these three links here.
+0:40
+Don't worry about this link here.
+0:41
+With that said, make sure you read through the challenge.
+0:43
+I think you should have everything that you need to know to complete this challenge.
+0:47
+So pause now and work on this challenge.
+0:55
+Okay.
+0:55
+Well, we know that we need to change our links to nav links.
+0:59
+I do want to keep this link here so I'm not just going to change my import, but instead I will also bring in nav link.
+1:06
+And then I will change all of these to nav link.
+1:10
+As it stands, everything should work exactly the same.
+1:12
+There's nothing different about nav link in its functionality, but it does add the capability of adding that active class or the active style.
+1:21
+This is going to get a bit long vertically so I'm going to separate things onto their own lines.
+1:26
+And since these are going to be repeating themselves quite a bit I'm just going to keep my three cursors up here.
+1:32
+And as it mentions you could either use inline styles or you could use a class name.
+1:36
+Maybe just for the sake of seeing both ways I will start with a class name.
+1:41
+And the thing that's special about the navlink component is that I can provide not just a string as my class name, but I can pass a function.
+1:49
+This is an example of NavLink using a render props pattern where we pass a function, and when that function gets called by the NavLink component it's going to call it with an isActive property on an object.
+2:02
+So it's going to call it with an object.
+2:04
+There's also an isLoading property on this object, but we're destructuring it to just make use of the is active property on that object.
+2:12
+And that way we know that we can check if is active is true then I want to provide maybe we'll call it active link will be the class name.
+2:23
+We haven't created that yet but we'll get there.
+2:25
+And otherwise, I don't know, we could say null or maybe empty string is better.
+2:28
+I'm honestly not sure.
+2:30
+Last but not least let's go actually let's copy these styles here and we'll go over to our CSS and actually maybe closer to the top is where we'll define this here we're accessing some header anchors let's just style all anchors that have a class of active link We'll give it those CSS styles.
+2:51
+Let's get rid of these comment stars here.
+2:55
+And I need to make sure, let's see, up in the header I hit save and okay well host is highlighted that's good news.
+3:03
+I click this and about is highlighted.
+3:05
+Vans is working and this one is not of course because we left it as a link.
+3:10
+This is really cool because without a whole lot of extra knowledge under our belts just understanding this kind of render prop pattern for class name.
+3:18
+We were able to add something to our app that really does help quite a bit with the user experience in understanding exactly visually where they are without having looking up in the navigation bar.
+3:29
+Especially because these days the URL bar kind of obfuscates what path you're actually on in a lot of browsers.
+3:35
+Awesome work!
+3:36
+Hopefully you were able to complete that challenge.
+3:38
+If not, feel free to go back and try it again.
+3:40
+Next we're going to go to this nested navigation bar that we have inside of our host routes, and we're going to do the same thing.
