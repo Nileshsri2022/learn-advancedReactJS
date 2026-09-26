@@ -1,0 +1,117 @@
+Transcript
+0:00
+We've already learned the concept in React Router of a link where it's basically an anchor tag when the user clicks the link it will send somebody to the place that you specify or the route that you specify in the props of the link.
+0:13
+However, React Router also provides another component that actually is a bit more forceful in sending the user to another route, and that component is called navigate.
+0:22
+The idea behind navigate is if it ever is rendered then it will automatically forward the person to the next route.
+0:29
+Unlike a link which is rendered and then if it gets clicked it sends somebody to the next route, If navigate is ever rendered at all it will send somebody to the next route.
+0:38
+So we can implement this part of the logic fairly easily.
+0:41
+We'll just say if not authenticated, then we're going to return our navigate component like this.
+0:49
+Now Now the one thing we do need to make sure we do is just like link provide a to prop that tells it where we are going to send the person.
+0:56
+Now we don't have a login route but I'm just going to type that we're sending the person to slash login for now and then we'll worry about that later.
+1:04
+Now one thing I can do is because each of these conditionals is returning something from my component if the user is not authenticated then the whole function will get returned and this code will never run so I can simplify this a little bit by getting rid of my conditional check here, and we can just return the outlet assuming this part of the code doesn't get run.
+1:25
+Okay.
+1:25
+So we still have that we are authenticated.
+1:27
+Let's go ahead and refresh.
+1:29
+We should still be able to access the protected route.
+1:32
+Okay.
+1:33
+I'll go to the home page.
+1:34
+I'm going to change this from true to false.
+1:36
+We'll hit save and then go to the protected route and it immediately forwards us to the login route which of course has nothing on it because we don't have a login route.
+1:47
+Okay easy enough.
+1:48
+Now I've been trying to break this down into pretty small bite sized pieces, but before we jump back into van life and implement what we've learned in our real app, I do want to get your hands on the keyboard and see if you can combine all of the information that we just learned into one single challenge.
+2:04
+So take the time you need to look through our code base.
+2:07
+If you want to pause and make sure that what we have written so far makes sense to you, this would be a good time to do that.
+2:13
+Because then what I'm I'm going to do is delete a bunch of the code that we wrote and have you write it again.
+2:19
+Now the idea shouldn't be for you to pause and try to memorize line for line what we've written, but instead to make sure you understand the concept so that you could write it again even if the language or the logic was slightly different.
+2:30
+Okay.
+2:30
+So if you want, you can pause now and feel free to look through the codebase.
+2:36
+Okay.
+2:37
+And then I'm going to revert some of this and type out a challenge for you.
+2:42
+Okay.
+2:43
+So I didn't remove absolutely everything.
+2:45
+Your challenge is to reimplement the auth required logic that we had.
+2:49
+Of course, that means that if we click the protected route it should automatically navigate the users to the slash login route.
+2:55
+Let me go back to slash maybe.
+2:59
+This is a better starting place for you.
+3:01
+And of course the login page doesn't exist yet but don't worry about that part for now.
+3:05
+Over in our index I did leave this import for auth required wrapping
+3:12
+before and I included this little comment for you just so that it was a we were wrapping before and I included this little comment for you just so that it was a little easier to pick out where it needs to go.
+3:21
+Okay.
+3:22
+Let's go back to here.
+3:23
+Once again, the idea here isn't to just regurgitate something that you've memorized, but rather to implement it based on the logic that we had written out before.
+3:31
+If it's helpful you of course could write out some comments just like we did before that might help you in the problem solving process.
+3:38
+Break down the challenge into smaller pieces and implement it one piece at a time.
+3:42
+Okay.
+3:42
+Pause now and work on this challenge.
+3:50
+Let's start here since we're already inside this file.
+3:52
+We're going to do our if authenticated check.
+3:56
+And actually we'll do if not authenticated, we'll do an early return.
+4:00
+We'll say then I need you to return the oops.
+4:03
+The navigate component like this which should send them to the slash login route.
+4:09
+We need to make sure that we import that from react router dom.
+4:13
+And assuming this passes its check, then we will return the outlet component instead.
+4:21
+And that is also something we need to import from React RouterDome.
+4:25
+Let's go ahead and change this to true and hit save.
+4:28
+Oh no actually we need to implement the layout route here so let's do that first so we will wrap any routes in our case just this protected route but in other cases any routes we might have this wrap a number of routes that we all want protected with a layout route so it will have an element that needs to get rendered and that is going to be our auth required okay let's try this again we'll hit save remember we set our authenticated to true I'll clear this out for some space we set our authenticated to true so I should be able to go to my protected route just fine and see all of my super important secret information and then if I change this to false notice I went back to the home page so that I could actively click on protected.
+5:13
+We'll click on protected and it takes us to the login page.
+5:16
+Perfect.
+5:17
+Notice I can't even click back because that's taking me to the protected route which is then automatically navigating me back to the login route.
+5:25
+That's actually something we're going to talk about in an upcoming lesson, but for now this has been a great practice.
+5:30
+Let's go back to our Vanlife app and implement what we've learned.
