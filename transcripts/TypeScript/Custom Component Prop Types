@@ -1,0 +1,46 @@
+
+Transcript
+0:00
+In the last scrim, we went through these five props and we typed them all in line down here, which does work, but it's definitely starting to get a little bit messy.
+0:09
+And you can imagine how much messier it will be if we had even more props.
+0:13
+So we're going to use what we learned back in the first section and make use of custom types.
+0:18
+After our import statements, but before the function, we're gonna create a new type and call it game status props.
+0:25
+Now this naming convention of component name plus the word props is pretty standard, so you'll see it across our app as we move along.
+0:32
+And for the value, we're going to grab the entire object that contains the props and their types, and we're gonna pop it up here instead.
+0:40
+And I'll very quickly fix the indentation here.
+0:43
+And now that we have the custom type of game status props, we can use it down here to type all of our props in one go.
+0:50
+Game status props.
+0:52
+And that's it.
+0:53
+It's now much cleaner and easier to look at, and it still works.
+0:57
+Now you will have a chance to create and use custom types like we did here in the next scrim.
+1:01
+But since we're already here in the game status component, let's do a quick vanilla TypeScript challenge.
+1:07
+Down here after the function declaration, we have a game status class variable which uses the c l s x n p m package.
+1:15
+If you're unfamiliar with this package, all you have to know is that it conditionally constructs and returns a class name.
+1:21
+What type do you reckon that would return?
+1:23
+Give this challenge a go, and I'll see you on the other side.
+1:31
+So this one should be pretty straightforward.
+1:33
+A class name is traditionally a string, so we'll type this as a string.
+1:38
+And that's done.
+1:39
+Now our game status component is very tightly typed.
+1:42
+Let's move on to something else in the next screen.
