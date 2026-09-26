@@ -1,0 +1,104 @@
+
+Transcript
+0:00
+Alright.
+0:00
+We finally come to the end of the lessons about buttons.
+0:03
+Your challenge is to now accept a variant prop and then to style the button component accordingly.
+0:09
+The values that the users of our button are allowed to pass to the variant prop are success, warning, or danger.
+0:15
+And in case you've forgotten, you can click on the image of the buttons here, which will take you to the Figma design file where you can find all of the specific colors for these three buttons.
+0:25
+Assuming you've been able to conceptually follow along with everything we've done so far, this should be fairly easy for you, so pause the scrim and work on this challenge.
+0:39
+We should be able to accomplish this in an almost identical way to how we accomplished the size prop.
+0:45
+So right here after size I'm going to accept variant and what I'm gonna do is just make some CSS classes that are very similar to our button dash and then the size by making some button dash and then the variant.
+0:59
+So just to make sure I'm not boring you by going to this file and looking up the specific colors, I did that ahead of time.
+1:04
+So I'm just going to paste in my three new classes here.
+1:08
+These are button success, button warning, and button danger.
+1:11
+They have all of the color, background color, and border colors that come from the design.
+1:15
+Then over in our button we can simply use the variant that was passed in to determine what the class that's applied should be.
+1:23
+So I will just say let variant class equal and then I'll double check that there is a variant coming in And if so I want it to be button dash and then whatever the variant is.
+1:36
+Of course in this case it's very important that the variant that comes in is spelled exactly the way that it should be because it needs to match perfectly with the class that we have there in our CSS.
+1:47
+Then in case there is no variant I'll just leave it as an empty string.
+1:50
+And to be clear you could decide to do these not as ternaries but by using the sort of shortcut syntax with the logical and operator.
+1:58
+In this case everything would work pretty much exactly the same.
+2:02
+So if you like that syntax better you can use that too.
+2:05
+I'll leave it like this just so that we've had a chance to look at it both ways.
+2:08
+Okay then the last thing is we need to make sure that we are including our variant class with our list of class names.
+2:15
+So we'll include it in our function call to class names.
+2:17
+That way it will concatenate all of these together for us.
+2:20
+We'll hit save and then of course we need to actually use the variant prop in our button.
+2:25
+In fact I'm gonna duplicate this button so we can just see all three at the same time.
+2:30
+Let's say that the variant equals success, warning, and danger.
+2:37
+Refresh.
+2:38
+Awesome.
+2:39
+And for kicks let's go ahead and leave one without a variant in there.
+2:44
+Okay, so we get sort of the default styling.
+2:46
+Let's go ahead and add some sizes just to see if those are still working well.
+2:50
+We'll say that the size maybe for the first one is large, small, and well I guess that's really all I have.
+2:57
+Let's do another small.
+2:59
+Okay looks pretty goofy but we'll roll with it.
+3:02
+Actually that reminds me that I had kind of blown up the padding of the large one just so that it was a little more obvious what was happening.
+3:08
+In reality if you look at the Figma design for this the padding should be thirteen on the top and bottom and twenty five on the left and right.
+3:17
+So we'll say thirteen, twenty five.
+3:19
+Okay.
+3:20
+That makes it a little more subtle.
+3:22
+Awesome work.
+3:23
+Again, hopefully you were able to accomplish this.
+3:25
+If not, then it probably means that you need to go back and study and practice some of the things that we've been learning thus far in this section.
+3:32
+And there's absolutely nothing wrong with that.
+3:34
+Remember, this isn't school.
+3:36
+I'm not here to give you a grade and then just move on whether you're ready or not.
+3:40
+Most important thing you can do is to make sure that you understand what we're doing.
+3:43
+Even if it's difficult, even if it means you have to step out of your comfort zone, it's much more important that you do that and you face those fears than it is to just plow ahead even if you don't understand what's happening.
+3:55
+As always, reach out to the Discord community here at Scrimba.
+3:57
+There are so many awesome community members from all over the world in every time zone.
+4:02
+So at any hour of the day there's always going to be someone there that's able to answer questions you have and help you work through any challenges you're facing.
+4:09
+Once you feel all warm and fuzzy that you understand what we're doing, then let's finally say goodbye to the buttons and we'll move forward to other parts of our component library.
