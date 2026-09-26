@@ -1,0 +1,157 @@
+Transcript
+0:00
+Let's bring things back to a much simpler time than the more complicated app that we've been working on.
+0:05
+This is actually the current default React and React router scrim that Scrimba produces when you tell it to create a new scrim with React router.
+0:13
+I've made a couple styling changes, but that's about it.
+0:16
+Currently I have it set up so that when you hover over one of these links it makes the link bold and underlines it.
+0:21
+This is actually going to be pretty similar to what we do in the van life app.
+0:25
+However, navigating around, there really isn't any visual feedback as to where I am other than what's actually on the URL bar and of course the actual content on the page.
+0:34
+A really common practice is to have the navigation bar highlight the item that represents the page that we're currently on.
+0:41
+So if I click about and hover off of it, maybe I want to keep this hover style to be always applied to this link here.
+0:49
+Fortunately, React router makes this fairly easy, and it uses something called render props, which if you're taking this course as part of the full advanced React course, you have already learned about.
+0:59
+So let's see how this is done.
+1:00
+I'm going to replace the link import with something called nav link.
+1:05
+Nav link is basically the same as link, except the style prop and the class name prop can both take a function as its value.
+1:14
+Let me show you what I mean.
+1:15
+First of all, I'm going to change link to nav link everywhere and of course I have to do that here as well.
+1:21
+And as it stands I can hit save.
+1:23
+Everything will work exactly the same as it was before, and it's of course not working the way that we want it to yet where it keeps some visual feedback about what page we're currently on.
+1:32
+But that's where the difference comes with nav link.
+1:34
+Let me actually put each one of these on their own lines.
+1:37
+Okay this might look like overkill since it's got so few characters in each one.
+1:41
+Spreading them across five different lines is a little bit crazy, but we're gonna add to this.
+1:46
+This will help make it look a little more visually distinct from one another.
+1:49
+Let's start with this slash about link here.
+1:52
+As I mentioned, the nav link can take a regular class name just like you might expect, and I could give this a string value like, I don't know, my link.
+2:00
+Then I can save that, I can go into my CSS, I can target my dash link, I can maybe say the color is red.
+2:07
+Of course that's going to add that class name no matter what route I'm currently on.
+2:11
+You'll see I'm at the slash contact route, but just like we would expect in regular CSS, this is styling my about text here, my about link as red.
+2:21
+Well with nav link we can do this programmatically.
+2:24
+Let's go over to where we're using our nav link and instead of providing a string as my class name, nav link allows us to pass a function.
+2:33
+Because I'm going into JavaScript, I need to use my curly braces, and then I can provide a function, and whatever that function returns will be the class name that gets applied to my nav link.
+2:44
+The reason this is beneficial is because react router will pass this function an object, and that object will have a property called is active.
+2:52
+So right in line here I'm just going to destructure it.
+2:54
+This looks a little bit crazy with the curly braces, parenthesis, curly braces, but just know this is getting me into JavaScript.
+3:01
+This is my function, and it's an arrow function, so it's just parenthesis, arrow, curly braces.
+3:06
+And then inside of that function parameter, I'm immediately destructuring it.
+3:10
+I guess I could say something like object, and then I would have to use the object dot syntax in order to access the property.
+3:17
+In this case, I'm just going to destructure it.
+3:19
+And the property that I care about in this object is called is active.
+3:23
+The is active property will be a boolean and it describes whether or not this route, the slash about route, is the current active route.
+3:32
+So this is nice because I can use it to determine what my class name should be.
+3:36
+So inside my function, I'm just going to use an implicit return.
+3:40
+So instead of using curly braces and then having to use the return keyword, I'm going to implicitly return, so I need that last curly brace there, and we're going to say if is active is true, so it's a boolean, I'll just say if is active, then I want it to be the class my link.
+3:56
+But otherwise we'll just have an empty class or an empty string representing the class.
+4:01
+We might also be able to do something like null.
+4:03
+Let's see how this works.
+4:05
+So I'll hit save.
+4:06
+Okay.
+4:06
+We're on the slash contact route.
+4:08
+Remember, we've only put this class name on the about link.
+4:13
+So when I go to about, it turns red and it stays red.
+4:16
+Awesome.
+4:16
+So it's not just on hover.
+4:18
+Right here, this hover CSS rule is making it a font weight bold and a text decoration of underline, but the my link class is what's making it actually red.
+4:29
+So I will make a copy of this and move it up to my home nav link, then we'll do the same down to contact.
+4:38
+And I want you to think for a second, When I hit save, what is going to change on our page?
+4:45
+Well we're on the slash contact route and we just added this active style class name to the link that is for slash contact, so when I hit save it should turn red, hopefully.
+4:56
+Perfect.
+4:57
+Okay.
+4:57
+So now everything seems to be working.
+5:00
+You might remember I mentioned that nav link allows us to either use class name or the inline style prop, and that is allowed to be a value of a function.
+5:10
+So if I didn't want to define a separate style in my CSS, I could put an inline style directly here.
+5:16
+Let's actually combine our hover state and our selected or our active state into one set of styles.
+5:23
+So inside my layout, I'm just going to create a styles object.
+5:27
+We'll say this is maybe active style, and we will have our font weight of bold,
+5:37
+our text decoration of underline, and we'll say our color is red.
+5:46
+Now the only thing left we have to do is to actually use this active style and we will just take exactly what we had with our class name, but instead of applying the last name of the string my link, we will include our style of active style.
+6:02
+So we'll just say if it's active, then the style should be this object of active style.
+6:08
+And otherwise, well I think we can just keep no let's get rid of our class name.
+6:13
+And I will just copy these down here and clean up our class names there.
+6:18
+And this should have the same effect although now our active style includes the underline and the bold, so it'll keep it kind of the way that it is on hover state.
+6:26
+Except our hover state is not red, so we would have to go over here and say that the color is red.
+6:34
+We can get rid of this style here.
+6:36
+Well I'll leave it there for educational purposes I guess if you're looking through this later.
+6:40
+Okay so hit save.
+6:42
+Now the hover state is the same as the active state, and when we click over to home that becomes the active state there.
+6:49
+Awesome.
+6:50
+Whether you use the nav link style prop or the class name prop is completely up to you.
+6:55
+If you're working in a team there will probably be some kind of standard or norm that you should be following, so just stick to whatever makes the most sense for that project and that team.
+7:05
+Okay, now that we've got the basic idea of nav link down we're going to back into the van life project and apply it over there.
