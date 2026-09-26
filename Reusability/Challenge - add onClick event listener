@@ -1,0 +1,65 @@
+Transcript
+0:00
+Actually gonna start this lesson with a challenge.
+0:02
+I want you to add an on click handler to the button component instance, the one that's right down here.
+0:07
+When it's clicked, it really should just log logging in to the console, just something simple to see that it's working.
+0:13
+And then I want you to make whatever other changes you need to make in order for that click to actually work.
+0:19
+That's a little foreshadowing to know that just adding on click here may or may not do what you want it to do.
+0:24
+I'm sure you'll figure it out.
+0:26
+Pause now and work on this challenge.
+0:27
+We're gonna go through it together and it'll be driving us to a bigger realization which we'll be talking about.
+0:32
+So pause now and give this a shot.
+0:39
+Okay my first inclination at least is to go into my button and to add an on click.
+0:44
+Since we're doing something so simple I'm just gonna add an inline console log function here.
+0:49
+This will log logging in and if you stopped there you might have hit save, tried to click the button and saw that nothing happened.
+0:59
+So why exactly is that?
+1:00
+Well, remember this button component is something that we created.
+1:03
+When we pass this on click, what we're really doing is passing a custom property or custom prop that's called on click.
+1:11
+And over in button JS, we are not doing anything with props dot on click.
+1:15
+So the next part is we need to accept a prop called props dot on click, and we need to set it up as the function that runs when an on click event happens on this native button here.
+1:27
+So when on click happens, I need to run props dot on click and now I'll hit save and everything should work just fine.
+1:34
+This brings us to a bigger point.
+1:36
+Here in button JS, we are the creators of this component library button.
+1:40
+However, over here in index JS, it's more like we're the users of that component library button.
+1:46
+If we are not the creators of it, then we don't really have control over what is going to be accepted as a prop.
+1:53
+For example, if I wanted this button to only do something on double click, I could try to add the on double click event handler.
+2:00
+I think it's on DBL click maybe.
+2:03
+Uh, nope.
+2:03
+Just looked it up.
+2:04
+It's the forward on double click.
+2:06
+So I could try to add this, but because the author of the button didn't actually listen for a handler like on double click, nothing is going to happen here when I double click my button.
+2:17
+So as an author of a library like this, a component library, I could try to maybe anticipate every kind of event or prop that might want to be passed down.
+2:29
+For example, it would make a lot of sense for me to accept something like a class name just in case the user of my button wanted to change the styling of the button a little bit or maybe do an inline style like using the style tag.
+2:41
+So I could try to anticipate every prop that could possibly be passed down, but there's gonna be a more succinct and a better way to do this.
+2:49
+So that's what we'll be tackling in the next lesson.
