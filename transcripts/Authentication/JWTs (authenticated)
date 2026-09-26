@@ -1,0 +1,164 @@
+
+Transcript
+0:00
+So you've heard about the anon key.
+0:02
+Let's now talk about what changes when a user signs in.
+0:06
+So continuing our metaphor, when someone new moves to the kingdom, they send their details to the castle to gain citizenship.
+0:14
+This is like signing up.
+0:16
+And Superbase stores their email and password.
+0:19
+Then when this person wants to interact with the castle, they send a letter to the castle with their credentials, their email and password.
+0:28
+The castle checks their credentials against their records.
+0:32
+And if everything matches up, the castle issues them a new JWT signed certificate.
+0:39
+But this time, the role part of the payload will be authenticated, and there will be loads more detail in the payload about when the token expires, the user's unique ID number that the castle has issued them, and much more.
+0:56
+This certificate is like a temporary member's pass that proves they are who they say they are.
+1:01
+They then store this JWT certificate in their client house, and they must include this certificate with every future letter they send to the castle.
+1:10
+And then let's try and push this metaphor one more step.
+1:13
+When the user is done and they want to sign out, they send a letter to the castle saying they're done.
+1:19
+The castle invalidates their current certificate, and they can no longer use that certificate for future requests.
+1:26
+So they have to start the sign in process again.
+1:29
+So let's see that on this slide.
+1:31
+So when they sign in or actually at the same time as when they sign up, because signing up in reality actually signs them in at the same time, Superbase checks their credentials and issues a JWT certificate with a unique signature just for them written with the secret pen.
+1:48
+The middle payload part here includes their role of authenticated, indicating they're logged in, their sub, which is the unique user ID, the email, when the token's issued, when it expires, and other user and app metadata.
+2:03
+And they've created their unique signature with the project secret pen.
+2:09
+There we go with role authenticated.
+2:12
+And then here we have that JWT certificate stored in local storage.
+2:17
+And then this part here creates that session object that we mentioned in a previous scrim.
+2:22
+That would then trigger the on auth state change.
+2:27
+Remember this part here?
+2:29
+This would then get triggered, and we use the session object, and we update the session state variable.
+2:38
+So the really nice thing here is that when a user makes a request to Supabase, they don't need to continuously keep proving who they are with their email and password each time since they're including a copy of the JWT certificate, which does that for them.
+2:53
+The JWT is sent in the request headers.
+2:56
+Superbase extracts the JWT from the request.
+2:59
+It uses the project secret pen to verify the signature.
+3:03
+If it's valid, it knows the token was issued by this Superbase project.
+3:07
+The token hasn't been tampered with, and the user's claims in the payload are authentic.
+3:14
+Okay.
+3:15
+Thanks for sticking with me with that.
+3:16
+I know it's quite a long explanation, but, hopefully, it will mean that you understand what's going on for the rest of the course.
+3:23
+A quick challenge now.
+3:24
+It's multiple choice.
+3:25
+Don't worry.
+3:27
+I'd like you to delete the two options and leave your answer.
+3:31
+So first question, which part of the JWT includes the role of either authenticated or a non?
+3:37
+Second question, how does SUPERBACE know the JWT is authentic and not forged?
+3:43
+Third question, what does the JWT signature prove?
+3:48
+Fourth, in our castle metaphor, what represents the project secret?
+3:53
+And five, what's the main difference between an a non JWT and an authenticated JWT?
+4:00
+So remember we talked about the a non JWT in the previous scrim?
+4:05
+And in this scrim, we've been talking about the logged in authenticated JWT.
+4:09
+Okay.
+4:10
+Good luck.
+4:11
+Delete the two options and leave your answer, and I'll see you in a minute.
+4:18
+Okay.
+4:18
+I hope that went well.
+4:20
+So number one, which part of the JWT includes the role of either authenticated or a non?
+4:25
+So if we look back at this, we've got the header, we've got the payload, and we've got the signature.
+4:32
+Well, I told us not to worry about the header, and the signature, well, that was written with that pen, so it's our middle payload part.
+4:40
+Okay.
+4:41
+Number two.
+4:41
+How does Superbase know the JWT is authentic?
+4:45
+Well, it checks the request was sent to the pro well, it's not to do with the URL.
+4:51
+So let's delete that one.
+4:53
+It verifies the JWT signature was created with the project secret.
+4:57
+Yes.
+4:58
+There we go.
+4:59
+That's the answer because the project has that secret pen, and the fact that the signature on the JWT certificate is the same as the new signature that Superbase creates when it receives the letter, it knows that it is authentic and it's not been forged.
+5:17
+So it can't be seen.
+5:20
+What does the JWT signature prove?
+5:23
+Well, a little bit similar to the last question that it hasn't been tampered with and came from a trusted source.
+5:29
+Okay.
+5:29
+Number four.
+5:30
+In our castle metaphor, what represents the project secret?
+5:34
+Well, it's not the guards, and it's not the actual certificate.
+5:39
+That's the JWT.
+5:41
+So, yes, it's that secret pen which signs the JWT and creates the signature, the third part of the JWT.
+5:50
+Okay.
+5:50
+What's the main difference between the a non JWT and the authenticated JWT?
+5:57
+Well, the role field, yes, it's that middle part, the payload, the second part of the JWT, and the role field.
+6:06
+All JWTs have a signature, and, nope, there's only one project secret.
+6:11
+There we go.
+6:12
+Brilliant.
+6:13
+I hope that makes sense.
+6:14
+Do Ask AI or have a Google if it doesn't.
+6:18
+And now that we've done the theory, we get on to actually adding a user into our auth dot users table and working on actually signing in a user.
+6:26
+See you then.
