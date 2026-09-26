@@ -1,0 +1,102 @@
+
+Transcript
+0:00
+Let's start off this section by talking about something called prop drilling.
+0:04
+You can see I put this in quotes because it's more of a colloquial thing.
+0:07
+It's not something you'll probably find in the react docs, but understanding the idea of prop drilling is going to help us push forward into learning a few new really cool things about react.
+0:18
+So what exactly is prop drilling?
+0:20
+Well prop drilling is simply when a component somewhere down in the component tree needs access to the data that's in a grandparent or somewhere higher up in the component tree, and so that data is manually passed down to each child through props until it finally reaches the component that needs it.
+0:37
+That might not make a ton of sense.
+0:39
+Let's look at a diagram that I think should be helpful.
+0:41
+Let's imagine that this is a visual representation of your application that you're making in React.
+0:46
+The top level might be, let's say, your app component that is rendering a couple other components and each one of those components is rendering other components and so forth down the line.
+0:55
+At a certain point in this application you have a component that needs state and so you can initialize state in that component.
+1:02
+But then let's say that one of the, let's call it a sibling component, also needs access to that state.
+1:07
+Well, ask yourself, can a component pass data to a sibling component?
+1:11
+We know that it can pass downward through props, but is it possible to pass it to a sibling component?
+1:19
+Well, no, it's not.
+1:21
+In order for both components to have access to that same data or that same state, we have to move that state up a level to the common ancestor or in this case in this diagram to the parent, these two components.
+1:32
+We initialize our state there, and then of course we pass down the state or that data that's living in state through props.
+1:39
+And by doing so both of those components can then have access to that data.
+1:43
+Well, sometimes you'll find that maybe a sibling to that new parent component also needs access to that data.
+1:49
+So once again, you raise state up and you pass it down through props and that way everybody can be happy.
+1:54
+Now notice here that the state is living in, let's call it a grandparent component to this bottom one here.
+2:00
+And in order for these two bottom ones to have access to that data, the state now has to go through two levels.
+2:06
+This isn't that big of a deal, especially if we're considering that all of these with the red box around it actually needs that data and uses that data.
+2:14
+But oftentimes what will inevitably happen is somewhere else in your application, completely disconnected, will also need access to that same data.
+2:22
+So once again, we'll raise it all the way up to the common ancestor.
+2:26
+In this case, let's call it the app component, the most parent component of everything here.
+2:30
+And we begin the long process of drilling these props down through the component tree so that it can finally reach the destination that it needs to be in.
+2:39
+And then of course because state is no longer living here we need to pass props down through this component so that all of these other ones can be happy again.
+2:47
+In this instance, you can see that there are a number of components that really have no interest in the props or the data that's being passed through it and it's sort of doing double duty.
+2:56
+It's certainly a component that's accomplishing its own thing, but at the same time it's also passing these props down to some child component even though it really has no interest itself in using that data.
+3:07
+The scenario might not be as familiar if you've mostly just been working in little toy projects that maybe have four or five or six components in it.
+3:16
+But once you start building multi page larger applications, this is something that certainly begins to happen.
+3:22
+So what are some things that we can do in order to avoid or to make the prop drilling process a little easier on us?
+3:29
+Well, first of all, you might just need to do nothing.
+3:32
+If it's small enough, crop drilling really isn't that big of a problem.
+3:35
+Here's a link to an article that talks about how you should avoid hasty abstractions.
+3:40
+Sometimes when you're first starting out, it's really tempting to abstract everything into the most reusable form that it possibly could take, when in reality you might be spending time doing something that really wasn't that big of a problem in the first place.
+3:53
+Now I've worked in code bases that looked like this and this was pretty problematic to go this far down, but if you're just passing props one or two levels down it might not be that big of a deal.
+4:02
+So you might consider doing nothing.
+4:04
+Try not to optimize things too early in the process.
+4:07
+Now this would be a pretty boring section if I didn't give you some other solutions.
+4:11
+So another thing you can do is to use something called compound components.
+4:15
+Using compound components allows us to flatten the structure.
+4:18
+We're gonna see that very soon, what I mean by that.
+4:20
+And it makes it so that you can more easily pass props to a deeply nested component without necessarily having to work in, let's say, three or four or five different files.
+4:30
+And lastly, another way that we can avoid prop drilling is by using the context API in React.
+4:35
+This allows components to access the state that it needs directly from where it lives.
+4:40
+That's gonna make a lot more sense later, but the first thing we're gonna focus on is compound components.
+4:45
+So that's what we're going to be spending the next little while talking about.
+4:48
+I hope you're excited.
+4:49
+Compound components are super cool and I'm excited to jump right in, so let's get to it.
