@@ -1,0 +1,48 @@
+
+Transcript
+0:00
+Hopefully you're able to start to see that once we got over the hurdle of learning how to set up context and some of the syntax involved with context, The rest of this has just been using what we are already familiar with with state.
+0:12
+So your final challenge is to update the div below.
+0:15
+This one here is still hard coded with dark dash theme.
+0:18
+That should be pretty straightforward.
+0:20
+You actually don't need to use context at all for this because we have access to it in the same file we're setting up state.
+0:26
+And then you need to go to the button component and add back the on click handler so that it will use the toggle theme function every time it's clicked.
+0:33
+Doing those two things, I believe, should fix the rest of this theme switcher, and we should finally be done with the theme switcher, which will then allow us to go back to the menu component.
+0:42
+We'll pause now and work on this challenge by tying off all the loose ends we have with our theme switcher.
+0:53
+Okay once again we already have access to our theme so we really just need to update this so that we see we'll wrap these in curly braces and we'll use template strings.
+1:05
+And the only thing we need to change is here so we will say theme.
+1:09
+Okay that should update the bottom part of my app here.
+1:12
+Okay we're back to a light theme there.
+1:14
+And now we'll go to the button and we will also catch our toggle theme function that we're passing down.
+1:22
+And we'll simply add an on click handler that will run toggle theme.
+1:28
+Okay.
+1:28
+Let's hit save, cross our fingers, click the button, and awesome.
+1:32
+We get everything working.
+1:33
+Even our text is switching the way that we would expect.
+1:36
+Perfect.
+1:37
+I know there's been a lot of little pieces of code that I've asked you to write here.
+1:41
+Hopefully it's giving you some good muscle memory and a good understanding of the fact that really we're just using the tools that we now know to create really cool, well maybe not really cool because it's just a very simple theme switcher, but hopefully you can see that this can lead to some really cool things.
+1:57
+Now let's go back to the menu and get your hands on the keyboard again.
+2:00
+We're going to apply what we've learned to our menu component.
