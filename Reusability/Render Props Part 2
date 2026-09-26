@@ -1,0 +1,233 @@
+Transcript
+0:00
+We're going to step really slowly into the concept of render props because it can be a bit mind bending to understand what exactly is going on.
+0:07
+So for our demonstration, we just have a very simple set of components.
+0:11
+We have an app component who is just rendering the decision component.
+0:15
+The decision component sets up a boolean state very similar to our toggle.
+0:19
+It has a toggle going out function that just toggles it back and forth.
+0:24
+It has a button that is able to call that toggle going out state, and it has an h one that's determining what should get displayed when the state is true or false.
+0:34
+So am I going out tonight?
+0:36
+Nope.
+0:36
+Change minds?
+0:37
+Yes.
+0:37
+Nope.
+0:38
+Yes, etcetera.
+0:39
+Now let's go back to the very basics of what we understand about props.
+0:43
+I know that I can pass information down from my app to my decision component through props.
+0:49
+For example, in my decision, I could pass a string name.
+0:53
+Let's say Bob.
+0:54
+We'll go to decision.
+0:55
+I can receive that name.
+0:57
+I'm gonna go really fast with this because this is something you should already be very familiar with.
+1:02
+And, uh, we'll just pass that name right here.
+1:04
+Am I going out tonight?
+1:06
+Comma.
+1:06
+And then we'll insert the name that's coming from props.
+1:10
+Okay.
+1:10
+I'll hit save.
+1:11
+Am I going out tonight Bob?
+1:13
+Nope.
+1:13
+Yes.
+1:14
+Okay.
+1:14
+So we know we can pass a string as our data through props.
+1:18
+We know that we can pass a number and a boolean.
+1:21
+And we've also seen instances where we are passing arrays and objects.
+1:26
+One thing we haven't explored too much yet is if we could pass something like a function down through props.
+1:31
+Well, because in JavaScript functions are considered first class citizens, so to speak, it means that they are afforded all of the same privileges that other data types are.
+1:41
+So yes, I can pass a function down through props.
+1:44
+Let's see that in action.
+1:45
+I can say my name is and maybe name isn't the greatest.
+1:48
+Let's choose say name because it's a function that's actually accomplishing something.
+1:53
+I'll also write this out as a function declaration just because I think that's a little easier to reason about sometimes.
+1:59
+Okay.
+1:59
+So I'm passing this function data type down to my decision component.
+2:03
+And when it gets run, it's just going to console log, let's say, hi, Bob.
+2:07
+Okay.
+2:08
+Well, in decision, I need to get rid of name, and we'll change it to say name.
+2:12
+And then I'm not going to render the function, so we'll just get rid of that.
+2:17
+If say name is a function, that means that I should be able to just call it anytime I want.
+2:22
+Right?
+2:22
+So I'll call say name.
+2:24
+Because this is on the top level of my component, it should just run every time my component renders.
+2:29
+So I'll hit save, and sure enough it console logs, hi Bob.
+2:32
+When I change the state, my component will also render again, so it will run my function again.
+2:37
+Well, just like we saw with the add event listener concept, where I'm passing a function down to add event listener, and then add event listener has the responsibility of calling my function with whatever parameters it wants, or rather whatever parameters it thinks will be helpful on the outside.
+2:54
+Now that I'm calling say name inside of my decision component I have access to my going out state.
+3:01
+So I could call say name with the going out state, and then on the out side I could say this function, it's going to be receiving some kind of boolean.
+3:10
+And here from the outside I can do something with that boolean.
+3:15
+Let's open this up a little bit.
+3:17
+So if I'm receiving a boolean, well this isn't very original, but let's just console log that boolean.
+3:22
+I'll hit save.
+3:23
+Okay.
+3:24
+From the outside, I'm accessing the inner boolean that lives inside of my decision component.
+3:29
+The decision component is still able to flip that boolean, and my console log will get logged again because the state has changed, which therefore means my decision component has re rendered and it's rerun the say name function.
+3:44
+For me, when I first saw this, this felt like it was breaking React almost.
+3:48
+It's like a cardinal rule of React that you cannot pass data up from a child component to a parent component.
+3:55
+Props and data always flow down the tree.
+3:57
+However, this is sort of a way to hack around that system by simply providing a function from the parent to the child expecting that that function will receive some specific kind of value using that value from the parent component, and then the child component is in charge of calling that function and passing the correct value to it.
+4:19
+So before we jump into actually applying this to the concept of render props, I want to sort of drill this into your brain a little bit, because it can be a little bit mind bendy.
+4:28
+So let's do a quick challenge.
+4:32
+Okay I've basically erased everything we did.
+4:35
+I still have the say name prop here, but I changed it to this string just so that React wouldn't complain about having an empty prop.
+4:41
+And over in Decision.
+4:43
+Js I just got rid of the accepting the props and doing anything with it.
+4:46
+So your challenge is to essentially just rewrite what we did.
+4:49
+Pass a function down via props to the Decision component that receives a boolean inside of the parameters of that function and then logs it.
+4:57
+On the decision side, don't forget to do the work you need to do over here in order for it to correctly receive that boolean.
+5:03
+I know this can be a little bit confusing if you've never done something like this before, so if you need to rewind and go see exactly what we did, that's okay.
+5:10
+I don't consider that cheating.
+5:12
+That's just a good way to study up for what we're doing here.
+5:14
+So pause now and work on this challenge.
+5:22
+Okay.
+5:23
+Instead of this string we're going to pass down a function.
+5:26
+Now you might have done a function declaration like we did earlier.
+5:29
+I'm going to now do an arrow function since this is actually what you are more likely to see.
+5:34
+And it's just going to console log.
+5:37
+Here we're going to be receiving a boolean.
+5:39
+This time maybe I'll call it going out, kind of like it is internally, but I can call it really whatever I want.
+5:45
+And maybe this time we'll be a little more creative.
+5:47
+Instead of just console logging going out, we'll console log something depending on what the going out value is.
+5:53
+And maybe to do that I'll just put this on its own line so we don't get too squished.
+5:57
+And let's say if going out is true, we'll log I am going out, and otherwise I'll say I'm staying in.
+6:06
+Okay.
+6:06
+This is half of the equation because over in decision we're doing nothing with the say name property yet.
+6:12
+So with decision we'll destructure that and pull in say name.
+6:16
+And right below my state here, we'll call say name, and I'll pass going out to it.
+6:21
+I have to do this part, otherwise my outer function will be thinking that it's receiving something when in fact it's not actually receiving anything, or rather this would be undefined.
+6:30
+Alright.
+6:31
+Let's see what we get.
+6:32
+I'll open my console, hit save.
+6:34
+Oh, of course, I spelled staying wrong.
+6:36
+Here we go.
+6:36
+Okay.
+6:37
+I'm staying in.
+6:38
+And that's because currently going out is false.
+6:40
+We can see that because this says nope right here.
+6:42
+However, my decision component is still capable of changing the state.
+6:46
+So I'll click change mind, and now our console log is saying I am going out.
+6:51
+Okay, this is a good stepping stone but this scrim is already getting a bit long.
+6:55
+So we're going to now apply this really basic concept more to React and see how this gives us a ton of extra flexibility when it comes to using the state that lives within the decision component.
+7:07
+However, the idea here is that we're slowly kind of creeping up on the concept of render props.
+7:13
+So if any part of this is confusing I really want you to pause and to just play around with the code.
+7:19
+Go crazy.
+7:19
+Do whatever you want to do.
+7:21
+Break it, maybe erase it again and try to rewrite it.
+7:24
+Make sure you understand it.
+7:25
+Again, at least for me personally, the hard part was understanding the interplay between the function that I'm passing down to decision and how that function gets access to the interstate of decision.
+7:36
+If that's confusing to you too, then playing around with it is going to be really the only way that it will start to click and make sense.
+7:42
+Once it has finally done that and clicked and is making sense for you at least a little bit, then you should be ready to move on and we'll see how we can apply this to render props
