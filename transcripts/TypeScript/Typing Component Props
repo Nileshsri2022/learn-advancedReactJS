@@ -1,0 +1,102 @@
+
+Transcript
+0:00
+Welcome back to the confetti container component.
+0:03
+In the last scrim, we typed this functional component with the JSX element or null, which covers both of the cases.
+0:10
+Now we're gonna handle the component prop.
+0:12
+Come over here and hover over is game one.
+0:15
+We can see that it's of an any type, which we know by now is not what we want in TypeScript.
+0:20
+When we're passing data between components, which we often do in React, it's very handy to be able to check data types to make sure we're passing through the right kind of data.
+0:30
+As you'll probably know as a React developer, React component props are defined between these curly brackets, and all we have to do to type them is to type the entire set of props.
+0:40
+The syntax starts as we expect with the colon to provide a type annotation.
+0:45
+And now we have to provide an object that contains the props and the matching types.
+0:50
+Because we only have one, which is is game one, this will be very short for us.
+0:54
+So the prop is is game one, and the expected type is a boolean.
+0:59
+And that's literally it.
+1:00
+If you come and hover over is game one now, we can see that it's of a boolean type instead.
+1:06
+But what if we had multiple props?
+1:08
+That's super easy as well.
+1:09
+We just have to keep chaining it on.
+1:12
+So we might have a second prop called prop two with a type of type.
+1:16
+But of course, that's not the case for us, so let's get rid of those.
+1:20
+And here we have a fully typed component, the component itself and the prop.
+1:24
+Now there's not much left to type in the confetti container component, so we're gonna hop on over here to the game status component.
+1:31
+We can see that it is a functional component, and it will definitely return a JSX element.
+1:37
+So we'll keep that in mind.
+1:39
+Up here, we can see that there are five component props this time.
+1:42
+Although we've only worked with a component with one prop, I have showed you how to chain on multiple prop types.
+1:48
+So here is the challenge for the rest of the screen.
+1:51
+First, explicitly type the game status components return value, and then type all of the props of game status.
+1:58
+And if you're unsure of the types, make sure to check app dot TSX.
+2:02
+So give it a go, and I'll see you in a bit.
+2:08
+Welcome back.
+2:09
+This is how to go about it.
+2:11
+First, we're gonna explicitly type the game status component itself.
+2:15
+We know that it will only ever return a JSX element, so this is easy.
+2:19
+We're going to first import the type of JSX from React, and then we're gonna type game status itself.
+2:26
+So over here, after the parentheses, we'll add JSX dot element.
+2:31
+Now we can handle the props.
+2:33
+So first, we're gonna start with the colon, and then we're gonna open the object literal.
+2:38
+And because there's so many, I will put one on each line.
+2:41
+Now all five of these are just derived values from app dot TSX.
+2:45
+So even if we can't remember what types they are or infer from the name, we can always go and check.
+2:50
+So is game one is a Boolean.
+2:54
+Is game lost is also a Boolean.
+2:56
+Is game over is yet again a Boolean.
+3:00
+Is last guess incorrect?
+3:02
+Is, you guessed it, Boolean?
+3:04
+And finally, wrong guess count is a number.
+3:08
+And there you go.
+3:09
+All nicely typed.
+3:11
+Well, nicely is a strong word.
+3:13
+It's actually starting to get a little bit messy, to be honest.
+3:16
+So in the next scrim, we're going to tidy this up a little bit.
