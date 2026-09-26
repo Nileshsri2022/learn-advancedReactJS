@@ -1,0 +1,135 @@
+Transcript
+0:00
+What we just learned is that there is a pretty neat way for us to get access to the data that lives inside of our decision component, but use it from the parent component in order to, in this case, just console log something different.
+0:13
+Notice that the decision component really has no idea what we're doing with this data.
+0:18
+All it knows is that it's calling whatever function I pass to it and giving me that data in order to use it however I I want.
+0:25
+So right now we're just doing a console log, but let's think carefully.
+0:29
+A regular function like this, what what's the difference between a regular function like this and a component function in React?
+0:36
+Well, the truth is not that much.
+0:38
+The only thing that distinguishes the two is that a component needs to return JSX.
+0:43
+And in the case of the function that we're passing down, it's not returning JSX, it's just running a console log.
+0:50
+Well, there's no reason that the function we pass down through props couldn't also return JSX.
+0:55
+Right now the decision component is in charge of maintaining state, changing state with this button, and also displaying what should happen based on that internal state.
+1:05
+What if the decision component wanted to be more flexible and not be in charge of determining what should get rendered, but instead could delegate that to the parent component and allow the parent component to access the internal state of decision and determine what should get rendered.
+1:22
+Let's take our h one completely out.
+1:24
+I'm going to cut it out.
+1:26
+And let's go back to App.
+1:27
+Js.
+1:28
+And here instead of console logging, what if we were to return the h one that we had inside of our decision before?
+1:36
+Let's see.
+1:37
+This is getting a little bit wide.
+1:38
+Let me see how I can reorganize this.
+1:41
+Okay.
+1:41
+That's a little bit better.
+1:42
+Okay.
+1:43
+Well, we're halfway there.
+1:44
+Let's hit save and see what happens.
+1:46
+Okay.
+1:46
+Well, we're not broken, but we're also not logging anything to the console.
+1:50
+Well that's because we got rid of our console log.
+1:52
+What if we go to decision and say name is now not console logging anything, it's returning something.
+1:59
+So if we actually want that to display to the console, let's run console log around the return value.
+2:04
+And actually, you know what?
+2:05
+Pause here and see if you can think through what is going to log to the console when we run this again.
+2:16
+Let's hit save and look at that.
+2:18
+We're actually getting a React element.
+2:20
+Remember, React elements are just JavaScript objects.
+2:24
+And that's because the function that we're passing to decision is returning JSX.
+2:29
+In other words, we're essentially passing an anonymous inline component.
+2:34
+It's kind of like receiving props, and it's using that to determine what should get displayed or what should get rendered.
+2:40
+Well, in that case, maybe a better name for say name would be render, and now we've finally arrived at where the term render props comes from.
+2:49
+What decision is doing is it's saying I have internal state, and in this case it has a button that allows us to change that, although that will not always be the case, and it's delegating to us what it should render.
+3:01
+It's saying tell me what I should render.
+3:03
+I'm going to give you that internal state and you tell me what you want me to actually return as a JSX element to the DOM.
+3:10
+So now it's up to the app component to make use of that going out prop, or state, and use it however it really wants to.
+3:18
+So on the decision side, we're not calling the say name anymore, we're getting render, and we're not gonna console log it, but instead, what do you think we're going to do with render?
+3:29
+Remember, calling the render function returns JSX.
+3:32
+So actually, let's make this into a little challenge.
+3:36
+See if you can figure out what you need to do with this render prop that we're receiving.
+3:40
+Pause now and work on this challenge.
+3:48
+Well, because render is a function and it returns JSX, let's go ahead and call it right here.
+3:55
+And one thing that might have been really, really easy to miss is to remember that App.
+4:00
+Js is expecting to have access to this going out variable.
+4:03
+So I need to make sure that when I call render, I pass in the value of going out, this internal state that we're keeping inside of the decision component.
+4:12
+And hitting save should bring exactly back what we had before.
+4:15
+Also, clicking change mind will re render the component and switch it exactly like we would expect.
+4:22
+Let's clean up this challenge text.
+4:24
+And finally we've arrived.
+4:26
+We now have a working render prop that essentially allows the decision component to expose its internal state and delegate what should get rendered based on that internal state to the parent component.
+4:39
+And again, this probably feels a little strange because we always think of React as moving data from top to bottom, and that's really still what's happening.
+4:47
+But at the same time, it's sort of a way to kind of hack around the system and allow us to have access to the internal state from below and use that from above.
+4:57
+Again, spend as much time with this as you need.
+4:58
+We're going to see one little small tweak that we can make to this.
+5:01
+It's not going to substantially change our understanding of render props.
+5:05
+But before we do that, if you're confused at all, I want you to spend more time with this.
+5:09
+Now I've tried my best to teach this concept, but this is also a good time if you're still feeling confused to reach out to the Scremba community on Discord.
+5:17
+Other people might teach it in a slightly different way that really helps this click for you.
+5:22
+So don't be afraid to ask questions and to get outside help.
+5:25
+Once you're ready, let's see that small tweak that I talked about with how we might rearrange our render props to work in a slightly different way.
+5:33
+So that's what we'll do next.
