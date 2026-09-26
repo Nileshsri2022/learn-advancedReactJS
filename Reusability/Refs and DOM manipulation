@@ -1,0 +1,122 @@
+
+Transcript
+0:00
+One of the most common reasons to use a ref in React is to do some manual DOM manipulation.
+0:05
+To demonstrate that, I've built a very, very simple form.
+0:08
+It's just one input and a button.
+0:10
+This might be an app for tracking the React project ideas you have.
+0:14
+There's some simple state setup.
+0:16
+One is the text that is to track the controlled component here with this input, and then a list of ideas which below gets mapped over as an ordered list and just displays each one.
+0:27
+So we might say that we want to build a blog.
+0:30
+I can hit enter.
+0:31
+Now I've put the focus outline as red so that it's very obvious where we're currently focused.
+0:36
+When I hit enter, we're still focused inside of the input box.
+0:39
+The reason enter works is because I am actually doing this inside of a form element, and hitting enter submits the form.
+0:46
+So it's the same action as if we clicked the button, but let's actually click the button this time.
+0:50
+Let's say we want to maybe make a flashcards app.
+0:53
+Then I go down and I hit submit, and notice where the focus has changed.
+0:57
+Because I clicked the button with my mouse, the focus has changed to the button.
+1:01
+However, for our project ideas list here, it's just not very user friendly.
+1:06
+I would like to be able to enter another idea, but when I start typing, nothing's going to happen because I'm not focused on my input.
+1:13
+So ideally, inside of my handleSubmit function, I would have something down here that would focus back to the input element.
+1:22
+In vanilla JavaScript, we would probably give our input some kind of ID, and then we would use document dot query selector or get element by ID in order to access the DOM element.
+1:34
+However, in React we do it a slightly different way.
+1:36
+So I'm not going to add an ID to my input and instead I'm going to create a ref.
+1:41
+We'll do that up here right below where we create some state.
+1:44
+I will say const, let's call it an input ref, equals react dot use ref.
+1:50
+And usually when I'm trying to access a DOM node, I will initialize the state with null.
+1:55
+Then in order to save a specific DOM element from my markup here into this ref that I'm creating, I need to use a special prop that React gives us called ref.
+2:06
+So down on my input, I'll say ref, and this is created by React.
+2:10
+It has to be spelled r e f exactly this way.
+2:12
+I'm going to set it equal to my input ref that I created above.
+2:16
+What this does is after the first render, when React returns my JSX markup here, it will associate my ref that I created with this DOM element.
+2:26
+And so after the first render, input ref dot current is going to be the actual DOM node that I have access to.
+2:33
+Because of that, I now have access to my input DOM element, and input DOM elements have a method called focus.
+2:40
+So down here where I want to put focus back onto the input element, I'm going to say input ref.
+2:45
+We have to remember, we have to say dot current.
+2:47
+That is the actual place where the nom element is being saved.
+2:51
+And then use the dot focus method.
+2:53
+Let's hit save.
+2:55
+Notice we've only added three lines of code.
+2:57
+We created a ref, we told it to focus every time the form is submitted, and then we associated our ref with this specific input element.
+3:05
+So just like before I can put an idea like maybe a mood board and hit enter.
+3:11
+That wasn't the problem before, but now I'll say I want to make a shopping list.
+3:15
+Let's click the submit button, and as soon as I submit it goes back and focuses in on the input.
+3:21
+There's lots of other great examples on when you might decide to use a ref to save a DOM element so that you can do some manual DOM manipulation.
+3:28
+I've included a link here to the React docs that will have some examples.
+3:33
+You can kind of scroll through the different examples they have at the top there.
+3:36
+Click this screenshot to go directly to the React docs examples on using refs in the DOM.
+3:42
+Now a quick word of warning.
+3:43
+Sometimes when people learn about refs and they have experience in vanilla JavaScript, they will sometimes lean very much too heavily on refs to do a lot of things in React.
+3:53
+Because they're familiar with manual DOM manipulation and doing things imperatively, they'll create a ref for every one of their elements and they'll just start kind of handling the logic with refs.
+4:03
+But that's not the right way to do it in React.
+4:06
+Refs are great for when you need to maintain some kind of information that is unaffected by the render cycle.
+4:12
+But if you have any data that you need to display on your screen as part of your component, it shouldn't be handled with a ref.
+4:19
+It should be handled with state or I suppose props, depending on the component and where it sits in the tree.
+4:25
+Okay.
+4:25
+We've gone as far down this rabbit hole as we're going to go.
+4:28
+I really just wanted to show this example of using refs because they're very often talked about in terms of DOM manipulation.
+4:35
+But reeling it back to our toggle component, we need to use refs in order to keep track of when we have first rendered our app versus when it has been re rendered.
+4:45
+I know that at the beginning of the scrim I threw you into a bunch of code.
+4:48
+It should be code that you're already a bit familiar with, but feel free before moving on to take a look at this code and make sure you actually understand what's going on.
+4:56
+I know sometimes in tutorials when I'm thrown into a codebase, it's a little more disorienting, so make sure you understand what we just talked about, and if you need to rewatch this, that's completely okay.
+5:06
+When you feel good about that, let's go ahead and apply this back to our toggle component.
