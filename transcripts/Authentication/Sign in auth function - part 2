@@ -1,0 +1,92 @@
+
+Transcript
+0:00
+Okay.
+0:00
+Time for you to show me what you've got.
+0:02
+I've deleted the top bit of the try, and it's your turn to make an asynchronous call to Superbase to sign in with a password.
+0:09
+If you're not sure the syntax, have a look at the Superbase docs.
+0:12
+The better you are using the docs, the better you will be with using Superbase.
+0:16
+Passing an object with the email, remember, we need it to be lowercase, and the password.
+0:23
+Destructure the response into data and error variables, and then save and test by signing in the user that you added manually into auth dot users.
+0:32
+As I mentioned in the last scrim, if you want to see the whole session object, I recommend going into your dev tools, f twelve, and looking at the console there, and you should see lots of data.
+0:44
+Good luck.
+0:45
+See you in a minute.
+0:49
+Okay.
+0:50
+I hope that went well.
+0:51
+So in the try, let's destructure those two data and error variables.
+0:57
+And we use await because it's asynchronous, and we say superbase.
+1:01
+And because it's auth, we use auth dot, and the method we need was sign in with password.
+1:10
+And then we pass an object, and that's got an email property and a password property.
+1:18
+And the email, we need to make it lowercase with dot to lowercase, and the password is simply the password.
+1:28
+Okay.
+1:29
+That's it.
+1:30
+Save.
+1:31
+Get rid of the challenge text, and let me try again.
+1:37
+There we go.
+1:37
+No error.
+1:38
+That's a good sign.
+1:39
+And we look again.
+1:41
+And there's lots more in here.
+1:43
+Session changed.
+1:44
+And super base sign in success again.
+1:46
+Fantastic.
+1:47
+That is working.
+1:48
+Get rid of this.
+1:49
+Now it's pretty obvious that it's the sign in function.
+1:52
+Brilliant.
+1:53
+Now because all we can do is sign in now, you might wonder what happens if we keep signing in.
+1:57
+Well, basically, when you log in, Superbase issues that access token JWT and a refresh token, and they're stored in the browser.
+2:07
+If you log in again with the same credentials, Superbase just replaces the old token in storage with the new one.
+2:14
+The previous session in the browser is simply overwritten, so you remain logged in as the same user.
+2:19
+And a good thing to know is if you log in on different devices or browsers, each will have its own set of tokens and session.
+2:26
+Superbase does not invalidate previous sessions by default when you log in again elsewhere.
+2:32
+All sessions remain valid until they expire or you explicitly log out.
+2:36
+Okay.
+2:37
+Fantastic.
+2:37
+We can log in now.
+2:39
+Let's work on navigating here to dashboard.
+2:44
+See you in the next screen.
