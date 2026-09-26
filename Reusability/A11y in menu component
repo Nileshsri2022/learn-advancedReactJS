@@ -1,0 +1,113 @@
+Transcript
+0:00
+Okay.
+0:00
+I lied a little bit.
+0:01
+We have one last thing that I wanna cover before moving on.
+0:04
+I'm coming back through some of my courses and searching out some ways to improve my approach for accessibility in the code that I've written.
+0:10
+And when it comes to a drop down menu that toggles in and out of view like this, there are a number of things that we have to take into account when we're dealing with accessibility.
+0:19
+So let's go through one by one and see how we can improve our menu and the related compound components so that assistive technology like a screen reader is able to fully represent what is happening on the page.
+0:30
+Interactive menus like this are not really semantic or rather there aren't built in semantic HTML elements that we can use to represent a toggling menu like this, which which means we need to resort to some ARIA attributes.
+0:42
+But even before we get there, the quickest and easiest thing that we need to make sure we do is indicate that the role of this div is going to be a menu.
+0:50
+By simply adding role equals menu, we are able to indicate to a screen reader what kind of role our non semantic div is going to be playing in our app.
+0:59
+So role equals menu is the first addition we're going to make.
+1:02
+Next, we have four different ARIA attributes that we need to make sure we include on the different
+1:13
+property that we add to our button so that a screen reader can announce ahead of time whether the menu is expanded currently or not, thus allowing a user to know whether they need to click that button to expand the menu or not.
+1:25
+I mentioned in the last lesson that we are only going to be pulling in the toggle property from our context, but with ARIA expanded in mind, we do need to know whether or not the menu itself is open.
+1:35
+This way on my button, I can add the aria expanded attribute, and I can just set it to the current open status of our menu drop down.
+1:44
+Okay.
+1:45
+Great.
+1:45
+The next ARIA attribute we want to add is one called ARIA has pop up.
+1:50
+ARIA has pop up allows our user to know that this button has an associated menu that it will be toggling.
+1:56
+Because that is always going to be true of our menu, I can just include aria dash has pop up and set it hard coded to true.
+2:05
+Let me take a second to move each of these properties to their own lines.
+2:10
+Okay.
+2:10
+Great.
+2:10
+So we've finished aria expanded and aria has pop up.
+2:14
+The next thing is aria hidden.
+2:16
+In a normal setup for a toggled menu like this, when a button maybe just changes the visibility in CSS of something, what we would want to do is go to our menu drop down and add a property called aria hidden, which in our case would always be the opposite of what's being indicated by aria expanded.
+2:33
+So on the button, we're saying aria expanded is true when open is true or, of course, false when open is false, with our menu drop down, we would normally say something like aria hidden equals not open because we want this to be hidden when it is not open.
+2:49
+Or in other words, when open is false, we want aria hidden to be false.
+2:53
+It's kind of a difficult double negative to wrap your head around.
+2:56
+However, because we are conditionally rendering this div, you might notice that if not open is true, in other words, if open is false, then this whole component, this whole div is not going to get rendered, but instead null will be rendered.
+3:11
+So in our very specific case adding aria hidden here is really not going to help us too much, but I thought I would mention it because if you do find yourself creating a component that is showing or hiding the elements purely in CSS, then you'll want to make sure that you include aria hidden.
+3:26
+The last aria attribute that we need to concern ourselves with here is one called ARIA controls.
+3:31
+We've taught each of the components of our non semantic menu whether or not the menu is expanded, hidden, if it has a pop up, and whatnot, but we haven't yet associated the button on the screen with the menu that should be toggling in or out of view.
+3:44
+And we can do this with ARIA controls.
+3:46
+Now let's see a really quick fix for this and then we're going to see a better way to do it.
+3:51
+First of all, in our menu button with ARIA controls, we add the ARIA controls attribute directly to our button and we need to provide it the ID of an element that it is controlling.
+4:02
+So let's just pretend I have an ID called menu, in which case I would go over to my menu drop down, and I would add an ID that is hard coded as menu.
+4:12
+Now what do you think could be a problem with hard coding my ID like
+4:19
+this?
+4:19
+If I ever wanted to render more than one version of my menu on a page at any given time, I would have two elements with the same ID.
+4:27
+So hard coding it this way is not going to be the best solution for us.
+4:31
+In my introduction to React course, there was an addition to that course that I made where we talk about a React hook called use ID.
+4:39
+If you haven't had a chance to see that lesson or you just want a refresher, then I'll include a link right here that you can use to go learn a little bit more about use ID.
+4:48
+In short, use ID is a built in React hook that allows us to generate stable IDs that will persist from one render to the next, specifically for these kinds of accessibility uses.
+4:59
+Now because I need both my button and my menu drop down to have access to that ID, I'm going to create a new ID.
+5:06
+Let's call it menu ID by calling react dot use ID and then pass this menu ID down through my context.
+5:14
+We'll just add it right here so that both my button and my drop down can receive it.
+5:19
+We'll go ahead and receive it right here with menu ID.
+5:22
+And instead of hard coding menu here for my ARIA controls, I can include my menu ID, and then we'll do the exact same thing for our menu drop down.
+5:32
+We will receive the menu ID and give it the ID of menu ID.
+5:38
+Perfect.
+5:38
+Now I know that was a lot of things to add, but what we've done with, frankly, this minimal amount of work is make something that probably was very opaque to our users using assistive technology and made it completely accessible so that they can navigate around this menu just like any other user.
+5:54
+Learning about the different approaches to accessibility and these ARIA attributes in the end can be the difference between having an app that is usable and an app that is completely unusable for a significant number of the users of our applications.
+6:07
+Now keep in mind that because I'm coming back and recording this after I have already finished recording the rest of this course, the code that we written here isn't going to persist into those other recordings.
+6:17
+But as you're writing your own code and practicing the things that we've been learning, do your very best to try and keep accessibility in mind as you're writing your code for the first time.
+6:25
+Okay.
+6:26
+Now as promised, let's move on and start learning about headless components.
