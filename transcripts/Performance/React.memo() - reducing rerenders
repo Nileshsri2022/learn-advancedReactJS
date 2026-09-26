@@ -1,0 +1,205 @@
+Transcript
+0:00
+Think this might have been one of the most confusing parts of React for me, and it's not what React dot Memo actually does.
+0:06
+It's distinguishing and remembering the difference between use memo and memo.
+0:11
+The more you use it, the more it'll make sense.
+0:13
+But the purpose of React dot memo is to help us reduce any unnecessary rerenders.
+0:19
+So what exactly is React dot memo?
+0:21
+Well, it is something called a higher order component, which sometimes is abbreviated as HOC or a hawk, and it's a higher order component that's built by React.
+0:30
+What exactly does that mean?
+0:31
+Well, a higher order function is something that you have used many times by now.
+0:35
+It's any method or function that takes another function as its argument.
+0:40
+It's a way to give extra control to the developers.
+0:43
+So for example with the dot map array method, the developer gets to put in a function that is highly tailored to the specific needs that the developer needs with dot map.
+0:52
+Well, a higher order component is very similar.
+0:55
+It's a function like React dot memo, it's got the parenthesis there, it's a function, and it takes a component as its argument, which means inside the parenthesis you're going to pass a React component.
+1:05
+Then what it does is it adds a few special abilities to it, and it returns or gives back the beefed up version of it.
+1:13
+Okay.
+1:13
+In what way is it beefed up?
+1:14
+What exactly does React dot memo do?
+1:16
+Well the component that it gives back to you will be memoized, or in other words it will be cached by React, or in even other terms, React will remember that component from one render to the next if the props don't change.
+1:29
+Now we're back here with our little ancestral app here that has the grandparent, parent, child, and grandparent components that are all being rendered.
+1:37
+And so we'll see this in action in just a second, but I do wanna take this moment to remind you that the rendering phase in React is usually not very slow.
+1:45
+It's usually really fast.
+1:47
+Even the reconciliation phase, which comes after the rendering phase, is usually pretty fast.
+1:51
+Comparing the old tree to the new tree doesn't usually take very much time because
+2:04
+I've I've included an article here by my friend Kent C.
+2:07
+Dodds who wrote that it's important to fix slow renders before you ever worry about reducing the number of re renders.
+2:15
+So feel free to click into that article and learn a little bit more about that.
+2:18
+Okay, so React dot Memo returns a new component that will check the previous props to the upcoming new props, and if they're the same then it will just skip re rendering that component entirely.
+2:30
+Let me show you what I'm talking about.
+2:31
+Remember here we have our app component.
+2:34
+Our app is rendering to grandparents, and then it kind of cascades from there.
+2:38
+Each grandparent renders to parents, each parent renders to child components, and each child renders to grandchild components.
+2:46
+And so that's why we get this hierarchy like this.
+2:48
+Beyond that, our console is also showing what's being rendered every time a component gets rendered.
+2:55
+I have this logs dot MD file which I'm going to copy and paste the console logs to because I can scroll in my console here, but it doesn't come through in the Scrumba recording.
+3:04
+Okay, so what we're considering an issue in this case is that when I change my count, which count is only being used inside of the app, notice we're not passing that count down anywhere as a prop to any of these grandparents.
+3:16
+When I increase my count or change my state, what I'm getting rendered to the console, let me just copy this here, is everything.
+3:25
+Despite the fact that neither of the grandparents nor any of their descendants are going to be changing or receiving different props, because they're not receiving any props at all, React still chose to re render them.
+3:36
+Again, as a reminder, that's usually fine.
+3:39
+It's not usually a big deal.
+3:41
+Only if you have measured the fact that one of these components or many of these components are actually slow to rerender should you then be concerned about fixing this rerendering process.
+3:50
+Because under the hood, even though they're undergoing the re rendering process, they are not being recommitted to the DOM because nothing's changing about them.
+3:58
+Okay, I'm gonna get off that soapbox, we'll just assume that that's knowledge now.
+4:02
+Now let me go over to my grandparent and I'm going to implement React dot memo so that I can teach React to not rerender this component if the props aren't changing.
+4:12
+And it looks like I have a prop here from a previous version.
+4:15
+Let's just go ahead and get rid of that.
+4:16
+We'll actually add it back in just a second.
+4:18
+The syntax for react dot memo is super easy.
+4:21
+So what I need to do is call react dot memo.
+4:24
+Remember it takes a component and returns a new component with those added special abilities to check its own props and determine if it should be re rendered or not.
+4:33
+So what if instead of saying export default this function, just doing that in line, I just define the function, and then I take this function, I pass it to react dot memo, and then whatever gets returned from react dot memo is what I export default from this file.
+4:48
+Anything outside of this file may not really understand that I'm doing this whole React dot memo thing, but it doesn't care so it should be fine to do it this way.
+4:57
+By making this simple change, now what I'm exporting for my grandparent dot JSX file is a component that will know to stop its own re renders if its props are no different than they were on the previous render.
+5:09
+So let me hit refresh and oh, well I'm trying to reference count here.
+5:14
+Sorry.
+5:14
+Let's get rid of that.
+5:16
+Let's try again.
+5:17
+Okay on my first render I still got everything just like before these thirty what is it thirty one renders.
+5:23
+Let me delete these and I'll go ahead and hit the plus button.
+5:26
+And now if I come down and I copy what actually got re rendered, it is this.
+5:32
+Just to the app component re rendered.
+5:34
+So not only did the grandparent not re render, but because the grandparent didn't re render none of the descendants of the grandparents re rendered either.
+5:42
+So we just reduced the number of renders from thirty one down to one, and we only rendered the component that really cared about it.
+5:50
+Assuming for whatever reason the grandparent, parent, child, or grandchild components were causing some kind of performance issue because they were expensive components to rerender, We just increased the performance of our app by quite a bit.
+6:02
+Okay.
+6:02
+Now I want you to get to your hands on the keyboard.
+6:04
+Let's come back to our app component, and I'm just going to write out a little challenge.
+6:08
+It's not really gonna gonna be a challenge.
+6:10
+It's gonna be more of a prompt that you should follow.
+6:14
+I guess you could call this like a structured free time.
+6:16
+I want you to just play around with this a bit.
+6:18
+What happens if you pass the count state to just one of the grandparents through props?
+6:24
+When you do that and change the count, what is going to get re rendered?
+6:27
+And does it matter in the grandparent component if you're even accepting that count as a prop and making use of it anywhere?
+6:34
+Or does it make no difference?
+6:35
+Difference?
+6:35
+So pause now and just kind of play around a little bit.
+6:37
+See if you can start to connect these pathways in your mind to hopefully make this make a bit more sense.
+6:43
+So pause now and play around with the code.
+6:51
+Okay well let's try it.
+6:52
+We'll just pass the count down to the grandparent like this.
+6:55
+If we can spell it right.
+6:57
+We'll get rid of this prompt here and let's see what happens.
+7:01
+So on my first render everything will get rendered.
+7:03
+That's completely fine.
+7:04
+Now I'll open my console and I'll hit plus and let's go ahead I'm gonna scroll down and just highlight everything that just newly logged to the console.
+7:14
+Okay and let's see logs dot MD we'll paste it here.
+7:17
+Okay so we did get sixteen re renders and that included the grandparent that had the count passed to it as props and all of its descendants.
+7:26
+But essentially we've cut in half the number of renders that we needed.
+7:29
+So why exactly did this grandparent re render?
+7:32
+Well remember React dot memo is going to check for the previous props and compare it to the new incoming props.
+7:39
+The previous props had a count of zero, and let's go up here.
+7:42
+Originally the count was zero, and the next time the count was one.
+7:46
+Because of that, the higher order component said, yeah, this grandparent does need to be rerendered because the count in the incoming props has changed.
+7:54
+And it's possible that a bunch of stuff down the line has changed as well.
+7:57
+So let's just rerender everything and let the reconciliation process determine what actually needs to change in the DOM.
+8:03
+But like I mentioned, for this grandparent, there is no count being passed to it.
+8:07
+Therefore, the props, well, I assume they would be considered undefined, and that didn't change from the previous render to the next render, and so this grandparent and all of its descendants did not rerender.
+8:18
+For For the sake of completion, I'm just going to explain really quick that there is an optional second parameter to react dot memo And that is a function that I think the React team calls something like our props equal.
+8:31
+So this would be a function that you pass to it and it receives the old props and the new props and gives you the developer a chance to write your own logic to determine if the new props and the old props are considered equal.
+8:43
+But I believe in the React docs it even says you are almost never going to have to worry about that, so I'm not even going to dive deeper into that.
+8:50
+But it's a good thing to know that exists in case you for some reason ever need it.
+8:54
+Okay, let's go back to our little product cards app and have a quick practice on how we can use React dot memo to reduce some expensive re renders.
