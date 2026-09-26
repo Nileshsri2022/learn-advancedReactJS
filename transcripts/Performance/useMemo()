@@ -1,0 +1,114 @@
+
+Transcript
+0:00
+From time to time in your components you will have some sort of calculated value at the top level of your component that is somewhat expensive to calculate, And that's where the use memo hook comes into play.
+0:12
+The use memo hook allows React to know exactly when it should and when it shouldn't recalculate values from one render to the next.
+0:21
+Let's take a look at a quick example.
+0:23
+Again, it's a little bit contrived, but let's imagine that we need to display the number of products that we're showing down here.
+0:29
+And for whatever reason, we are using a slow function to count the number of items in this product's data array.
+0:36
+This slow count items function is something that I wrote.
+0:39
+It just manually runs a while loop for the number of milliseconds that you specify, and then it simply returns the data dot length.
+0:46
+Again, it's a little bit contrived, but stick with me here.
+0:49
+So we pass in the array of data that we need our function to count the length of for us and we pass in the number of milliseconds that we want it to delay.
+0:57
+And because this calculation is happening on the top level of our component, in other words, it's not happening inside of a useEffect that only happens sometimes, it's going to run this slow count items function every single time our component renders, even if the value doesn't change with some of the renders.
+1:14
+For example, we still have the counter built into our app here and that has absolutely nothing to do with the products data.
+1:21
+However, when I click the plus, I'm just gonna click it a number of times here.
+1:24
+You can see that it took quite a while for it to register all six counts.
+1:28
+I'll do that again just so you can see it.
+1:30
+I'm gonna click the minus button six times starting right now.
+1:36
+Okay, that was pretty delayed to get here.
+1:38
+That's because every time I click the button, it's re rendering this component and doing a slow count items function call, which is delaying for a half a second each time it re renders.
+1:49
+So when do we use use memo?
+1:51
+Well, the primary thing that we'll be using in this lesson is to avoid recalculating any expensive calculations if recalculating them isn't necessary.
+2:00
+This is a great time for me to mention that you need to ensure that there's actually a performance problem happening before you just start using use memo on every top level calculation that you might be doing.
+2:11
+Again, this function, slow count items, is pretty contrived.
+2:15
+It's meant to act as a placeholder for a real calculation that maybe is quite a bit more complex and really does take quite a bit of time to complete, especially if the user's device is relatively lower powered.
+2:27
+So just make sure that you're actually able to measure a performance problem because if really all I were doing was saying products data dot length here, This is definitely something that we do not need to memoize with react dot memo because this operation of just getting the length property from this array is so fast even on the slowest of machines that we would actually be causing more of a performance problem by using use memo than if we didn't use it in the first place.
+2:54
+Okay.
+2:54
+I'm getting off my soapbox here.
+2:56
+Let's go back to pretending that we do legitimately have a slow calculation happening.
+3:01
+UseMEMMA works in a very similar way to useEffect.
+3:05
+As a quick reminder, the idea of useEffect, we'll say React dot useEffect, is that we provided a function, and we say you only need to rerun that function if one of the values inside of this dependency array changes.
+3:19
+So for example, if I said I want you to rerun this effect, this side effect function, anytime the count changes.
+3:27
+Let's go ahead and console log count changed.
+3:31
+Okay.
+3:31
+Then every time I change the count, of course it's a little delayed because of our slow count items, but you can see that we're getting a console log for each time the count changed because it's rerunning our side effect.
+3:42
+Now if this dependency array included just the products data and we said products data changed, I want you to think is this side effect going to run again when I change my count.
+3:56
+And the answer is no because from one render to the next, products data is not changing.
+4:01
+In fact, currently
+4:09
+is still delayed but it's not running our console log because products data is not changing.
+4:14
+The same paradigm is exactly how we're going to use use memo.
+4:18
+Let me get rid of my use of actually I'm just going to comment this out for quick reference.
+4:23
+The way use memo works is let me put this on its own line.
+4:26
+We're going to say react dot use memo.
+4:30
+And again, anything you see me starting with react dot, you could simply import it as a separate import up here like use memo.
+4:39
+However, when I'm teaching I tend to prefer to use react dot beforehand just to make it absolutely clear that use memo is a part of the react library.
+4:48
+Just like use effect I'm going to give it a function to run and a dependency array.
+4:53
+Let's open up this function and whatever I return from this function is a value that React will remember as the value of products count from one render to the next assuming nothing in my dependency array changes.
+5:07
+So let's go ahead and return our slow count items.
+5:11
+I'll just move that right here.
+5:13
+And the correct value of products count will depend on actually I want you to think about this.
+5:18
+What should go inside of my dependencies array?
+5:24
+The only thing I'm using to calculate the correct products count is my array of products data.
+5:29
+So even though we don't currently have a way for the user to change our products data, the value of our products count does actually depend on the products data array.
+5:39
+And by specifying this, I'm also kind of by omission teaching react that it should not recalculate products count if my count up here ever changes like when when I press the plus or minus button.
+5:50
+So let me hit save.
+5:52
+Remember before hitting plus and minus caused quite a bit of a delay and now if I click these there's no delay whatsoever because it's not spending that extra five hundred milliseconds per render to recalculate our products count.
+6:06
+Now if I did have some built in way to change the number of products in my array like a plus or minus that would delete products or add new products or something, then each time I clicked that it would take another five hundred milliseconds because that would be changing the products data array.
+6:21
+Now there is another legitimate reason to use use memo, but before we jump into that, I wanna get your hands on the keyboard practicing use memo and making sure that you understand the theory behind it.
+6:30
+So that's what we'll do in the next lesson.
