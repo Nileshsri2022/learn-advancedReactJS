@@ -1,0 +1,83 @@
+Transcript
+0:00
+Okay.
+0:00
+We're gonna start out simple by just working on our star.
+0:03
+If we go to index JS, you'll see I've commented everything else out.
+0:07
+These are all the different iterations we've done here and I just put the star back.
+0:11
+So in star j s, your challenge is to remove all the parts of the toggle component.
+0:15
+Make sure you don't delete our star icons from react icons And then to pull in and use the use toggle hook we created to just simply conditionally render the stars.
+0:26
+I'll let you figure out exactly what that means and how to do the rest.
+0:29
+You'll want to make sure that to the stars we have a class name right now.
+0:32
+You'll also want to add an on click that will run the toggle function that you'll get from use toggle.
+0:37
+Okay.
+0:37
+I'm done giving you hints.
+0:38
+Pause now and work on this challenge.
+0:46
+Okay let's do this.
+0:47
+I'm going to choose all the lines here that have a toggle component and remove them.
+0:54
+Let's clean this up.
+0:55
+And of course in react I can't return two components so I'm just going to surround this with a fragment.
+1:01
+Since I'm not using toggle anymore I can get rid of that import.
+1:04
+And let's go ahead and import our use toggle.
+1:07
+And once again this is going to be pretty far back.
+1:10
+Let's see it's outside of star and then outside of components into hooks and into use toggle.
+1:16
+Okay.
+1:17
+Now let's hit save.
+1:18
+We're gonna see that it's rendering both of them and of course clicking them does nothing.
+1:22
+So let's call use toggle and we're going to receive our on and our toggle from calling use toggle.
+1:29
+And now I can use my on value to conditionally render one or the other.
+1:34
+So let's open some curly braces and we'll use a ternary to say if on is true then it should be the filled star and otherwise it should be the empty star.
+1:45
+Let's format this a little bit.
+1:47
+Okay.
+1:47
+We still don't have our on click but let's hit save.
+1:50
+And okay that's a good start.
+1:51
+We have an empty star.
+1:53
+Now we should use our toggle function and do an on click on both of these.
+1:59
+When they're clicked it can just run the toggle function.
+2:02
+Let's hit save and look at that.
+2:05
+Our code is dramatically simpler and we're offloading all of the logic of creating the state, creating this toggle function, and like I mentioned, eventually setting up our callback function so that we have access to what should happen when this on change prop gets called.
+2:20
+Currently we're not even using that and it won't work for us so we need to fix that.
+2:25
+But the code for our star is so much simpler and I would argue easier to reason about and easier to read.
+2:31
+Now just like in any other challenge, if you weren't quite able to get this working on your own, now that you've seen me do it, scrub back before I solved it and try it again.
+2:40
+There's really no benefit on just plowing forward.
+2:42
+It's most useful for your education to make sure you're practicing getting your hands on the keyboard and actually completing these challenges.
+2:49
+Then as always when you're ready we're going to move forward and apply our new use toggle hook to the menu component.
