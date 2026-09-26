@@ -1,0 +1,279 @@
+Transcript
+0:00
+We can sign in to our application now.
+0:02
+So I guess the logical thing is to now work on signing out.
+0:07
+We're gonna start this time by actually writing the auth function, and then we'll move on to dealing with some sort of sign out button.
+0:15
+So here's the section of auth context, our centralized file for all the auth functions.
+0:20
+We've done sign in.
+0:23
+Underneath, let's go for our sign out.
+0:28
+Now so that you get lots of practice, it's challenge time.
+0:32
+So using the sign in function as a template, write a sign out function calling the auth dot sign out method this time.
+0:41
+So remember up here, we use the auth dot sign in with password method.
+0:46
+This time, we're gonna be using auth dot sign out method.
+0:49
+The best thing to do here would be to look it up in the Superbase docs and have a read about it.
+0:54
+We only need to destructure error because here, remember, we destructured data and error because we wanted to see the data we get back from Superbase.
+1:05
+But when we sign out, we're not interested in any data back.
+1:08
+We just want to know of any potential errors.
+1:10
+And, of course, if we scroll up, our on auth state change CCTV radar will pick up this sign out and update the session state variable accordingly.
+1:22
+Well, we actually know what will happen to it because we know that if the user is signed out, it will always be updated to null.
+1:30
+So this time, instead of we're going from undefined to one of these, we went from undefined to null earlier.
+1:38
+But now we are signed in, and we're working on signing out.
+1:41
+So updating the session state back to null.
+1:44
+Okay.
+1:45
+Handle both super base and unexpected errors in a similar way to in the sign in user function.
+1:52
+So you could do a copy and paste here because, again, we're gonna say if error from superbase, we wanna console dot error it, and we want to return exactly the same thing because we still want to use this success property of the return object and an error if it's needed, but we will not need to use the data because that's not what we're destructuring back.
+2:12
+Okay?
+2:13
+Add this function to the auth context value prop.
+2:16
+So remember, when we finish the sign in user function, I added it here so that we could access it through context.
+2:23
+When you finish your new sign out function, you can add it down here so that we can access it wherever we're gonna have our sign out button.
+2:32
+And then a little note here, there's no need to pass the super basic sign out method any parameters.
+2:37
+Remember up here, we obviously passed the sign in with password, the email and password, but we don't need to do that with this auth dot sign out method.
+2:45
+Okay?
+2:46
+So take it slow.
+2:48
+You will actually be able to basically change just one word here.
+2:51
+So it's sign out.
+2:53
+Unexpected error during sign out.
+2:56
+But do use this function as a template.
+2:58
+Okay?
+3:00
+Alright.
+3:00
+Good luck.
+3:01
+See you in a minute.
+3:06
+Okay.
+3:07
+So let me be a little bit lazy, and I'll copy this.
+3:14
+So we're calling it sign out instead.
+3:16
+We don't have email and password here.
+3:19
+I said only destructure error, so we can get rid of data, and it's the sign out method.
+3:27
+So we can actually take all of this and replace it with that.
+3:34
+If error, console dot error.
+3:35
+Yep.
+3:36
+Super base sign out error this time, isn't it?
+3:39
+And we can log the error dot message.
+3:42
+Again, it's gonna be success false, and we want to return that error message.
+3:47
+And then this is our success, but because we've got got any data, we don't really need to log it.
+3:53
+Another reason why we don't need to log it is because we will see the session change here.
+3:59
+So we'll know whether the logout has been successful.
+4:03
+Let's get rid of data.
+4:05
+There we go.
+4:06
+We catch any unexpected errors, and then we say unexpected error during sign out, and we return success false and unexpected error occurred, let's say, during sign out.
+4:21
+Okay.
+4:21
+That looks good.
+4:23
+And then number three, add this function to the auth context value prop.
+4:28
+So we just add it to this nice object here.
+4:31
+Now it's available through context.
+4:34
+Super.
+4:35
+Get rid of this challenge text, and we don't need that because it's called sign out, so we know what's happening here.
+4:41
+Great.
+4:42
+I'm gonna save.
+4:44
+So when this dot sign out gets called, the client library deletes the user's JWT, the access token, and the refresh token from the browser storage.
+4:53
+That can be local storage or cookies.
+4:56
+And then as I mentioned, our on auth state change listener will receive the change and update the app's session state to null.
+5:05
+In a minute, we're now gonna write a function when a sign out button is clicked, which will then navigate back to our home path.
+5:17
+Okay.
+5:17
+Thanks for your help with that.
+5:18
+Now let's deal with the sign out button.
+5:21
+So I've actually added a button here.
+5:24
+I'm so efficient.
+5:25
+Let me show you that.
+5:28
+There we go.
+5:30
+So I'm now going to work out how to get this working.
+5:35
+So let's start by accessing the sign out function that we just wrote.
+5:41
+So we need to import the hook.
+5:43
+We're getting used to that now.
+5:44
+It's our use auth hook, and it's from auth context.
+5:48
+So we go into context.
+5:51
+There we go.
+5:52
+And then right at the top, we call it and we destructure the sign out function.
+5:59
+Okay.
+5:59
+So that's now ready to use when we need it.
+6:02
+So we're getting an error back from here, aren't we?
+6:09
+Let's store that error in some state.
+6:11
+So let's import use state, and we'll create some state for the error.
+6:16
+And it can start off as null.
+6:20
+And then let's write a handle sign out function.
+6:22
+Okay.
+6:23
+We need to remember it's async, and we're gonna take the event parameter so that we can do our e dot prevent default.
+6:32
+And before we forget, let's add our on click to our button, and it's gonna be this handle sign out function.
+6:42
+There we go.
+6:43
+And then here, we're gonna call that sign out function that we are accessing through context.
+6:49
+So we need to use the await, and we call sign out.
+6:53
+And we need to destructure the response.
+6:55
+What do we get back?
+6:56
+Well, success and error.
+6:58
+No data, remember.
+7:01
+There we go.
+7:02
+Very nice.
+7:04
+And let's just do an if statement and an else.
+7:07
+So if there's success, then what do wanna do if there's success?
+7:11
+So we're signing out.
+7:12
+We wanna go back to our sign in component, which is, who can remember,
+7:20
+home directory.
+7:25
+So we're gonna navigate to home.
+7:29
+And then if there's not success, we can set our error state so that we can render it in the UI.
+7:35
+So we use our set error set a function, and we update it with the error.
+7:41
+And let's, consistency, go for error dot message.
+7:45
+Okay.
+7:46
+Very nice.
+7:47
+And let's now put an error message in.
+7:52
+So let's put it just after the button.
+7:55
+We're gonna use some conditional rendering.
+7:57
+So we're gonna say, if there's an error, we use the double and and we say we want to render then a div.
+8:06
+That's gonna have the alert role.
+8:09
+That's gonna have a class name of error message.
+8:12
+Gonna have an ID of sign out error, and we want to render the actual error, and then we'll have a closing div.
+8:23
+Okay.
+8:24
+We've saved that.
+8:25
+Okay.
+8:26
+So a way to check the error is if I just change this from null to failed to sign out.
+8:33
+We save that, and we see that over there failed to sign out.
+8:36
+Okay.
+8:37
+Great.
+8:38
+So the error's working.
+8:39
+And we can actually test the button as well because if we click it, hopefully, we'll see in the console information about the session change.
+8:47
+We won't actually navigate.
+8:49
+Ah, yes.
+8:50
+There we go.
+8:50
+You see session change to undefined?
+8:52
+So we know that the button is working and firing our sign out all function, which is signing us out of Superbase.
+8:59
+The client library is deleting the user's JWTs, and our on all state change is noticing the session change and using set session to update the session state variable.
+9:10
+Okay.
+9:10
+In the next screen, we're gonna be navigating back to our home path here, and I'd quite like to also show the email of the user who's logged in up in the header as well.
+9:20
+It's gonna help us understand what is available in the session that we are passing here to context.
+9:27
+See you in the next screen.
