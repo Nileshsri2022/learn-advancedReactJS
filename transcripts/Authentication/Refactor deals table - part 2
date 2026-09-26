@@ -1,0 +1,183 @@
+Transcript
+0:00
+Now that we've replaced our original broad policy with this select policy here, we're now on to dealing with insert policies.
+0:09
+The two policies we're gonna need to write are for reps to only be able to add their own deals and for admins to be allowed to add deals for anybody.
+0:19
+When we learned about RLS, I said we can combine checking the JWT with other database queries and, of course, the data being sent if there's an insert policy.
+0:31
+Well, now we need to check if the inserted deal ID is the same as in the JWT, I e, who's making the request, and that there's a row in user profiles with this UID, and that row has an account type of rep.
+0:51
+It's a little bit to get your head around.
+0:53
+Hopefully, this will help.
+0:55
+So the bouncer in front of the sales deals table, they have been given these two orders.
+1:01
+The first one down here is allow authenticated reps to insert their own deals into sales deals.
+1:10
+So the fact that they're reps, that needs to be worked out.
+1:14
+And then another thing needs to be worked out is that the deal they're inserting has the ID which corresponds to their ID.
+1:23
+Right?
+1:23
+It's kinda like two checks which needs to be made for that policy.
+1:27
+And then they've also been told for admins, allow authenticated admins to insert anyone's deals into sales deals.
+1:36
+So here, they only need to check that the person doing the inserting is an admin because it's a bit broader, isn't it, anyone's deals?
+1:43
+So if we have a quick look back at this, the way that we're gonna check if the person doing the inserting are an admin or a rep, well, that's here because the account type is crucial there.
+1:54
+So we need to say the person doing the inserting, their ID, we can get that from the JWT, and then we can look in user profiles for that ID and see what the account type is for that row.
+2:08
+And then for reps, to make sure they can only add their own deals, we can take the ID from the JWT and check the row they're trying to insert into sales deals, the ID of that row.
+2:21
+So now I'm gonna show you how we do the check to find out if the person doing the inserting is an admin or a rep.
+2:29
+So the way we check if a row exists in a table, because that's what we need to do, don't we?
+2:34
+We need to check, does a row exist in user profiles, which has the ID of the person doing the inserting, and the account type of that row is either admin or rep.
+2:44
+So the way we're gonna check this is we're gonna use the word exists, and then we start a bracket, and then we sort of start a new SQL query.
+2:52
+So we say select, and we're gonna use the one.
+2:56
+I'll explain this in a second.
+2:58
+And my little example here is let's imagine we have a table called extended family.
+3:05
+And I wanna check if a row exists in this table.
+3:07
+And I wanna check two things, whether the shoe size column is ten, so that would be extended family dot shoe size equals ten.
+3:18
+And my second thing I wanna check is whether the favorite color column is red.
+3:24
+So if a row exists in extended family where both of those things are true, then this will return true.
+3:30
+So I'm gonna leave that there to help us.
+3:33
+So the two policies we need, we need a policy for reps to only add their own deals.
+3:39
+And then the other one was admins to add anyone's deals.
+3:46
+I'm gonna write this first one, and then I'm gonna set you a challenge to write the second one.
+3:50
+So let me type out the boilerplate.
+3:54
+So let me just call our policy that.
+3:57
+It's gonna be on sales deals, and it's for inserts, isn't it?
+4:03
+We've done the select in the past, but now we're working on inserts.
+4:06
+Must be authenticated user.
+4:09
+Now the with check.
+4:11
+Do you remember I mentioned we need two checks?
+4:13
+So the first check is ID on JWT is the ID of the inserted row.
+4:23
+And then the second check is, does row exist in user profiles with ID from JWT and rep account type.
+4:38
+Yeah?
+4:39
+So this one.
+4:40
+So how do we get the ID from the JWT?
+4:42
+Oh, we can use one of those fancy super base helper functions.
+4:46
+It's auth dot UID.
+4:48
+So that has to be the ID of the inserted row.
+4:52
+Now when we're inserting a new row, Postgres allows us to reference the values that are being inserted in the with check clause.
+5:00
+So we actually simply just use the column name of the inserted row, and the column name is user ID.
+5:08
+So in the with check, Postgres lets us directly reference a column of the inserted row.
+5:15
+So now we need an and exists because we're about to start this how to check if a row exists.
+5:22
+Alright?
+5:23
+So we know how to do this.
+5:25
+We could even copy this and paste it in.
+5:27
+Right?
+5:27
+So we use our select one.
+5:30
+Oh, I actually failed to tell you about select one.
+5:33
+So this is a simple way to check if a row exists.
+5:37
+If we selected, say, star, which we're used to in SQL, that would actually return all of the data.
+5:44
+Right?
+5:44
+It would return the data of that row that we're selecting.
+5:49
+But we don't actually need the data, do we?
+5:51
+We just want to know whether a row exists.
+5:53
+We kinda want a true or a false Boolean.
+5:56
+We just care if there's a match.
+5:58
+So one is just a constant value that's returned if the condition is true.
+6:03
+It's a more efficient way than saying select star since we don't actually need the data.
+6:08
+So that's what we're using here.
+6:09
+Select one from, and it's not from extended family, is it?
+6:12
+We're looking in user profiles, and it's where the ID from the JWT.
+6:21
+So that means the ID column of user profiles equals the ID from the JWT, and and we know we can get that from our helper function.
+6:31
+There we go.
+6:33
+And the account type is rep.
+6:35
+So we go user profiles dot account type equals rep.
+6:41
+There we go.
+6:42
+So this bit is doing this comment here.
+6:46
+Does a row exist in user profiles with an ID from the JWT?
+6:52
+So that's the ID in user profiles equals the ID from the JWT, and the account type column from user profiles equals rep.
+7:03
+So that all basically says the person doing the inserting is a rep.
+7:09
+And this part is checking the deal that they're adding is their deal.
+7:14
+The ID on it corresponds to their ID.
+7:17
+Now I realize that's a lot.
+7:19
+The one you're gonna do is actually a little bit simpler, isn't it?
+7:22
+So before we get on to the challenge, I'd like you to pause and add this policy to your sales deals table.
+7:28
+There's a few ways to get there on superbase dot com.
+7:31
+You can either go to table editor, click sales deals, click auth policy, and then create policy.
+7:38
+Or another way you can do it is click authentication, policies under configuration, and then find the sales deals table and click create policy.
+7:47
+And you now know how to get the two clause up.
+7:50
+You know how to choose insert, and you can type this into the with check or copy and paste it.
+7:56
+Make sure you don't move on to the next scrim until you've saved this policy.
+8:00
+See you in the next scrim where it's your turn.
