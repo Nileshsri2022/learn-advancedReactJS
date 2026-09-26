@@ -1,0 +1,73 @@
+Transcript
+0:00
+Welcome back to the language chips component where we've just typed our two props.
+0:05
+Now we're gonna move into the component and type any variables that we find.
+0:09
+There are three pretty straightforward ones right here.
+0:12
+There's is language lost, there's styles, and there's class name.
+0:16
+We're gonna start off the scrim with a quick challenge to type all three of them.
+0:20
+And hint, you may have to use TypeScript's emit utility type.
+0:24
+Give it a go, and I'll catch you in a bit.
+0:29
+Now two of these are pretty straightforward.
+0:32
+Is language lost is a boolean, and class name is a string.
+0:36
+But styles might have been a bit trickier.
+0:39
+We can see that it's an object that contains a background color string and a color string, and those should ring a bell.
+0:46
+If we come over here to our languages file and check out the custom language type, you can see that background color and color are two out of three properties in this language type, So we should definitely take advantage of that.
+0:59
+So back in language chips, we're going to type styles this way.
+1:03
+We're going to use the emit utility type, and we're going to say that we'll use everything from language except for the property name.
+1:11
+And that's how we do that.
+1:12
+So with that out of the way, we're going to hit the actual challenge of the scrim.
+1:17
+We're going to be typing the callback arrow function inside of this map method as well as language elements itself.
+1:25
+I'm going to throw you in the deep end now with a challenge.
+1:28
+First, type the parameters of the callback function.
+1:31
+Then type the return value of the callback function itself.
+1:34
+And then finally, type language elements.
+1:37
+Remember that you can hover over each of the parameters, the arrow, or language elements itself to check out what TypeScript is inferring.
+1:45
+But I do want to encourage you to try it on your own first.
+1:48
+So good luck, and I'll see you on the other side.
+1:54
+Welcome back.
+1:55
+I hope that was a good challenge and really stretched your brain.
+1:59
+A little challenge is a good thing when learning new concepts.
+2:02
+Let's start with lang and index.
+2:04
+Lang is a single language type, and index is a number.
+2:09
+Next, let's tackle the return value of the callback function.
+2:12
+We can see from the return statement here that we get a single JSX element every time, so we'll get to use that JSX import again.
+2:20
+Over here after the parentheses, we'll type the return value as JSX element.
+2:25
+And since what's being returned in each loop of the map method is a JSX element and map returns an array containing the value of each loop, language elements should be an array of JSX elements.
+2:38
+And we can do that with JSX element and then an array.
+2:42
+And there we have it, a fully typed language chips component.
+2:45
+That was a slightly longer scrim, so feel free to take a break before you join me in the next one where I'm gonna challenge you to fully type one of our components using everything that you've learned so far.
