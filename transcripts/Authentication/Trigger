@@ -1,0 +1,353 @@
+Transcript
+0:00
+It's time to write our super base trigger, which will pass the data from the auth dot users table when it's inserted there into our new user profiles table.
+0:09
+Now a bit of a pre warning.
+0:11
+There is gonna be some Postgres SQL syntax coming up, and it's fine if you don't understand it all at a deep level.
+0:17
+Do have a look at the super base docs on trigger, and you'll find an example one there.
+0:23
+So I've made a little trigger dot SQL file here so we can write it all in here.
+0:27
+Then I'll give you a little challenge to rewrite out some of it so you get a little bit of experience there, and then I'll ask you to actually import it all into your Superbase project SQL editor and run it to set it up.
+0:39
+Creating triggers involves two parts, a function which will be executed called the trigger function, and then the actual trigger objects with parameters around when the trigger should run.
+0:50
+So we start with the function.
+0:52
+I'm gonna write out the boilerplate code, and then we'll talk about what each thing means.
+0:56
+Okay?
+0:58
+Okay.
+0:59
+So we start by creating the function and naming it.
+1:02
+Functions are also on schemas, bit like tables, and the default schema is always public in Superbase.
+1:09
+So we're just gonna be explicit and say public dot, and then we can name it whatever we want.
+1:13
+Why don't we go for handle new user?
+1:17
+Because it's a function, we need the smooth brackets.
+1:20
+Okay.
+1:20
+That line is done.
+1:22
+It always needs to return a trigger.
+1:25
+Because this is a special type of function, these must return a special type called a trigger.
+1:30
+So we just write returns trigger.
+1:33
+Now the language we use, this is Postgres' procedural language, and that's p l p g s q l.
+1:40
+Now here's that security definer we talked about in a previous scrim.
+1:44
+If we write security definer in the function, then it runs with the privilege of the function's creator, I e, us, the database owner, not the person who calls it, the person who's signing up and causing the trigger to happen.
+2:00
+So remember, this security definer means we don't need to write the RLS policy allowing the trigger to insert into our user profiles table due to the elevated privileges that this gives us.
+2:12
+Oh, I meant to write set here, but it's changed it to security.
+2:15
+Uh, there we go.
+2:16
+So if we want to prevent search path injection attacks, then we write set search underscore path equals and an empty string.
+2:27
+Now these dollar signs marks the start and end of the function body.
+2:31
+Okay?
+2:32
+So in here, we use begin, and then funnily enough, right down here, we're gonna say end.
+2:39
+So we think what do we want to happen when this function runs?
+2:42
+Well, we want to insert into our user profiles table.
+2:46
+So we say insert into, and user profiles is in the public schema, user underscore profiles, and then we write the columns.
+2:55
+So let's just put a little comment like that.
+2:58
+And then we use values and smooth brackets to specify the values for those columns.
+3:05
+And then below here, we return.
+3:07
+And we need to return a trigger variable, and this is a special record that represents the row that was just inserted or updated, which caused the trigger to fire.
+3:17
+And we reference that row with the word new.
+3:20
+So when a row is inserted into users on sign up, the trigger will fire, and the row that was inserted into users is now called new, and we reference that data with the new dot, whatever it is.
+3:34
+Okay?
+3:34
+So let's write a little comment here.
+3:37
+There we go.
+3:38
+Brilliant.
+3:38
+So let's start by going through the columns that we want to insert.
+3:42
+So let's have another look here.
+3:44
+We want ID, name, and then account type.
+3:48
+And then these values are gonna be the values of those comments, and we must stick to this order, ID name, account type.
+3:55
+So why don't I write some comments?
+3:56
+ID, name.
+3:59
+So the first thing in value must be the first thing here.
+4:02
+Okay?
+4:03
+So we want the value of the row that caused the trigger to fire, and we know that we reference that with the word new.
+4:10
+So this will be new dot and then whichever column.
+4:14
+Now we're looking for the ID from users, so it's gonna be new dot ID.
+4:20
+There we go.
+4:20
+And these are all gonna be new dot something because they're all coming from the row that caused the trigger to fire when it was inserted into auth dot users.
+4:30
+Now name and account type, they remember our end user metadata, and that's JSON.
+4:37
+So we have to use something a little bit different here.
+4:40
+We're gonna say the row in auth dot users is actually called raw user metadata.
+4:50
+And because it's JSON data, we have to use a special operator, which we have seen before in a previous scrim.
+4:58
+It's this double arrow.
+4:59
+This extracts the value as text from JSON.
+5:03
+So new dot raw user metadata is the JSON column.
+5:07
+So the double arrow extracts the value as text from the name property in this column, and then it'll be very similar for account type.
+5:18
+There we go.
+5:19
+So the ID column will be populated by the new row's ID.
+5:24
+The name column of user profiles will be populated by the new rows view of the name property of raw user metadata and so on.
+5:34
+Okay.
+5:34
+Trigger function complete.
+5:37
+So we've said, happens?
+5:38
+We want to insert into this table into where?
+5:41
+Well, into this table with data from the row that has caused the trigger to fire and these columns from it.
+5:48
+Onto the trigger object.
+5:50
+This is when should this trigger function happen.
+5:54
+So in a similar way, just say create, and this time, not a function, but a trigger.
+5:58
+And we call it something let's go for op on auth user created.
+6:05
+We don't need to specify the schema this time as by default, it belongs to the same schema as the target table.
+6:12
+There are two types of trigger, a before and an after.
+6:16
+The before, these triggers can modify the data before it's inserted or updated.
+6:21
+And then after is after it is.
+6:23
+So that's what we're looking for here after it's inserted into auth dot users.
+6:27
+So we say after, and after what?
+6:30
+Well, an insert on which table?
+6:33
+The auth dot users.
+6:35
+And since we want the trigger to execute once for each row that is inserted, we say for each row.
+6:42
+And what do we want this trigger object to do?
+6:44
+We want it to execute the trigger function that we wrote up here.
+6:49
+So we write procedure, and then we put the name of the trigger function, which we called public dot handle new user.
+6:58
+There's the trigger object.
+6:59
+Okay?
+7:00
+So this is saying when should this function run after an insert on auth dot users, and it's gonna happen for each row.
+7:09
+Remember, if you don't understand all of the syntax, don't worry at all.
+7:12
+So triggers are automatic.
+7:14
+No need to manually create these profiles from our application.
+7:18
+It's secure.
+7:19
+It runs with elevated privileges, but in a controlled way.
+7:23
+And it's maintainable because the profile creation logic is centralized in the database.
+7:28
+Okay.
+7:28
+I promised you a challenge.
+7:30
+I have removed a few parts, and I'd like you to complete them.
+7:33
+So I'd like you to name the function on the public schema.
+7:37
+I'd like you to complete the table name, where are we inserting into, and then in brackets, the columns.
+7:44
+Let me just help you with those brackets.
+7:47
+And then I'd like you to complete the account type JSON extraction.
+7:50
+I've been very helpful and left the other one here for you.
+7:53
+And then in the object, I'd like you to name the trigger.
+7:56
+I'd like you to complete the table after inserting on, so think about the logic there, and then complete the function name and schema that you have put up here.
+8:06
+Great.
+8:07
+Good luck.
+8:08
+See you in a minute.
+8:13
+Okay.
+8:13
+I hope that went well.
+8:15
+So we called it public dot handle new user.
+8:21
+This is all good.
+8:23
+And then we need the table names.
+8:25
+We're inserting into the user profiles, and that's on the public schema.
+8:31
+And then in the brackets, we have the columns.
+8:34
+So they represent these columns.
+8:37
+We've got ID, name, and account underscore type.
+8:43
+And then complete the JSON.
+8:45
+Yes.
+8:45
+So we can actually copy this, can't we?
+8:47
+Just for speed, and this would be account type.
+8:52
+And then that's all finished.
+8:54
+And then we come down here.
+8:55
+We name the trigger.
+8:57
+So this can be anything you want.
+8:58
+We went for on auth user created after inserting on well, auth dot users.
+9:08
+We need to see that again just for clarification.
+9:11
+After the sign up has added the details into users, we want the trigger to fire and add into user profiles.
+9:19
+For each row, yep.
+9:20
+And then we can just copy the trigger function name we put up here down here because it executes that procedure.
+9:28
+Okay.
+9:29
+Fantastic.
+9:29
+Let me get rid of these comments.
+9:33
+There we go.
+9:34
+That's fixed.
+9:35
+Thanks.
+9:36
+Autocorrect.
+9:38
+Okay.
+9:38
+So we need to now run this in our project.
+9:41
+So you need to go back to your project dashboard.
+9:44
+We're now looking for the SQL editor.
+9:47
+So this is the third icon on the left.
+9:50
+Should look like this.
+9:51
+I'd like you to pause the video, copy all of this, paste it in here at the top, and then click run.
+9:59
+Okay.
+9:59
+Do that now, please.
+10:02
+Okay.
+10:02
+Now we need to delete everybody in auth dot users because remember, we don't want anybody in auth dot users who's not in user profile.
+10:10
+So we need to sort of start again.
+10:13
+Okay?
+10:13
+So I'd like you to navigate to your authentication part.
+10:16
+That's the thumb up.
+10:18
+Click everybody you have in auth dot users.
+10:20
+You can either right click and delete, or you can click the little square and then click delete.
+10:26
+And once you've done that, I'd like you to test our application by signing up somebody as an admin.
+10:32
+I'm gonna sign up Pam as an admin and then Dwight again as a rep.
+10:37
+And I'm gonna check my auth dot users table to see that they're in there, and I can check the metadata by clicking on them and going into the raw JSON and looking for the metadata part.
+10:50
+And I'm gonna check my public dot user profiles table.
+10:54
+You can do this via the table editor.
+10:57
+Okay.
+10:57
+I'm gonna do that now.
+10:58
+So here we go.
+11:00
+So I'm gonna go for Pam.
+11:03
+She's gonna be an admin.
+11:05
+Great.
+11:05
+I can see a session created in the console.
+11:08
+And if I look in my super base project, I can see Pam in auth dot users and in user profiles.
+11:15
+And she has an account type of admin.
+11:17
+And I do the same for Dwight, and he's a sales rep.
+11:22
+And there we go.
+11:23
+Brilliant.
+11:24
+Now that reps and admins can sign up and their name and account type are being stored in our new user profiles table, it's time to update our sales deals table.
+11:33
+See you in the next screen.
