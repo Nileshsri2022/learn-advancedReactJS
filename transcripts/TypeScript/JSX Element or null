@@ -1,0 +1,49 @@
+Transcript
+0:00
+Hello again.
+0:01
+In this scrim, we're going to be looking at this confetti container component.
+0:05
+It's pretty simple and it does its one job very, very well.
+0:08
+It imports a confetti component from the react confetti n p m package and then it returns the component over here if the game has been won.
+0:17
+If not, it will return null instead.
+0:20
+So this is gonna be a very quick scrim, but here is a challenge for you.
+0:24
+Explicitly type the confetti container components return value.
+0:28
+Now if you need a reference, remember that you can hop back into the header component, but I am going to warn you that it's not as straightforward as the last one.
+0:36
+Be sure to carefully check what this function might return.
+0:39
+I'll see you in a bit.
+0:44
+Welcome back.
+0:44
+Now, of course, we will probably be returning this JSX element right here.
+0:49
+So let's import the JSX type from React.
+0:51
+With import, type JSX from React.
+0:55
+And just like the other component, we're gonna type this one to return a JSX dot element.
+1:01
+But if we stop here, we might run into some issues later.
+1:04
+Because of this if else statement, there is a chance that this component will return null rather than this JSX element.
+1:12
+So what do we do here?
+1:13
+Remember unions from the first section of this TypeScript course?
+1:16
+This is where we can use it.
+1:18
+This function will return either a JSX element or it will return a null.
+1:23
+And that will safely handle either case.
+1:26
+Now we can safely move on to typing this is game one prop, but in the next scrim.
+1:31
+I'll see you there.
