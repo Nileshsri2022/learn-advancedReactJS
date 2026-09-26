@@ -1,0 +1,33 @@
+Transcript
+0:00
+Now there's actually a major caveat to the way that we've been doing our query parameters so far, and let me show you what I mean.
+0:07
+So up here I'm going to create a new query parameter that has nothing to do with what we've been doing so far.
+0:12
+I'll say name equals Jill.
+0:14
+We'll hit enter question mark name equals Jill.
+0:17
+That has no impact on the filtering of this part of the app.
+0:20
+Well, and we know that it has no impact on any part of the app at this point.
+0:24
+But it's so common to have more than one query parameter, each one possibly having to do with a different part of your app or a different page in your app.
+0:32
+However, the way that we've structured this right now, because we're hard coding a question mark type equals Jedi or Sith, and over here we're hard coding this object that just has one key and value in it.
+0:42
+As soon as I click one of these buttons or these links I will lose the context of the query parameter name equals Jill.
+0:49
+So if I hit Sith, now it's changed the query parameter to type equal Sith because that's what we've hard coded.
+0:55
+And rest assured the exact same thing would have happened if I'd click the buttons instead.
+0:59
+And the clear buttons would do the exact same thing.
+1:01
+It clears out any search parameters that you might have, not just the ones that you care about in this specific component.
+1:07
+So if for some reason you know for a certainty that you will not have any other query parameters in your project, then the way that I've shown you here so far will work perfectly.
+1:16
+However, for the purposes of education and an exercise in completeness, I'm going to show you some methods that you might use in order to merge your query parameters with existing query parameters instead of completely replacing them.
+1:29
+So we'll do that in the next scrim.
