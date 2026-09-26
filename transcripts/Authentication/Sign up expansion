@@ -1,0 +1,116 @@
+
+Transcript
+0:00
+Okay.
+0:01
+We've set up the user profiles table and any appropriate RLS.
+0:05
+Now we are on to updating the sign up component and the sign up new user function.
+0:11
+I've been so bold as to add two radio buttons here for select your role.
+0:16
+Now remember I said we're gonna start with just admin and sales reps.
+0:20
+Now the word role here is job role.
+0:22
+Let's not get confused with the super base role of either admin or authenticated.
+0:27
+So the only place we're gonna use the word role is on the UI here.
+0:31
+If we scroll down to the field set, you can see that I'm actually calling this input the name of account type.
+0:40
+We're gonna reference that from now on as an account type.
+0:44
+We also need a name input.
+0:47
+So let me copy the email one here, change it to name.
+0:53
+This is gonna be name.
+0:55
+It's gonna have a type of text.
+0:57
+It's gonna be the name of name, ID of name, and then I think this can all stay the same.
+1:04
+Okay.
+1:05
+Let's save that, and we now see we've got a name field.
+1:08
+Great.
+1:09
+So challenge time.
+1:10
+I know it's been a while.
+1:11
+Quite a short one.
+1:13
+I'd like to extract the name and account type from the form into variables.
+1:17
+So we already have email and password.
+1:19
+You can continue below.
+1:21
+And then pass these extracted values as additional arguments to the sign up new user function just on here.
+1:28
+Alright.
+1:28
+Good luck.
+1:32
+I hope that went well.
+1:34
+So I'm gonna copy this line and just make two more.
+1:39
+And then we need a name variable, and we need a let's call it account type like that.
+1:47
+And then these are gonna have to change.
+1:49
+Obviously, name we called name.
+1:54
+And account type I mentioned is going to be account dash type.
+2:03
+There we go.
+2:04
+And then we just pass these values as additional arguments.
+2:09
+There we go.
+2:10
+Brilliant.
+2:11
+So we delete the challenge text.
+2:14
+So let's have a look at our sign up new user function in auth context.
+2:19
+Here it is.
+2:20
+We only currently have email and password, so let's change that now.
+2:24
+There we go.
+2:26
+So when we talked about our plan, we said we were gonna put the name and account type in user metadata as our sort of parcel, and then the trigger will populate user profiles.
+2:37
+So we now need to add name and account type into the user metadata part of the user's table.
+2:43
+Let me show you how we're gonna do that.
+2:45
+So we don't just pass it to dot sign up like this.
+2:49
+We add an options property.
+2:52
+This is an object which has a data property.
+2:57
+It's like inception.
+2:58
+And then whatever we want to add to the user metadata, we put in here.
+3:02
+So we want a name property with the name from up here, and we want an account type property, which is that account type from there, and it changes color.
+3:15
+There we go.
+3:16
+So this is how we add to the user metadata part of auth dot users.
+3:21
+Okay.
+3:22
+Another thing ticked off from our refactor to do list.
+3:25
+Next up, the trigger.
+3:27
+See you in the next scrim.
