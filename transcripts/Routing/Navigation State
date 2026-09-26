@@ -1,0 +1,130 @@
+
+Transcript
+0:00
+We want to make it so that if the user ever goes to the host route or rather attempts to go to the host route and is redirected to the login page, that we display some kind of helpful message up here that says you must log in first.
+0:12
+Again, we don't want that to be hard coded in our login page because it would be a little weird if they went to the login page and it said you must log in first.
+0:20
+You might remember a while back in this same course, we talked about something called link state where we were able to pass some information through a link to whatever route we were redirecting to.
+0:32
+And then we would grab the location object and grab the state from the link that was sent to that location object.
+0:38
+We were able to do that by adding a state prop to our link component, and this link component is the one that comes from React Router DOM.
+0:46
+If any of that is sounding a bit vague or you just want a quick refresher, you can click the screenshot here which will take you back to that lesson.
+0:53
+And actually the one directly after it in the playlist is the one that talks about how to receive that state in the component that we navigated to.
+1:00
+You might be able to see where I'm going with this.
+1:03
+We can do the exact same thing with the navigate component.
+1:06
+All we have to do is add a prop called state and we can pass in whatever state we want to the component that we are about to navigate to.
+1:14
+My state doesn't necessarily have to be an object.
+1:17
+I could pass a string if I really wanted to, but it's a little bit nicer to organize our code inside of an object.
+1:23
+Now of course because I'm inside of JSX, my first set of curly braces means I'm going to be interpreting some JavaScript and then my second set of curly braces is the actual JavaScript object.
+1:33
+And so maybe we'll include a property that's called message and let's just have it say you must log in first.
+1:40
+This is getting a little bit long so let's go ahead and put these things on their own lines.
+1:46
+Okay.
+1:46
+That's easy enough, but it is only one half of the equation.
+1:49
+Let's go over to our login page.
+1:51
+And just like we did when we were talking about link state, we're going to pull in the use location hook.
+1:57
+And then we can grab information about the location by saying console location equals use location.
+2:04
+And let's just go ahead and console log the location object.
+2:07
+Now notice that I'm here on the login page.
+2:10
+I'll open my console and I'll hit save.
+2:12
+Okay.
+2:13
+You'll notice that it says that the state is null.
+2:16
+Think for a second why is the state null?
+2:18
+I thought we just passed state to this component.
+2:24
+Now I might have given it away because I said we were already on the login page at the beginning but that's the reason.
+2:29
+We didn't navigate through the host component to the login component and therefore this navigate component here never got rendered and therefore no state was passed to our login page.
+2:40
+Now if I do try to go to host, we'll see that now having gone through this auth required route, we were then redirected to the login page again and now our state does have a message that says you must log in first okay let's go back to our login page and we'll have just a really quick challenge.
+2:59
+Okay.
+2:59
+If location dot state dot message exists, then display it above the h one right here.
+3:05
+Keep in mind that when there is no state here it is null and so trying to access dot message of null is going to give you some problems.
+3:12
+So that's just something to keep in mind while you're coding this up.
+3:15
+Pause now and work on this challenge.
+3:23
+Okay.
+3:23
+Well I can get rid of my console log up here and then we'll come down here and I'm going to just conditionally render.
+3:30
+I don't know, maybe we'll call it an h three.
+3:32
+So I'll put my h three up first and assuming it exists it will display location dot state dot message but we do need to make sure that that exists first so we don't get an error in our code And so I'm simply going to say location dot state and then I am going to use optional chaining.
+3:50
+I could say and location dot state dot message if I wanted to or I could just use optional chaining which would make this a bit simpler.
+4:01
+So we'll just use question mark dot.
+4:03
+Scrimba does complain about this but it'll work I promise.
+4:06
+I'll put these things on their own lines so that it doesn't take up too much space.
+4:11
+Oh and I need my ampersands here.
+4:13
+Okay let's go ahead and hit save.
+4:16
+And we do see now that it says you must log in first.
+4:19
+However, that again might seem weird because we just talked about how we were on the login route and it didn't give us any state, but and then we went through the host route and it did show a state.
+4:27
+So why is it that this time when I refresh it does show state?
+4:30
+Well, the truth is it's not as simple as just which direction we came from, but this location state that's happening under the hood is actually not something that is specific to React Router, but instead is something native to the web.
+4:43
+The web has a history stack which we're going to be talking about very soon and as a part of that there is the ability to pass state through your history.
+4:50
+And that state doesn't necessarily just go away with a simple refresh.
+4:54
+So if I do click on the login we'll see that it's not there, but I can go to host and it will be there.
+5:00
+Now this doesn't seem very urgent.
+5:01
+Let me go ahead and give this just a little bit of styling.
+5:05
+We'll give it a class name of login first and then I have a class that I've already created called login first, which just changes the color to red.
+5:13
+Okay.
+5:13
+Let's try again.
+5:14
+Hit refresh.
+5:15
+Okay.
+5:16
+That's a bit more urgent and apparent.
+5:18
+We'll clean up our challenge text.
+5:20
+Alright.
+5:20
+Awesome work.
+5:21
+Let's move on.
