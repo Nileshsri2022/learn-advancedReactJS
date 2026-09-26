@@ -1,0 +1,119 @@
+Transcript
+0:00
+One of the ways we're going to avoid this whole prop drilling problem is by using something called compound components.
+0:06
+And compound components are something that you should already be familiar with the idea of in HTML.
+0:12
+Some examples include a form and an input element.
+0:16
+Now you certainly can use an input outside of a form.
+0:20
+However, by putting an input inside of a form, it allows the form to maintain some state about the data that's being input into the form.
+0:28
+I found that there's a million different ways to get data from the inputs inside of a form, but if you have an input outside of a form, you kind of have to select it by its ID and then get the value individually for every input you have.
+0:41
+If you put those inputs inside of a form, there's a way for you to just select all of the elements of a form and then to get the values of each of your inputs.
+0:50
+I don't know that it's necessarily less code to write, but it feels a lot better when the form is maintaining state for you.
+0:56
+There's other examples too with a form.
+0:58
+For example, a button element.
+0:59
+If it's inside of a form, it automatically acts like a submit button inside of that form.
+1:05
+Hitting enter in the form will essentially click the button and submit the form.
+1:10
+It runs those events, the button click event and the form submit event.
+1:14
+Another familiar example is ordered or unordered lists and their list items.
+1:19
+In this case, you technically can put list items without being inside of an unordered or ordered list.
+1:24
+However, wrapping the list items with an unordered list or an ordered list provides some additional styling benefits.
+1:30
+In fact, we can very briefly go take a look at at that.
+1:33
+So let's say I'm just here.
+1:35
+I'll just kind of put this at the bottom of the body.
+1:37
+Um, let's actually add a couple breaks while we're there.
+1:40
+Now I can add some list items here and what these actually say don't really matter.
+1:47
+And if I hit save this is probably gonna be pretty ugly but and oh well that's a lot uglier than I thought.
+1:53
+Uh, my body has a display of flex meat.
+1:55
+Take that off for just a second.
+1:58
+And oh my menu is absolutely positioned.
+2:00
+Okay there we go.
+2:00
+There's my whatevers.
+2:02
+Now if I were to take my list items you can see they get bullet points just like we might expect.
+2:07
+But if I wrap them in an unordered list, this is gonna be kind of minor.
+2:12
+But you can see let's move this to the bottom, clean this up a little bit.
+2:17
+Okay.
+2:17
+Watch what happens when I hit save.
+2:19
+I'll hit save and get rid of my menu again.
+2:22
+And these have bumped over before they were aligned directly on the edge, but wrapping them in an unordered list has provided different styling, namely some kind of indentation or padding.
+2:33
+Let me actually go to my menu really quick and change this to false so that the menu doesn't keep opening every time I hit refresh.
+2:40
+And then perhaps even more obviously, if I change this to an ordered list then we get obviously some different styling.
+2:46
+We get numbers instead of bullets.
+2:48
+So you should be familiar with the concept of using kind of a parent component that provides additional styling to the child components.
+2:56
+And then the list kind of goes on.
+2:58
+A table is a really expansive example because table elements in the table ecosystem of HTML elements, there's a lot of different elements that all work together.
+3:07
+Table rows, table head, table body, table data.
+3:10
+And you as the developer are given the control to compose them together into a table that makes sense for what your needs are.
+3:17
+And there's a lot of these select and option is another one.
+3:19
+There's a whole bunch of others that are specific to HTML, but the point is you are already familiar with the idea of using multiple components together that you compose in order to either add additional styling or additional functionality or sometimes both.
+3:34
+So that brings us to compound components in React.
+3:37
+Some primary things to know about compound components is, first of all, that they will use children props.
+3:42
+Because we're rendering some components inside as children of other components, the parent components will use children props to render those other children components.
+3:52
+Because of this composition that we'll be using between multiple components, it allows us to give components a dedicated function or a dedicated styling that they get to focus on instead of, like we talked about with prop drilling, worrying about passing props along as well.
+4:07
+We'll also see how compound components allow the component structure to be more transparent.
+4:12
+There's some pros and cons to this which we'll get to later.
+4:15
+Ultimately, using these compound components is going to give more control to the user of the component, which in this case is you.
+4:23
+It's you the developer.
+4:24
+That's why user is in quotation marks.
+4:26
+Now this scrim has gotten a little bit longer than I think I would like.
+4:29
+So in the next scrim, we're going to jump into the syntax and we're going to see what this actually looks like in practice.
+4:36
+So if you need to, make sure you're taking breaks.
+4:38
+You're not just kind of plowing through the content of this course.
+4:41
+Grab some water, look at something far away, take a walk, whatever you need to do to get your wits about you as we are about to jump into the syntax for compound components.
+4:50
+And I'll see you in the next lesson.
