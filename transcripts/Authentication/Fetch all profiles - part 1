@@ -1,0 +1,179 @@
+Transcript
+0:00
+We're making great progress in our big refactor.
+0:04
+Now we're on to fetching all of the profiles from user profiles, this block here.
+0:09
+Why do we need all these profiles anyway?
+0:12
+Well, we're gonna be using it quite a lot.
+0:13
+We're gonna be using them to determine whether the user who's logged in is an admin or a rep.
+0:20
+Because remember, account type is in user profiles.
+0:23
+It's the only place we can tell whether the user is account type rep or account type admin.
+0:30
+So what we'll be able to do is we'll be able to get the ID from the session when they're logged in because, remember, session is created from the JWT, and that includes their database ID from auth dot users.
+0:45
+We'll be able to take that ID from session and reference it against the ID in user profiles, and we can check the account type associated with the ID from this table.
+0:56
+We also need the profiles to populate the drop down for admins and here for reps.
+1:03
+We're gonna be finding the name associated with the ID to set the name input, and then we also find the ID from these users before we insert the deal into sales deals.
+1:14
+Now we're gonna need these user profiles then in form because here, we're not gonna be mapping around the metrics anymore.
+1:21
+We're gonna be mapping around these profiles to get the names out to generate the options.
+1:27
+But I'm also keen actually in the header to not just render the email of the logged in user, but also their account type.
+1:36
+So we're gonna need this data in various places, so I think we need to fetch all of these profiles in our central auth context file.
+1:45
+Now if we need to fetch all of the profiles from here, do we have an RLS policy that allows that?
+1:51
+Oh, yes.
+1:51
+We already wrote it, didn't we?
+1:53
+It was our users can view all profiles.
+1:56
+Good work.
+1:58
+It looked like this.
+1:59
+It was quite broad.
+2:00
+It just said you have to be authenticated to be able to select all of the profiles from user profiles.
+2:06
+Okay.
+2:06
+So I'm gonna start by creating some more state to hold these profiles.
+2:12
+Let's call them users, and we want them in an array, so we'll initialize it as an empty array.
+2:18
+Now it's challenge time.
+2:20
+Okay?
+2:21
+So we're gonna be doing this in use effect.
+2:24
+So why don't I write the challenge text down here so that you can complete it underneath?
+2:31
+So I realize this looks quite long, but remember, we've got one of our lovely hints here.
+2:35
+Follow the same error handling pattern as the fetch metrics function.
+2:39
+So let's have a look at that.
+2:41
+Because we're selecting data here from sales deals, it's gonna be essentially very similar.
+2:47
+So you could copy and paste if you wanted, but this time, we're gonna be writing a fetch users function, which queries the user profiles table, getting the ID name and account type.
+2:58
+Now remember back in section one, we used the super base translator to write this bit.
+3:04
+But, actually, I don't think we need to do that now.
+3:07
+Because we're not doing any aggregates for this new function, all we're doing is selecting three columns.
+3:13
+So all you'll need to do is just write the select, and then here, put in inverted commas.
+3:20
+Remember, these funny backticks are just because we've got them on separate lines, but you'll just need regular inverted commas.
+3:26
+So a little help.
+3:27
+It'll just look like select, and then in commas, you can just write ID, name, and account type.
+3:34
+Okay.
+3:35
+You get the idea.
+3:37
+I'm so helpful, aren't I?
+3:38
+Then we destructed the response into data and error variables.
+3:41
+Yes.
+3:41
+We're used to that using the try catch syntax.
+3:44
+So try this.
+3:46
+If ever we throw the error, that's for success.
+3:50
+Catch any error and then console dot error.
+3:53
+If successful, log the fetch data to the console.
+3:56
+Okay.
+3:57
+So we can see that array eventually and update the user's state with this data.
+4:02
+Okay.
+4:02
+Using set users.
+4:04
+Call the new function below the function definition.
+4:07
+So you see here when we define this function, we had to call it below.
+4:11
+You're gonna do the same here below your new fetch users function.
+4:15
+Now a warning, when you save and test by logging in, currently, the console should show an empty array.
+4:22
+So I don't want you to think that you have done something wrong if it shows this.
+4:26
+This is what should display at the moment.
+4:28
+Okay?
+4:29
+As a bit of a stretch goal, I want you to think why this is.
+4:33
+Why are we not seeing an array of the data from user profiles?
+4:37
+Okay.
+4:38
+Good luck.
+4:38
+I'll see you in a minute.
+4:43
+Okay.
+4:44
+So I'm feeling a little lazy, so I'm just gonna copy this function here.
+4:49
+And ours is gonna be called fetch users.
+4:53
+It's not from sales deals this time.
+4:55
+It's from user profiles.
+4:58
+I'm actually going to put all of this on a new line and then one line here like this, and we're selecting, as I said, ID, name, and account type.
+5:14
+If ever thrower, that looks good.
+5:17
+We're not set metrics, are we?
+5:19
+We are going to set users with the data.
+5:23
+But before that, we want to console log the data.
+5:28
+There we go.
+5:28
+Set users, and then we're not fetching metrics.
+5:31
+We're now fetching users.
+5:35
+And then we need to call the new function below the function definition.
+5:42
+There we go.
+5:43
+Okay.
+5:43
+We can clean up this challenge text.
+5:47
+I'm gonna leave the warning there.
+5:49
+So because this scrim's getting quite long, I'm gonna move on to the next one.
+5:53
+I'll see you there where we can save and we can test and see what's going on and try and work out why this is happening.
+6:00
+See you then.
