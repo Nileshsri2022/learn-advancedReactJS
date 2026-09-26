@@ -1,0 +1,107 @@
+Transcript
+0:00
+Let's imagine a scenario where we need to pass our increment function down to the grandparent component so that the grandparent component can also control our count.
+0:09
+Let's walk through that, it should be pretty straightforward for us.
+0:12
+So here in the grandparent component, we will add a prop called increment, and we'll pass the increment function.
+0:18
+And then in the grandparent we will receive the increment function and let's just put a button maybe right here in line.
+0:27
+It's, uh, not gonna be very pretty but it'll get the job done.
+0:31
+Okay and then on click we will run increment.
+0:35
+Okay.
+0:36
+So let's hit save.
+0:37
+I think everything should just work fine.
+0:39
+Let's go ahead and hit the plus.
+0:42
+Oh, no.
+0:42
+It is very laggy again.
+0:44
+Even this one up here is also very laggy.
+0:47
+We're still using React dot memo for the grandparent, and the increment function isn't changing.
+0:52
+Right?
+0:52
+We're not making any changes to the body of the increment function.
+0:55
+Well, I want you to pause here and see if you can figure out why it is that we're laggy again.
+1:00
+So go ahead pause now and try to think through that.
+1:07
+Just like before, although we weren't making a change to this style object, the reference to that style object was changing.
+1:15
+It was getting recreated on every render.
+1:17
+And the exact same thing is happening to our increment function.
+1:21
+Right here as a part of the body of our app component, we are creating this function, and therefore its reference is changing between renders and React dot memo thinks it's receiving a new prop and therefore it is re rendering all of the descendant components of our grandparent component, which as we have seen are artificially slowed down.
+1:40
+Well, this is where the use callback hook comes into play.
+1:43
+Just like that second reason that we saw for using React dot use memo let's see.
+1:48
+Where is it?
+1:49
+Right here.
+1:50
+To maintain referential equality of a complex data type like an object or an array, we're going to use useCallback for the exact same reason.
+1:58
+Use callback allows us to maintain a reference to a function that we create between renders.
+2:04
+And by maintaining that reference we will be able to avoid any re renders when we want to avoid re renders with react dot memo.
+2:11
+And another thing it would allow us to do is avoid too many use effect calls.
+2:16
+Remember, useEffect uses a dependency array and it looks in that dependency array for anything that changes from one render to the next.
+2:23
+And if something does change, it calls that useEffect function again, well if one of the dependencies is only changing because the reference is changing, the useEffect is going to be called again even though it probably shouldn't be.
+2:35
+The syntax for this should be remarkably familiar.
+2:38
+We're going to create a new variable called increment, and we'll set that equal to what gets returned from use callback.
+2:47
+Just like use memo and use effect, use callback takes two parameters, a function and an array of dependencies.
+2:54
+Inside the function, we're just going to perform the operations that we want to have happen when this function gets called, this increment function.
+3:03
+And technically our increment function is depending upon set count to do its job and to be unchanging, so we are going to put set count here as one of our dependencies.
+3:13
+But because set count is coming from a React dot use state setter function, it's, uh, this one up here, it's not going to change its reference or its functionality or anything like that.
+3:23
+So putting it here is for completeness, but it won't really make that big of a difference.
+3:28
+Okay.
+3:28
+So essentially we've memoized this function by using the use callback hook, and I think everything else should just kind of work out.
+3:36
+Let's go ahead and hit save.
+3:39
+And we'll know that this worked if we get the fast renders again with our plus and minus buttons.
+3:44
+And sure enough, from both of these, we are avoiding any additional re renders, and we can see that from the console.
+3:50
+Well, I can see it when I scroll down that we are just getting this top line.
+3:54
+Let me just paste it right here.
+3:56
+This top line is the only thing that's being rerendered because our React dot memo in our grandparent is doing its job now.
+4:03
+The reference of increment from one render to the next is now maintained as the same function and therefore React dot memo knows that nothing else is changing.
+4:12
+So as you can see, React dot use memo and React dot use callback are remarkably similar to each other.
+4:18
+The main difference being that with react dot use callback, the function we pass it will be the value that we are maintaining a reference to from one render to the next.
+4:27
+And in react dot use memo, the value that we return from this function is the value that will be maintained from one render to the next.
+4:36
+Okay.
+4:36
+Let's take what we've learned about use callback and apply it to our other product app.
