@@ -1,0 +1,152 @@
+
+Transcript
+0:01
+Whenever there are any modifications to our database table, for instance, something's inserted, changed, or deleted, we want those to be immediately reflected in our bar chart.
+0:11
+We can imagine that a different sales rep adds a deal.
+0:14
+We want to see our chart change immediately.
+0:18
+That's where Superbase's real time subscription comes into play.
+0:22
+Superbase refers to these updates as events, and we want to subscribe to these changes.
+0:28
+Just like in the olden days, when you subscribe to a magazine, as soon as a new edition came out, it would be sent to your address.
+0:35
+Or these days, if you subscribe to a podcast, as soon as a new episode comes out, it is sent to your podcast provider.
+0:42
+This provides a seamless way to keep your application synchronized with your database.
+0:48
+One of the three core extensions of Superbase Realtime is Postgres changes.
+0:53
+And funnily enough, that's the one we're gonna be using in this course.
+0:57
+It listens for database changes and sends them to the client.
+1:00
+So the different events we can listen out for are insert, update, delete, or star, which they use for all three of those.
+1:09
+We can receive event information, so exactly what's changed, and we can trigger actions at this time.
+1:15
+Since we want to start the subscription only once on initial render, let's think about where we need to write this setup code.
+1:22
+What else is already happening only after initial render?
+1:26
+Well, I don't think we want it in the main body of this component, but we do have this use effect.
+1:32
+Now if we remember when we set up the fetch metrics, we only wanted that to happen on initial render.
+1:38
+So I think that's gonna be a good place for us to write this code.
+1:42
+Remember, with the empty dependencies array, this means that this will only happen once after initial render and not on every render.
+1:49
+If it did happen on every render, then we'd be setting up duplicate subscriptions, which would be bad.
+1:55
+Now we want to make sure that we fetch all of the data before we set up our subscription, so we're going to want to code after this fetch metrics function call.
+2:04
+Setting up a subscription is an operation that reaches outside the React rendering cycle to interact with an external system, I e Superbase.
+2:13
+So it's a side effect that should happen after the component renders.
+2:17
+And useEffect is designed to handle side effects, so this is the perfect place.
+2:21
+Okay.
+2:22
+Challenge time.
+2:22
+I've copied the challenge text here and some boilerplate code here that you're going to complete.
+2:29
+So here is the super base client instance, and then we're using dot channel.
+2:34
+This is where we can choose a channel name, and I've asked you to call it deal dash changes.
+2:38
+Then we've got a dot on, and here's that Postgres changes I mentioned earlier.
+2:43
+Then we have an object with event schema and table.
+2:45
+So you need to think about what to put in events since we're going to listen for all types of events.
+2:50
+Then the schema here and the table name here.
+2:54
+Then they give us a payload object, so here is where we'd write any action we want.
+2:58
+And I've asked you to log the new property of this payload object to the console.
+3:03
+We're gonna talk later about what this cleanup subscription here is.
+3:07
+Before I set you off on this challenge, one more thing.
+3:10
+When we created this table, we actually enabled real time, if you remember.
+3:15
+It said broadcast changes on this table to authorized subscribers.
+3:19
+We have it all set up, but in case you missed that or if you just want to know how to do it in the settings anyway, you would need to select the database icon on the far left, which is the fourth one down, and then click publications.
+3:33
+We can see Superbase Realtime here in the middle, and you've got the different vents insert, update, delete.
+3:40
+And if you click the source, the one table there, that's because I have enabled it on our sales underscore deals table.
+3:47
+Okay.
+3:48
+So once you've saved it, then navigate to your Superbase table editor and insert a row and check the console.
+3:54
+Good luck.
+3:58
+I hope that went well.
+4:00
+So we are going to call the new channel yield changes.
+4:04
+We are going to listen out for all events, so that's the star.
+4:07
+Schema is the public schema.
+4:10
+You will have seen that in your table editor, and we know the table is sales underscore deals.
+4:18
+Now to log the new property, we're going to do console dot log payload dot new.
+4:25
+Then I'm gonna save.
+4:31
+And I checked the console, and here is that payload dot new.
+4:35
+So that's actually another object, and we've got our four columns here.
+4:41
+So I went for Dwight and a deal with two thousand value.
+4:46
+We could destructure this if we wanted to use this.
+4:50
+We could call the new property new record, and then there's also an event type property of the payload, which might be useful.
+5:02
+And then we could even destructure it again and create name and value variable from that new record.
+5:11
+So it's quite common to see things like this.
+5:13
+We can do an if event type is equal to insert and then do something with that, especially if you wanted to do something different depending on the event.
+5:26
+A quick note on the old record, if you were listening out for an update or a delete, by default, it's only the new record changes that are sent.
+5:34
+But if you did want the old one, you can run some code in Superbase to enable that.
+5:39
+So if you're interested in that, do have a Google.
+5:42
+But we're actually not gonna do any of this.
+5:44
+We are just going to re fetch all of the data with our fetch metrics function.
+5:51
+Now if you had a really large dataset, this would not be very performant because any tiny change in your database, you'd have to re fetch everything.
+6:00
+But since we're using such a small dataset, I think it's okay for our project.
+6:04
+Now a quick word on this cleanup function here.
+6:07
+So this cleanup code runs when the component unmounts.
+6:11
+Real time subscriptions establish persistent connections that need to be properly set up when a component mounts and cleaned up when it unmounts.
+6:20
+The return function in this useEffect hook runs when the component unmounts, which is the perfect place to unsubscribe and prevent memory leaks.
+6:29
+And once again, the empty dependencies array means this cleanup only happens when the component unmounts, not on rerenders.
+6:37
+And here we've got the super base client instance and then a dot remove channel, and then we pass in the channel that we created here.
+6:47
+Alright.
+6:47
+See you in the next scrim.
