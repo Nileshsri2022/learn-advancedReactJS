@@ -1,0 +1,176 @@
+
+Transcript
+0:00
+Now we move on to adding an account type for each user.
+0:04
+To start with, let's only sign up sales reps, those making the deals, and admins.
+0:11
+Eventually, we are going to limit reps to only be able to add deals for themselves, whereas admins can add them for any other reps.
+0:21
+Before we implement users being able to sign up and include either an admin or rep account type, let's talk through an action plan.
+0:30
+When we sign up a new user, we need to store which account type they are somewhere.
+0:36
+We can include extra data on sign up in a part of the auth dot users table called user metadata.
+0:43
+Let me show you.
+0:45
+If you could navigate to your authentication page so if you go to your project dashboard here, it's remember the fifth icon, the thumb up on the left.
+0:56
+Authentication looks like this.
+0:57
+We immediately get taken to the auth dot users table.
+1:01
+And then I'd like you to click on one of your users, and then you see some of the data from the columns here.
+1:08
+But I'd like us to go for raw JSON.
+1:11
+In the Superbase web UI, when you look at the auth dot users table, you typically see a set of standard columns.
+1:19
+Some columns, especially those with complex or JSON data types, are not shown by default.
+1:24
+That's why we need to go into this inner menu.
+1:28
+Then we have that unique UID here that's also shown over here.
+1:33
+We have the role, you see, because they are a signed up member.
+1:36
+They're authenticated.
+1:38
+The email they use to sign up with.
+1:40
+If you scroll down, you should see a part called raw user metadata.
+1:44
+It's already got their email.
+1:45
+This is just an example I made.
+1:47
+I know it doesn't correspond to Dwight, but this is just an example.
+1:50
+Okay?
+1:51
+Now this is where we can actually store more extra fields, such as potentially account type.
+1:58
+The sub here is subject.
+2:00
+It's actually just the same user UID that we saw earlier.
+2:04
+I know it's not the same because this is just a different example, but they would be all the same for the, uh, the same user.
+2:10
+Okay?
+2:11
+When the JWT is created, this data is included in the user metadata claim of the JWT.
+2:18
+Remember, the claims are in the middle payload part.
+2:21
+So we can actually base RLS on it.
+2:24
+Let me give you an example of a potential policy that uses this user metadata part of the claim.
+2:30
+We're using another one of those super base helper functions here.
+2:34
+Earlier, we saw auth dot UID, and we saw auth dot role.
+2:39
+But here is auth dot JWT, so this returns the whole JWT.
+2:44
+And then we use this single arrow to access JSON, which this user metadata part is in.
+2:50
+And then the double arrows means that we're looking for the string value from the account type property.
+2:58
+So it's saying the string value of the account type property needs to equal the string admin.
+3:04
+So this is a little example policy.
+3:05
+I've called it only admins can delete deals.
+3:08
+So I've made it only authenticated users, and I've said the person making the request, because it will be from their JWT that they send with that letter, the user metadata part of the JSON part, the string value of the account type property has to equal admin, basically meaning the user is an admin.
+3:30
+So this would be if we've added this account type part into the user metadata claim of the JWT, we could base an RLS policy on it like this.
+3:41
+But the raw user metadata can be updated by an authenticated user using another of the super base functions.
+3:50
+It's actually called auth dot update.
+3:53
+This would mean there could be a malicious attempt to self upgrade.
+3:58
+So somebody could sign up as one account type, and then they could use this author update function to upgrade to an account type that has more privileges.
+4:08
+So this user metadata is not a good place to store authentication data like account type if we plan to base RLS policies on it.
+4:18
+Remember, we can base RLS policies on it because it's included in the JWT with each request.
+4:24
+Now in our app example, I do realize it's a little strange to be hung up about this since we're gonna be letting the user on sign up choose which account type they are.
+4:33
+In a real company, you can imagine that a new employee wouldn't be able to choose this on sign up.
+4:39
+Somebody, say, in tech support would create an account for them with their correct account type association.
+4:46
+So our first problem now is where are we gonna store the account type since it's not secure to store it in our user metadata part of the JWT if we plan to base RLS policies on it.
+4:58
+On to problem two.
+5:00
+So we want to limit reps to only adding deals for themselves.
+5:06
+You can imagine why we might wanna do this.
+5:08
+We're gonna go about this in two ways.
+5:11
+The first way is the UX.
+5:13
+So our new deal, add a deal form, we can make that name field be their name, not a drop down like we have currently.
+5:22
+We could also make it read only so they can't change it, so they're forced to only be able to add a deal for themselves.
+5:29
+We can also limit it using RLS, our sort of last line of defense.
+5:34
+We can say the name in the inserted deal row has to match.
+5:41
+Here's our problem.
+5:44
+So this is what it would look like.
+5:45
+The RLS bouncer can be told only allow authenticated reps to insert their rows, so rows with their own name, into sales deals table.
+5:56
+Now the problem here is we where do we have name of the user?
+6:02
+We don't have name in our auth dot users table.
+6:05
+The only place name is really is on the JWT in the start of the email, but we don't really want to be writing a policy that checks the start of somebody's email.
+6:20
+RLS, remember, can only check the JWT info about potentially what is being inserted if it's an insert request, and it can reference data in the database.
+6:30
+So where is name?
+6:32
+So we hit a bit of a wall thanks to the way we have our sales deals table currently set up.
+6:37
+Right now, it looks like this, doesn't it?
+6:39
+The way we know the owner of each deal row is using this name column.
+6:44
+So a potential RLS policy would say, allow insert if the name column of the inserted row is the same as again, we struggle.
+6:55
+What in the JWT?
+6:57
+I guess we could add a name part to that user metadata claim on sign up.
+7:02
+Oh, but we said it's not secure to base RLS policies on that because it can be self upgraded.
+7:08
+And as we've said, we don't really wanna base it on the beginning of the email before the at symbol.
+7:13
+You see we have now a second problem.
+7:16
+So these are our two problems.
+7:17
+Where are we gonna store the account type on sign up of each user since it's not secure to store it in the JWT's user metadata if we're gonna base RLS policies on it?
+7:29
+And then this sales deals table row ownership issue.
+7:32
+Currently, we take the ownership of each row thanks to the name column.
+7:36
+But what are we gonna reference that name to to check that reps can only add rows of their own name.
+7:45
+Luckily, with some refactoring, we can solve both of these in a secure way.
+7:50
+In the next scrim, you're gonna find out how.
+7:53
+See you then.
