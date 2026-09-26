@@ -1,0 +1,46 @@
+
+Transcript
+0:00
+The concept that we're about to learn in React is called children, but the fact is children have existed in HTML since the beginning of time.
+0:08
+That might sound a little funny because it's talking about children, but the concept is that any element might have something that it wraps around and the things that it wraps around are the children.
+0:18
+In fact, right here we can see my main element is wrapping around this button component.
+0:24
+That makes this button component a child of the main element.
+0:27
+Over in our button component we can see that we have this button tag opening and closing and it wraps around just some bare text.
+0:34
+In HTML this text would be considered a text node, but still the button here is a parent of the child's text node.
+0:42
+Now there's even elements in HTML that essentially rely on having a parent child relationship.
+0:48
+The common one that comes to mind is the idea of a select box.
+0:52
+So I can have my select opening and closing, but inside the select box itself won't make sense really.
+0:59
+I mean I can refresh this and I just get this funny looking arrow unless I add a bunch of option elements.
+1:05
+And the options are what will make this select box meaningful.
+1:10
+So say thing one, two, and three.
+1:13
+And now when I click on the drop down, you won't see this in the recording, but you could pause and click it.
+1:18
+It's essentially just a select box that has the different options that I've specified.
+1:23
+This is a similar relationship if I have an ordered list or an unordered list, and then inside I'm expected to put list items.
+1:31
+L I elements list item elements don't really make sense outside of the context of an ordered list or unordered list, at least as far as I know, and so there's a tight coupling between the parent and the child relationship here.
+1:44
+So long story short, in some instances a parent child can just be like this list item with a text note inside, or it could be a little more complex where the parent and the child kind of work together to create what you end up seeing on the page.
+1:57
+Of course this is all messed up because I messed it up.
+1:59
+Let me get rid of this.
+2:00
+But I think you get the idea.
+2:01
+There's also other examples in HTML but we don't have to dive into those right now.
+2:05
+Okay that's the stage that I want to set for us to then jump into how we can deal with children and the concept of children in React.
