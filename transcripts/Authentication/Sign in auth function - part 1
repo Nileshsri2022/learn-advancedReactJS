@@ -1,0 +1,272 @@
+
+Transcript
+0:00
+Now that use action state in sign in is almost complete, we need to write this sign in function.
+0:06
+Because we decided this is the response we want back, let's copy that over to auth context.
+0:12
+So sign in, and let's just put this here as a reminder.
+0:18
+So, currently, we're passing session through our app via context, but we are gonna be passing all of our auth functions through context so that we can access this sign in function we're about to write here.
+0:33
+So my plan is to write it all out for you, and then in the next screen, I'm gonna delete the super base client method part of it and get you to do it again so you get some time with your fingers on the keyboard.
+0:45
+So we're gonna call this function sign in user.
+0:49
+Very original.
+0:51
+And it's async, and we'll be getting the email and password from the sign in component.
+0:57
+Now let's do a try catch block again.
+1:00
+We're getting quite good at these.
+1:02
+There we go.
+1:03
+And let's put some comments in as we're getting accustomed to handle super base error explicitly, then success.
+1:14
+And then in here, we're gonna be handling unexpected error.
+1:19
+Alright.
+1:21
+So we're getting pretty used to this now.
+1:23
+We say await, and we use the Superbase client word.
+1:27
+And similarly to up here where we use dot auth dot something, we're gonna do the same thing.
+1:33
+Dot auth dot.
+1:35
+Now there's lots of ways that Superbase lets people log in through OAuth, SSO, with a magic link or one time password.
+1:43
+We're gonna go for the trusty password.
+1:47
+So the method is sign in with password, and we pass to it an object with email and password properties.
+1:59
+Now the email we're getting from here, but in case the user has added any uppercase letters in their email, we want it to be consistent in our database table.
+2:08
+So we're gonna use our dot to lowercase.
+2:13
+There we go.
+2:14
+And the password is gonna be just the password.
+2:17
+There we go.
+2:18
+Okay.
+2:18
+That's the part you're gonna be doing yourself.
+2:20
+So have a good look at that.
+2:22
+Now super base errors.
+2:24
+You know what?
+2:24
+I've totally forgotten to destructure any response.
+2:27
+So let's do that now.
+2:29
+And we're used to getting data and error back, aren't we?
+2:33
+The responses back from super base are always very consistent.
+2:36
+That's one good thing about superbase.
+2:39
+So the superbase error is this error here.
+2:43
+So we can say if there's an error at this point, we're gonna return and we know the format.
+2:51
+Success is obviously gonna be false.
+2:53
+And the reason I'm doing an object is because remember, we destructured this from an object.
+2:59
+So let's make sure this is spelled correctly.
+3:03
+And then the error part of it will be the error here, which is from superbase, and we want the error dot message to be nice and explicit.
+3:12
+And then we probably also want a console dot error.
+3:17
+Let me check.
+3:17
+Did we do one here for superbase error?
+3:20
+No.
+3:21
+Great.
+3:21
+So let's do one here.
+3:23
+Super base sign in error.
+3:27
+Okay.
+3:27
+Very nice.
+3:28
+Next, onto success.
+3:30
+So if it's successful, we want to return.
+3:33
+Can you guess?
+3:35
+Well, the success property of the object is obviously gonna be true, and we don't need to bother with an error part, but the data is important.
+3:45
+So let's put data.
+3:46
+We don't need to put data is data.
+3:47
+We can just purely put data like that.
+3:50
+And why didn't we put a console dot login so that we know if it's successful?
+3:56
+Superbase sign in success.
+4:00
+And let's get the data so we can see it.
+4:03
+I have already told you that it should be in this format, shouldn't I?
+4:08
+But we can prove that in a minute.
+4:09
+Okay.
+4:10
+Success done.
+4:11
+Super base error is done.
+4:13
+Now just the unexpected errors down here.
+4:15
+So we want to return well, very similar to this actually.
+4:20
+We can probably just copy this, and let's have a look at what we did here.
+4:25
+So we did console dot error here.
+4:27
+I think we need consistency.
+4:28
+You know?
+4:29
+So let's remove it from here, and then let's put a console here.
+4:34
+And let's be a little bit more explicit here.
+4:37
+Unexpected error during sign in.
+4:42
+And the error here can be an unexpected error occurred.
+4:49
+Please try again.
+4:52
+Oh, error disappeared.
+4:54
+There we go.
+4:56
+Now I'm thinking we may have some redundant handling here.
+5:01
+Yes.
+5:03
+So because the unexpected error is already being caught in auth context, I don't think we actually need a try catch in sign in.
+5:11
+Nope.
+5:12
+I've changed my mind.
+5:14
+It's a bit redundant, so I'm just gonna get rid of that quickly.
+5:19
+There we go.
+5:21
+That's better.
+5:22
+We're doing all our consoles logging in errors here.
+5:25
+Unexpected error is being dealt with here, and we're returning this message, which we will then catch here.
+5:33
+Okay.
+5:34
+Brilliant.
+5:35
+So let's test this, and then it'll be your turn.
+5:38
+So I mentioned that we need to now pass this new function to the value object here so that we can access it through context.
+5:46
+Save this.
+5:47
+We hop back over here, and we need to now import our custom hook.
+5:52
+There we go.
+5:53
+And we're gonna go back one level into the context folder, and it's called auth context.
+6:02
+There we have it.
+6:04
+And then right at the top of our component, we're gonna destructure from the object, and it's our new sign in user function.
+6:16
+There we go.
+6:17
+Now sign in user is available.
+6:18
+So we just need to pop it there.
+6:21
+Get rid of this comment.
+6:24
+Brilliant.
+6:25
+Let me save.
+6:27
+Great.
+6:28
+So let's test this.
+6:29
+My email and password is gonna be extracted.
+6:31
+It's gonna be passed to the sign in user function.
+6:34
+The response we get back from that is here.
+6:37
+And the way we're gonna tell whether we're successful is we've got this console log Superbase sign in success.
+6:44
+We'll hopefully see later.
+6:45
+And, of course, when we sign in, we know that the JWT will be sent from Superbase, and the client will take it and create that session object, which our lovely on all state change will see.
+6:58
+Remember, it's that CCTV or radar.
+7:01
+It'll see that and then return the session, and we'll set our session.
+7:07
+Cross fingers.
+7:11
+Bingo.
+7:12
+So there's no error.
+7:13
+Let me just minimize this a bit.
+7:15
+Let's open up our console.
+7:18
+Yes.
+7:18
+We see session changed.
+7:19
+That's from on all state change, and we see super base sign in success.
+7:25
+And it's the way I mentioned it.
+7:26
+It's an object with a user property and a session property.
+7:31
+And look.
+7:31
+The user property has got that unique ID, the UID that we saw Dwight being given in the auth dot users table.
+7:38
+It's got the role of authenticated.
+7:40
+That shows that the user is logged in, and it's got the email they used to log in.
+7:45
+The Scribble console doesn't actually show us everything.
+7:48
+So in the next screen, when you test it after you've completed the challenge, why don't you look in your dev tools, and you'll see the whole session there.
+7:55
+Great.
+7:56
+So this is working.
+7:57
+In the next scrim, it's gonna be your turn to recreate this and show off your skills.
+8:02
+See you then.
