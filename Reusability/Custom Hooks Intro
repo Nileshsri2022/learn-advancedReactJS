@@ -1,0 +1,32 @@
+
+Transcript
+0:00
+By this point, you should be really familiar with a number of the hooks that React has to offer, but one of the really cool things that we can do is compose those hooks together into our own custom hooks.
+0:11
+And using custom hooks allows us to really step up our game when it comes to creating reusable code in React.
+0:18
+As a reminder, hooks are what allow us to hook into the rendering cycles of React so that we can do some pretty useful things.
+0:26
+As you should be familiar, use state, for example, allows us to maintain some kind of value in a variable across render cycles, and changing the state will trigger re renders.
+0:37
+This is particularly useful when we have some kind of data that needs to be displayed on the screen, but is also changeable.
+0:44
+So if that data changes, then react will automatically trigger its re rendering process so that it can, you could say, paint that new information onto the page that you see.
+0:54
+And As we learned recently, use ref allows you to maintain values across render cycles without causing re renders.
+1:01
+There's also of course other hooks that you've learned about like use effect and a number of other ones that we haven't yet touched on.
+1:07
+So in React we have the built in hooks like use state, use effect, use ref, and so forth.
+1:12
+But we also can create any custom hooks that we want, and this allows us to take those built in hooks and create our own custom reusable pieces of logic.
+1:21
+You probably are already familiar with the concept of taking logic from one part of code and moving it into some kind of utility function that you can then call anytime you need it.
+1:32
+Well, custom hooks are pretty much identical to regular functions, utility functions you might call them, but they specifically use hooks to access the render cycles of react.
+1:42
+So we're going to start out simple.
+1:43
+We're going to take some logic that we already wrote and we're going to move it into a custom hook that we will choose to call use effect on update.
+1:51
+So that's what we'll tackle on the next scrim.
