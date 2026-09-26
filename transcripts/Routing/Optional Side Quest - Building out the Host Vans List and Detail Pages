@@ -1,0 +1,58 @@
+
+Transcript
+0:00
+Because we need a way to get from our van list page, or rather our host van list page, to the host van detail page, we do need to build out this page here.
+0:10
+However, that doesn't have a whole lot to do with React router, so I'm making it an optional challenge for anyone who wants to really flex their react skills and exercise what they've learned in react in general to build out this page.
+0:24
+To make that a little more possible, I've added some endpoints to our server, the slash host slash vans endpoint specifically, that will return only the vans that are owned by the specific host that we're pretending to be logged in as.
+0:37
+You can see that it's searching all the vans where the host ID property is equal to one two three.
+0:43
+That's not something that used to exist, but up here I've added a host ID to a number of these vans, Some of them including one two three.
+0:51
+I think three of them have the host ID of one two three and the others have just random other host IDs that are not owned by the currently logged in host air quotes around currently logged in.
+1:02
+Remember all of these requests are implied to start with slash API, so when you make the fetch request, you'll make it to slash API slash host slash vans.
+1:11
+What actually gets displayed will be here in the host vans list page.
+1:15
+Again, this is an optional challenge.
+1:17
+I'm not going to be walking through the actual creation of this because it's a fair amount of work, but this is the time to pause if you do want to work on that optional challenge.
+1:30
+If you know anything about me, you know I don't do this very often, making these challenges optional, so I'll nudge you once again.
+1:36
+If you are feeling a bit shaky on your react skills, then once again I really implore you to go back and to do this optional challenge.
+1:43
+But otherwise I'm just going to pull out my magic wand, snap my fingers, and just like that we have our Vans list page built.
+1:51
+As I mentioned there were three that had the ID of this particular host or the host ID of one two three and that is these three VANs that you see here.
+1:59
+We have not yet built out the detail page.
+2:01
+We're going to work on that next.
+2:03
+If you click it, it does take us successfully to the host VAN detail page, but of course there's nothing specific to this one VAN here.
+2:10
+A few key things to note is that when we're mapping over our list of vans we're creating a link to the host vans slash colon ID and we make sure to dynamically fill in the ID of the currently looping over van or the van that we're currently looping over.
+2:26
+In our useEffect you're seeing that we are creating our fetch request to slash API slash host slash vans.
+2:32
+We're setting that into the van state.
+2:35
+And because we're initializing our state with an empty array, we're checking if the van's length is greater than zero, and if it is then we're displaying the van elements that we created above.
+2:46
+But otherwise we're just creating this loading element here.
+2:49
+Now that I look at this, this isn't going to be a problem, but there could be a little bug where if the currently logged in host has no VANs it's just going to say loading forever.
+2:58
+So I've used kind of a cheaters method here of getting whether or not it's loading.
+3:02
+Usually we would look for some kind of loading state, but that's a topic for a completely different lesson.
+3:07
+Okay.
+3:08
+If you did this challenge, hopefully it wasn't too hard.
+3:10
+If you didn't do this challenge, I know for a fact that it wasn't too hard for you.
