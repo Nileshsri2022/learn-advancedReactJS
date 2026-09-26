@@ -1,0 +1,134 @@
+
+Transcript
+0:00
+Let's see if we can fix this conflict that we have with the size property and the class name property where only one of them is really getting applied.
+0:08
+If we look a little bit deeper we can see that we're providing the size and the class name, but in the code of the button we're using the size property to determine a class and then we're setting the class name equal to that class.
+0:21
+However, as a part of the rest of the parameters here, we're also accepting another class name prop, which is what is being provided right here with the class name of green.
+0:31
+And so when we apply all of the rest of the props to our button element, class name here is getting overwritten by the class name that's a part of the rest parameters.
+0:42
+In fact, we can see that this is happening because right now class name of green is getting applied, but our class name of large is not.
+0:50
+And if I move all of my rest parameters to the beginning, now we have a large button but not a green button.
+0:57
+Let me undo that real quick.
+0:59
+Now when I was preparing for this I came up with two different solutions on how to fix this.
+1:03
+One is sort of a quick and dirty way, and one is a little bit more of a professional solution.
+1:08
+But I think it might be a good idea just to get your brain working and your hands on the keyboard, as I always say, to turn this into a little bit of a challenge.
+1:14
+So let me type that out.
+1:17
+Okay.
+1:17
+Let's see if you're able to fix the problem with our conflicting class name props.
+1:21
+It doesn't need to be elegant or beautiful.
+1:23
+It just needs to essentially solve our problem and you'll know that you have fixed it when we have both a large button and a button with green text at the same time.
+1:31
+Unlike some of the other challenges, I don't want you to necessarily spin your wheels for a really long time on this one.
+1:37
+Just see if you can come up with a solution that works, and then as always we're gonna be going through it together.
+1:42
+So pause now and see if you can fix our class name issue.
+1:50
+Well the first solution that came to my mind is that instead of assuming we have the class name in the rest parameters here, to actually name it as we pull it in.
+1:59
+So destructure it as part of our props, take our class name, and then essentially combine what we determined our size class is going to be with our class name.
+2:09
+Now I could just do some regular JavaScript because we're inside of a regular JavaScript expression with these curly braces.
+2:15
+So I can do something like this.
+2:17
+I can say the size class plus a space plus the class name.
+2:21
+Let's hit save and awesome we have a large button with green text.
+2:25
+That's how we know that we did it right.
+2:26
+If you'd like to modernize this a little bit you can surround this with template strings like this.
+2:31
+We'll get rid of our string concatenation and then we would just surround each one of these with these curly braces with the dollar sign, and this should do exactly the same thing.
+2:41
+Awesome.
+2:42
+Well it turns out this isn't a terribly uncommon case to need to combine multiple class names, and so the slightly more professional solution that I found has to do with using a third party package.
+2:52
+There's two that are really popular.
+2:54
+One is just called class names and another is called CLSX.
+2:58
+They're both very popular, though either one would be completely fine to use.
+3:01
+I'm just going to randomly choose class names and simply enough all we have to do is import class names from class names.
+3:10
+This gives us a function that we can pass multiple class names to and it will return basically a concatenated string with all of those class names included.
+3:19
+It can get a lot more complex and use objects and do all kinds of cool things, but for us we just have some strings that we need to concatenate and that's going to work fine for us.
+3:27
+In fact this might be a little overkill for what we're doing, but sometimes it's fun to over engineer something.
+3:32
+Let me clean up the text of our challenge here.
+3:35
+And right below determining our size class, let's go ahead and maybe we'll create something called all classes or combined classes, let's call it all classes.
+3:45
+We'll say this is going to equal a call to the function class names, and then we'll just pass our two arguments.
+3:51
+One is the size class that we determined above, and the next is whatever class names the person that's using our button decides to add.
+4:00
+Let's go ahead and console log all classes just to see what that looks like.
+4:05
+We'll hit refresh, button large and space and green.
+4:09
+Okay so that combined both of them.
+4:11
+And then the last thing I need to do is just replace this class name stuff here with all classes, and I need my curly braces.
+4:19
+Okay awesome we're back to working, large button with green text.
+4:23
+Now there's a few ways that we might be able to improve this to sort of break down some of the boilerplate code.
+4:29
+First of all, right now we're making a distinction between our size, which is something like l g, and the classes, which are things like button dash l a r g e.
+4:39
+One way we could simplify this quite a bit is if we're willing to change our styling we can come in here and make these equivalent or the size portion of these classes equivalent to what we're accepting as part of the size prop.
+4:53
+So in our button instead of necessarily doing some conditional checking to see what size we're coming in, I could simplify this a little bit and say we'll let the size class equal and then we'll check if size is an actual prop that they're providing.
+5:07
+So I'll use a ternary and I'll say if there is a size then we'll set the size class equal to button dash and then we'll just put the size in.
+5:17
+Now this is a ternary and so I'm going to make an else and we'll just maybe set it to an empty string for now.
+5:23
+That way when we combine it with class names it won't actually add anything to the ultimate all classes string that gets pumped out from the class names function call.
+5:32
+That means I can get rid of these two if statements.
+5:35
+Let's hit save to see if that applies, and awesome.
+5:38
+Now you might have noticed that for a minute the button had gotten smaller and that was because when I changed my style CSS in Scrimba it automatically immediately applies the style changes that we make without having to save or refresh.
+5:52
+But over here, no over here, I made changes that I hadn't saved.
+5:56
+So when I hit save everything started working again.
+5:59
+Let's clean up our code a little bit here and awesome this is working great.
+6:03
+Again this might be a little bit overkill for this little button that we're doing, but I just thought it could be fun to see a third party package that's pretty commonly used that might help you in handling different class names that you might be receiving and combining them together if you ever need to.
+6:17
+Okay, let's come back from our little side tracking journey and we will come back to our component library.
+6:22
+And I bet when we started you didn't think that Bob would be able to teach for this long about a simple button.
+6:27
+Well I have some good news and bad news.
+6:29
+The good news is that I'm done teaching about buttons.
+6:32
+The maybe bad news is that you're not actually done working with the button yet, and that's because in the next challenge you are going to be applying these different variant properties to our button so that someone can supply a prop called variant.
+6:44
+They can use success, warning, or danger and it will modify the button to apply these different styles.
+6:49
+Then once you're done with that challenge, I promise we're done with buttons, we're going to move forward into other parts of our component library.
