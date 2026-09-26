@@ -1,0 +1,98 @@
+
+Transcript
+0:00
+If you've been keeping track of what components we worked on, you'll know that there are only two left.
+0:05
+In this scrim, we're going to tackle the new game button component.
+0:09
+We can see from the code that it looks relatively simple.
+0:12
+It takes two parameters and it returns either null or a JSX element.
+0:16
+It looks really easy.
+0:18
+Right?
+0:18
+There's not much here.
+0:19
+But don't be deceived.
+0:21
+One of these props is not like the other.
+0:23
+Now is game over is a derived variable from app dot TSX, but start new game is more than that.
+0:30
+Let's hop on over to app dot t s x and have a look.
+0:34
+Start new game is a function that we typed near the beginning of this section.
+0:38
+This function is what gets passed into the new game button component all the way down here as a prop.
+0:44
+So how do we type that?
+0:46
+Back in the new game button component, I'm gonna very quickly type the component's return value.
+0:52
+So import type JSX from React, and this will return either a JSX element or a null.
+0:59
+Okay.
+1:00
+Let's start handling these props.
+1:02
+First, we'll create the new type, and we'll call it new game button props.
+1:06
+And we'll make sure to include the first prop here.
+1:08
+Is game over?
+1:09
+We know is a boolean.
+1:11
+But now we have to think about start new game, which is a function prop that returns void.
+1:16
+So I'm gonna throw you in the deep end now with some syntax to try and give this a go.
+1:21
+The syntax you'll have to use is the prop name and then the parameters parentheses and then the arrow and then the return type.
+1:29
+Give it a go.
+1:34
+Welcome back.
+1:35
+How did you go?
+1:36
+This is how we would type a function prop.
+1:38
+So first, we'll specify the prop name like any other prop.
+1:41
+Start new game.
+1:43
+And then according to the syntax, we're going to need to provide an arrow syntax function.
+1:48
+For parameters, we'll just need to list the parameters and their types, but this function doesn't take any parameters.
+1:54
+So then we have the arrow and then the return type which we know is void.
+1:58
+And this is literally it.
+2:00
+This is how you type a function prop that takes no parameters and returns nothing.
+2:05
+If the function did have parameters, maybe a string, and then it returned a number, it might look like this instead.
+2:11
+So let's say it had a name prop that was a string and then it returned a number.
+2:15
+This is how we would type it.
+2:17
+But ours takes nothing and returns nothing, so we will revert this back.
+2:21
+And now we have our new game button props to use over here.
+2:24
+New game button props.
+2:28
+And all is well.
+2:29
+And that's how we type any functions that are being passed in as props.
+2:33
+Alright.
+2:33
+Now you know there's only one component left to type.
+2:36
+And in the next Grimm, you're going to tackle it in its entirety.
+2:40
+I'll see you there
