@@ -1,0 +1,78 @@
+
+Transcript
+0:00
+Let's do the same thing that we have been doing by converting our get host vans function to pull from Firebase instead of pulling from our fake server.
+0:09
+Again, this is another function that we were overloading and I'm just going to make the executive decision not to do that.
+0:15
+So I'm going to comment this one out.
+0:17
+We're going to see that the logic and the code is going to be very similar to when we were pulling in all of our vans.
+0:23
+We're just going to make a couple tweaks to it.
+0:25
+So I'm going to pull in the function from above.
+0:27
+We'll rename it to get host vans.
+0:29
+And the major change we want to make is that instead of getting all of the documents, we're going to filter down the reference to the documents that we're trying to get before we ever make the call out to get docs from Firebase.
+0:41
+Now because we don't have real authentication here, you might remember in our server JS file down when we were getting the list of host vans we had this schema dot vans dot where the host ID was equal to one two three.
+0:54
+We are just going to continue hard coding this host ID of one two three.
+0:57
+We don't have a way to track which user is actually logged in, what their host ID is, or anything like that, and so we'll just continue cheating the way that we were cheating before.
+1:06
+In order to filter this reference down before we make the request out to get docs, I need to create a query object.
+1:13
+Now I'm going to call my query queue because the way I construct a query in Firebase is by using a function that they provide called query.
+1:22
+I need to pull in query while I'm importing stuff, so I will import query here.
+1:27
+And query is going to take at least two parameters.
+1:30
+The first one is the collection that I want to query on, so I'm going to take my Vans collection reference right here and pass it in as the first parameter.
+1:38
+And the second parameter is some sort of filtering operation.
+1:42
+I can use yet another function that also comes from Firebase called where.
+1:46
+And so before I forget, I'm going to import where up here in my imports.
+1:51
+And the syntax for where in Firebase is a bit different than what we saw here.
+1:55
+Here we were able to pass an object where we could specify which property and which value we are trying to filter down to.
+2:02
+However, in Firebase it actually reads a little bit more like an English sentence.
+2:06
+The first parameter will be the property that I'm trying to look at, so I'll say the host ID.
+2:11
+The second is going to be some kind of comparison operator.
+2:14
+You can go to the Firebase documentation to get a full list of the different comparisons that I can do here, but I want a pretty simple one which is to say that my host ID is equal to, and you'll notice that it's double equals.
+2:26
+It's not JavaScript so they're not going to be concerned with the triple equals syntax.
+2:31
+And the third parameter is going to be the value that I want my my host ID to be equal to, so I will just hard code one two three like we did before.
+2:38
+Then lastly, I just need to update get docs so that it is pulling from this filtered down version, which comes from queue instead of the entire van collection reference.
+2:48
+From there, we still want to change the shape of our data.
+2:51
+We're going to get an array of documents back.
+2:53
+So we'll keep everything else the same as it was in our get vans function above.
+2:58
+And we're here on our host vans page.
+3:00
+Let's go ahead and refresh and just hope for the best.
+3:04
+Okay.
+3:04
+Well, all this data is coming in just like we would expect.
+3:07
+And just like before, if we click into one of these, we are missing a bit of data because we are no longer overloading this get host vans function like we were before.
+3:15
+We are getting really close to the end.
+3:17
+Let's fix this page and tie off any remaining loose ends we might have in our app.
