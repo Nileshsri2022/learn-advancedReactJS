@@ -1,0 +1,73 @@
+Transcript
+0:00
+First, we'll take a look at the basic steps here in this really complex app that I built.
+0:05
+It just has two routes.
+0:06
+It's got a home route and a protected route, which of course has some very secret information.
+0:11
+And our goal is to make it so that the user has to be authenticated or logged in in order to even make it to this protected route.
+0:18
+Now how to implement this concept of protected routes is one of those things that could be done in a number of different ways.
+0:24
+So just know that the way I'm going to show you is just one of many possible ways that you could accomplish the same task.
+0:31
+From a high level overview, what we'll be doing is creating a layout route that we will wrap any routes we want to protect behind our sort of login wall.
+0:40
+So let me go ahead and create a new component.
+0:42
+Maybe I'll call it auth required dot JSX and let me just get that set up.
+0:49
+And since there's a few logical steps here that we need to take, I'm going to break down the logic into smaller pieces and then we will one by one solve those pieces.
+0:57
+In fact, that's just a good strategy in general.
+1:00
+Anytime you have to solve a larger complex problem, you break it down into the smaller bite sized parts, and then just work on each of those parts individually.
+1:08
+A lot of times I like to do this just within some comments.
+1:11
+So let's go ahead and write out the approach that we're going to take.
+1:15
+So when our auth required layout route runs, we will first want to check the authenticated status of the user.
+1:24
+And if they're not authenticated, then we'll send them send the user to the login page.
+1:33
+And if they are authenticated, then what we can do is just render the outlet component.
+1:41
+Remember, when you have a LayoutRoute, you need to render the Outlet in order for any of the children routes of that LayoutRoute to be rendered.
+1:49
+However, there's not a rule that says we absolutely have to render the outlet.
+1:53
+In many cases, it wouldn't make sense not to.
+1:56
+But in our case we don't want to render the Outlet if that Outlet represents a route that is supposed to be protected behind an authenticated wall.
+2:04
+Let's go back to our index JSX and we'll make this make a little more sense.
+2:08
+Let me give some space around our protected route, and we will go ahead and set up our layout route.
+2:14
+And And in this case we don't need a path.
+2:16
+We're just going to have an element and that element will be the auth required layout that we just created.
+2:24
+We need to make sure we import that.
+2:26
+So we'll import auth required.
+2:30
+And let's go back to auth required.
+2:32
+And we'll start out just by naively assuming that the user is always authenticated.
+2:37
+So we'll just go ahead and return the outlet, which we will need to import.
+2:42
+And I don't think we'll see much of a difference, but we should be able to get to the protected route just fine.
+2:48
+And that's a good start.
+2:49
+Now for the sake of compartmentalizing the topics that we're learning, I think we will go ahead and implement the rest of this logic in the next lesson.
+2:57
+But as always, if you want to play around with this, make sure that you understand what we're going to be doing with this logic.
+3:04
+You could try rewriting it or just break it and then fix it again.
+3:07
+And as always when you're ready we'll move on to the next lesson.
