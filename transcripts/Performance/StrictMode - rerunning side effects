@@ -1,0 +1,178 @@
+
+Transcript
+0:00
+Let's take a look at another instance where strict mode is really helpful to us and that's when it reruns all of our side effects.
+0:07
+I've simplified our app here and I have it so that there's a timer that's kind of hiding behind this show timer button.
+0:14
+Well, not literally behind it, it's underneath it.
+0:16
+But you can see that we're using that state of show timer to conditionally render our timer.
+0:21
+I've turned off strict mode and let's go ahead and toggle the timer.
+0:25
+Well, it just counts up once a second.
+0:27
+It's basically a timer like it says to be and it doesn't look like there's any issues here.
+0:32
+I'll go ahead and hide it.
+0:33
+If I show it again, it starts back over at zero and it just counts up.
+0:38
+Okay.
+0:38
+Well, everything seems to be working, but let's go over to our timer and take a look at it.
+0:42
+I want you to look at this code and see if you can find any issues that might arise.
+0:47
+Of course, you know that we're talking about our side effects, so I'll give you a little bit of a hint.
+0:51
+We have a bit of a problem here with our use effect.
+0:55
+Clearly it's not a problem with the functionality because the counter seems to be counting, but but I want you to pause and read through this code, see if you can figure out what it is that actually needs to change.
+1:10
+We're setting up a side effect but we don't have any way to clean up that side effect when this component unmounts.
+1:16
+This show timer toggle button is giving us the ability to mount and unmount this component.
+1:22
+And if we were to throw a console log in here, let's say timer is running.
+1:27
+We'll hit save.
+1:29
+I will open this timer.
+1:31
+K.
+1:31
+We can see that timer is running console logs every time the timer re renders.
+1:36
+I'll go ahead and hide the timer and, uh-oh, our timer is running console log is still running.
+1:42
+What does that really mean?
+1:43
+Well, it means that our set interval is still running in the background.
+1:47
+Now because the timer component is not mounted, we are not able to see the timer.
+1:51
+And when we show the timer again, it mounts and it starts the count back over at zero and everything just like we would expect.
+1:59
+But now as you see, the timer is running console log is running two times.
+2:04
+And if I toggle this on and off a whole bunch, we'll start to see what the real problem is.
+2:09
+My console log is going absolutely crazy here.
+2:12
+Let me comment this out so we don't have that being a huge distraction for us.
+2:16
+Okay.
+2:16
+So what exactly was happening?
+2:18
+Well, this is something that can be considered a memory leak.
+2:21
+When we set up the set interval, we're doing that in JavaScript in the browser.
+2:25
+And simply unmounting this timer doesn't stop the interval from running in the background.
+2:30
+Now an interval running in the background in this case is pretty innocent.
+2:34
+It's probably not going to be a big deal.
+2:37
+But if instead of setting an interval this were making a WebSocket connection to let's say a chat application or something, then having multiple connections to that chat application can be problematic.
+2:48
+Once again, just like before, we got pretty lucky to see that this is actually a problem.
+2:53
+If, for example, we didn't have this show timer toggle and instead the timer were just always on the page or we didn't have this console log, then we probably wouldn't know that there's an issue.
+3:04
+So let's bring this back to strict mode.
+3:06
+I'm gonna turn on strict mode.
+3:08
+Remember, turning on strict mode will make it so that the side effect, this use effect function, is going to be run two times.
+3:16
+React is going to run it two times on purpose in order to surface any bugs that might be happening in the background without us knowing.
+3:24
+So let's go ahead and hit save.
+3:26
+I'll click show timer and we should see the problem pretty immediately.
+3:31
+It's counting up by twos instead of by ones.
+3:34
+Let me hide the timer.
+3:35
+Now why exactly is that happening?
+3:37
+Well react automatically ran this function two times and because I'm not cleaning up my set interval, I have two intervals running and it's always incrementing it by two.
+3:49
+Alright.
+3:49
+So this is a perfect time for you to fix this problem.
+3:52
+And since we're in strict mode, after fixing this problem, you should be able to well, first refresh our app with the new changes that you've made and then show the timer and it should count up by ones instead of by twos.
+4:03
+So let me type this out as a challenge.
+4:06
+Your challenge is to clean up the interval as the last part of the useEffect.
+4:10
+And if you're feeling a little bit rusty for cleaning up useEffects, that's completely okay.
+4:14
+I included a link here to my learn react course, specifically the lesson on how to do this.
+4:20
+If you think you might have an idea, then try it without even looking at that lesson.
+4:24
+Then if you get stuck, you can look at that lesson and hopefully that will give you a refresher.
+4:28
+You also might need to turn to another resource if maybe this is your first time leaning up a set interval.
+4:33
+Of course, you can always turn to Google or something like chat JPT to get some help with this.
+4:38
+Okay, the time is yours.
+4:39
+Pause now and work on this challenge.
+4:47
+Let me clear up this challenge text since it's pretty straightforward.
+4:51
+In the function that we pass to useEffect, we can return a function.
+4:55
+So I'll just stub this out for now.
+4:57
+We can return this function and whatever code we put inside of this function will get run whenever React determines that this use effect function should be finished.
+5:05
+That will happen anytime a dependency changes if there are dependencies in my array or if this component that houses the useEffect is about to unmount.
+5:14
+In JavaScript, I can grab an ID from my interval.
+5:18
+You might call it an interval ID or something like that.
+5:21
+And I can use a function called clear interval and pass the ID of the interval I want to clear and that will make sure to clear up this interval whenever React determines that this side effect should stop being a side effect in my app.
+5:34
+So I'm in strict mode.
+5:36
+Before I had this return happening, I was counting up by twos.
+5:39
+Let's hit save.
+5:40
+We'll show our timer and perfect.
+5:43
+We're going up by ones as we would expect.
+5:45
+If I were to uncomment this console log, I can hit save, we'll show the timer.
+5:50
+Okay.
+5:50
+We get our timer is running.
+5:52
+If I hide the timer, it stops logging to the console.
+5:55
+Now this might seem a bit strange where the purpose of strict mode is to surface bugs.
+6:00
+It's to show us more bugs in our app.
+6:03
+But in truth, that's a really good thing.
+6:05
+It shows us as developers where our shortcomings in our React code exist.
+6:09
+It allows us to address those problems.
+6:11
+And in the end, it allows us to become better React developers.
+6:15
+Ensuring that we write pure components and pure functions and that we clean up our side effects is an important part for us to not just have a better React code base, but to have better performance in the end in our apps.
