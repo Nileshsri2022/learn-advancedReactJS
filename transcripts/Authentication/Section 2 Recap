@@ -1,0 +1,29 @@
+Transcript
+0:00
+That's this section done.
+0:04
+We've covered a lot.
+0:05
+We set up the React router DOM, the context API to share the auth state and more around the app.
+0:12
+We've learned all about that session object and JWTs getting issued by Superbase on login, and then the client sends it back with every request.
+0:23
+Sign in up and out, row level security, and that database trigger near the end.
+0:29
+Think of all those challenges you've completed as well.
+0:33
+Do share your progress on the Discord community.
+0:35
+We'd love to hear your feedback about these few sections.
+0:39
+Can you make this project your own?
+0:41
+Do remix from any point you'd like to.
+0:44
+You can change the design, the format, and there's a stretch goal there.
+0:48
+Maybe add a new account type for potential managers who aren't interested in adding deals, just a sort of read only account.
+0:57
+And most of all, keep on going.
+0:59
+See you in another course.
