@@ -1,0 +1,40 @@
+
+Transcript
+0:00
+It's that time again.
+0:01
+Let's run through a quick quiz that deals with protected routes.
+0:05
+Like before, I want you to actually click into the lesson here and type down your answers.
+0:09
+And when you're done, you can hit play and we'll go through the answers together.
+0:13
+So pause now and work on the quiz.
+0:21
+Okay, so how did we change our route definitions in order to protect certain routes from an unlogged in user?
+0:28
+Well the first thing we did was to wrap all of our protected routes in a layout route that has some logic inside of it that will protect those routes if the user is not logged in.
+0:38
+With the next two questions, we'll talk about how it actually protects those routes, but for now, for answer number one, that's good enough.
+0:45
+I guess one thing we can be a little bit more specific about is that the way in which it protects the routes is by redirecting the user if they are not logged in to the login page.
+0:55
+Okay.
+0:55
+Number two.
+0:56
+What component can we use to automatically send someone to a different route in our app?
+1:00
+Well that would be the navigate component.
+1:03
+If the navigate component renders at any time it will automatically forward them to the location or the path that we specify in the to prop.
+1:12
+So I can say navigate to slash login for example.
+1:17
+Okay and lastly what component can we render if the user is logged in?
+1:20
+Well Well if they're not logged in we will render the navigate component, but if they are logged in then because we have wrapped a layout route around our protected routes we want to use an outlet in order to render the contents of the route that they're trying to reach.
+1:36
+Okay, short and sweet.
+1:37
+Let's keep moving forward.
