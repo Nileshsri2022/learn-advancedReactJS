@@ -1,0 +1,118 @@
+
+Transcript
+0:00
+Okay, let's tackle doing this in our buttons as well.
+0:03
+I mentioned a few times how the use search params hook is very similar to the use state hook from React, And it's not just in that it returns an array with two items that include the value and a function for setting the value, but more deeply the function for setting the value can take two different kinds of parameters just like in use state.
+0:22
+It can either take a replacement value for the state or it can take a callback function and that callback function will receive the previous state so that you can use it to make changes to it.
+0:32
+Let's see what that looks like.
+0:33
+We're going to need a little bit more room than just doing this inline.
+0:36
+So below our gen new search parameter string function we're going to create a function that's called maybe handle filter change.
+0:45
+We'll just get rid of everything here and actually we are going to need to take a parameter.
+0:52
+We'll probably call this the new filter or the maybe new type and we will change everything here.
+1:00
+Yeah I think that's right.
+1:01
+And we'll say handle filter change parenthesis and then we're going to pass in the new type.
+1:07
+We'll say is, this one is Jedi, and then we'll just do the same for these other ones.
+1:14
+This time I'll remember to change this one to Sith and here we will pass in null.
+1:20
+It might have been overkill to pass in both the type parameter and the actual value parameter or the key and value up here since this function is currently living in the place where the only thing we're changing is type.
+1:32
+I guess I wrote it so that we could eventually move this function out to some kind of utility folder and theoretically use it across the entire application in other circumstances other than type.
+1:43
+Maybe just for the sake of being similar I'll do the same thing here.
+1:47
+So we'll say we're going to pass in the actual key of the key value pair and then we will not just take the new type but we'll take the key as well.
+1:56
+And what the heck, let's make this more generic too, we'll just call it value.
+1:59
+Okay, back to what I was saying.
+2:01
+The setter function, so we called it set search params, we were just using it where we just passed in a new object that represented the replacement for the params, but we found that that completely overwrote any other parameters that we might have.
+2:14
+Just like the state setter function with useState we can pass in a function, and this function will receive a previous version of the params.
+2:23
+Because it's an arrow function and we just have one parameter I can get rid of those surrounding parentheses.
+2:28
+And we will do something very similar up here.
+2:30
+We'll check if the incoming value is equal to null.
+2:36
+Now this is where the set search params setter function diverges pretty dramatically from the state setter function.
+2:42
+In the state setter function, we would never take the state that we received here and make any direct modifications to it.
+2:48
+Instead we would always create a copy of it somehow and only use its old values in order to determine the new values and we would return a completely new state.
+2:58
+As far as I can tell, and I've confirmed this with the way that React Router has some of their internal tests set up, it's completely okay for us to modify the previous params object.
+3:10
+So in this case I'm going to say if the value is null then we'll run previous params dot delete and it'll be the key whatever key we pass in.
+3:19
+If the value is not null then we'll say prevparams dot set whatever key and then whatever value.
+3:28
+And at the end, because in this case we're not trying to turn it into a string, we're trying to set it as a URL search params object, we're just going to return the previous params.
+3:38
+Again, this feels a little icky to me because I'm used to having the state setter be where you never modify the original object.
+3:45
+But as far as I can tell this is okay.
+3:47
+And I think that's all the code we need.
+3:48
+Let's hit save.
+3:49
+Again our links were working before.
+3:51
+We still have the question mark name equals Bob up there.
+3:54
+Let's go ahead and hit Sith.
+3:56
+Okay, it appended it to this string.
+3:58
+That's great.
+3:59
+Same with Jedi and clear clears out the type but it does not clear out the name.
+4:03
+Now you could go even further down this rabbit hole.
+4:05
+The truth is search params can have the same key multiple times.
+4:09
+So for whatever reason, if I wanted to I could say name equals Bob and name equals Joe or type equals Jedi and type equals Sith.
+4:17
+And the way that we've written this it would clear out okay I just had to confirm it, yeah it would actually clear out both types.
+4:24
+In fact let's just see it in action.
+4:26
+Well let me start out type equals Jedi, we'll get rid of name equals Bob just to buy some space.
+4:31
+Okay question mark type equals Jedi, ampersand type equals Sith.
+4:37
+So you can see that, okay it's got both, the clear function will just clear both of them out.
+4:42
+So that might not be ideal you would have to get much more complicated to actually search through the params object and only delete the type that you're trying to delete.
+4:51
+But now we're venturing into a realm that's much past the scope of this course.
+4:55
+In fact, we might have already done that a little bit here, but that's okay.
+4:58
+It's all great learning, and hopefully I can save someone out there at least a few hours trying to struggle with understanding this.
+5:04
+With that behind us, let's go back to the Vanlife app.
+5:06
+I'm going to implement some of these changes for you since it is, like I mentioned, a little bit outside the scope of this course.
+5:13
+And you know what?
+5:13
+Let's lighten it up a little bit.
+5:14
+We'll have a pretty simple conditional rendering challenge.
+5:17
+So that's what we'll do in the next scrim.
