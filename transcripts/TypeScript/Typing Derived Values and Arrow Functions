@@ -1,0 +1,65 @@
+Transcript
+0:00
+Hello again.
+0:01
+Directly under the state values that we have just typed, we have a bunch of derived values.
+0:07
+At the moment, because we only have the one component, these are considered local derived constants.
+0:12
+So we don't actually need to explicitly type these because TypeScript will infer most of them correctly.
+0:18
+You can actually hover over each of these to see that inference in action.
+0:22
+But I do also really want you to get as much keyboard time as possible typing stuff.
+0:27
+So we're going to spend some time sleuthing types and typing these variables.
+0:32
+There are also a few callback arrow functions here with some parameters and return values that we can explicitly type as well.
+0:38
+So with that said, here is your challenge for this scrim.
+0:42
+Take your time, and I'll see you on the other side.
+0:48
+Welcome back.
+0:49
+Let's go through them all, and I'm first gonna type the variables themselves.
+0:53
+First off, we have num guesses left, which is a number.
+0:57
+WrongGuessCount is also a number.
+0:59
+Then we have is game one, which is a boolean, and so is is game lost and is game over.
+1:06
+LastGuessedLetter is a string, and isLastGuessIncorrect is a boolean.
+1:11
+Now for the arrow functions.
+1:13
+We'll start with the first one.
+1:14
+Letter is a string, so we can type it as string.
+1:18
+But you'll notice that you'll probably get an error right now, and that's because we need to wrap these in parentheses.
+1:24
+And now the return value is a Boolean.
+1:27
+This second function here is actually exactly the same.
+1:30
+So first, we'll wrap the letter in parentheses and type it as a string, and the return value will be a boolean.
+1:37
+Realistically, we don't always have to type everything, even though this particular scrim was good practice.
+1:42
+TypeScript is pretty good at inferring types by itself.
+1:45
+In fact, we're going to leave this static alphabet const alone to show that we don't have to type everything.
+1:51
+This one actually does very well on its own.
+1:54
+Come and hover over alphabet, and you'll see that it's inferred as a literal type.
+1:58
+It's not even just a string type.
+2:00
+It's this exact string type.
+2:03
+So nice going.
+2:04
+We're going to keep traversing down this file in the next scrim, and we're gonna tackle these two functions.
