@@ -1,0 +1,36 @@
+
+Transcript
+0:00
+Okay.
+0:00
+Your challenge for this one is to, well, basically do exactly what we just did but here in our van life app.
+0:06
+In fact, it's very very similar, so hopefully you grasped what we just worked on because now it's your turn to get your hands on the keyboard.
+0:12
+Pause now and work on this challenge.
+0:20
+Well let's just do exactly what we just did.
+0:22
+We'll create a const displayed vans and that's going to check if type filter is a thing and if it is then we will use vans this is the full array of vans dot filter.
+0:38
+We'll look at each van and if the van dot type is equal to the type filter then it will return true and that will become part of the array in displayed vans.
+0:48
+Otherwise if type filter is null, in other words there is no type equals whatever up there, then we just want to have the full list of vans.
+0:58
+And then when we're mapping over it we will just put our displayed Vans.
+1:02
+Again sometimes this will be the full array of Vans and sometimes it will be a filtered down array.
+1:07
+We'll just use displayed bands to map over that and create our van elements.
+1:11
+I don't think anything else needs to change.
+1:14
+Let's clear this up and I already have type equals simple so let's hit save.
+1:20
+I'll scroll down a little so we can see that there's more than just the simple ones.
+1:25
+Cool.
+1:25
+So I think the next logical thing for us to do is not have to actually type it up into the URL, but have a way that we can click some buttons and have that change the query that's in the URL.
+1:37
+There's actually a couple different ways we can handle this, so that's what we'll be learning about next.
