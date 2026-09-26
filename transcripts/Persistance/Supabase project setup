@@ -1,0 +1,282 @@
+
+Transcript
+0:01
+Okay.
+0:01
+Let's get going.
+0:03
+So the first thing we're gonna do is install React with Vite, then we're gonna create a super base project and sales deals table, and then connect to the database via the client library.
+0:14
+As I mentioned in the first scrim, thanks to Scrimba, during your upcoming challenges, you are able to work with your own table and data.
+0:22
+When you watch me, you'll be seeing data from my project.
+0:25
+This is why we spend this scrim getting you, the student, all set up.
+0:28
+You'll see how we're gonna do this in a second.
+0:31
+So we're going to create a React app using Vite.
+0:35
+I'll run NPM create Vite at latest dot dash dash, and then we're going to use the React template.
+0:47
+So if you're interested to learn more about Vite, do check out Shant's Intro to Vite course here on Scrimba.
+0:53
+Yes to proceed, then we're going to npm install,
+1:00
+and then npm run dev.
+1:04
+And we then see in the mini browser the Vite and React boilerplate code.
+1:11
+So let's create a new Superbase project.
+1:14
+Please click this slide to take you to superbase dot com, and then click the green start your project.
+1:20
+If you already have a Superbase account, sign in.
+1:23
+But if you don't, click on sign up now at the bottom, and you will have to confirm your details in an email.
+1:30
+If you sign up, the first thing they will ask you to do is create an organization.
+1:34
+This can be anything.
+1:35
+I'm gonna go for Jonathan's team, then click create organization.
+1:40
+If you already had an account, you'll need to go to your all projects dashboard, which looks like this, and then click new project in green.
+1:47
+That should take us all to this create a new project page.
+1:51
+We've got my organization name there, and I'm calling this project sales dashboard.
+1:56
+You could call it whatever you want.
+1:58
+Make a note of the database password that you generate or come up with.
+2:03
+Pick a region close to you, and then click create a new project in green.
+2:07
+Awesome.
+2:08
+We've created a new super base project with its own Postgres database.
+2:12
+Time to create a table.
+2:14
+At the top left, you see the house.
+2:15
+That's the project home page.
+2:17
+If you go down one, that's the table editor.
+2:20
+So click on that, and it should look like this.
+2:23
+We start off in the public schema, which is where we want to be.
+2:26
+And in the middle, we're gonna click the green create a new table.
+2:29
+I'm calling my table sales underscore deals.
+2:32
+Please call yours the same because we're going to be referring to this table in our code later on when we make our super base requests.
+2:40
+It'll make it a lot easier if your table is called the same as mine.
+2:44
+I'd like you to untick enable row level security.
+2:48
+RLS allows you to define policies which control access to individual rows in the table.
+2:53
+We're gonna be talking about this in a later course, but for the purposes of this project, let's untick it and then confirm to turn it off.
+3:01
+Click enable real time here.
+3:02
+This will mean we don't have to dive into the Superbase settings later on when we set up the real time subscription.
+3:09
+This means that any changes in our table are immediately reflected in our bar chart.
+3:14
+Then scroll down, and we see that Superbase automatically generates an ID column and a created at column.
+3:21
+We are gonna create two new columns, so click add column.
+3:24
+We need a name column, which is type text, and then click add column again and create a value column with the type int four.
+3:34
+And then once you've done that, save bottom right.
+3:37
+And here is our table.
+3:38
+So the name is on the left, and it's empty right now, but we see the four columns we have.
+3:44
+ID created at, name, and value.
+3:47
+Superbase lets you import data from CSV, but we're going to import a few rows annually.
+3:53
+So click the green insert and then insert row.
+3:56
+I've inserted a row with name Jim and value three thousand.
+4:01
+This is because I'm gonna go for a the office US theme as long as you all agree not to tell Gervais.
+4:07
+Alright.
+4:08
+Good.
+4:08
+You can pick any name you want to personalize your project.
+4:12
+I do recommend using values in the thousands for now.
+4:15
+Okay?
+4:16
+So your first challenge now.
+4:18
+The video is going to pause, and I'd like you to work through this.
+4:20
+Please insert more rows until you have at least three different sales rep names in your table.
+4:26
+Remember, these names can be anything you want.
+4:28
+Make sure the highest value that you choose is not tied with anyone else.
+4:33
+So pick a highest value, say, thousand, and make sure only one row has that highest value.
+4:38
+Make sure it's not tied.
+4:40
+And please make sure at least one sales rep is duplicated.
+4:44
+So if you did have a row with Jim, you could create a new row with Jim so that there are two with Jim.
+4:50
+And a quick warning, make sure there's no white space either side of the name.
+4:55
+Alright.
+4:56
+Good luck.
+4:56
+See you in a minute.
+5:02
+I hope that went well.
+5:03
+Here's what I went for.
+5:04
+I've got Jim, Andy, Dwight, Andy, and Dwight.
+5:07
+So I've got two Dwights and two Andes.
+5:10
+And I chose six thousand as my highest value, and I just have one row with that value.
+5:15
+The keen eyed amongst you might realize that I don't have a row with ID four.
+5:20
+That's because I made a typo and had to delete it.
+5:23
+But to attempt to make all mistakes into learning opportunities, demonstrates that the ID is self incrementing.
+5:29
+Even though I had deleted the row with ID four, the next I inserted automatically continued with five.
+5:37
+Time to add Superbase to our React project.
+5:41
+We're going to install the Superbase client library.
+5:44
+So to do that, I run NPM install at Superbase slash, and it's called Superbase dash JS.
+5:56
+So now I recommend everybody clicks on this slide to take them to the really clear superbase docs, has a quick skim of all of the objects and methods available in this client library.
+6:06
+So what is this client library?
+6:08
+Well, it's a powerful SDK that simplifies database interactions by abstracting complex API calls and providing a seamless interface for Postgres database operations.
+6:20
+An SDK is a software development kit, a platform specific building tool for developers.
+6:27
+This client provides three things, simplicity, security, and performance, converts your request into an HTTP request.
+6:35
+API gateway routes this to different services.
+6:39
+Post REST verts the request to SQL, and the data is transformed to JSON, and the client library processes it into a JavaScript object that we will see getting back later in the course.
+6:51
+For security, we've got DDOS protection.
+6:54
+Prepared statements prevent SQL injection.
+6:57
+The RLS checks happen at the database level.
+7:00
+For performance, we have connection pooling, prepared statement caching by post REST.
+7:05
+If you want to learn more about what happens under the hood, I really recommend clicking on this video.
+7:11
+Superbase released this recently, and it has some really interesting visualizations of what's happening under the hood.
+7:17
+So time to set up this client in a separate file.
+7:21
+So in source, we're gonna create a file called superbase dash client.
+7:26
+So we're gonna initialize a new client using the create client method.
+7:30
+So we're going to import that to start with, and it's from superbase dash j s.
+7:36
+And we call this create client, and we pass in URL and key from your project.
+7:42
+So I'm gonna create some variables here, and we're gonna pass these here.
+7:48
+And then let's assign this to a variable just called super base so we can refer to it later in our project.
+7:55
+Let's export that so we can use it in our components.
+7:59
+Then here's where the environment variables are gonna happen.
+8:02
+I'll explain this in a minute.
+8:03
+You're gonna set it up in your own Scrimba.
+8:06
+If you've used environment variables before, you might be used to using process dot e n v.
+8:13
+But when using Vite, variables are not accessible using process dot e n v.
+8:17
+This is because Vite doesn't run on Node.
+8:19
+Js during the build, so we have to use import dot meta dot e n v.
+8:25
+And the Vite docs tell us that to prevent accidentally leaking environment variables to the client, only variables prefixed with Vite in capitals like this exposed to our Vite process code.
+8:37
+So let's go for superbase underscore URL and superbase underscore key.
+8:45
+So now this superbase variable holds the client instance returned by the create client function.
+8:51
+Okay.
+8:51
+That concludes us establishing a connection to the superbase client.
+8:56
+To find your unique project URL and key, I'd like you to navigate to your project dashboard.
+9:02
+That's the home icon in the top left.
+9:04
+It should look like this.
+9:07
+And then scroll down to project API.
+9:11
+Here is your project URL and API key.
+9:14
+Now there is a bug in Superbase.
+9:17
+You may see JWT secret is being updated and a spinning wheel.
+9:23
+If you do, don't fret.
+9:25
+All you need to do is on the left here, you see view API settings.
+9:30
+Click that button, and it will take you to a slightly different page, which you'll see the project URL at the top and the API key underneath, and it's the Anon public key you're looking for.
+9:43
+So you are going to be copying these into Scrimba in a moment.
+9:48
+If it's your first time using environment variables on Scrimba, I really recommend clicking the screenshot in the middle here, and it will take you to a brief tutorial.
+9:58
+There's also a scrim you can watch to show you how to set it up.
+10:02
+When you name your environment variables, just like you can see in this screenshot, I really need you to make sure that they are all capitals, vite underscore super base underscore URL and vite underscore super base underscore key.
+10:17
+They have to be exactly the same.
+10:19
+Otherwise, it won't quite work.
+10:21
+One option, you can try command or control y to lower the presentation and then copy this from that Superbase dash client file that should be behind the slide.
+10:34
+There is a section in this tutorial which mentions using the import dot meta dot e m v rather than the process dot e m v when using Vite.
+10:44
+So pause the video and get these environment variables set up.
+10:52
+Excellent.
+10:53
+We are now connected to our super base project.
+10:55
+Next, let's learn how to query the database.
