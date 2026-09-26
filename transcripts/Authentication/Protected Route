@@ -1,0 +1,178 @@
+
+Transcript
+0:00
+Let's learn how to implement a protected route.
+0:03
+If a user navigates straight to slash dashboard at the moment, the server side RLS stops the data being fetched from the sales deals table in our chart, but we can access slash dashboard.
+0:16
+This is obviously not secure.
+0:17
+We did not log in, so we are unauthorized.
+0:21
+We want to protect this dashboard route so anybody who's not authorized can't access it.
+0:26
+We can see that RLS is like a last line of defense.
+0:32
+Okay.
+0:33
+Let me take us back to our sign in.
+0:36
+So we currently have this setup.
+0:38
+Root redirect is checking when a user visits our home path.
+0:41
+It directs them to slash dashboard if there is a session and to the slash sign in if there's not.
+0:47
+But as I just demonstrated, anybody could manually type in slash dashboard in their URL and access it.
+0:54
+So we've dealt with users visiting our home path, just slash, but we've not dealt with protecting the slash dashboard route if they navigate there.
+1:04
+We can protect this route on the client side by adding some UX protection, a protected route.
+1:11
+Because a user might close and reopen their browser, or the session might expire, or they might have bookmarked slash dashboard.
+1:18
+We need this extra check whether a session exists.
+1:22
+Our route's gonna sort of wrap slash dashboard and check the authentication state.
+1:28
+If session is still undefined, I e get session hasn't updated it yet, then we'll show a loading state a little bit like we did for route redirect.
+1:36
+We probably won't even see this, but it's good to have nonetheless.
+1:39
+If there's no valid session, it'll redirect the user back to sign in.
+1:43
+If there is a valid session, it will render the protected content.
+1:47
+And our protected content for slash dashboard is the header and the dashboard components.
+1:52
+So I'm gonna create a new file in the components folder.
+1:55
+I'm gonna call it protected root.
+1:58
+It's gonna be so similar to this, so I might be a bit naughty and
+2:05
+copy and paste just for the boilerplate part of it and the imports.
+2:11
+So remember, we need to check the session again, so we'll keep that bit here.
+2:16
+And, again, we're gonna show a loading div if session is still undefined.
+2:20
+Now this is actually a little bit of a learning opportunity because remember I mentioned there was a little quirk in the Scrimba console.
+2:28
+I said that we initialize session as undefined.
+2:31
+We'll update the session here either to null if there's no session, I.
+2:36
+E.
+2:36
+The user's not logged in or with the session object data.
+2:40
+If we look at the console, it's still actually showing as undefined.
+2:45
+And if you look in your browser dev tools, you will see it as null.
+2:49
+But if we now think about the logic here, if the session was indeed staying undefined like the Scrimba console tells us, then we would constantly be seeing this loading div in a minute, and we probably won't even actually see this because get session updates the session state so quickly to either null if not logged in or with the session data if the user is logged in.
+3:13
+And we're gonna put another return here, and let's put some comments like we're getting used to.
+3:18
+So if no session, navigate to slash sign in.
+3:25
+If session, we're gonna render the children.
+3:29
+Now the reason I've said children is because I'm gonna get you in a minute to wrap the header and the dashboard components in this protected route.
+3:39
+So we're gonna import it here, wrap it, and because it's gonna wrap around it, that means that the header and the dashboard components will be the children of this protected route.
+3:50
+And we can then render those children if there is a session.
+3:53
+Okay?
+3:55
+So we're gonna receive children as a prop, and we destructure.
+4:00
+There we go.
+4:02
+So let's use another ternary.
+4:03
+You'll say session question mark, and we're gonna render these children.
+4:09
+And then colon for if there's no session, and that's just gonna be our navigate to sign in.
+4:13
+Already got navigate actually from before.
+4:16
+So this is a component, and we use the to, and we say to sign in.
+4:23
+There we go.
+4:23
+Get rid of these comments.
+4:25
+So when React renders protected root, it will receive these children as a prop children.
+4:30
+If the user is authenticated, protected route renders the children.
+4:35
+And if the user is not, it navigates back to the sign in route.
+4:39
+So another challenge for you.
+4:43
+I'd like to import the protected root in here, wrap the header and dashboard components in the protected root component, save, and then navigate to slash dashboard in the mini browser to test the protected root.
+4:56
+You'll know if it's working because if you have not logged in, you will not be able to access slash dashboard, and you'll be redirected to slash sign in.
+5:04
+You can then sign in and check that you can still access slash dashboard and see the header in the dashboard components.
+5:11
+Because you're wrapping here in number two, just think about what you're going to need.
+5:16
+A little bit of a hint there.
+5:17
+Okay.
+5:17
+Good luck.
+5:21
+Okay.
+5:22
+I hope that went well.
+5:23
+So we're gonna import the protected route up here.
+5:28
+And then because we've already got these, we can actually use them.
+5:34
+Let's copy this so I don't make any spelling mistakes.
+5:39
+There we go.
+5:40
+So now you can see header and dashboard are the children of the protected route.
+5:45
+Save that.
+5:46
+Let's get rid of here, and we can test.
+5:49
+So if I navigate to slash dashboard now
+5:53
+there we go.
+5:54
+We can't access it now.
+5:56
+So we've got that UX protection as well as RLS on the actual table in the database.
+6:02
+Let me check that I can still sign in and access slash dashboard.
+6:07
+Yes.
+6:08
+I can.
+6:08
+Fantastic.
+6:09
+So because there is a session now, it's rendering the children, and I can still sign up.
+6:16
+Okay.
+6:17
+Fantastic.
+6:18
+So we are now set up like this.
+6:20
+We've got route redirect dealing with the home path, and we've got our protected route dealing with slash dashboard.
+6:27
+Okay.
+6:28
+In the next screen, let's work out how to sign up and add a user into the auth dot users table from our sign up component.
+6:36
+See you then.
