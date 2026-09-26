@@ -1,0 +1,34 @@
+
+Transcript
+0:00
+As you start using third party libraries, you will start to run into this concept of render props because the library will be maintaining some kind of internal state but want to expose it to you and leave the responsibility of what to render based on that internal state up to you.
+0:15
+And as you're doing that, you will certainly run into instances where they actually receive a prop called render, and they do exactly what we're doing here.
+0:23
+However, a slightly more common way you'll see this, and it's just how it has evolved in the React community over time, is not to use a named prop called render like this, but instead to make use of the implicit children prop when you have both an opening and closing tag in your component.
+0:42
+By now you should be familiar with the concept of children, so I'm going to refactor this just very slightly, and we'll see what has kind of evolved to be a slightly more common way that you'll see render props used.
+0:52
+So instead of self closing the decision component, we're going to have a separate tag here for the closing decision, which means anything I put between the opening and closing is considered the children prop.
+1:05
+And I'm just going to grab my function, which goes, let's see, right up until here.
+1:11
+I'm going to cut that out, get rid of my render prop, and I'm going to put the entire function as a child to the decision component.
+1:20
+Let's see, I think we need to do some formatting.
+1:22
+Yeah, there we go.
+1:23
+Okay, so we're passing our function not as a dedicated named prop called render, but now as the implicit children prop.
+1:31
+So over in DecisionJS, I can just change what I used to call render to children, and then down here when I'm calling render, I can just change it to children.
+1:41
+Hopefully I've got everything right.
+1:42
+Let's hit save, and everything is working exactly like we had before.
+1:46
+I'm honestly not a hundred percent sure why this has been a more common way that I have seen render props used in real code, but nevertheless this is a slightly more common way that you'll see render props used.
+1:58
+Because of that, this is how we're going to apply it as we move on now back to the toggle component and see an instance in which using render props is going to be pretty helpful for us.
+2:08
+So that's what we'll be doing next.
