@@ -1,0 +1,76 @@
+
+Transcript
+0:00
+Alright.
+0:00
+It's time to get our hands dirty.
+0:02
+In this scrim, we're going to create a brand new React project using Vite, and we'll be setting it up with TypeScript right from the start.
+0:09
+Now you can install TypeScript into an existing React project manually, but trust me, there's a lot of config involved to get everything working smoothly.
+0:18
+You'd need to install all the TypeScript packages, configure your config files, rename your files, set up type declarations.
+0:25
+It's it's really just a lot.
+0:27
+So instead, we're going to go with the cleanest and safest route, and we're going to let Vite handle all of that for us.
+0:34
+We're gonna create a new project using Vite by coming down here to the terminal and typing n p m create Vite at latest.
+0:41
+We'll press y to install create Vite.
+0:44
+And for the project name, we're just gonna scaffold it into this folder, so I'm going to put a dot.
+0:49
+For the framework, we want React.
+0:51
+And, of course, the variant is TypeScript.
+0:54
+Now we just have to install everything with NPM install.
+0:57
+We're not gonna run it just yet because we'll only get a Vite starter project anyway.
+1:03
+While it's doing that, let's have a quick look at the configuration files that we didn't have to handle ourselves.
+1:08
+So first, in package dot JSON, it has all the React and Vite dependencies as well as some new TypeScript ones.
+1:15
+There's TypeScript itself, TypeScript ESLint, types React, and types React DOM, all which work together to make sure we have a breezy experience with TypeScript.
+1:25
+And then we have t s config dot JSON, and this actually refers out to two other config files.
+1:31
+There's t s config dot app dot JSON and t s config dot node dot JSON.
+1:36
+And if we peek into either one, there's a lot of configuration happening here to make sure that TypeScript runs smoothly with this install of React.
+1:45
+Let's check out the install, and we're done.
+1:48
+So now we are TypeScript ready.
+1:50
+I'm now gonna do some extra housekeeping here to get our new project set up to accommodate our original React only project.
+1:58
+So first thing I'm going to do is upload the original assembly endgame React project from the learn React course.
+2:05
+It's going to live up here inside of the AE original folder.
+2:08
+Inside of it, we're going to open up index dot CSS and grab all of its content.
+2:13
+And then we're going to come down to our new project and open up index dot CSS and replace all of the content in here.
+2:21
+Back in the original project, if we open up package dot JSON, you'll see two packages, c l s x and React confetti that we'll need to manually install into our new TypeScript project.
+2:32
+So we're gonna do that in one fell swoop.
+2:34
+In the terminal, we will npm install c l s x and React confetti.
+2:41
+And I'll let that do its job.
+2:43
+And one last thing, I'm going to come into our source folder here and delete anything from the boilerplate that we won't be needing.
+2:49
+So that is app dot CSS and the entire assets folder.
+2:53
+And now the stage is set.
+2:55
+We have the original React project up here to draw from.
+2:58
+We have the new TypeScript ready React project to populate, and we've made sure to bring over the CSS and installed any required packages.
+3:05
+Let's get typing with TypeScript from the next scrim.
