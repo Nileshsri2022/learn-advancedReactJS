@@ -1,0 +1,84 @@
+
+Transcript
+0:00
+We've written and saved one of our insert policies for the sales deals table.
+0:05
+Now it's your turn to write the second one, allowing admins to add anyone's deals.
+0:10
+So here's the challenge.
+0:11
+I'd like you to write a policy called admins to add anyone's deals.
+0:15
+Apply the policy to the sales deals table in the public schema.
+0:19
+Restrict the policy to authenticated users only.
+0:22
+Check that admins are making the request by checking the current user's UID matches a user's ID in the user profiles table, and the matching user has an account type of admin.
+0:36
+So I'm gonna just scroll away.
+0:38
+So if you need help, you can always scroll and see how that's done.
+0:42
+But the good thing about yours is because admins can add for anyone, you won't actually need this part, but you will need to check if a row exists in user profiles.
+0:54
+Okay?
+0:55
+Good luck, and I'll see you in a minute.
+1:00
+Okay.
+1:01
+I hope that went well.
+1:02
+So we're gonna create a policy, and we're calling it admins to add anyone's deals.
+1:09
+It's on the public dot sales deals table.
+1:14
+It's for insert.
+1:18
+We're gonna use the to authenticated, and now we get onto the with check.
+1:24
+So the way we check if a row exists somewhere is we use that exists word.
+1:30
+And then in smooth brackets, we kind of start a new select query.
+1:36
+We say select one because we are not interested in the data, just whether the row exists, and we see from the correct table.
+1:46
+And then the where, the current user's UID matches a user's ID in the user profile.
+1:53
+So let's do this bit first, the ID in user profile.
+1:58
+So we say user profiles dot ID equals the current user's UID.
+2:03
+So that's the person doing the inserting.
+2:06
+So we get that by using our auth dot UID.
+2:09
+And because we need to check something else, we use the and word.
+2:13
+The matching user has an account type, so the matching user will be the same row.
+2:18
+So we basically say user profiles again dot account type equals and this time admin.
+2:26
+Okay.
+2:27
+I hope that was alright.
+2:28
+I need you to pause the video again and add this second insert policy on sales deals.
+2:35
+Okay.
+2:36
+Brilliant.
+2:37
+I hope that's all saved.
+2:38
+Do check you have both of these policies set up on the sales deals table.
+2:44
+Alright.
+2:44
+Tick.
+2:45
+Four things done in our refactor to do list.
+2:48
+Next up, we need to fetch all of the profiles from user profiles so we can use them in our app.
+2:54
+See you then.
