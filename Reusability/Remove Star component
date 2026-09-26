@@ -1,0 +1,114 @@
+
+Transcript
+0:00
+Let's finally get rid of the internal state from our star, and actually we're going to find that we can completely get rid of our star component entirely.
+0:08
+Now that we have the toggle on and toggle off components which will allow us to conditionally render something based on the state that's held in the parent toggle component, Let's refactor our app to use those toggle on and toggle off components to conditionally render the star icons that are found from the react icons here.
+0:27
+I've written a couple reminders here.
+0:29
+First is to make sure that you copy these class names over.
+0:32
+In fact, you can probably just copy this whole thing.
+0:35
+Well, you don't need the on click.
+0:36
+Anyway just make sure that you get the class names here because we have some CSS that I wrote for you that we don't want to lose.
+0:42
+And next is to make it so that when you click the star it will toggle the state, but not from the star itself since we won't have the star component anymore, but instead it should toggle the state that's living in the toggle itself, or rather the state that we're passing down through context to our toggle on and off.
+0:59
+There's a little hint here you can read about.
+1:01
+So this is going to be a really fun challenge.
+1:03
+So pause here and refactor our app to get rid of our star component.
+1:12
+The reason we're able to get rid of our star component in the first place is because really all it was doing was setting up state, and then using that state to determine which of these two icons should be rendered.
+1:23
+Because we're now getting our state from our toggle headless component, we really don't need much of the functionality here, and instead can just directly use the components that we get from here and instead can just directly use the components that we get from react icons.
+1:34
+So let me copy this line.
+1:36
+I'm going to put it over in index JS and let's actually look at this a little differently.
+1:41
+Inside of my toggle dot on I'm going to render, let's see if it's on I want it to be the filled star.
+1:48
+So we'll render our filled star here.
+1:51
+And let's bring in those classes from over here.
+1:54
+We have star filled and then the other one is just star.
+1:57
+We'll just remember that.
+1:58
+And let's put that right here.
+2:00
+Okay.
+2:01
+And then inside of our toggle off let's put our empty star that is just be a star.
+2:06
+So we will let's just copy this line and we'll make a couple changes.
+2:11
+This is just be a star and the class name should not include filled.
+2:15
+Okay when I refresh we should see a second star because we're still rendering an instance of our star And okay, cool.
+2:22
+Now we'll notice that when I click this star nothing is happening, and that's because we are not wrapping that star in a button.
+2:30
+This star, however, is wrapped in our toggle button and will still be able to change the state of our toggle.
+2:36
+So when I click this top one, the click event will bubble up to our button component.
+2:41
+Our button component will then flip the toggle state and that will affect whatever's inside of our toggle on and toggle off.
+2:48
+Right now we are rendering this empty star, but clicking this one should hopefully fill both of the stars.
+2:54
+So let's click this, and there we go.
+2:57
+Now this is a little strange because this top star is using its internal state.
+3:01
+It's not using the toggle state, but the bottom star is using the toggle state, not its own internal state.
+3:07
+Now for this second part of our reminders here, clicking the star should flip the toggle state.
+3:11
+Let's get rid of this star and instead because I want the click of these stars to trigger the button, then I'm just going to wrap everything in my button.
+3:21
+We'll indent these other parts.
+3:22
+And now essentially what I'm saying is anything inside of this button that gets clicked should be able to trigger a state change in our toggle.
+3:30
+And that will be true whether this is being rendered with the filled star or this is being rendered.
+3:36
+And remember, it's only going to be one or the other.
+3:38
+It will never render both of these.
+3:40
+Another way I could structure it which would just kind of create more elements is I could wrap each of these in a button.
+3:45
+So I could say this first star is its own button and then the second star would also be wrapped in a button.
+3:52
+Offhand I'm not thinking of necessarily a reason to do that unless it feels like it's more clear for you so I'll just leave it with one button that anything that gets clicked inside will trigger the state change.
+4:03
+Let's refresh.
+4:04
+We should be back to one star and clicking it should work great.
+4:08
+Notice also we're having our console log toggled run which is over in our let's see where is that right here we were console logging toggled.
+4:15
+We can get rid of that now.
+4:17
+And awesome.
+4:18
+Let me clean up the challenge text.
+4:20
+Now you might be thinking to yourself why do I have so many nested components just to have a simple star display that can flip its state back and forth?
+4:28
+And you're justified in thinking that.
+4:29
+This is a little complex for this small thing that's showing up on the page.
+4:33
+However, I think it's time for us to jump back to our collapsing menu and see how we can delegate the logic that was happening in our menu component to our toggle component so that our menu component can just be concerned with the way that things look instead of also having to worry about all the logic that's happening.
+4:49
+Then once we've done that, we'll talk about composition and we'll revisit this kind of crazy looking star and what will be also a crazy looking menu, and we'll learn how to compose them together so that they will be a lot simpler than what we're seeing here.
+5:02
+So once you feel good with everything we've done here we'll jump back to our menu component next.
