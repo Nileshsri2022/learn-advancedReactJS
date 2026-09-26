@@ -1,0 +1,63 @@
+Transcript
+0:00
+I've been doing far too much talking, so it's time to get your hands on the keyboard.
+0:03
+I'm gonna have you read through these questions and answer them by actually typing into the editor here.
+0:09
+The purpose of this quiz is to make sure that we fully understand some of the terminology we've been talking about, not just for the sake of having memorized it, but for the sake of helping us create a solid strategy as we approach improving the performance in our React apps, which is basically what we'll be doing for the rest of this section.
+0:27
+So pause here, actually click in and type down your answers just to get your fingers typing in your mind working, and then we'll go through the answers to these questions together.
+0:36
+Okay.
+0:36
+Let's get started.
+0:37
+The three phases are first the rendering phase.
+0:41
+We'll just call it the render phase.
+0:43
+Second, we have the reconciliation phase.
+0:47
+And third, we have the commit phase.
+0:49
+So what actually happens in the first phase or the render phase I didn't want to give away the answers here so I'll put these answers in here now.
+0:58
+What happens in the render phase?
+1:00
+This is when React will call the component that had the state change trigger this rerender and all of its children components.
+1:07
+Assuming you're using functional components, it will just call the function component.
+1:13
+And if you do happen to be using class components, then it will call the render method of that class component.
+1:18
+So let's type down a concise answer here.
+1:22
+As a side note, when React is running all of the code from these components, if there were any calculations or functions created or whatnot, all of that gets called again.
+1:32
+SideFX will also be called in this phase, assuming one of the dependencies in your side effects dependency array was changed from the old render to the new render.
+1:41
+But we could dive much further down that rabbit hole.
+1:44
+I think this will be a good enough answer for now.
+1:46
+Okay.
+1:46
+Number three.
+1:47
+What happens in the reconciliation phase?
+1:50
+This is where React will use its diffing algorithm and it will compare the old virtual dom render with the new virtual dom render in order to determine the smallest number of changes that need to happen in the next phase, the commit phase.
+2:03
+So we can say something like this.
+2:06
+Okay.
+2:06
+And then the commit phase, this is where the actual visual work happens.
+2:10
+So the list of updates that are necessary as determined by the second phase, the reconciliation phase, will actually be committed or painted or written, whatever you wanna say, to the actual document object model, the DOM.
+2:24
+Okay.
+2:24
+Nice work.
+2:25
+Let's keep moving forward.
