@@ -1,0 +1,128 @@
+
+Transcript
+0:01
+Now that we have the data stored in state, we could do any manner of things with it.
+0:06
+Make a leaderboard to inspire the sales reps to jump on the phones or create a nifty bar chart that could be part of a larger dashboard of visualizations.
+0:15
+That sounds like a good idea.
+0:16
+This scrim will be more data manipulation and creating the bar chart than pure super base, so feel free to skip if you want.
+0:24
+But if you're gonna stick around, let's get cracking.
+0:27
+After updating state with the super base data in the last scrim, we are now holding an array of salespeople objects.
+0:35
+These objects represent each metric or bar in our case we want in our chart.
+0:41
+So name is gonna be on the x axis, and the sum is gonna be on the y axis.
+0:46
+We are going to use the React Charts library to create our bar chart.
+0:50
+The legal team have advised me I must make it clear that other libraries are available.
+0:56
+That was close.
+0:58
+So to install React Charts, we need to run NPM install React dash charts at beta dash dash save.
+1:09
+And then we're going to import it at the top of our dashboard component because this is where the chart will live, and it's only the chart that we're going to be using, and it's from react dash charts.
+1:22
+Brilliant.
+1:25
+Now I'm not gonna go through every single part of this chart, but here's the chart we just imported, and then we've got an options object with all of these options in it.
+1:36
+We've got a primary axis, so I need to quickly write that at the top.
+1:42
+There we go.
+1:43
+And then we've got secondary axis.
+1:47
+Don't worry too much about these.
+1:48
+This is just gonna make sure our chart looks really great.
+1:51
+And then I've written a little function that is going to make sure the bars of our chart don't touch the top of the chart.
+1:58
+That's taking in the metric state variable there.
+2:01
+You can have a look at that in your own time if you want to.
+2:04
+But the important part here is this data property, which is a chart data variable.
+2:09
+So let's create that above here, and this is where we're going to manipulate the data we have in state into the correct format.
+2:18
+The React chart docs tell us that the data the chart component needs must be, and now I hope you're ready for this, an array of one object which has a single data property.
+2:30
+Value of this property must be an array with each metric you want to plot as an object with primary and secondary properties.
+2:39
+These will relate to the primary x and secondary y axes.
+2:43
+Since we want the name plotted on the x axis and the summed up deal value on the y, it needs to look like this.
+2:50
+So that's what we're gonna do.
+2:53
+Since you've had quite a few challenges recently, I'm going to take the reins for this one.
+2:58
+I can hear you thinking, Jonathan, you are too good to us.
+3:02
+Well, you are correct.
+3:04
+You might have realized, but since we have a metrics array, that's the state on the left, with objects in this format, but we want a data array with objects in this format on the right, I'm gonna use the array map method.
+3:20
+Each item in the data array will be an object, the metrics state's name value mapped to the primary property, and the sum mapped to the secondary property.
+3:32
+So let's set up our chart data array.
+3:35
+So we start with an array, and that's got one object which has the data property, and the value of that is going to be an array.
+3:47
+Okay.
+3:47
+So that's set up now.
+3:49
+Now remember, the data array is going to be made up of objects.
+3:53
+So we're going to map around the metrics state variable, and then we need a callback function for each array element.
+4:02
+So we need to call the old element something let's go for m for metric, and then we need the arrow and the smooth.
+4:10
+So anything in these smooth is going to be the element in the new array.
+4:15
+And we remember the new array is gonna be made up of objects.
+4:18
+So we create an object, and that object is going to have a primary property and a secondary property.
+4:26
+Okay.
+4:27
+And the value of the primary property is the old element's name value.
+4:35
+So we access that with the dot syntax.
+4:38
+M, remember, is the old element, and we're accessing the dot name.
+4:42
+Let's just have another look.
+4:43
+So dot name here is going to primary, and then it'll be m dot sum.
+4:49
+Have another look.
+4:50
+Can't be too careful.
+4:52
+Name goes to primary, and sum gets mapped to secondary.
+4:57
+Okay.
+4:57
+Very nice.
+4:58
+Let's save.
+5:01
+And, hey, presto.
+5:02
+The mini browser shows us our bar chart.
+5:06
+We've got name dotted on the x axis and the aggregated sum on the y.
+5:11
+We did it.
+5:12
+We are fetching aggregated data from our table and displaying it in a bar chart.
+5:18
+Next up, we will be setting up the real time update so any changes in our table are immediately reflected in our chart.
