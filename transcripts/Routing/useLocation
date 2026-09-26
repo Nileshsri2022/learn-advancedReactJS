@@ -1,0 +1,188 @@
+
+Transcript
+0:00
+Okay.
+0:00
+So we are linking to the van detail page by its ID and we're passing the state along with the link.
+0:07
+So let's go over to VAN detail and learn how we can receive the state from the incoming link that sent us to this page.
+0:14
+Doing so will require us to learn a new hook called use location.
+0:18
+And I'm going to be perfectly honest, you can probably tell from the screenshot here the documentation on use location I think has a little bit of work to be done.
+0:26
+But nonetheless, I link to it here just in case it gets updated or maybe I'll submit a PR and actually update their documentation to have more useful examples.
+0:35
+So I'm going to import use location.
+0:38
+Use location is more like the use params where it doesn't bring in an array like we have with use state or with use search params.
+0:47
+So I'm going to say const location equals use location and this location object is well it's just that it's an object.
+0:56
+So let's go ahead and console log it.
+0:58
+And we need to go over to the detail page to run that code.
+1:01
+Okay, and you can see it's an object with a number of pretty helpful properties.
+1:05
+Path name gives us the absolute path to where we currently are in our routes.
+1:09
+Search would have a query string there if this page had a query string.
+1:14
+In fact I can see that by saying question mark name equals Bob, hit enter.
+1:18
+Okay so now we can see the path name is slash van slash five, the search is question mark name equals Bob, and that came from the query up there.
+1:26
+Of course you can also see that the state says it's null and that's because I navigated to a new page by adding this query string.
+1:32
+So let me actually go back in the browser and I guess this brings up a really good point.
+1:37
+You can see that just by hitting back I was able to bring back the search state.
+1:41
+If you look in the console there's a property called state and it has an object with a search property.
+1:46
+As a reminder, that's what we created.
+1:48
+We chose to call it search.
+1:49
+This isn't something browser specific.
+1:52
+The property state, however, is something specific from React Router.
+1:56
+But the cool thing is I was able to hit the back button and bring that state back even though it did a refresh of my app.
+2:03
+And in fact, even if I do refresh the app, you can see the state is maintained.
+2:07
+This is what I meant by saying that the browser has its own internal ability to maintain some kind of state based on where you are in the app, and that's all React Router is using under the hood.
+2:18
+Now there is a limitation to this.
+2:19
+If I copy this URL and I send it to a friend, their browser does not have that same state.
+2:24
+There's nothing in the URL that's hidden or secret about the state that I'm trying to maintain.
+2:29
+It's something specific in our browser.
+2:30
+In fact, even if I were to open a different browser and use the same URL, that state would just disappear.
+2:36
+In this case though, that's probably okay because if I'm in a new browser or I send the link to my friend, they may not necessarily care to go back to all the luxury vans like what I'm trying to handle here.
+2:48
+Okay, so by using the use location hook we have access to the state, which is an object that has a search property because that's how we set it up in the Vans List page.
+2:57
+So that sounds like a pretty good time for a challenge now.
+3:01
+Okay, your challenge is to modify the link to prop so that it can send the user back to the previous page with the search parameters included.
+3:09
+If, and this is important, if they exist.
+3:12
+Like the little note says here, we may not have anything in the state if there were no filters applied.
+3:17
+Maybe I came to that page and you can see in this case it says the state search is an empty string.
+3:24
+Or as we discovered we may not be sending state at all.
+3:27
+If I were to add a random parameter up here, say name equals Bob, then state is null.
+3:32
+So we don't even have state dot search.
+3:34
+Keeping that in mind, you'll want to make sure that you code defensively so that you don't run into a bug in case that happens.
+3:41
+Okay.
+3:41
+Pause now and work on this challenge.
+3:49
+Okay now I did leave you in the dark a little bit and I'm hoping that you just had a chance to play play with the code to figure this out yourself.
+3:55
+But when we have a relative path like this with just dot dot, I still can say question mark maybe type equals simple and have that work.
+4:05
+So if I hit save, I'm just hard coding this of course for now, I'll click back to all vans and you'll see that our simple filter is applied.
+4:12
+So let's change this back to luxury.
+4:15
+Of course what this did is it lost the name equals Bob but but that's because we're hard coding it.
+4:19
+This isn't the final solution.
+4:21
+Let's go luxury.
+4:21
+We'll click on a van.
+4:23
+And we have state dot search.
+4:25
+Now we have location dot state actually let me open the console again, location dot state dot search, and that's going to be the query that we want to include.
+4:36
+Don't let this be confused with the location dot search.
+4:39
+Again that's just whatever search is in the URL at the current time when this loads.
+4:44
+And Actually you know what, I'm seeing something now.
+4:46
+The way that React Router handles search is including a question mark at the beginning.
+4:51
+So for the sake of consistency I'm going to make a quick change over here.
+4:55
+Instead of the value just being the search params dot to string I'm going to have it include a question mark.
+5:03
+So we'll just do this.
+5:04
+I didn't expect you to figure that one out that's just a choice that I'm making.
+5:08
+Okay so let's try this again.
+5:09
+We'll go back to all vans, let's maybe hit refresh, change the type to luxury, go over here.
+5:16
+Okay so now our search has the question mark in it.
+5:19
+Again, not necessary but it seems a little more consistent to me.
+5:23
+So because of that I can just change my to prop and we could just say this is going to be a template string and it's going to start with a dot dot and then include location dot state dot search, right?
+5:37
+Well not quite because again there's a possibility that the value of state is going to be null.
+5:43
+If the value of state dot search is an empty string this works fine, but if state is null this is going to throw an error.
+5:49
+So what I'm going to do is create a sort of backup for the location dot state dot search just in case it doesn't exist.
+5:56
+Let's go ahead and save it.
+5:58
+We'll call it maybe, I don't know, we'll say const search is equal to location dot state dot search.
+6:05
+And there's a relatively new feature in JavaScript that's called optional chaining.
+6:10
+In fact it's new enough that Scrimba is going to complain about the syntax, but I promise you it still works.
+6:15
+And so I can say if location dot state is a thing then check for a search property and that value is going to be the value of my new variable that I'm setting up.
+6:24
+But if that doesn't exist, let's just say it's an empty string.
+6:28
+That gives me a fallback just in case location dot state does not exist my value will be an empty string.
+6:35
+So I'm going to take my search and replace, well I guess we can just delete that part and say the search will go here.
+6:42
+Let's hit save.
+6:44
+I'll close my console to buy some space.
+6:47
+Let's go back to all vans and awesome that took us to type equals luxury.
+6:51
+Perfect.
+6:52
+Rugged, go into one of them, back to all vans, type equals rugged.
+6:56
+If you didn't know about optional chaining or you didn't want to use optional chaining you could also simply say something like location dot state and location dot state dot search.
+7:07
+This was usually how it was done before optional chaining existed in JavaScript, But because optional chaining does exist, even though Scrimbus is going to complain about the syntax, I'm going to leave it in here.
+7:19
+What's nice about this is it should work with any other filters or queries that we have included in our URL.
+7:25
+So if I add back my and name equals Joe, I click on one of the rugged vans, now we have type and name in our queries.
+7:33
+We go here and then I say back to all vans, it's going to maintain both the type query and the name query.
+7:41
+Alright that was a lot to take in.
+7:44
+As always if you did struggle through this challenge, now that you've seen me do it, I recommend you scrub back to before the challenge and just try it again on your own.
+7:51
+Practice really does make perfect.
+7:53
+Since that one was pretty heavy, let's do a quick challenge that's going to be a little bit lighter, and then we'll be ready to move on.
