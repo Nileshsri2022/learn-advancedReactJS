@@ -1,0 +1,58 @@
+
+Transcript
+0:00
+Okay challenge time again.
+0:01
+Your task is to change the links that we have into buttons and to use the set search params function, which remember we instantiated up here, to set the search params for the filtering of our vans.
+0:13
+Make sure you keep all the class names exactly the way they are.
+0:17
+Pause now and work on the challenge.
+0:24
+Okay.
+0:24
+This should be pretty straightforward.
+0:26
+Let's go ahead and select all of our links.
+0:29
+We'll select the link to the clear filter option as well and we will change these two buttons.
+0:35
+And then instead of having a to property, we'll select all those, we're going to actually let's leave the string there for now.
+0:44
+We'll say that when this button is clicked, so on click, it's going to be equal to a function.
+0:52
+We'll need to run that inside of curly braces and I can't just say set search params right here because I would need to call it, and that means it will get called as soon as the page loads, not as soon as the button is clicked.
+1:07
+We need to pass a function.
+1:10
+And let's go ahead and move, oh it looks like my strings are a little off, that's okay, we'll make it so that this string goes inside here and then we'll move this string inside, actually this is just going to be an empty string.
+1:26
+Remember the dot string like this like we had with the link before?
+1:29
+That's something specific to react router that it's doing under the hood.
+1:33
+So set search params is actually using the URL search params constructor and that won't, I don't think, know what to do with having a string of a dot in there.
+1:43
+So we'll just have it be an empty string.
+1:45
+Again when we're passing in a string we can include or not include the question mark.
+1:49
+Let's just leave it there because we're actually going to change this in just a second anyway.
+1:53
+So let's hit save and type simple, type luxury, type rugged, and gone.
+1:59
+Perfect.
+1:59
+Now like we learned the string is not probably the most common way to do this, although it works just great.
+2:06
+Instead a little more commonly you'll see an object passed in here.
+2:10
+We'll actually just manipulate the string that we had and turn this into an object like this.
+2:16
+And then for here we'll pass in an empty object which means that we have no search parameters when we set the search parameters.
+2:24
+Alright, let's hit save.
+2:27
+And yet again it's working like we would expect.
+2:29
+Great work.
