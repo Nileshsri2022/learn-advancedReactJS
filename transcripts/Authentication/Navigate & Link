@@ -1,0 +1,231 @@
+Transcript
+0:00
+Now that we can sign in, let's learn about navigate and link.
+0:05
+When we have a successful sign in, we see here we need to follow this arrow and get to the dashboard route, which is gonna render the dashboard component.
+0:15
+So we've got this comment here, navigate to dashboard.
+0:18
+Let's finish that bit now.
+0:20
+Navigate is a function provided by the use navigate hook from React Router Dom.
+0:26
+I'm gonna import it at the top,
+0:29
+and it's from React Router DOM.
+0:33
+And then because it's a hook right up here with use auth, we're going to say use navigate, and then React Router provides this function for us.
+0:42
+So we say const navigate.
+0:45
+There we go.
+0:46
+We can now use this navigate function.
+0:49
+So down here, we can replace this, and we just say navigate.
+0:55
+And we pass to it the path that we want to go to, which let's have a quick look in router.
+1:02
+It's going to be slash dashboard.
+1:06
+Okay.
+1:06
+Let's save.
+1:08
+Okay.
+1:08
+Now we can test.
+1:10
+Hopefully, when we sign in, we get navigated to the slash dashboard route.
+1:17
+Fantastic.
+1:18
+There we go.
+1:20
+And we see Superbase sign in success.
+1:22
+Alright.
+1:23
+Next, we're gonna move on to linking from sign in to a new sign up component I've just created.
+1:30
+So let me navigate back to our home route.
+1:34
+You can see here I've created a new sign up dot JSX.
+1:38
+It's very similar to sign in.
+1:41
+The only difference is that we have the word sign in.
+1:44
+We have different form description, but you can see all of that's very similar.
+1:50
+So it's a challenge time now.
+1:51
+In Router, I'd like you to create a new route for this sign up component.
+1:58
+Here we are.
+1:59
+So I'd like to create a new route with path slash sign up, set the element as the sign in dot j s six component.
+2:06
+Remember that's not been imported yet.
+2:09
+And then save and test your path by navigating to slash sign up in the mini browser.
+2:14
+Good luck.
+2:20
+Okay.
+2:20
+I hope that went well.
+2:22
+So why don't we just copy one of these objects?
+2:26
+There we go.
+2:27
+And it's sign up this time.
+2:30
+And the component is sign up, not sign in, and we need to import it.
+2:37
+It's gonna be very similar to here, so why don't we just copy that and modify it?
+2:44
+There we go.
+2:45
+Save that, and I'm gonna test it by navigating to sign up.
+2:52
+And there we go.
+2:53
+It says sign up today, and we have the we'll link eventually back to sign in and sign up in the button.
+3:00
+Lovely.
+3:01
+Now let's work on linking between these.
+3:06
+So let me go back to sign in, which is our home route.
+3:10
+We need this sign up to be a link to our new sign up component.
+3:17
+And here it is in the code.
+3:19
+We're gonna use a link component.
+3:21
+This is also from React Router DOM.
+3:24
+So let's add it to here.
+3:28
+And it's a component, so we're going to wrap it around the sign up word.
+3:34
+It's a component, so we need to remember capital l.
+3:37
+I'm gonna give it a class name of form link.
+3:41
+And then the other side of this, we need our closing.
+3:44
+There we go.
+3:46
+Now link, it renders as an a anchor tag in the DOM, but does not cause a full page reload.
+3:52
+Instead, it updates the URL and renders the new route instantly using JavaScript.
+3:57
+So this is not quite finished.
+3:59
+We haven't told it where we want to link to.
+4:01
+So we add a to prop, and then we write in the path.
+4:06
+So let's have another look at this.
+4:09
+Remember that our sign in can link to sign up.
+4:13
+And in a minute, I'm gonna get you to do the other way, link back to sign in.
+4:18
+So we want to go to sign up.
+4:21
+Okay.
+4:21
+I'm gonna save, and now we've got our nice green link.
+4:26
+And I click to it, and there we go.
+4:27
+We we renavigate to slash sign up.
+4:31
+This isn't a link yet.
+4:32
+This is what you're gonna finish off now.
+4:35
+So over in sign up, here is another challenge.
+4:38
+Wow.
+4:38
+I do work you hard, don't I?
+4:40
+I'd like to import the link component from React Router DOM, turn the sign in, so that's all the way down.
+4:48
+I missed it.
+4:48
+Here.
+4:50
+Into a link, which routes back to sign in, add the form link class to the link, and save and test your link.
+4:57
+Now if you need to know the path for this, check our router dot JSX because remember, the sign in component is not rendering in the slash sign in path.
+5:08
+Okay.
+5:09
+Remember, if you need to see the slides, you can use a command y or control y.
+5:14
+Good luck in this challenge.
+5:15
+I'll see you in a minute.
+5:20
+Okay.
+5:21
+I hope that went well.
+5:22
+So at the top, we're going to import link from React Router DOM,
+5:28
+and we're gonna turn this into our link.
+5:31
+And we need the class name, and we need the two.
+5:35
+Let me leave that blank for now until I finish the closing, and then we're just going to push that forward.
+5:43
+Very nice.
+5:44
+Okay.
+5:45
+So we've done this.
+5:47
+We've reached back to sign in.
+5:49
+Now
+5:51
+sign in was in our home path, wasn't it?
+5:54
+Yeah.
+5:54
+If I look at this again, user visits home, and they see the sign in page.
+5:58
+Okay.
+5:59
+So it's a simple slash for the home path.
+6:03
+Have I finished everything?
+6:05
+Yep.
+6:05
+Okay.
+6:06
+Get rid of the challenge text, and we can save.
+6:09
+And, yes, in our sign up component, we see the sign in link now in green.
+6:14
+We click that, and we go back to our home path.
+6:17
+So we can just keep going back and forth.
+6:19
+Okay.
+6:19
+Brilliant.
+6:20
+So I navigate to slash dashboard on successful sign in is sorted, and we can now link between our paths of home for sign in and slash sign up for sign up.
+6:32
+Let's work on being able to sign out now.
+6:34
+See you in the next scrim.
