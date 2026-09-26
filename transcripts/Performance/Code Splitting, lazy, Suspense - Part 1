@@ -1,0 +1,94 @@
+
+Transcript
+0:00
+One of the biggest issues we face as web developers is having an application that has assets to it, whether that's a third party package that's kind a really heavy large package or some other kinds of assets that are just big and bulky.
+0:13
+Now when you're working on your own computer that's maybe pretty powerful and you're working on a Wi Fi network that's likely pretty strong, you might not notice these issues.
+0:22
+However, because this is web development, many of your users will not be on powerful machines and will oftentimes not be on a powerful internet connection.
+0:30
+Think of any mobile device.
+0:32
+If you've ever been using a mobile device that didn't have a strong cellular connection, you might have noticed that some things just take a long time to load.
+0:40
+So this is where the concept of code splitting comes into play when it comes to increasing the performance of our React applications.
+0:47
+In short, code splitting allows us to reduce download size for parts of our application.
+0:52
+More specifically, code splitting allows us to conditionally import parts of our code only if or when they're needed, instead of, as the alternative, always importing something, in our case we'll maybe call it heavy code, whether you need it or not.
+1:06
+Let's look at our application here, and forgive me with some of these performance related lessons.
+1:11
+I do sometimes have to use pretty contrived apps in order to demonstrate what I'm teaching, but without without getting so complex that it loses the message.
+1:19
+So here let's imagine we have an app that has some certain features that we're allowed to use, like this counter, and it has another feature that we can click show products, and only when we click show products will it actually show a list of the products for this app.
+1:32
+Essentially, I'm trying to show that this show products might not be a feature that our user actually needs.
+1:37
+They might only need these other features that exist as soon as the app loads.
+1:41
+However, if we look at the code we can see that in our index JS we are always importing products list.
+1:47
+Products list is using this products data from our data file, and Data JS is using a library called Faker, which as it turns out and as we'll see in a few minutes, is a pretty large library, especially if you're downloading it on a slow connection.
+2:02
+However, in our case, our user might not be interested in this show products feature.
+2:07
+So code splitting allows us to sometimes import those features or those libraries of code or whatever it might be if the user actually needs it.
+2:15
+If the user does need it, then it will split up our download times so that our main features like this counter feature that we have here aren't going to be blocked by any slow connections that our user might be experiencing.
+2:27
+And in the best case scenario, maybe the user doesn't need that feature at all, and so the download of that code will be bypassed altogether.
+2:34
+Okay.
+2:34
+So how exactly does code splitting work?
+2:36
+We're going to learn about a function that is oftentimes called dynamic import, and it's just a built in function to JavaScript that's called import that you can execute as a function.
+2:46
+And because it's a function, that means that we can put it inside of our code and conditionally run that import function, instead of like we have here at the very top of our file, always running this import.
+2:58
+So dynamic import is something that was introduced into the core part of JavaScript.
+3:02
+We are going to use it in combination with a function in React called lazy, React dot lazy.
+3:07
+And these two together will allow us to only import or load a heavy component if that component is needed.
+3:14
+Then because of the way React dot lazy works under the hood, we will need to make use of the suspense component that also comes from React to provide some kind of fallback user interface while this lazy component is in the process of loading.
+3:26
+Because we have a lot of ground to cover, I'm going to just talk about one more thing in this lesson before we move on to the next one where we get into the nitty gritty of how this works.
+3:35
+Because of the way that Scrimba is running this React app under the hood, this one right here, there's going to be a little bit of limitations when it comes to using your developer tools here inside of the Scrimba interface.
+3:47
+And so I'm going to ask you before we move on to the next lesson to set this project up locally.
+3:52
+Now the Scrimba layout may change in the future, but at the time of recording you can click this little gear icon in the lower right and choose download as zip.
+4:00
+If things have moved around a little bit, just look for the option to download this project as a zip.
+4:05
+That will download a zip file to your computer.
+4:07
+You can most likely double click it to open the contents of that zip file, which should just be a folder with probably kind of a crazy looking name.
+4:14
+And then I just want you to open that folder in your editor of choice.
+4:18
+I'm gonna be using Versus Code.
+4:19
+Inside of Versus Code, I opened my integrated terminal and I'm running npm install, And then when that finishes, npm run dev.
+4:27
+I just chose to put them both in the same command with this double ampersand so that my terminal would run them one after the other.
+4:34
+Once Once that's finished, npm run dev will spin up this project locally, and the default port will be five one seven three.
+4:40
+In Versus Code I think you can just click that URL that's here, or of course you can copy and paste it, but in your browser, I'd recommend using a Chrome based browser so that the Chrome developer tools that we're gonna be talking about will make sense.
+4:52
+Once you've done that, opened it in your browser, I want you to open your developer tools, head over to the network tab, and change the throttling from no throttling down to fast three g.
+5:03
+Now don't let the name fast three g fool you.
+5:05
+It is not gonna be very fast.
+5:07
+Okay.
+5:07
+We've covered a lot of ground here, a bit more on the theoretical side.
+5:10
+So I'm excited in the next lesson to actually look at some of these numbers and figure out how we can use code splitting to increase the performance of this app.
