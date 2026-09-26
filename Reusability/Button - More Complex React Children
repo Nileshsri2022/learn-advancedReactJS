@@ -1,0 +1,132 @@
+
+Transcript
+0:00
+One of the things that becomes clear when you start using children in React is that there's really nothing stopping us from doing more than just putting bare text as the children inside of our custom components.
+0:10
+For example, there's nothing stopping someone from using our button by putting an unordered list inside and of course having a few list items.
+0:20
+I don't know, maybe they're putting in some car brands or something.
+0:24
+I can hit refresh and, well, it looks pretty silly but I have successfully put an unordered list inside of the contents of my button.
+0:31
+The idea of putting multiple children elements inside of a custom component can get a lot more complex.
+0:37
+We're going to touch on that later in this section, but for now I want to do something simple just to practice this a little bit.
+0:43
+I'm going to undo this unordered list here, and let's say the user of our button really just wants to put an icon to the left side of Buy Now.
+0:51
+Well if we weren't using children then we might expect some kind of API where we say, well you can include an icon if you'd like.
+0:58
+And I don't know, the person could pass in an SVG or a React element or something here for the icon, but then what if we wanted to allow them to put the icon on the right side of the button?
+1:08
+Then we might have to go even further and include some kind of prop like icon location where we only allow the options of left or right, and then inside of our button we have to account for the icon location and put it in the right place depending on what value they passed in for the icon location prop.
+1:24
+With React children all of this goes away.
+1:26
+We don't have to worry about any of that, and the button becomes much more easily reusable.
+1:31
+Because we can pass in whatever we want as children, I can really just put an icon here to the left side of my button.
+1:38
+Let's put these on their own lines just to make this a little easier.
+1:41
+And I'll just put a little inline comment here that says icon goes here.
+1:46
+What's nice about this is that if the user of our button wants to put the icon on the right side, all they have to do is move it to the other side of the Buy Now text like that.
+1:56
+For now let's keep it on the left side.
+1:57
+Now there's a lot of different ways to do icons, but I recently came across a package called React dash icons that's actually really awesome.
+2:05
+I've included here a screenshot and a link.
+2:07
+If you click the screenshot it'll take you to the React icons GitHub page where you can see all this information.
+2:12
+And what's really great about it is that it doesn't just choose one icon library to use, but it collects together a bunch of different icon libraries.
+2:20
+So you can look through the different icons that they offer and then simply import them as React components and put them into your code wherever you want.
+2:28
+Let's say for example you wanted to include something from the Font Awesome icon library, you would just click on the Font Awesome option on the left side and it would show you all the different icons and exactly how to import them.
+2:39
+And now wait a second, I was going to put the icon in here, but I've been doing way too much work here.
+2:43
+I think it's your turn to get your hands on the keyboard.
+2:45
+So let me write up a little challenge for you.
+2:48
+Okay I want you to go to the documentation for react icons.
+2:51
+You can click on the screenshot here to do that, And I want you to add the f a money bill icon, which is from the Font Awesome library, to the left of the buy now text in the button.
+3:00
+So that'll go exactly right here.
+3:02
+Remember you will want to remove the curly braces when you put in your icon.
+3:07
+And if you're feeling adventurous you can decide to style it a little bit if you'd like, but we're going to do all of that together.
+3:12
+So pause the scrim and work on this challenge.
+3:20
+Okay.
+3:21
+Hopefully that went pretty easily.
+3:22
+You can see from the documentation that all you need to do is to import the icon that you want from react icons slash fa.
+3:31
+The slash fa part is what specifies the Font Awesome icon library.
+3:36
+So I can say import and I even gave you the name of the icon right here so FA money bill from react icons slash FA.
+3:48
+And then I just use that as a component.
+3:51
+So FA money bill.
+3:53
+I'll hit save.
+3:54
+And great!
+3:55
+Well we can see that there's some styling issues here.
+3:58
+In fact let's address those really quick, that might be helpful.
+4:00
+On the button they're not exactly centered so I'm going to put the display to flex and the align items to center because that's a really easy way to vertically center things.
+4:11
+That's looking a little better.
+4:12
+And then the SVG doesn't have very much space that it's giving for the text to the right of it.
+4:17
+So we can actually target the SVG.
+4:19
+I'm going to make sure I select the SVG inside of the button just to add some specificity.
+4:25
+And let's just give it a margin right of, let's say, seven pixels.
+4:29
+Yeah that looks great.
+4:31
+The cool thing about these icons being SVGs is I can modify the color of it just like it were text.
+4:36
+So maybe I want the color to be green just to make it pop a little bit.
+4:39
+And awesome this is looking great.
+4:41
+I also can change the height and the width if I want.
+4:43
+So maybe actually don't know what these are.
+4:45
+Let's say thirty pixels just to see what those look like.
+4:48
+Oh that's a little big.
+4:49
+Maybe let's go to twenty pixels.
+4:52
+And awesome this is looking great.
+4:54
+Now like I mentioned before one of the nice things about this is that the user can just decide actually I want the money bill to be on the right side and it's going to mess with some of our styling because we put margin right but hopefully you get the idea.
+5:05
+Let's move that back.
+5:07
+The ability to add other components inside of your custom components through React children, like I mentioned, will open up a whole world of possibilities.
+5:15
+Later in this section we are going to be covering compound components and how we can pass state implicitly between them and all kinds of really more complex but also really fun things.
+5:25
+But for now we have a few more topics we need to learn about our button before we're quite ready to move on to other components in our awesome component library.
+5:32
+So Once you've had a chance to complete this challenge and to play around with the code a bit, let's keep moving forward.
