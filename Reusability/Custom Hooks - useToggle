@@ -1,0 +1,106 @@
+
+Transcript
+0:00
+Okay.
+0:00
+Like I told you, there's some good news and there's some bad news.
+0:03
+The good news is that we can use our fresh knowledge of creating custom hooks to dramatically simplify our code base here.
+0:10
+The bad news is it means that we are essentially going to be getting rid of the toggle component that we spent so long learning.
+0:17
+It's been an awesome way for us to learn how we can use the React ecosystem to create some pretty cool patterns, but the truth is most of what we have going on with our toggle can actually be extracted to a custom hook and can therefore simplify quite a bit of the rest of our code.
+0:32
+So don't be too sad about the toggle component, it's been really helpful as we've been learning, but it's time for us to upgrade.
+0:38
+Now with the use effect on update hook that we just created, notice that we're not returning anything from our function.
+0:44
+Just like when we use react dot use effect we are setting up this effect and kind of hooking it into the render cycles of react, but it's not giving us anything back in return.
+0:54
+A number of other hooks will actually give us something back in return, like when we used use ref we get this value back that we can then use in our code.
+1:01
+When we use use state see where are we actually using use state?
+1:05
+Here we go.
+1:05
+Go, when we do use state we get this array with a state value and a state setter function and we can do the same thing in our custom hooks.
+1:14
+So the new custom hook we're going to make we're going to call use toggle.
+1:18
+And we're gonna get started on a simple version of use toggle and then we're going to beef it up and make it even more capable.
+1:24
+So let's start with the bare bones.
+1:26
+In the hooks folder I'm going to create a use toggle file.
+1:30
+Now the whole purpose of this use toggle hook is going to be essentially setting up the state like this on and set on, creating this toggle function.
+1:39
+Eventually, it's also going to use this use effect on update hook that we ran.
+1:43
+And then it will only expose the small pieces that we actually need to use inside of the components that need access to toggling logic.
+1:51
+So in the end this hook is going to be relatively small but it's going to do quite a bit for us.
+1:57
+So this is the perfect time for you to start building out the bare bones as part of a challenge.
+2:03
+Okay so for the first part of this challenge I'm going to have you create a function called use toggle.
+2:08
+We're gonna skip any parameters for now, we'll get back to that later.
+2:11
+And then simply go to the toggle JS and bring over the use state call that we have there and the toggle function that we created.
+2:18
+Once you do that we'll move on to part three of the challenge.
+2:21
+So pause now and work on numbers one and two.
+2:29
+Okay let's create our function called use toggle.
+2:32
+You may have known ahead of time that we're probably going to need to access this somewhere else so we can export default, the function we just created.
+2:39
+And I did give you a little bit of an easy way out.
+2:42
+I'm allowing you to copy these things that we have here.
+2:45
+So let's just copy those and we'll paste them right there.
+2:48
+Remember the thing that sets a custom hook apart from just a regular utility function is that the custom hook will be using some sort of other built in React hook, and its purpose is essentially to combine together other React hooks into a useful pattern that will then be reused in other places.
+3:06
+The only reason I mention this is because this was a little confusing for me when I first started creating my own custom hooks.
+3:12
+I would have some kind of task like going out to an API and getting some data.
+3:16
+And I started creating these custom functions that I was starting with the word use as if they were a custom hook, but that hook didn't set state.
+3:24
+It didn't have any kind of effect or anything dealing with other hooks in React.
+3:28
+So really what I was creating was just a utility function.
+3:31
+It wasn't a custom hook.
+3:32
+In our case, because we're accessing use state and eventually we'll be using a use effect as well, this is a custom hook.
+3:38
+And so it's important to start it with the prefix of use.
+3:41
+Hopefully that clarifies something and hopefully helps you sidestep the confusion that I was having when I first started learning this.
+3:47
+Okay.
+3:48
+Well that was simple enough to finish the first two parts of our challenge.
+3:51
+Now I mentioned that we're going to be getting rid of the toggle component, but we're going to do that in phases.
+3:57
+So the first thing is I want my use toggle to essentially replace these two portions that we have here and instead be able to use it like this.
+4:06
+I might say const on and then instead of getting set on and then having to create a separate toggle function that uses it like this, I'm hoping that I can just create on and then a toggle function that we get back by calling our use toggle hook.
+4:22
+Of course this is not going to work because we haven't finished our use toggle hook, But you know what?
+4:27
+I'm gonna leave this code this way and it's probably going to break.
+4:31
+Yep.
+4:31
+Use toggle is not defined.
+4:32
+And then that is going to become part three of our challenge.
+4:36
+Since this lesson is getting a little bit long, you can take any time you need to review what we've done here, and when you're ready we'll work on the next parts of this challenge.
