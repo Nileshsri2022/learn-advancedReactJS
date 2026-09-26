@@ -1,0 +1,47 @@
+Transcript
+0:00
+Thus far in the app we've been mostly coding for what we call the happy path.
+0:04
+And all that means is that we've been assuming in the way that we write our code that everything is going to just work out perfectly.
+0:11
+Let me show you an example of what I mean.
+0:13
+Over in our server JS file for the vans endpoint, I changed the code so that it would just always return a four hundred level response.
+0:21
+That means that it's throwing an error.
+0:23
+It wasn't able to get the vans from the database or whatever it might be.
+0:27
+But the point is this is hard coded so every time we try to fetch to slash vans it's going to fail.
+0:33
+Over in our vans JSX if we look at our code we have this useEffect that's running as soon as the component loads for the first time or mounts for the first time.
+0:42
+It's fetching the data and then it's just assuming that the data is always going to come back perfectly.
+0:47
+However, now that the server is hard coded to return a four hundred level response, let's go over to Vans and the app just completely crashes.
+0:55
+There's no useful information here to the user saying that the server is currently down or please try refreshing the page or anything like that.
+1:03
+Instead the way that we've written the code assumes that vans is going to get set correctly into our state and therefore when we go down here and we say displayed vans dot map, we get a problem because displayed vans is not an array.
+1:16
+So this brings us to a quick lecture on the difference between the happy path and the sad path.
+1:22
+So let's look at what the happy path is.
+1:24
+This is what we've mostly been coding.
+1:26
+It's when we assume that everything goes perfectly according to plan just like we would hope that it does, and it doesn't account for any errors or other problems that might happen in our code.
+1:36
+Anytime we're reaching out to another service like an API or a back end or a database or whatever it might be, those things are out of our control, and it's not terribly uncommon for some kind of problem or failure to happen.
+1:48
+So that's why it's important as experienced software engineers for us to always take into account the sad path as well.
+1:55
+This forces us to imagine what could possibly go wrong and to plan accordingly.
+2:00
+So this is where we would start thinking about things like error handling, different loading states, form validation, and all of those beneficial user experience things that we might want to add into our app.
+2:10
+So the next couple of lessons won't be specifically geared toward learning something new in React Router six, but it is a really important point of hygiene that we need to take care of before we move on.
+2:21
+And by the way, we are almost done with the main topics that we have to learn here in the career path version of React Router six.
+2:28
+So let's jump right in and start considering the different ways we can handle the sad path.
