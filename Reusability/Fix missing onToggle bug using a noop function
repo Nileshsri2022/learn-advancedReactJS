@@ -1,0 +1,36 @@
+
+Transcript
+0:00
+In our star component we have left this empty function running on our stars on change prop.
+0:06
+Inside the Star JS it's just taking that on change and passing it to the on toggle of our function, and if we don't pass something to the on change of our star then it's going to pass an undefined value to the on toggle of our toggle and the toggle is receiving that on toggle through props, but it's actually calling it.
+0:26
+So if we don't provide an on change to our star, let's remove that and I'll refresh and then I try to click my star, we're going to crash.
+0:34
+That's because it says on toggle is not a function because we're trying to pass undefined down through the star to the toggle.
+0:41
+That's not a great experience because we don't want to force the user to provide an empty function just so that it appeases our toggle here.
+0:48
+There's two easy solutions to this.
+0:50
+One is I could check before I use on toggle just to make sure that it's a function, but another really easy way is just to provide something called a no op function.
+1:00
+No op looks like the word noop.
+1:02
+It's, uh, n o o p, but it's pronounced noop because it has no operation.
+1:08
+Effectively it's just a completely empty function, and I can just provide that as the default for on toggle inside of my toggle function.
+1:15
+I can do that by saying that on toggle is equal to an empty function.
+1:20
+So if on toggle is passed to my toggle component, then it will take the value of whatever I pass to it, and if not, then it will default it to an empty function.
+1:29
+No, it actually wouldn't be a terrible idea for me to double check that the value for on toggle is a function before I run it, but there's honestly a million things that we could be checking and doing in order to make this a more robust component library that are just a little bit outside the scope.
+1:45
+We've already gone down quite a rabbit hole into seeing how cool we can make this toggle function.
+1:49
+So I think it's time for us now to dig ourselves out, and we're going to tackle the last part of our toggle component, which is to create another sort of sub component of our toggle compound component that exposes access to the outside of our toggle component of the state that was created inside the toggle component.
+2:05
+To do that we're going to use a pattern in React called render props.
+2:09
+So that's what we'll be jumping into next.
