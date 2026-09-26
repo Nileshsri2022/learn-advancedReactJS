@@ -1,0 +1,150 @@
+
+Transcript
+0:00
+Now to learn how Superbase remembers who we are when we're logged in, but also how the same JWT system has handled our anonymous requests up to now.
+0:11
+Remember when you created the Superbase project at the start of the course?
+0:15
+We used a project URL and an API key.
+0:19
+The key is called the Anon public key seen here.
+0:24
+We stored both the project URL and the Anon key in our environment variables in Scrimba Even though this API key looks like a string, well, plot twist, API keys in Superbase are actually something more sophisticated.
+0:39
+They are JWTs, JSON web tokens, a way for securely transmitting information between parties as a JSON object.
+0:49
+We can see here we have lots of numbers and letters and then a dot.
+0:54
+Well, if you could see the rest of it, you'd see there are actually three sections separated by dots.
+0:59
+The first section is the header, then we have the payload, and then the signature.
+1:04
+I mentioned JWTs in the last screen when I said that Superbase issues a JWT when a user signs in.
+1:11
+Well, all will be explained now.
+1:14
+So to understand how this works, I have a metaphor for you.
+1:18
+I've been back and forth on which metaphor is best.
+1:21
+I hope this one works for you.
+1:23
+Let's imagine that creating our super base project was building a beautiful grand castle, which can store anything we want.
+1:32
+Each room is like a different table in the database.
+1:35
+When we send a request to the castle, it's like sending the castle a letter.
+1:41
+This letter might say, please add something to this room.
+1:44
+Please send me the contents of this other room, or please delete some of another room.
+1:49
+You get the idea.
+1:51
+The project URL is like the postal address on the front of the letter to which castle or project it will be sent.
+2:00
+Now on to the JWTs.
+2:02
+Let's think of this JWT like a certificate that is created by the castle.
+2:08
+The first type of JWT we're gonna talk about is this AnonKey that we mentioned earlier.
+2:13
+It was created when the castle was built, and we've hung it on our wall in our client house out in the kingdom somewhere.
+2:22
+Here, we can see the Anon key certificate over on the client side.
+2:27
+So on the left here is the super base castle, and on the right, this is our client house somewhere in the kingdom.
+2:34
+Stick with me on this.
+2:36
+The three parts here in the Anon key are represented here as the header on the left.
+2:41
+That just has information on the algorithm that was used to create it, so we don't need to worry about that.
+2:47
+The middle part is the payload, this scroll.
+2:50
+This includes the claims of who we are and what permissions we have, and then the right symbol is the signature.
+2:57
+And this is the part I'd actually like us to start talking about.
+3:00
+So information in a JWT certificate can be verified and trusted because it is digitally signed.
+3:08
+Continuing my metaphor, when the castle created this JWT certificate, it signed it using the castle's unique magic secret pen.
+3:20
+The signature that was created is the proof of authenticity for the certificate.
+3:25
+This magic secret pen is the project secret.
+3:29
+See what I did there?
+3:30
+In our Superbase back end, and you can find this if you look deep enough in your Superbase project.
+3:37
+It's something we definitely do not want to leak since anyone who has access to it can create new certificates and also verify existing ones.
+3:45
+So when creating any JWT, Superbase uses this secret to cryptographically sign the first two sections, that was the header and the payload, of the token to produce the signature, the third part.
+3:59
+And Superbase signed the Anon key when it was created on project creation, and we've stored it in environment variables.
+4:07
+Now whenever we write a new letter or request from the client house to the castle database, we include a copy of this signed JWT certificate.
+4:19
+The superbase docs actually say that this Anon key is for developers to send along with their API requests whenever they want to interact with their superbase database.
+4:29
+So we send off our letter with that project URL address on the front in the post.
+4:35
+It arrives at the castle, and the guards verify it by taking the castle's secret magic pen, and they use it to write a new signature based on the certificate's contents.
+4:47
+They then compare this fresh signature with the one already on the certificate.
+4:51
+If they match perfectly, they know this certificate was originally signed by our castle, and nobody has altered anything since we signed it.
+5:01
+They can say, yes.
+5:02
+This particular certificate was signed here by our secret pen.
+5:06
+It's come from a legitimate source, and it hasn't been tampered with.
+5:10
+If anyone had tried to change anything in the header or the payload, the signature wouldn't match.
+5:16
+So in reality, Superbase takes the header and the payload, applies the secret key algorithm, and compares the result with the signature part of the JWT.
+5:26
+The reason the key is called the anon key is because it's used by our front end app to initialize the Superbase client and make requests as an anonymous not logged in user.
+5:36
+We're about to get into that anonymous part now.
+5:39
+Okay?
+5:40
+So the Anon key proves it's a valid token for our specific project via that signature.
+5:47
+So that was about that signature third part.
+5:50
+Now we're gonna go on to the middle part, the payload, this part here.
+5:55
+So the payload is encoded using base sixty four, which is a simple letter scrambling.
+6:00
+For an authorized user, and we'll see this in the next scrim, the payload includes lots of details about the user.
+6:06
+But for this anon key, you guessed it, it doesn't, since there's nobody logged in.
+6:13
+But it does have one important piece of information.
+6:16
+The payload has a part detailing the sender's role, and this is one of two values.
+6:21
+It's either anon or authenticated.
+6:25
+In our metaphor, this part of the certificate reads, this is a public anonymous request, or this user is a full blown signed in member.
+6:35
+Up to now, when we've been making requests to Superbase, you know, like our select or our insert for deals in the sales deals table, this Anon key that Superbase created and we've stored in environment variables is sent to Superbase with a role of anon, hence why it's called an anon key.
+6:56
+It's like a basic visitor's pass, whereas a logged in authenticated user's JWT is like a full member badge with specific permissions.
+7:06
+Superbase knows which project or database to connect to, but the user is considered a non.
+7:13
+This is like a public anonymous request.
+7:16
+For a deeper dive, I recommend watching the CTO of Superbase talking about JWTs.
+7:22
+Click the screenshot, and you can hear from Ant as he decodes JWTs and shows how that signature is created using the project secret.
+7:31
+Next, we're gonna see what changes when a user signs in and Superbase issues them a full member's badge JWT.
+7:39
+See you in the next scrim
