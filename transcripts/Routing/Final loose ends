@@ -1,0 +1,42 @@
+
+Transcript
+0:00
+The last thing that we haven't transitioned over to Firebase is the host VIN's detail page.
+0:05
+You can see that we're missing some information here.
+0:08
+And to be completely honest, because we're not dealing with authentication here, we're really going to cheat on this one.
+0:14
+I'm going over to host van detail And instead of pulling from get host vans, which used to be able to take an ID, we're just going to pull in get van.
+0:23
+And then I need to change that down here.
+0:26
+We'll say get van and pass in the ID.
+0:30
+Of course, this means that anybody could come to slash host slash vans slash and then the ID of any van in the database.
+0:37
+But because we don't have any kind of edit functionality in our app right now, it's not that big of a deal.
+0:43
+In the end, we would need to implement real authentication and then set up security rules in Firebase so that it would only allow edit access for documents that belong to or rather have the host ID value of the currently logged in user in Firebase.
+0:58
+So like I said, we're going to cheat here.
+1:00
+I'm gonna see if this works.
+1:01
+Let's hit save.
+1:03
+And, okay, we get our end information back in.
+1:06
+Of course, like I mentioned, we don't necessarily have to be the owner of this fan.
+1:11
+I could just come to host vans five or actually I think four doesn't belong to the ID of one two three.
+1:17
+If I come to the dashboard I can see so we have modest explorer beach bum and green wonder.
+1:22
+I think this is one, two, and six maybe.
+1:25
+Yeah.
+1:25
+Six.
+1:26
+So, anyway, it doesn't matter in the end because we're not doing real authentication, and we're not spending the time to dive into the security rules.
