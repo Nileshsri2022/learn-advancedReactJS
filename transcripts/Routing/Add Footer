@@ -1,0 +1,82 @@
+
+Transcript
+0:00
+This challenge is a bit off the beaten path for what we've just been working on, but I wanted to put a little bit of space between when we added the header from before and now what your challenge is to add the footer.
+0:11
+That's just a way to test yourself and your abilities from what we learned prior.
+0:15
+So your challenge is to add the footer to the site.
+0:18
+I've even given you the markup here so you can use that in a new footer component that you create in the components folder.
+0:24
+And mostly I'm wanting to test your ability to see if you know where the footer would be added.
+0:29
+So I don't care too much about you getting the styling just right.
+0:32
+However, you'll be the best judge for your abilities in CSS.
+0:35
+If it's been a little while, you're feeling rusty, or you just want a little extra practice, you're more than welcome to add the styled footer.
+0:42
+You can click on any of these multiple screenshots to take you to the Figma design file for that if you wanted to get the details on it.
+0:49
+But otherwise I will just be handling the styling behind the scenes, and mostly what I'm looking for is that on your app any page you go to will have the footer just tacked to the bottom of the page.
+1:00
+So if you're not gonna be doing the styling, it will just appear maybe on this really short page like this right here below dashboard goes here.
+1:07
+On a longer page it would show up at the bottom.
+1:09
+You'd have to scroll down to see it.
+1:11
+If you are working on the styling, then the idea is that the footer will always be at the bottom of the content.
+1:16
+Even if you have to scroll to see the bottom, then you would have an extra section where the footer sits.
+1:21
+If it's a small section like this, then the footer would still be at the bottom of the page.
+1:25
+Okay.
+1:25
+I think that should all make sense.
+1:27
+Pause now and add the footer to our site.
+1:35
+Okay you might remember that the layout component is where we are including our header, and because this route that's using the layout component is wrapping every single route in our route definitions here inside of our router, that means that the header is going to show up on every single page.
+1:52
+And since that's what we want to do with the footer that's what we're going to do.
+1:55
+We're going to put the footer inside of our layout route here, or rather our layout component.
+2:00
+So below our outlet, remember the outlet represents whatever content will go below the header, we're going to say we also want a footer in here and that's going to be at the bottom of the outlet.
+2:11
+To import our footer, even though we don't have it yet created, footer.
+2:17
+We'll hit save.
+2:18
+Okay, unknown error that's because footer is undefined.
+2:21
+So let's go ahead and create footer dot JSX and we'll set this up like normal.
+2:30
+And fortunately for you I was so kind as to just give you the markup that you need to include.
+2:35
+Let's hit save.
+2:36
+And great, there's our footer as basic as it is and it should be showing up at the bottom of every page.
+2:43
+There we go.
+2:44
+Like I said I'm going to handle the styling for you so I'll use the magic snap of my fingers and there we are.
+2:51
+So we can see that if we go to a shorter page here we have our van life footer down at the bottom.
+2:57
+The main point isn't about the CSS, the main point is about this layout file.
+3:01
+You can see I've made a few changes here to make it so that everything laid out correctly.
+3:05
+Great work.
+3:06
+Hopefully that wasn't too much of a challenge.
+3:07
+I think the CSS was a lot harder than actually getting the footer to show up on every page, and hopefully that was the same case for you.
+3:14
+Okay.
+3:15
+It's time for us to jump back into some new material, so let's do that next.
