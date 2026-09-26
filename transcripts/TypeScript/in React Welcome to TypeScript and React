@@ -1,0 +1,36 @@
+
+Transcript
+0:00
+Hey there, and welcome to the next section of the Learn TypeScript course, where we're going to put TypeScript and React together.
+0:07
+My name is Rachel, and I'll be taking you through this React specific section of the Learn TypeScript course.
+0:14
+We're going to be working with a very familiar project from the Learn React course called Assembly Endgame.
+0:21
+If you took the React course, you'll probably recognize this.
+0:24
+If you're not familiar, it's a hangman style game where with every incorrect letter guest, a programming language gets snapped out of existence until only assembly remains.
+0:34
+You can actually pause the screen right now and have a play if you so wish.
+0:38
+Now just a heads up.
+0:39
+We're not gonna be spending a lot of time tweaking or extending the game itself because the gameplay is already working very nicely.
+0:46
+What we are going to do is reworking this project with TypeScript.
+0:50
+So here's what's coming up.
+0:52
+First, we're going to do a quick refresher on vanilla TypeScript, just enough to get our heads back in the game.
+0:57
+And then we'll shift into some React specific stuff, starting with typing use state and functional components.
+1:03
+After that, we'll look at typing component props using both inline types and custom types and even importing prop types from other files.
+1:11
+And finally, we'll tackle one of the most common patterns in React, typing function props.
+1:16
+And of course, I will be throwing challenges at you every step of the way to keep your fingers busy.
+1:21
+By the end of this section, you'll have a foundational understanding of how TypeScript fits into a React workflow, and you'll be able to start typing your own React components with confidence.
+1:31
+So let's dive in.
