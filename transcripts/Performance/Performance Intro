@@ -1,0 +1,63 @@
+Transcript
+0:00
+One thing that can really set you apart as a great React developer, especially if you are searching for a new job in React, is to have a deeper understanding of how React works and how you can improve its performance in your application.
+0:14
+Now the topic of performance is really, really vast, and so I've tried to dial it down into some of the most important points that you'll need to learn in order to have the biggest effect on improving the performance of your React app.
+0:27
+So throughout this section, the performance strategies that we are going to cover are, first of all, sending less code down to the browser.
+0:35
+We can do this through a process called code splitting.
+0:37
+We're also going to spend some time understanding how we can cache expensive calculations calculations that we can reuse from one render to the next in React.
+0:46
+We'll see that if you have a component that is calculating something that does take a while, or maybe if you just have lots and lots of components that are all making some kind of calculation like this, we're going to learn how we can avoid having to recalculate that every time React renders your component.
+1:03
+Then if your problem actually has more to do with having too many renders of a component, we'll learn about how we can avoid any unnecessary re renders.
+1:12
+And lastly, sometimes the problem isn't really React, it's just how you decided to structure things, and so sometimes we can fix any performance issues we're having simply by restructuring our application.
+1:22
+Throughout this section we'll get to see examples of all of these things and how they'll improve our React app.
+1:28
+Now anytime we're talking about performance, there are some pretty important caveats that we need to cover.
+1:33
+The first major caveat that we should touch on is the fact that React is already very fast.
+1:38
+The reconciliation process, which I'll be talking a little bit about soon, is a very intelligent process and it ensures that React only makes updates to the DOM that are truly important for the application to correctly display whatever state you're currently holding in your app.
+1:54
+Because of this, one thing you could try to come away from this section doing is optimizing optimizing everything right from the get go, but it's really important that you don't prematurely optimize your code.
+2:04
+What this really boils down to is that you should be able to measure a performance problem before you jump into using these techniques to improve the performance problem.
+2:14
+Kind of like they say, if it ain't broke, don't fix it.
+2:17
+On a similar vein, you will need to make sure that you balance any optimizations you make with the readability and maintainability of your code.
+2:25
+You could go far out of your way to write code that's really clever and also very performant, but if that code is practically unreadable to any other developers or honestly even yourself in the future, it's going to end up being more of a problem than it is a solution.
+2:41
+So what exactly are we going to learn in this section?
+2:44
+First we're gonna touch on exactly how React renders its components.
+2:48
+I'm hoping that understanding this will actually clarify what React is doing and help you make more informed decisions about both how you write your React code and how you improve the performance of your React code.
+2:59
+While we're talking about React rendering, we will touch on the concept of strict equality, which is how React chooses whether something should be committed to the DOM or not.
+3:08
+We'll touch briefly on a component called React dot strict mode, which is sort of a guardrail that you can put on yourself as a developer to make sure that you're writing React in the way that it was intended to be written.
+3:19
+Then we'll be diving into the actual implementation of performance improvements.
+3:23
+We'll talk about code splitting and how that can help us send less JavaScript down to the client when it's not necessary.
+3:30
+We'll learn about the useMemo hook and how we can ensure that we're only recalculating something that's quote unquote expensive when it's absolutely necessary.
+3:39
+We'll learn about React dot memo and how we can avoid any unnecessary re renders when it makes sense to do so.
+3:45
+And oftentimes React dot memo is used in conjunction with either use memo or use callback, which we will also touch on briefly.
+3:52
+Again, performance is a huge topic to be covering and we will be covering sort of a cross section that I think encapsulates a majority of the performance boosts you can give to a React app.
+4:03
+So buckle up.
+4:04
+We're in for a fun section.
+4:05
+Let's get started.
