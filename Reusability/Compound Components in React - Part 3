@@ -1,0 +1,123 @@
+Transcript
+0:00
+Okay.
+0:00
+We're gonna do this challenge a little bit differently because this one, I was typing out the challenge, and it was a little bit complicated.
+0:06
+So what I want to do is actually walk you through the solution first, and then I'm gonna delete it all and have you do it from scratch.
+0:13
+I tell you that now so that you'll pay good attention as we get this done so that you can really deeply understand what we're about to do.
+0:20
+One thing you'll note is that I moved my array from being inline items here up to its own variable here at the top called sports, but everything else should work the same.
+0:30
+Of course our button isn't working yet.
+0:32
+And so my goal here is to make it so that I don't necessarily have to pass this entire array of items down to the menu drop down, but instead can turn the menu drop down into a container for menu items.
+0:45
+I'll show you exactly what I mean.
+0:46
+So just like before I'm going to take out the self closing part of the menu drop down and we'll add a separate closing tag here.
+0:55
+And the idea is that for every item in sports I'm going to render a menu item.
+1:01
+And then menu item is also going to take children, and it will have first tennis, then pickleball, racquetball, and squash.
+1:09
+In fact, let me start there.
+1:11
+This is obviously a little bit backwards because we don't even have a menu item component yet, but that's okay.
+1:17
+First, I will map over my sports array.
+1:19
+So I'll say sports dot map.
+1:22
+For every sport in that array, I'm going to render a menu item, and it's not self closing, so I will have menu item and then we will just render the sport inside.
+1:33
+Okay let's go ahead and make some menu items.
+1:36
+First I'll import it from a fictional file that I haven't yet created, and then I will create it.
+1:42
+We'll do it inside of the menu here.
+1:44
+We'll call it menu item dot JS, and just like always import react from react, export default function menu item.
+1:56
+This is going to take children as a prop and it will return let's just maybe have it return a paragraph that says hello, see if we can't get the broken part of what we have fixed, and let's hit save.
+2:10
+And oh yeah, we're still broken because our menu drop down is not yet updated.
+2:14
+So this is no longer taking items, but instead is going to take children.
+2:19
+We're going to leave all of the map sort of logic to the parent out here in index JS, and instead we are just going to render children.
+2:28
+So that gets drastically simplified.
+2:31
+Hit save, and okay, we're getting this hardcoded hello in the menu thing going on.
+2:37
+And oh shoot, you know what, there was a class name that I wanted to keep.
+2:40
+Let's go ahead and keep this div right here, and then I'll move it back to say children, and then in my new menu item instead of this paragraph we'll render that div, just that way I don't have to type out the class name again, I guess I'm being kind of lazy.
+2:55
+The key is only necessary if we're looping, so I'll handle that logic somewhere else.
+3:00
+This can get bumped into one line since it's a lot shorter now.
+3:04
+And instead of item we're just going to render children.
+3:08
+Okay let's try that again.
+3:10
+Cool, okay, we need a unique key prop as we see, so we can go here and for every menu item we'll provide a key.
+3:17
+And let's see, each sport is unique for us right now, so I'll just use the string sport for our key and that should be fine.
+3:24
+Our warnings are gone and everything is back to working, well except our menu actually collapsing.
+3:29
+Again what we've done is we have really flattened the structure of my menus and exposed it to whichever developer is going to be creating a menu with these components so that they have a ton of fine grain control over what exactly is going to be passed in where.
+3:45
+For example, if I wanted to change all of the elements, every menu item in my array of menu items into an anchor that actually leads somewhere, I can do that very easily.
+3:56
+Because menu item is just taking children and rendering children inside of this div, I can just change instead of rendering the sport I could wrap this in an anchor.
+4:07
+And we'll just put a placeholder here for now and say the text of that anchor should be the sport.
+4:14
+It might be easier to see if it's on its own line.
+4:18
+And there we go.
+4:19
+Obviously these are styled a little bit funny and they're not actually going to lead anywhere right now.
+4:24
+But the point is I have a ton of flexibility as to how I want this to render.
+4:28
+Just for the sake of simplicity I'm going to get rid of the anchor, but the point is that is something that I have a lot of flexibility to do now.
+4:36
+As a recap, instead of passing an array of my sports down to the menu drop down and then allowing it to iterate over them and display exactly what needs to be displayed.
+4:47
+Instead I simplified it.
+4:48
+I told the menu drop down to render the children.
+4:51
+I created a new component called menu item, and I, outside here in Index.
+4:55
+Js, am in charge of looping over my data in order to create an array of menu items.
+5:01
+And then in each menu item I can have fine grain control over what gets actually displayed in each of those menu items.
+5:08
+I know that's a lot to take in, but it is now the moment of truth.
+5:12
+You get to do the exact same thing on your own, and fortunately because you're watching a scrim, you get to go back and rewatch me do it if you need help.
+5:20
+So give me a second, I'm going to undo all the changes I just made.
+5:24
+And through the magic of editing we're back where we started.
+5:27
+Just so I'm not leaving you completely high and dry, I'm gonna type out a hint for each of the steps you'll need to take.
+5:33
+Okay here's kind of a three step process that you'll need to recreate what we did.
+5:38
+Again I won't walk through it afterwards because I already walked through it beforehand.
+5:41
+If you need help go back and watch how I did it, but don't just say, okay, I get it, and then move on.
+5:46
+Make sure you type every part out yourself till it actually works the way that you want.
+5:51
+Once you've had a chance to do that, the next thing we're going to address is finally making this menu work again when we click the button.
+5:57
+So that's what's coming up next.
