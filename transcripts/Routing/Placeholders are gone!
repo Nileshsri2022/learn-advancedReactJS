@@ -1,0 +1,40 @@
+
+Transcript
+0:00
+We have been staring at those default dashboard goes here pages for far too long inside of our host routes, and so the little treat that I have for you is that I completed them for you.
+0:10
+Before you get too excited, I did take some pretty serious shortcuts when I was doing this.
+0:15
+For example, if we come to the income page, we have this little chart, but the truth is this is just an image that I pulled from our Figma design.
+0:22
+It didn't quite feel like it was worth the time and effort to actually build this in the code.
+0:27
+I did the same thing with our reviews.
+0:29
+We have this review chart and it's just an image.
+0:32
+If we go to those pages then we can see here in the reviews page I just have an array of review objects that I'm using to render these reviews down here.
+0:43
+And I did the same thing with the income.
+0:45
+I just have some transaction data that is being rendered here on the income page.
+0:49
+The reason that I wanted to do this was just to try and round out our application.
+0:54
+The truth is this project is an awesome project for learning.
+0:57
+Following along building this van life app is a great way to learn the principles, but what I really want to get across to you is the importance of actually rounding out the rest of your app.
+1:08
+Maybe if you're doing a similar app in order to really beef up your portfolio, you might not take the same shortcuts that I took here.
+1:15
+But the point is if you are trying to add this to your portfolio or more importantly another project that you are creating on your own to your own portfolio, I really want to stress the importance of finishing off all of the pieces that you have.
+1:28
+Don't leave unfinished portions of your app just sitting there for a recruiter or a hiring manager to find and think less of the application that you have spent a lot of time and effort on.
+1:38
+Along that same line of thinking, something else that I think would be really helpful for us is not to be pulling data from our fake Mirage JS server like we have been.
+1:48
+It's been really great to us all this time, but it's going to be even more impressive if we're pulling this data not from just a fake seeded database like we have here, but rather from a real database.
+1:59
+So for the next few scrims, we're going to be converting the data that we're currently pulling from our fake database to instead pull it from Firebase.
+2:07
+So that's what we'll be jumping into now.
