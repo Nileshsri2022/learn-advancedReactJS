@@ -1,0 +1,96 @@
+
+Transcript
+0:00
+Something that really, really helped me in understanding the concept of render props was looking at callback functions in general.
+0:08
+As developers, we're very used to creating the functions that we want to run and then determining which parameters will get put into the function signature.
+0:16
+For example, if I wanted to make an add function, I'm the one that's defining this function, and I can say I'm going to allow for two numbers, a and b, and I want to return a plus b.
+0:27
+However, the concept of callback functions is sort of inverting this control.
+0:32
+And one of the examples that really clicked the most for me was looking at event listeners and the callback functions that we pass to event listeners.
+0:40
+You see, it's somebody else who created this dot add event listener method, and they are the ones who determined which parameters would get put into this method.
+0:50
+So as the user of add event listener, I need to maybe read the documentation and understand which parameters I need to put in and in which order to the add event listener function.
+1:01
+Of course we know the first one is a string that represents the name of the event that we're trying to listen for.
+1:07
+There's very specific options we have.
+1:09
+We can't just make up any name we want here.
+1:13
+It has to be one of the specified and agreed upon strings like click or input or mouse over, but then the control for what should happen when that event listener occurs is given back to us by allowing us to provide a callback function.
+1:28
+However, it's important to remember that this function is its own data type.
+1:32
+Just like this first one is a string, the second one is a function.
+1:36
+And inside the internals of add event listener they're probably calling this function some parameter name.
+1:43
+It might be something like callback.
+1:44
+It's kind of like if I were the creator of add event listener and I were creating this function, I would say my first parameter is some kind of string.
+1:53
+Maybe we'll call it a event type.
+1:55
+And the second parameter is going to be a callback function.
+1:59
+Again, we're pretending like we're the creators of add event listener here.
+2:02
+Inside the internals of addEventListener, at some point, they're going to execute our function.
+2:07
+They called it callback, but they're the ones that are executing it.
+2:10
+And because they're the ones that are executing it, they are the ones that get to determine what parameters get passed to callback.
+2:17
+I have seen students in the past when they're using an event listener, they think, well, I wanna make sure that whenever this event occurs, I want to maybe console log the person's name.
+2:26
+And so thinking that they have control over what this function gets, they'll put name here and they'll say something like, you know, name clicked the button.
+2:34
+And usually they're a bit confused about what happens.
+2:37
+So I'll hit save, I'll click this button, and we see object pointer event clicked the button.
+2:42
+Certainly not what they were expecting.
+2:44
+The thing that they didn't understand is that even though we're creating this function here, because the function is getting called by AddEventListener, it's AddEventListener, the internals therein, that get to determine what gets passed to it.
+2:56
+It's going to be different for every callback function, but when it comes to add event listener, the callback function that you provide to it, they're going to give you the whole event object.
+3:06
+And that event object is super useful in determining what should happen when the click event happens on this specific element.
+3:14
+Let's actually go ahead and just console log event, and Scrimba is going to kind of obfuscate what we see here.
+3:21
+So let me click the button.
+3:22
+It just says pointer event is trusted true.
+3:25
+But if I open my developer tools and I actually pull out all of the properties here, I'll go ahead and put them down here and comment them out.
+3:34
+Okay.
+3:34
+We can see that there's a ton of information about the specific event that just occurred.
+3:39
+There's information like where the element is sitting on the screen, where the mouse was, the direction the mouse was moving.
+3:45
+A really important one that you'll end up using quite a bit is target that represents the DOM node that was actually interacted with.
+3:53
+And so this huge event object is what will actually get passed to our event listener.
+3:58
+The main point to understand here is that the callback function that we provide is not one that we get to determine what gets passed to it, but add event listener is exposing to us some information that will be really useful to help us determine what should happen when this click event happens.
+4:15
+A really common one you're probably used to is let's let's add an event here to our input event listener for our input element, and let's go ahead and console log event, which we're getting from our callback function, dot target dot value.
+4:30
+We're drilling down into the information of this event and when I type and I forgot to hit save, let's hit save and now when I type the value shows up in the console log.
+4:44
+K, and we can see that's a bit crazy.
+4:45
+It's console logging every time the event happens, but we're getting the value out of the input box, and that's a really common way to gather information from inputs in forms.
+4:55
+Okay, that's plenty.
+4:56
+I think you're getting the idea.
+4:58
+That's going to be a good first step in helping us understand exactly how render props in React work.
