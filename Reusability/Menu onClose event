@@ -1,0 +1,48 @@
+
+Transcript
+0:00
+Okay, so we're going to work on our menu and I've brought our menu back into our component and uncommented it.
+0:05
+I also got rid of the console log that was happening whenever the star changed just because it was kind of cluttering up the console a little bit.
+0:12
+However, I hit save and you'll notice that it gives us an error that on toggle is not a function, and that's because our menu component currently is not passing anything to toggle and toggle is expecting an on toggle function or rather an on toggle prop that is a function.
+0:25
+So here's your challenge.
+0:26
+It's very similar to before so I won't necessarily go through every point.
+0:30
+Pause now and work on this challenge.
+0:38
+Now I purposefully chose a sort of awkward naming scheme here for using on open since this will also run when it's closed and that's because we are going to make an on close prop later.
+0:49
+But for now I just expected you to run on open anytime the menu opens or closes.
+0:54
+So we accepted it as a prop.
+0:56
+Now we need to pass it as the on toggle here for our toggle component.
+1:01
+So we'll pass on open easy enough.
+1:03
+And then in the index where we're using this all we will pass an on open prop and that will be a function that again just runs console log and will say menu toggled or something.
+1:15
+Okay, cross our fingers.
+1:16
+Our menu's showing up.
+1:17
+Again, we get the bug where it's showing up in our console immediately as it loads.
+1:21
+We're going to fix that later.
+1:23
+And hitting the menu is running menu toggled.
+1:25
+Awesome.
+1:26
+Okay.
+1:26
+Let's address this bug where it's running our on open and our on change as soon as the component loads.
+1:32
+This can be problematic if we're talking to an API anytime it's supposed to change because, well, when we load the app, we don't necessarily want to immediately save information about the user because they haven't yet had a chance to click the star or open the menu or whatever it might be.
+1:47
+There's probably more than one way to solve this problem but I'm going to use it as a chance to talk about a hook that we haven't had a chance to learn about yet and that is called use ref.
+1:56
+So that's what we'll do next.
