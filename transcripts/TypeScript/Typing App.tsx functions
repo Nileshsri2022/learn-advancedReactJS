@@ -1,0 +1,97 @@
+Transcript
+0:00
+We've typed the state values and the derived values in app dot TSX.
+0:05
+And now it's time to handle the two functions that we have down here.
+0:08
+Add guest letter and start new game.
+0:11
+We're going to start with an easier one as a warm up.
+0:13
+So here is your warm up challenge.
+0:16
+Fully type the start new game function.
+0:18
+There is only one opportunity to add a type annotation here.
+0:22
+So look for it and go for it.
+0:28
+Did you find it?
+0:29
+So start new game takes no parameters and returns nothing.
+0:33
+All it's doing is setting some state.
+0:35
+So for clarity, we can type the return value with a colon void just to cover our bases.
+0:41
+Again, it's not strictly required, but it is good practice so that the intent of the function is clear to anyone reading the code, and it helps catch accidental returns or unexpected values if the function is modified later.
+0:54
+Okay.
+0:54
+It's time for the bigger challenge.
+0:57
+Fully type the add guest letter function.
+0:59
+There are four places that we can add type annotations.
+1:03
+Now the first one is a must.
+1:05
+In fact, TypeScript's already screaming about it over here.
+1:08
+But the other three are less important, especially after handling the first one.
+1:12
+In fact, TypeScript has already implicitly typed two of them correctly.
+1:16
+But let's get into the habit of typing.
+1:19
+So have at it.
+1:20
+See if you can find all four type annotations, and I'll see you on the other side.
+1:28
+Did you find all four opportunities?
+1:30
+Let's have a look.
+1:31
+The first is this letter parameter, which is currently of an any type, and TypeScript really doesn't like that.
+1:37
+But this is easily remedied by giving it the type of string.
+1:42
+Then we have the return type of the add guest letter function.
+1:46
+All this function does is set stuff and doesn't return anything.
+1:49
+If you hover over add guest letter, we can see that TypeScript has already implied the type for itself.
+1:55
+But to be specific, we're going to add it ourselves as well with colon void.
+2:00
+Now there are two places left.
+2:02
+The first is the previous letters parameter, and then it's the return value of this entire callback function.
+2:09
+Set guest letters is a state setter function, and those take either a new value directly or it takes a callback function that receives the previous state by default.
+2:20
+The latter is what's happening here.
+2:22
+So TypeScript can easily infer that both previous letters and the return value should be a string array, thanks to our typing earlier in the states.
+2:32
+You can actually see this if you hover over the arrow here.
+2:35
+Previous letters is a string array, and so is the return value of the function.
+2:40
+So realistically, typing this parameter and return value isn't necessary.
+2:44
+But for learning reasons, we're gonna do it anyway.
+2:46
+So we'll wrap previous letters in parentheses, and we'll type it as a string array, and we'll also type the return value as a string array.
+2:54
+And there we have it.
+2:55
+Both of our functions in app dot TSX have been typed with TypeScript, and everything is a bit more specific and foolproof.
+3:03
+We're off to a great start, but we've really only just scratched the surface in terms of React related typing.
+3:09
+In fact, we've only touched on use state.
+3:11
+In the next room onwards, we're going to be looking at React components and props.
+3:16
+So I hope you're ready to dive into something new and exciting.
