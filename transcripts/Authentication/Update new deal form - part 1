@@ -1,0 +1,287 @@
+Transcript
+0:00
+Now it's time to update the new deal form.
+0:03
+Before we start this scrim, I just wanted to make a quick comment about this sales deals form.
+0:09
+I realized I did not talk about why we have an ID column as well as a user ID column.
+0:16
+I just wanted to make sure this is really clear.
+0:19
+So we used to have name here, but now we've replaced it with the user ID column.
+0:24
+If you remember, every time we've created a new table, SuperBaza's auto created an ID column.
+0:31
+This is the primary key.
+0:34
+This is a unique ID for each row in this table.
+0:37
+This was created back when we created the sales deals table in section one, and we aren't actually ever using this ID.
+0:45
+I realized I may have actually referred to the user ID now that we've got that just as ID because as you can see, it can be quite easy to get confused between ID and user ID.
+0:56
+So I'm just taking a moment here.
+0:58
+Whenever I've referred to ID, when I should have said user ID about the sales deals table, it's always about this foreign key because it's this user ID here which is telling us who owns each deal, each row in the sales deals table.
+1:15
+It's this user ID, which is the foreign key to the ID in user profiles, which as I've said, is in turn a foreign key to the ID that Superbase gives every user when they sign up.
+1:29
+That's sort of our link between our tables as you can see here.
+1:33
+I hope that makes sense.
+1:34
+Sorry for any confusion in my wording.
+1:37
+Right.
+1:38
+Onwards.
+1:38
+So now that we have all of our users from the user profiles table fetched, we can now populate the form drop down with the name from this user's array.
+1:49
+We'll eventually be only doing this for admins, but that comes a bit later.
+1:54
+And we also need to find the current user's name so that we can set the form input value as this name, and that's for reps.
+2:04
+So in form, it's gonna be a challenge time now for you.
+2:08
+And I'm gonna put it down here because you're gonna be modifying generate options.
+2:14
+So I'd like you to access the fetched user profiles through context.
+2:18
+So you're gonna have to import something up here, and you're gonna have to destructure something here.
+2:24
+Hint.
+2:24
+Hint.
+2:25
+Then I'd like you to refactor the generate options function to map through the users array.
+2:30
+That's the one you're accessing through context in step number one.
+2:34
+So it's not gonna be metrics dot map.
+2:36
+It's gonna be users dot map.
+2:39
+And you're gonna have to think about what you're gonna set the key prop as for this option.
+2:44
+Key has to be a unique identifier.
+2:47
+So if you want to think about what you're gonna have in these users array, if we look back at all context where we selected from user profiles, you're gonna have ID, name, and account type columns.
+3:01
+So they will be properties in an object, which is in the array.
+3:05
+We saw that in the console earlier.
+3:07
+And, actually, that's the hint here about what you're gonna set the key prop as.
+3:12
+And then I'd like you to save and test by logging in to our app and using the form drop down.
+3:18
+You should see all of the names of the profiles that you have in your user profiles table.
+3:24
+If you wanna add more, you just need to sign up different users, which the trigger will populate the user profiles table.
+3:31
+Okay.
+3:31
+Good luck.
+3:32
+See you a minute.
+3:36
+Okay.
+3:37
+So context needs our user auth hook.
+3:41
+There we go.
+3:42
+And then we'll destructure from the objects the users array.
+3:48
+There we go.
+3:49
+Now the users array is available.
+3:52
+And down here, we're going to not metrics dot map anymore, but now users dot map.
+3:57
+We don't wanna call each thing metrics.
+3:59
+Let's call each thing user.
+4:01
+For now, let's just replace all of the metric with user so we're back in the game.
+4:07
+And then we think about this option key.
+4:10
+Well, because it needs to be a reliable unique identifier, I'm gonna go for the ID.
+4:17
+Remember, we have ID name and account type to choose from, and the unique identifier is ID.
+4:23
+Remember, the ID references that unique ID that Superbase gives each user on-site, so that is very good.
+4:34
+So we're gonna go user dot ID, not dot name.
+4:38
+The value is the name because that's the same, and then this will be the same as well.
+4:43
+Brilliant.
+4:44
+So let's save, and I'll log in as Dwight.
+4:49
+And I could still see our drop down, and it works for me.
+4:53
+I don't think you can see at your end, but I can confirm the drop down is working.
+4:58
+Great.
+4:59
+Now let's have a look up here.
+5:02
+In our use action state, we've still got this name, and we're then inserting the new deal object with the name into sales deals.
+5:14
+But the new way we're doing it, remember, we've not got name, so we actually need to insert the user ID and the value.
+5:21
+So we're gonna have to change this a little bit.
+5:24
+We need to use the name that's from the form and then search in users and find the ID of that name, and then insert that with the ID and the value.
+5:39
+So let's call the submitted name from the form submitted name.
+5:45
+So original.
+5:46
+And then we're gonna get that from the form.
+5:48
+So we can just put that there.
+5:52
+And we now need to let's just put a comment.
+5:54
+We need to find the user object from users array, from this array.
+6:02
+Remember, this is an array of objects of each row from user profiles that matches submitted name because in here, each object is is gonna have ID, name, and account type.
+6:16
+So we find the one that has the same name as submitted name, and let's create a user for that object.
+6:23
+So we say user equals, and we need to look in the user's array.
+6:28
+So we say users, and we're gonna use the find method.
+6:32
+This takes an arrow function.
+6:35
+And for each user in here, let's just call it you.
+6:38
+If the name property of that user equals submitted name.
+6:44
+If it does, it gets assigned into this user object.
+6:48
+Now our new deal object that we're going to insert into sales deals does not need a name property, does it?
+6:56
+We want to insert the user ID and value, not name and value.
+7:00
+So let's change this to user ID, and the value of that property is gonna be well, this is the object.
+7:08
+And in the object, remember, we've got ID, name, and account type, and it's the ID that we want from that.
+7:16
+So we say user, and we access it through the dot syntax.
+7:20
+There we go.
+7:21
+So we extracted the name from the form.
+7:24
+We've looked in our users array and said, which object in there has the name of that submitted name and assigned it to this user object?
+7:33
+We've then looked in that and found the ID and created a new deal object.
+7:38
+Value's gonna be the same, isn't it?
+7:40
+And that gets inserted into sales deals.
+7:43
+So this is using the ID from the found object, and here's the found object.
+7:51
+There we go.
+7:52
+So if you need to think through that again, just pause it now and go through it line by line.
+7:57
+I'm gonna make this a little bit better.
+7:59
+Okay.
+8:00
+Super.
+8:00
+Let's get rid of these comments.
+8:03
+Now if you look in your sales deals table, you'll see that we've still got all deals in the wrong format, in the name and value format.
+8:12
+So I'm gonna set you a challenge now to delete those.
+8:15
+So I want you to go into your superbase dot com project, delete all of the records with the old name and value format in the sales deals table.
+8:23
+And then you can add new deals with the new user ID and value format by logging into our app and using the form.
+8:32
+You can verify these deals are being saved in the right format via your Superbase project.
+8:36
+This will break the fetch metrics function.
+8:39
+Therefore, the chart won't work, hence why you need to verify this via the Superbase project website.
+8:46
+Now this is also an opportunity to test our RLS since right now, both admin and rep users, when they log in, will be able to choose from the drop down from this drop down.
+8:58
+We've not created any UX limitation.
+9:00
+So if reps try to add a deal for anyone but themselves, the RLS should stop it.
+9:07
+Remember this policy we wrote?
+9:08
+Reps can only add their own deals.
+9:11
+We said the person doing the adding, their ID has to be the ID of the inserted row, and we said this is the case when they are a rep.
+9:21
+So you can actually test users with account type rep can only add deals for their own name.
+9:26
+You should see an error.
+9:27
+If you log in as a rep user and you try and choose to add a deal for someone who's not that user who's logged in, it should fail.
+9:36
+But they should be able to add deals for themselves, and admin should be able to add deals for anybody, themselves and other people.
+9:44
+Okay.
+9:45
+Go and do that now.
+9:48
+I hope that went well.
+9:49
+So I've gone in and deleted all of my old records from sales deals.
+9:53
+So let me sign in as Dwight.
+9:55
+He's a rep.
+9:57
+And I'm gonna choose Dwight and go for three thousand.
+10:03
+And the form shows something without a name, so we're gonna fix that later.
+10:07
+I look in the console, and there's my new deal.
+10:10
+And now if I try to add a deal for somebody who's not Dwight, because Dwight's logged in and he's a rep, so, hopefully, we'll see an error.
+10:18
+There we go.
+10:19
+Failed to add deal.
+10:20
+So the RLS is working.
+10:22
+Okay.
+10:22
+I'm gonna quickly sign in as Pam.
+10:24
+She's an admin.
+10:26
+There we go.
+10:27
+And Pam should be able to add a deal for somebody else, I e, Dwight.
+10:32
+There we go.
+10:34
+Brilliant.
+10:34
+So before you move on to the next screen, check one last time that there are no rows in your sales deals table that have anything in the name column.
+10:43
+They should all just have data in user ID and value.
+10:47
+When we fix our chart so that it looks nice, why don't you make sure that you have deals for at least, say, three different reps?
+10:55
+That might mean you need to sign up a new person as a rep, but I think that would look good.
+11:01
+Okay.
