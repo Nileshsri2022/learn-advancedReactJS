@@ -1,0 +1,133 @@
+Transcript
+0:00
+A really important part of any application is being able to give useful information to people when they come to a path that doesn't actually exist on your site.
+0:10
+Sometimes this happens if you have outdated links within your own site and they lead to pages that no longer exist, or it might happen if somebody else links to your site and they either got the link wrong or, again, they're using an outdated link that no longer exists.
+0:25
+For example, if I'm here and I type in slash blah blah blah and hit enter, you can see there's really no useful information on our site because React router is not handling a blah blah blah route.
+0:36
+This is where a good four zero four page comes in.
+0:39
+And I've seen some really creative interesting four zero four pages, but we're just going to keep it pretty simple for now.
+0:44
+So how can we handle this in React Router?
+0:47
+Fortunately it's really easy.
+0:49
+There's something called a splat route or a catch all route and that has everything to do with what you put for your path.
+0:55
+Here inside of my layout route, because you can see in our example here we still have the navigation bar and we still have the footer, So that's the reason I'm choosing to do this as a nested route inside of my layout.
+1:08
+I could, if I didn't want to have the navigation or footer, I could have a completely dedicated four zero four page that didn't have those elements in which case it would go as a child of routes right here.
+1:17
+But let's keep it as a child of our slash route.
+1:20
+So I'll create a new route and a catch all route is going to be very similar to if you've ever used a universal selector or a catch all selector in CSS.
+1:30
+We're we're going to use the asterisk.
+1:32
+This essentially means if there are no other routes listed then use this route, which is why it's called a catch all.
+1:39
+It'll catch anything that doesn't match elsewhere.
+1:42
+Let's go ahead and put an element that just says maybe an h one that says page not found.
+1:49
+We're still on the slash blah blah blah route.
+1:51
+Let's hit save and here we go.
+1:53
+We have this is a very basic version of it but we have a page not found sort of catch all here.
+1:59
+One thing that's really cool about React Router six is that it's a lot more intelligent under the hood about scoring the paths that we have based on what the actual text of our URL is.
+2:10
+What I mean is that even though our catch all path is at the top of our list of paths, I can still navigate around my site and it's not going to prefer the first one in the list.
+2:21
+Instead, it's going to give a score under the hood about which of these paths best matches where I currently am in my site.
+2:27
+In the past, we did have to worry about what order we put things in but we'd no longer have to do that.
+2:33
+Now it feels a little bit out of order for me to put the page not found first so I'm actually going to bump this down to the very bottom.
+2:41
+That'll go right there.
+2:43
+And because React Router is really smart about how it prefers the different paths that we have available it doesn't really matter.
+2:49
+So I can still navigate around my site just like I was before and if I were to have a link that sent me to the wrong place like slash blah blah we'll get our page not found the way that we would expect.
+3:01
+Now this isn't very exciting.
+3:03
+Let's go ahead and, as part of a challenge, have you create a bit more of a polished four zero four not found page.
+3:09
+Let me type that challenge out now.
+3:12
+Okay.
+3:12
+I deleted the not found that we had before.
+3:15
+So if I hit refresh, we'll be back to a completely blank page.
+3:19
+And your challenge is to create an actual four zero four page.
+3:21
+I have the design here.
+3:23
+Of course, You can click on the screenshot to go to Figma, but the key components are just an h one and a button that will take you back to the slash route.
+3:31
+So if you just want to put those and you don't want to spend time with CSS, that's okay.
+3:35
+So you'll create a new component in the pages directory.
+3:39
+You'll add that h one and that button from the design, and again you can style it if you want.
+3:43
+Then you'll need to recreate the catch all path that we just created and you will import and use that not found component that you just created as the element for that catch all route.
+3:53
+Pause now and create our four zero four page.
+4:01
+Okay well let's just go through one at a time.
+4:04
+We'll create this new page called not found dot JSX.
+4:08
+I guess you could call it four zero four as well.
+4:11
+We'll get it set up like normal.
+4:16
+Okay and I'll go ahead and add the message that we see in the design.
+4:21
+Sorry the page you were looking for was not found.
+4:26
+Okay there's no styles quite yet but you'll notice that I also already imported the link from React Router DOM because I wanted to send people back to the home page.
+4:35
+So I set up the link there.
+4:36
+I'll have to make it look like a button instead of an anchor later.
+4:39
+Now let's make it so we can actually see this not found page.
+4:42
+Let's go over to our index.
+4:45
+We will import the not found page and this one is under pages and so I'll actually move this to be up with the pages.
+4:54
+Okay let's add our catch all route.
+4:56
+Again I prefer this one just a personal preference to be at the end because that makes a little more sense to me.
+5:02
+We'll say that the path is the asterisk and the element is an instantiation of not found.
+5:11
+Okay we're still on the blah blah route so when we hit save we should see our new not found page.
+5:17
+Awesome.
+5:18
+Yeah again this return to home is not styled at all like we would expect, but that's something that a magic snap of the fingers can handle for us just fine.
+5:28
+So we have our four zero four page.
+5:29
+We're at the blah blah blah route.
+5:31
+Return to home takes us back to the home page.
+5:33
+Hopefully this one felt like a quick win.
+5:35
+It's fairly easy to understand.
+5:37
+There's also some other things that you can do with these what they call splat routes or catch all routes but for now we're just going to use it as our four zero four page.
+5:46
+Great work and I'll see you in the next lesson.
