@@ -1,0 +1,96 @@
+
+Transcript
+0:00
+To help us at this stage in understanding performance improvements in React, we need to understand exactly how React is rendering the components that it renders under the hood.
+0:09
+Keep in mind, we will be covering a high level overview of how React renders and re renders to help us better understand the techniques we'll use to increase performance and that if you were to really dive deep, things get a little bit more complicated than how I'm explaining it here.
+0:23
+But what we'll be covering should do the trick.
+0:26
+Now I'll be referring to this tree diagram that you see here and calling it a tree is a bit of a misnomer.
+0:32
+It's what I tend to hear the most when we're talking about the document object model, we talk about a DOM tree.
+0:37
+But if you think about it too literally, it's maybe better described as an upside down tree.
+0:41
+This is a theoretical app that has a top level app component.
+0:45
+And in this case, it's rendering two what we'll call grandparent components.
+0:49
+Of course, the hierarchy is all relative depending on which component you are referring to, but we'll just stick with this naming to keep things clear.
+0:57
+So we have two grandparent components.
+0:59
+Each of these grandparent components is rendering two parent components.
+1:03
+Each of the parent components is rendering two children components.
+1:06
+And I ran out of horizontal room so not every child component is rendering to grandchild components, but I think you get the idea.
+1:13
+Now I've actually created this in code over here.
+1:16
+We have our app JS.
+1:17
+This is rendering two grandparent components.
+1:20
+You can ignore all of the state and props for now.
+1:23
+These grandparent components, if we go over to the grandparent component, these are rendering two parent components each.
+1:29
+The parent component is rendering two child components and the child component is rendering two grandchild components.
+1:36
+And then the grandchild component is just rendering a paragraph.
+1:39
+Each one of these is also rendering a paragraph so that in our little app we can get a visual representation of what's going on here.
+1:46
+In the mini browser, we can see the actual structure or how things get laid out on the page.
+1:52
+And you might have noticed that each one of these components is also running a console log.
+1:58
+And so if we open up our console, we can see exactly what order everything got rendered in.
+2:03
+So this brings me to the topic of this lesson and that is the concept of recursive rendering in React.
+2:09
+React will render all of the components in your application recursively which means in our sample application diagram that we showed here, the first thing it will render is app and then it will render one of the grandparents and then instead of rendering the other grandparent it will continue down this branch you could say of this upside down tree until it reaches the very tip.
+2:30
+So the next thing it will render is the parent component that grandparent renders.
+2:34
+And remember, grandparent is rendering two components but it's going to continue recursively down this chain until it reaches the end.
+2:39
+The parent renders one child and that child renders, I think in this case, just one grandchild,
+2:47
+again because I ran out of room, and that has reached the end of the chain.
+2:51
+If this child were to render another grandchild, that's when it would render the second grandchild.
+2:56
+But in our case, the parent renders its second child, that child renders its grandchild, and this one also only had one grandchild connected to it.
+3:04
+Now that the second child has reached the end of the branch, the rest of this recursive rendering will happen in exactly the same format as before.
+3:11
+At this point, we've rendered one entire branch of our tree here, the grandparent branch, and it will pick up where it left off and it will recursively render everything else in the remaining tree.
+3:21
+If we look at those console logs we can see that that's exactly how this happened.
+3:26
+The console logs in each one of these components runs in the order in which the component was rendered by React.
+3:33
+And we can see actually, I'm going to copy the logs here and I'm going to create a logs dot md file just because when I scroll in the console it doesn't actually show up in the recording.
+3:45
+So we'll go ahead and do this and then I'll clean this up.
+3:48
+Okay.
+3:49
+That's good enough.
+3:50
+So we can see this recursive rendering happening.
+3:52
+At the top we can see app just rendered so that rendered first and I created this little diagram or column header I guess you could say to better show off everything that's happening down below.
+4:02
+And you can see it started with one grandparent and then before rendering the second grandparent it recursively rendered all of the parents, children, and grandchildren first.
+4:11
+Then down here on line seventeen is when we have the second grandparent and all of the descendant components rendering recursively.
+4:18
+Okay.
+4:19
+That's a great start.
+4:20
+Now let's jump in and get a better understanding of what we really mean when we talk about the word rendered or rerendered in React.
