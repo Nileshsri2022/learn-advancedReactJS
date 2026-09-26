@@ -1,0 +1,268 @@
+
+Transcript
+0:00
+It's time to talk about this auth session state.
+0:04
+In the last screen, we created a session state variable, and we can now share this through the app thanks to the context.
+0:12
+This is gonna be a way for our app to know whether the user is signed in authorized or not unauthorized.
+0:18
+Let me briefly explain what we're gonna update this to when the user is signed in.
+0:23
+So as I mentioned earlier, when a user signs in or up because this will also sign them in, Superbase issues them a token, which is stored in the browser's local storage.
+0:32
+This token is a JSON web token or JWT.
+0:37
+For now, just know there is a token, and we'll dig deeper into this later.
+0:41
+The client library then takes the data from the token and automatically creates a session object with that data.
+0:48
+We need to access this so that our set session setter function can update the session variable and store this session object.
+0:57
+Now here you see we initialized session as undefined.
+1:01
+This is gonna be a sort of loading checking state, and then this method from the client library we're gonna use now is gonna update this to either null if there's no session object in local storage or with the data from that session object.
+1:18
+So we have two tasks to do here.
+1:21
+Let me just move this up.
+1:23
+There we go.
+1:24
+So task number one, we need to check on first render for a session, and that's gonna be using this get session method.
+1:36
+The reason we need to do this is because imagine if a user's logged in, then they've closed the application, and then they navigate back to the application.
+1:44
+There's still a session.
+1:45
+They're still logged in.
+1:46
+And on that first render, we need the app to check whether that session exists and update our session state, which will therefore navigate them, say, into the app and past the login screen.
+1:59
+Then number two, if they're not logged in and they do log in or, say, if they're logged in and they log out, we need some way to be constantly checking for any auth state changes, a bit like starting a CCTV or radar.
+2:13
+So we need to listen for changes in auth state, bit like how we set up that real time subscription to watch out for any changes in our database table.
+2:25
+So both of these things are gonna happen after first render.
+2:29
+We're gonna be turning on the CCTV or the radar, and we're gonna be checking for a session object in local storage.
+2:36
+So let me ask you a question.
+2:38
+Where in React do we set up a sort of side effect after first render which reaches outside the React life cycle?
+2:48
+If you're thinking useEffect, you are correct.
+2:51
+So I'm gonna do this bit for you, and then there's a challenge for you to do number one here.
+2:56
+So we import it, and then we say useEffect.
+3:00
+And we've got our arrow function, and then here we've got our dependencies array.
+3:06
+And because we want this to happen after first render, it's gonna be an empty dependencies array.
+3:11
+Now we're using get session from the client library, so I'll also be nice and import that for you.
+3:18
+Gotta go back a level, and then it's in super base client.
+3:23
+There we go.
+3:24
+Let me move these up into use effect.
+3:28
+Okay.
+3:28
+Challenge time.
+3:30
+I know this seems like a lot, but if we have a look at this hint, we're gonna follow the pattern that we used for fetch here.
+3:40
+So there is an option just to copy and paste this into auth context and modify a few bits.
+3:45
+But if you wanna challenge yourself, maybe have a look at fetch metrics and then see if you can type it out again.
+3:51
+So inside the user phase, well, we already are here.
+3:54
+Write an asynchronous get initial session function, which executes the auth dot get session method.
+4:00
+So we've not seen this auth part, but because it's part of auth, the syntax is to use auth dot before the method from the Superbase client library.
+4:09
+So remember here, we used Superbase dot from and dot select.
+4:14
+We're gonna need this time Superbase dot auth dot get session.
+4:19
+Then destructure the response into data and error variables.
+4:23
+It's probably good for me to show you the response we get from get session.
+4:26
+So if there is a token in local storage, we have an object which has a data and error properties.
+4:33
+And the data property, the value of that is another object with a session property, which is the actual session object that we need to use to update our session state variable.
+4:45
+And then if there's no token in local storage, that session is just null.
+4:49
+Hence, why we're gonna be updating the session state to null.
+4:53
+So I'd like to use the tri catch syntax handling both super base specific errors and unexpected errors.
+4:59
+So just like we did here, we threw any super base error and caught it in the catch.
+5:05
+So this catch is therefore catching super base specific errors and unexpected errors, for instance, like a network problem.
+5:13
+If successful, I'd like to log the value of the session property of the data object to the console.
+5:20
+Remember, this is because it's gonna be data dot session to get into the data object, And then I'd like to also update the session state with that data dot session.
+5:30
+Then call the function below the function definition.
+5:33
+And then number six, check the browser's dev tools.
+5:36
+Well, you may be thinking, Jonathan, why are we not just checking the Scrimba console?
+5:41
+Well, there's a little bit of a quirk in the Scrimba environment.
+5:44
+And when we check our Scrimba console, we actually see undefined and not null.
+5:49
+But if you check your browser's dev tools, and for me, that's using f twelve because I'm using Chrome.
+5:56
+But have a Google of how you do that if you've not done that before, and then click the console part of the dev tools, you will see it logging as null.
+6:04
+And that's correct.
+6:05
+That's what the Superbase docs say.
+6:07
+If you Google get session and look at the response, you'll see that one of the options is that the session property of the data object would be null if there's no session in local storage.
+6:19
+Okay.
+6:19
+Take it slow one step at a time.
+6:21
+Good luck.
+6:21
+See you in a minute.
+6:26
+Okay.
+6:27
+I hope that went well.
+6:28
+So we're gonna go for async.
+6:31
+Let's copy this function name, and then we're gonna set up our try catch.
+6:38
+There we go.
+6:39
+And we're gonna execute this auth dot get session.
+6:41
+So we say await because it's an async function.
+6:46
+We use super base, and we use the dot auth dot get session method.
+6:51
+Now we destructure data and error back.
+6:55
+There we have it.
+6:57
+Handle both Superbase specific errors.
+6:59
+So that's this error here.
+7:01
+So we say if there's an error back from Superbase, we're gonna throw that error so that it's caught in the catch.
+7:09
+Let's deal with the catch now.
+7:10
+So we put error in here, and then we can reference this error for what we want to do with it.
+7:18
+Well, just like we did in fetch metrics, let's console dot error with a little message error getting session, and let's use the error dot message to be really clear.
+7:31
+Did we do that?
+7:33
+Oh, we actually got error there, so let's improve that by putting message there.
+7:37
+Great.
+7:37
+Save dashboard.
+7:39
+Okay.
+7:40
+If successful, log the value of the session property of the data object.
+7:45
+That's gonna be here.
+7:46
+Here is if we have success.
+7:48
+We're gonna console dot log, and it's from the data that we're destructuring here.
+7:55
+So we do data, and we go into that object, and it's the session property.
+8:01
+There we see.
+8:03
+We've destructured data, so we've got this object, and we need to go into that and take the value of the session property.
+8:10
+And then also update the session state with that.
+8:15
+So we can use our set session, and, again, it's data dot session.
+8:21
+Number five, call the new function below the function definition.
+8:26
+There we go.
+8:27
+So we've defined it and called it in this useEffect.
+8:31
+And then let me save, and we'll see that little quirk that I mentioned that in the Scrimba console, it shows as undefined, but it's actually null.
+8:40
+So, hopefully, when you got to stage six, you went into your browser's dev tools, and you saw the console log as null.
+8:49
+One more time, let me remind you.
+8:51
+We initialized session as undefined, and then we want this get session method to update it to either null if there's no session in local storage and with the data if there is.
+9:02
+But, obviously, we have no current way of signing in, so we can't see that data yet.
+9:08
+Fantastic.
+9:08
+Let me delete all of this.
+9:11
+So when there is a session, it includes lots of data.
+9:14
+We get the actual access token that was sent from Superbase on sign in.
+9:19
+It tells us when this token expires, how long until it expires.
+9:23
+It's got a user property with the email address, the unique ID that Superbase gives the user.
+9:29
+So let's briefly go into what this get session method does.
+9:33
+So when it's called, it checks for local storage.
+9:36
+If there's no token, it just returns null.
+9:38
+If there is a token, it then checks whether this token has expired.
+9:43
+If it's not expired, it decodes it and returns the session data that that we just saw in that slide.
+9:48
+If it has expired, though, it will check for a refresh token.
+9:53
+If there's not a refresh token in the JWT, then it'll just simply return null.
+9:57
+But if there is, it then makes a new request to Superbase for the new token.
+10:02
+If this is unsuccessful, then we just get null again.
+10:04
+But if it is successful, then it stores the new access token, and we get the session data again.
+10:10
+This is all happening under the hood.
+10:12
+You don't need to worry about it, but it's interesting to know nonetheless.
+10:16
+And this JWT, it proves the user's identity and that user's permissions.
+10:22
+So what's quite cool is that Superbase doesn't actually track who's logged in and logged out of your app.
+10:28
+The JWT that it sends and is stored in the client, that actually proves that they're logged in and for how long, etcetera.
+10:35
+So it's a stateless authentication system.
+10:38
+Okay.
+10:39
+Brilliant.
+10:40
+On to dealing with number two, listening for any changes in all state.
+10:44
+See you in the next scrim.
