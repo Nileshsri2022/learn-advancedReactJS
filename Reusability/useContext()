@@ -1,0 +1,160 @@
+
+Transcript
+0:00
+The next thing we need to do is make it so that the components that are children of our provider can get access to the context that we're providing.
+0:08
+And in this case it's not as complicated as you might be thinking.
+0:11
+Really all they'll be getting access to is whatever we pass in as the value.
+0:15
+So it's really just going to be this string that they receive.
+0:18
+Now the way that this is set up, I currently have this dark theme class here in the same file as a child of my theme context provider.
+0:26
+We're going to kind of ignore that for now because we need to wait till we can talk about how we can make changes to our context before this will make sense to use.
+0:34
+But we do have our header and our button.
+0:36
+If I look at both of these, the button is using this dark theme and the header is also using dark theme, as well as using the string dark, which we'll want to change to light when we change the theme.
+0:48
+So the header is as good a place as any to start working.
+0:51
+In order to pull the context value that is being provided by the theme context provider, we'll simply use a hook called react dot use context.
+1:01
+However, in order to use the correct context, because you can set up multiple contexts that will all provide their own values, we need to give use context the full context object that we created over here with theme context.
+1:16
+And this is why we exported it.
+1:18
+So fortunately over in my header I can just import my theme context, and I need to wrap this in curly braces because it's not a default export, and I'll get that from the app component.
+1:30
+Then I'll provide my theme context to use context, and I need to catch what it returns.
+1:36
+Let's just call it value in a variable.
+1:38
+Now let's go ahead and console log what the value is and we'll hit save.
+1:42
+And look at that, we simply got the string dark.
+1:45
+And that's because the value that we sent in our context was just the string dark.
+1:49
+If I change this to light it changes to light.
+1:52
+Again we're going to get more complicated with what we're passing down as our value, but for now this is a good way to learn that whatever you tell the provider is the value is what will be received when you use use context.
+2:03
+Okay, let's buy ourselves some room by closing the console and I will get rid of this console log.
+2:09
+And now is a perfect time for a challenge.
+2:13
+Okay the first part of this challenge is to update our class name.
+2:16
+So instead of having a hard coded dark dash theme you can actually use whatever the value from context is.
+2:24
+Remember it's either going to be dark or light.
+2:26
+And then you can also change the text that's showing up here inside of the h one.
+2:30
+If the value is dark it should say dark, if it's light it should say light.
+2:34
+Pause now and work on this part of the challenge.
+2:42
+Alright.
+2:42
+So updating our CSS class name should be fairly straightforward.
+2:46
+I could use string concatenation and say something like, uh, well change this to a JavaScript expression so I can add the strings together and then say value plus theme.
+2:57
+In fact I think this should update because we did we set our yeah we changed this value to light.
+3:02
+So let's go to header let's hit save.
+3:04
+Oh cool it changed our header to be a light theme and that seems to be working.
+3:08
+Another way you might have done this and probably the way I'll leave it is to use string interpolation.
+3:14
+So that would be using these back ticks and then the dollar sign and then wrap my dynamic value in curly braces like that.
+3:22
+We'll hit save just to make sure yeah that's still working.
+3:24
+Awesome.
+3:24
+The next part of the challenge was to change dark to light or light to dark.
+3:29
+I could simply provide the value in here and hit save.
+3:32
+Of course I get a lowercase l because that's kind of what we're expecting our state to be, or rather our context value to be.
+3:39
+I I could also get fancy and do some JavaScript operations and say like value at the index of zero which would be the first letter dot to upper case and then add the rest of the string.
+3:52
+So what would that be value dot I think slice starting from index of one.
+3:56
+This is just kind of some leet code style JavaScript challenge.
+4:00
+Let's hit save.
+4:01
+Oh cool, that seems to work.
+4:02
+I'll go to app.
+4:03
+Js.
+4:04
+Let's change this to dark, lowercase d.
+4:06
+We're at dark theme and we have a capital d.
+4:08
+I don't know that I love doing this whole crazy thing in here.
+4:11
+I would either choose to do it outside of my return so it doesn't clutter up my UI here, or simply enough I could just use a ternary that says if value is equal to light then display the string light with with a capital l and this needs to be a question mark.
+4:28
+Otherwise display the string dark.
+4:30
+Let's see if that works.
+4:31
+Okay we still have the dark there, let's go to value of light and capital L light.
+4:36
+Yeah that works.
+4:38
+Honestly this is simple enough that I'll probably just leave it it here in my h one, but just so you know you also could say like const text equals and then do your operation to determine what the text should be and that way you can just put in, if I can select it right, here we go, text.
+4:52
+And then it'd be text theme.
+4:53
+But then you do have two places to look, I don't know.
+4:56
+Again there's a million different ways to do things.
+4:58
+I'm going to probably leave it like this.
+5:00
+Even though I can manipulate the string to say exactly what I want it to, it's a little less readable for other developers, so I'm gonna leave it this way.
+5:07
+Okay that brings us to part two of the challenge.
+5:11
+Okay your task is to do the same thing but now with the button component.
+5:16
+You only need to worry about changing this class name right here.
+5:19
+You don't need to worry about getting the button click to work or anything like that.
+5:23
+Pause now and work on part two of this challenge.
+5:31
+All right so we need to import our theme context because we'll be using that as a part of use context.
+5:38
+Then we will get our value from react dot use context passing it the theme context, and then with that value we will use it to determine what the string should be.
+5:49
+So we'll do the same thing we did before, so it'll be our value, and let's hit save.
+5:53
+And cool, our button changed.
+5:55
+It might not look super obvious but the button used to be dark and now it's light.
+5:58
+Now you probably noticed that we're hard coding everything right now.
+6:02
+We're hard coding this value to be light and when it's in your code you don't necessarily want that to be hard coded.
+6:08
+In our case we want the button click to be able to change that.
+6:11
+So that'll be the next thing that we learn about.
+6:13
+But first we're going to take what we've learned here, creating a context, wrapping the code in a provider, giving it a value, exporting theme context, using use context.
+6:23
+We're going to take all of that information and go back to our menu button component and apply it there.
+6:28
+So once you feel good about everything that we've learned so far we'll go ahead and get started there.
