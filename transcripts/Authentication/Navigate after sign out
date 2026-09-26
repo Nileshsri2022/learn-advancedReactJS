@@ -1,0 +1,142 @@
+
+Transcript
+0:00
+Okay.
+0:00
+So we can successfully sign out.
+0:02
+The client library deletes the user's JWTs from the browser storage.
+0:07
+And after the token's deleted, our on old state change listener will receive the change and update our app session state accordingly.
+0:15
+Let's deal with our navigate back to the home path here.
+0:19
+Since I've already done a navigate for you, it's now your turn.
+0:24
+After a successful sign out, when success is true, use the use navigate hook to redirect the user to the home route.
+0:32
+Save and test this functionality.
+0:35
+I'm gonna take us back home, so that means to test this functionality, you're gonna have to log in and then click the sign out button and check whether you get renavigated back to the home path.
+0:46
+Good luck.
+0:52
+Okay.
+0:53
+I hope that went well.
+0:54
+So to use the use navigate hook, we're gonna have to import it.
+0:58
+There we go.
+0:59
+And then because it's a hook up here, we're gonna go use navigate.
+1:05
+And remember, we then get the navigate function.
+1:09
+There we go.
+1:09
+We can now use that navigate word here, and we pass to it the path that we want to go to.
+1:18
+There we go.
+1:19
+Okay.
+1:19
+Let me save and test this.
+1:22
+Let's log in as Dwight again.
+1:24
+Okay.
+1:25
+Fantastic.
+1:25
+And then I click log out.
+1:28
+Yes.
+1:28
+We see the session change in the console, and we're back to home.
+1:32
+Great.
+1:33
+Let me delete this.
+1:35
+So this is the first of two ways we're gonna make sure a signed out user will be directed back to the home path.
+1:41
+In a future scrim, we will protect our slash dashboard route by only letting users access this route if there is an active session.
+1:52
+This means when a user logs out and the session is removed, they will be redirected back to home.
+1:58
+I mentioned in the last screen that I'm keen to show the email address of the logged in user in the header.
+2:04
+So let me sign in again.
+2:06
+I'd like to add it next to the sign out button.
+2:09
+How are we gonna access this?
+2:11
+Well, we are passing our session object, and we've seen before that the session object includes a user property, which has their role authenticated if they're logged in and their email.
+2:27
+We saw this in the console previously, so we can access the email through here.
+2:32
+So we need session in header.
+2:35
+So we've already got the user auth hook, so we can actually add to this destructuring and say session as well, please.
+2:43
+Let's log this session to the console and see what we've got.
+2:47
+Actually, let's not go for session.
+2:48
+Let's go into session and see the user property.
+2:51
+Here we go.
+2:52
+We've got the ID.
+2:53
+That's the unique ID that Superbase gives every user.
+2:56
+Role and AUD, very similar, both authenticated.
+3:00
+And there's the email.
+3:01
+That's the email we want to render in the header.
+3:04
+So that's important.
+3:05
+Let me copy that, and we can delete our console log.
+3:10
+And where are we gonna put it?
+3:12
+Well, actually, let's put it before the button.
+3:15
+Gonna make an h two and a span.
+3:20
+Let's write some accessibility as we go.
+3:23
+So we've got an s r only class name, and that's gonna say logged in as.
+3:31
+And here's where we're gonna render it.
+3:32
+So we've got session dot user, and we wanna go into the user property and get the email.
+3:39
+And you know what?
+3:39
+Let's have the error after the email address.
+3:43
+So it goes email potential error and then the button.
+3:47
+Now just for safety, because session is initialized as undefined, so that we don't risk any runtime errors, let's add the optional training operator after session and also after user.
+4:01
+Okay.
+4:01
+Let's save.
+4:02
+And thanks to some sneaky CSS, we we've now got the sign up button on the right and the email on the left, and then nice space for any error message in the middle.
+4:12
+Fantastic.
+4:13
+So the user now knows who's logged in themselves.
+4:16
+Brilliant.
+4:16
+Now on to learning about a really important part of Superbase or any database, really, and that's row level security.
+4:24
+See you in the next scrim.
