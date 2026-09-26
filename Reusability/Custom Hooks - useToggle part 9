@@ -1,0 +1,66 @@
+
+Transcript
+0:00
+This last little tweak we'll make I'm actually just gonna do for you.
+0:03
+I know that's not usually my MO, but it's gonna be really quick.
+0:06
+Here in use toggle, as we saw, we're passing two parameters, But if we didn't want to provide this first parameter but did want to provide the second one, then we would either have to force ourselves to put a first one in or do some other kind of strange thing.
+0:21
+A better option for this is to use a configuration object so that we can pass in whichever properties we actually want to pass in, but that's going to require just a really quick tweak.
+0:30
+So instead of two parameters I'm going to pass in one parameter and that parameter will be an object.
+0:35
+And because it's an object it needs key value pairs.
+0:38
+So the key that I'll give this I'll say is initial value will be true.
+0:44
+And I believe in use toggle we're calling this on toggle that it's receiving.
+0:49
+So let's use that as our key.
+0:51
+Open our menu we'll say on toggle will be this on open function that's being passed as a prop to our menu.
+0:57
+This is getting pretty wide let me put this on its own lines.
+1:00
+Okay let's go update use toggle so that it can accept an object instead of two parameters.
+1:06
+And I'm kind of hoping that I can just change my signature here to destructure this object like this.
+1:13
+And well let's see what happens.
+1:14
+I'll hit save.
+1:16
+Okay well that seems to be working so I think that's everything we need.
+1:20
+Now if I go to menu and I don't want to provide an initial value we can get rid of that one and hit save.
+1:26
+And sure enough, everything's working.
+1:28
+And you might have noticed too when we had the initial value of true, the menu was opened.
+1:33
+But when we got rid of it the default was false and so it was closed.
+1:37
+Let's also try giving an initial value but not an on toggle And it's open, that's good.
+1:43
+And no console log happening when we click.
+1:45
+Okay.
+1:45
+Awesome.
+1:46
+There's a lot of really amazing things that you can do with custom hooks.
+1:50
+And the truth is, if you just do a quick search, you'll see that a lot of people have already written hundreds or thousands of custom hooks that you could just install into your project and use.
+2:00
+So it's worth going out and actually looking at what's available out there.
+2:04
+Okay.
+2:05
+Wow.
+2:05
+We have covered a lot of ground and we've only covered reusability in React.
+2:09
+We have a lot more ground to cover and a lot of really cool new things to learn.
+2:14
+Before we move on from reusability, let's do a quick recap and see all of the really cool new things that we've learned in this section.
