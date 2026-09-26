@@ -1,0 +1,83 @@
+Transcript
+0:00
+Okay.
+0:00
+Let's now work on getting this on open prop that we originally are passing to our menu back to a working state.
+0:07
+We're passing a function that just console logs opened and I guess that might be silly because it's going to call it when it closes too.
+0:12
+Maybe we'll say open slash closed or something.
+0:14
+And over in our menu, we are still, because we haven't changed it, we're still accepting this on open prop.
+0:20
+However, in the code as it has changed in its iterations a few times, we're no longer using on open anywhere.
+0:26
+Because the use toggle hook is the one that is creating the state and maintaining it and changing the state internally, that's exactly where we would want this on open function to be called.
+0:38
+So just like we did by providing an initial value to our use toggle, we can also have use toggle accept a function that it should call every time the toggling occurs.
+0:48
+So over in use toggle oh, we still have the old challenge text.
+0:51
+Let me write a new challenge for you.
+0:53
+Okay.
+0:54
+Your challenge is to pass a second parameter called on toggle to our use toggle custom hook and you can give it a default of a no op function.
+1:01
+It looks like noop but it's no op and it's just this empty arrow function.
+1:05
+And then I want you to think how can we call this on toggle function anytime the on value changes but not on the first render.
+1:13
+Hopefully this is sounding familiar and you should be able to look around our code base and find something that will help you do this.
+1:19
+So I guess for challenge number two don't just think about it, actually get this to work.
+1:23
+You'll know that it's working because in my index JS I am passing an on open function here to my menu.
+1:29
+Oh and actually you know what we need a third part to this.
+1:33
+The last thing you'll need to do is to modify menu js and pass in the correct second parameter to use toggle and you'll know that it's working when clicking the menu will actually run our console log that we have here.
+1:44
+Okay pause now and work on this challenge.
+1:52
+Okay, so our first parameter is the initial value which we're giving a default of false.
+1:57
+The second parameter will be a function that we'll call on toggle and its default is going to be a weird looking no op function.
+2:05
+Maybe I'll put these on their own lines just to clear it up a little bit.
+2:10
+Okay and then for part two this on toggle function is one that we only want to call when the on state changes.
+2:16
+That's the perfect time to use a use effect, but hopefully you remembered that we created this custom hook called use effect on update, and that's going to allow us to only run on toggle after the first render.
+2:28
+So let's pull in our hook.
+2:29
+That's going to be import use effect on update.
+2:35
+And if you remember it has the same signature as a regular use effect so we'll call use effect on update.
+2:42
+We'll pass it first a callback function that runs on toggle.
+2:47
+And actually we kind of discovered that if that's actually the only effect we want to run I can just pass on toggle to my use effects on update hook.
+2:55
+And then the second parameter is an array of dependencies.
+2:58
+In this case we are watching the on variable.
+3:01
+Okay and then lastly we need to go to menu JS.
+3:04
+We're currently only passing one parameter to use toggle but now we're going to pass our on open prop that we're getting from props here.
+3:14
+Okay I haven't tried this.
+3:15
+Let's hit save, cross our fingers.
+3:17
+Okay we didn't get the console log on the first render which is good.
+3:21
+And then clicking it, awesome.
+3:22
+That's running our function again.
+3:24
+Yes, we are providing a default value for this first parameter, but there's no way for JavaScript to know that if I don't provide this that this is not the first parameter which actually isn't a function, it's the boolean of the initial value.
+3:37
+So So we're gonna make a small tweak to this, which we'll do in the next scrim.
