@@ -1,0 +1,188 @@
+
+Transcript
+0:00
+One solution, albeit not the preferred solution, to allow us to pass those additional props to any, let's call them unnamed children, is to use React dot children.
+0:11
+React dot children is an API provided by React that acts as a utility that gives you methods for interacting attached to
+0:24
+it.
+0:25
+With the way that react is dealing with children under the hood, attached to it.
+0:28
+With the way that React is dealing with children under the hood we aren't really able to do what we need to using the regular array methods And so React dot children gives us some of those familiar array methods like React dot children dot map and React dot children dot for each.
+0:45
+There's a few others that you're welcome to check out in the react docs.
+0:48
+You can click this link to head there.
+0:49
+The one that we're going to be focusing on is react dot children dot map.
+0:53
+Now here's the menu component set up as compound components that we just created previously and I want you to pause and think for a second which children do you think react dot children dot map is going to loop over?
+1:08
+Well remember react dot children dot map gives you access to the direct children elements and so in our menu component the direct children are just the menu button and the menu drop down.
+1:20
+However, it does not include grandchild elements of the menu like the menu items.
+1:25
+That's going to come into play a little bit later.
+1:28
+Now we're gonna be using React dot children dot map in conjunction with another utility provided by React called React dot clone element.
+1:36
+This is a utility that will duplicate a React element and provide a way to inject additional props to that element.
+1:42
+If you have ever used object dot assign in vanilla JavaScript, it's essentially the same thing but for React elements.
+1:50
+And when we use React dot clone element in conjunction with React dot children dot map, it is a way for us to take all of these unnamed children, which just now says children, and augment them or provide to them or pass them additional props.
+2:05
+In our case, what do you think the props are that we want to pass to the children of our menu?
+2:13
+If you said that we want to provide the open state and this toggle function then you are correct.
+2:20
+So let's use React dot children dot map in conjunction with React dot clone element to see how we can provide these props to the children elements.
+2:28
+Remember, children is an array and the map method in just regular JavaScript and in React dot children dot map, instead of modifying the original array, it provides a new array.
+2:40
+It creates and then returns a new array.
+2:43
+So the API for React dot children dot map, I'll just type this out.
+2:47
+Remember, this has gotten me a number of times to use a capital c in React dot children.
+2:51
+We'll say dot map.
+2:53
+Now the first parameter that I provide here, this is a little bit different than the map method in JavaScript because you just run that directly on top of your array.
+3:01
+Notice we're not saying children dot map because children is a regular JavaScript array and it would be running the original JavaScript map method.
+3:09
+So with React dot children dot map, the first thing we need to provide is the array that we want to interact with.
+3:15
+So pause for a second.
+3:16
+What array am I going to put here in the first parameter of React dot children dot map?
+3:24
+Well I'm trying to interact with the array of children and so I need to provide this method the children array.
+3:30
+The second parameter is a callback function.
+3:33
+We'll go ahead and stub out this callback function now and this callback function is a function just like JavaScript stop map that will be called on every one of the react children of this array or rather every one of the elements in this children array.
+3:48
+This callback function will receive each one of those elements.
+3:51
+So we'll just say this is an individual child.
+3:54
+And think back to that previous slide.
+3:55
+If this is the code we're running this on and menu is where we're running React dot children dot map, how many times will that callback function run?
+4:06
+It's gonna run two times, one for the menu button and one for the menu drop down.
+4:11
+Now think again, what are we trying to pass to the menu button and what are we trying to pass to the menu drop down?
+4:17
+Remember our ultimate goal is to make it so that I can click the button and make the menu show and hide.
+4:25
+Well, our menu button needs the toggle function that we created right here and the menu drop down needs access to the current open state right here.
+4:36
+So this callback function is going to run one time for each child.
+4:40
+One of those times will be for the menu button and one will be for the menu drop down.
+4:44
+And whatever we return from our callback function is what the original children array will be replaced with, each in the same index as the original children array.
+4:55
+So for example, if I were to just say return child, essentially this function would be accomplishing nothing because we're not augmenting this child component in any way.
+5:04
+However, I believe this would work.
+5:06
+If I hit save, we're back to exactly what we had before, but the sports button doesn't work of course.
+5:11
+Instead of returning the child without being augmented, I instead want to use react dot clone element to make a copy of the child.
+5:20
+So the first parameter is going to be the object or the thing, the element that I want to clone, and the second parameter is going to be an object that contains the new props that I want to provide to this child.
+5:32
+All of the original props are going to be held intact.
+5:35
+All I'm going to be doing is adding additional props on top.
+5:39
+And actually, this feels like a good place for a quick challenge.
+5:43
+Okay.
+5:43
+Your challenge is to figure out what I need to pass into this object in order for each of these children elements to have access to what they need.
+5:51
+Pause now, see if you can figure this out, and then we'll go through it together.
+5:59
+Like I mentioned before we really only have two values that we're trying to pass down.
+6:03
+One is the current open state and the other is our toggle function.
+6:07
+So as a part of this object which represents the new props I want to add on to the child, I'm going to pass an open prop.
+6:14
+And if I wanted to rename it at this point I could.
+6:17
+So I could say open open and then I could rename this maybe to something else.
+6:22
+And if I did that, then the children would not be receiving props dot open.
+6:26
+They'd be receiving props dot something else.
+6:29
+That makes no sense.
+6:30
+So I'm just gonna say open open and toggle toggle.
+6:34
+And as you may know in ES six, they introduced the option to do a shorthand so that instead of having to say open open, if the value of my variable is equal to the key of my property in the object, I can just say open comma toggle and that represents exactly the same thing that we just had.
+6:53
+Let me clean up my challenge here and we'll hit save.
+6:56
+Now think for a second, is this going to work when I try to use it?
+7:00
+Well not quite.
+7:01
+I'm gonna hit the sports here and it's still not working.
+7:04
+What we've done is we've augmented the children to have access to open and toggle but of course we have not yet made any use of those things.
+7:12
+So this is a perfect time for another challenge.
+7:16
+Okay.
+7:16
+Now that the menu button and menu drop down are receiving the open and toggle properties that we have augmented them with using React dot clone element.
+7:25
+Your challenge is to use those new props in those two components and essentially just make the menu work again.
+7:31
+I've given you a little hint here so you can get started, pause the screencast, and work on this challenge.
+7:43
+Okay, let's go over to menu button.
+7:46
+Now we were originally passing it an on click property, but now it's receiving a toggle property.
+7:52
+And so instead of on click here, we will call toggle.
+7:56
+And while I'm at it I might as well go into menu and as part of toggle I'm just going to console log that it was toggled.
+8:03
+That way I can see if this is working.
+8:05
+Awesome.
+8:06
+Every time I click the button it's running my function.
+8:08
+That's perfect.
+8:09
+We can clear that.
+8:10
+And now I need to go to menu drop down and instead of just children it's also now receiving an open prop.
+8:17
+And what I can do is use that to conditionally render.
+8:20
+So I'll say if it's open, I'll use a ternary here, then display the div and otherwise just display null.
+8:28
+Okay, let's give it a shot.
+8:29
+Moment of truth.
+8:30
+I hit refresh and look at that, everything is working again.
+8:34
+Finally.
+8:35
+Now, as I mentioned, this is actually not the preferred way to handle this whole scenario, and the reason is something that we are going to tackle next.
+8:43
+But for now, just bask in the glory of having something that's finally working again, but now using the power of compound components.
+8:51
+Once you've soaked up all the rays from that glory then feel free to move on.
