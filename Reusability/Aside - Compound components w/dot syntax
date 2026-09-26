@@ -1,0 +1,62 @@
+
+Transcript
+0:00
+One last thing that we're going to look at with our menu component is just an alternate syntax that we could use.
+0:06
+Right now you can see that we are having to import our menu, our menu button, our menu drop down, and our menu items all from different files.
+0:15
+But you may have seen a syntax using compound components that have dot syntax in between just like you would with an object and a property.
+0:22
+For example, you might see instead of menu button it would say menu dot button and for menu drop down menu dot drop down same with menu item menu dot item.
+0:34
+Personally I slightly prefer this syntax because it does allow me to just import the menu one time instead of having to separately import all of the different components from the menu.
+0:44
+Now just adding the dot here isn't going to magically make that work.
+0:47
+So I'm going to show you what we need to do in order to make it so that we can have this dot syntax.
+0:52
+Over in my menu folder, I'm going to create a new file just called index.
+0:56
+Js And this is essentially going to be a staging area for my menu component.
+1:01
+So I'm going to import all of the menu pieces and actually I'm just going to grab them from here because I'm lazy and we're inside the menu folder already so I don't need to specify dot slash menu.
+1:15
+So we will get rid of that.
+1:18
+And now that I have the individual components, I can treat my menu component here like an object and just say menu dot button equals menu button.
+1:28
+And we'll do the same thing for drop down and item.
+1:31
+So we'll call this drop down and item.
+1:34
+And then from this file I can export default my menu component which now has been, so to speak, augmented with the button component, the drop down, and the item as properties of the menu component.
+1:47
+That might seem a little strange because the menu is a function, but we're adding properties to it as if it were an object.
+1:53
+Under the hood, everything in JavaScript is an object, and this is a normal thing that you can do.
+1:58
+I don't see it in too many other instances, but here it makes a lot of sense.
+2:02
+Sense.
+2:02
+Then the last thing I need to do is in my index JS, I can go and actually get rid of all of these individual pieces because now they're all a part of the menu.
+2:11
+And like you saw, we had already made the changes down here below, but if I did it in a different order, I would then have to go through and change these.
+2:18
+Let's cross our fingers and hit save.
+2:20
+Oh, and we're not importing menu from menu slash menu anymore.
+2:24
+It's just menu slash index.
+2:27
+And awesome.
+2:28
+Let's see if everything is working.
+2:30
+Okay good.
+2:31
+So I just wanted to show you this quick syntax change.
+2:33
+I will personally be preferring the dot syntax from here on, but I've seen them done either way, so whichever way you prefer is up to you.
+2:42
+Okay, now it's time for us to move forward and learn about the concept of headless components.
