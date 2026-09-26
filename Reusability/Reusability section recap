@@ -1,0 +1,33 @@
+Transcript
+0:00
+Well, we certainly have come a long way, haven't we?
+0:02
+Here in this reusability section, we covered a lot of ground.
+0:06
+We learned about children in React and how we can use children to make components more flexible and compose them together.
+0:14
+Speaking of composition, we learned about compound components and how we can use context to share some implicit state within those compound components.
+0:23
+And those three together allowed us to create the composition that we wanted, then we learned how we can create components that invert control or pass control using a paradigm called render props.
+0:34
+Then we kinda took a sharp right turn and we started learning about custom hooks and we ended up completely ripping out some of the hard work we had done along the way.
+0:42
+But you know what?
+0:43
+That's okay.
+0:43
+That is the life of a software engineer.
+0:46
+The vehicle that drove us to learn all of these things is the made
+0:56
+our menu a bit more generic by creating the toggle component, We made our menu a bit more generic by creating the toggle component.
+1:02
+And then as I mentioned, we shifted our focus to some custom hooks like use effect on update and use toggle.
+1:08
+The fact that we covered a lot of ground also means that there's a fair chance that there were some of these topics that didn't quite stick the way that maybe they should have or that would be ideal.
+1:19
+So if by looking at these lists, you feel like you still need some work on some of these topics, that's completely okay.
+1:24
+You You can always go back and review them, and we will be getting a taste of this in other sections in this course as well.
+1:30
+Great job on this section, and get excited because coming up next, we're going to be building a really awesome project using React router.
