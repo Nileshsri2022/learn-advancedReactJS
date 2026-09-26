@@ -1,0 +1,78 @@
+
+Transcript
+0:00
+Here, I have opened the word letters component that needs a bit of typing.
+0:04
+Now you already know more than enough to fully type this one.
+0:08
+We've got a component that definitely returns a JSX element.
+0:11
+It's got three props, a map method, and a handful of variables that we can type explicitly.
+0:17
+So with that introduction, here is your challenge.
+0:20
+First, explicitly type word letter components return value.
+0:24
+Then type the component's props using a custom type.
+0:27
+And then finally, explicitly type any variables in the component itself.
+0:32
+I'll catch you on the other side.
+0:34
+Welcome
+0:37
+back.
+0:38
+Let's tackle this together.
+0:39
+First, let's type the return value of the word letters component itself.
+0:44
+Now we know that it returns a single JSX element, so let's import the type of JSX from React.
+0:51
+And then we'll type it right here with JSX dot element.
+0:55
+Next up are these component props.
+0:57
+So first, the custom type, which we'll call word letters props to satisfy the naming convention.
+1:03
+And then inside of it, let's target all three.
+1:06
+Current word should be a string.
+1:08
+Guest letters should be an array of strings, and is game lost is a boolean.
+1:14
+And now that we have that type, we can use it to type all of our props in one go with word, letters, props.
+1:22
+And now any TypeScript warnings that you may or may not have seen down here have disappeared, but we can always benefit from some explicit typing.
+1:30
+And there are a few things that we can add type annotations to down here.
+1:34
+First, we're going to type the two parameters of the map method.
+1:37
+So letter is a string and index is a number.
+1:41
+And as for the return value of this callback function, we can see that it is returning JSX element.
+1:47
+And we can also see this if we hover over the arrow right here.
+1:51
+So we'll just use JSX element to type this function.
+1:55
+Inside of the function, we also have the should reveal letter variable as well as the letter class name variable.
+2:01
+Looking at the code for should reveal letter, we can tell that this will be a boolean because of the or right here.
+2:08
+So we'll type this as a boolean.
+2:10
+And as for letter class name, we've seen c l s x in action before, so we know that this should return a string.
+2:17
+And there we have it.
+2:18
+Another component done.
+2:19
+And this time, it was a hundred percent all you.
+2:22
+We're getting very close to fully typing the entire React project now.
+2:26
+And in the next scrim, we're going to have a look at how to type a component prop that's also a function.
+2:31
+I'll see you there.
