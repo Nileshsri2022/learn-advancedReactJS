@@ -1,0 +1,49 @@
+Transcript
+0:00
+Now that get session is checking for a session object in local storage after initial render, we now need to move on to our second task, listening for changes in auth state.
+0:11
+We need to constantly watch out for this session object being created or removed.
+0:15
+On first render, we need to start it watching for changes, a bit like turning on a radar or a security camera or like that friend that keeps asking.
+0:27
+Okay.
+0:28
+So number two is gonna use another super base client method called on auth state change.
+0:37
+This is set up a little bit different.
+0:38
+We use the super base word, and then, again, it's another auth dot something because it's part of auth.
+0:45
+And we've got on auth state change, and then we pass to it a callback function that runs when some auth state does change.
+0:54
+So let's set up this callback function.
+0:56
+There we go.
+0:57
+And the callback function receives two arguments, the event that causes this to fire and the session object.
+1:06
+Now if the event is, say, a logout, then the session object will be null.
+1:10
+Remember, it's null if they're signed out, and it's the data from the session object in local storage if they're signed in.
+1:19
+Because we're not actually interested in what event causes this, we're gonna use a little underscore there.
+1:24
+And then, again, the whole point of this is to update the session state.
+1:28
+So we use set session again.
+1:30
+And this time, we don't need to use data dot session because we're getting the session directly.
+1:38
+Here, remember, the session was in the data object.
+1:41
+And then why don't we put a console log here so we know when some auth state does change?
+1:46
+Session changed.
+1:49
+So now our app is gonna react immediately when a user logs in, logs out, or their session changes in some way.
+1:56
+We get to respond to this change in real time.
+1:58
+Thanks to this dot on or state change method.
+2:01
+Okay.
