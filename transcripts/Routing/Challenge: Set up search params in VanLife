@@ -1,0 +1,92 @@
+
+Transcript
+0:00
+You know, sometimes when I'm watching a tutorial with somebody else doing all the work, I find myself getting lost a little bit in their code base.
+0:07
+So this is a silly kind of intro challenge, but the first thing I want you to do is to try and figure out where it is we're going to be implementing this search params challenge.
+0:17
+Remember the idea is eventually we're going to add buttons here to our vans page so that when we click them it will alter the search params and filter our list so that it only shows vans of a specific type.
+0:28
+Like we have the vans for the simple, the rugged, and the luxury types.
+0:34
+So if you need to pause and find the correct file, you can do that or you can just maybe say it out loud or something to show that you know where it is we're going to be implementing this.
+0:43
+So go ahead and do
+0:48
+that now.
+0:50
+Because we are doing this work on the VANS page, we are going over to the VANS component here, and hopefully you were able to find that or at least understand that that's where we would be doing the work.
+1:00
+Again, the only reason I had you do that is because I know that for me personally sometimes I realize I've gotten this far in a code base while watching a tutorial and then kind of realize I actually get lost in it pretty easily because I wasn't the one doing all the work.
+1:13
+I guess that's a little different in this course because hopefully you've been typing along.
+1:17
+Okay.
+1:17
+So we have our real challenge here and that is to access the search params inside of this component.
+1:22
+I guess an important distinction to make between what we're doing here with search params and what we have done in the past with state is to understand that state just lives inside of this component, whereas the search parameters, they're something that lives up in the URL.
+1:37
+URL.
+1:37
+So even though we are going to be accessing the search params here in this component, we're not actually instantiating or initializing search params here.
+1:46
+Instead, the search params variable is simply going to read the parameters that are up in the URL.
+1:52
+We can modify the URL, and we will be modifying the URL from this component, but it's a little bit different than state since state is just living in memory for this component only.
+2:03
+Anyway I don't know if that clears anything up or makes it worse, but hopefully that helps.
+2:07
+So I've laid out some steps for the challenge.
+2:09
+You need to use the hook that we just learned about from React Router DOM, set a variable, and use it to set a variable called search params.
+2:16
+That search params object will have a property you can use to grab the value of the type parameter, and I want you to save that to a variable that we call type filter.
+2:27
+And then simply log the value of type filter to the console.
+2:30
+Now remember, currently as it stands right now in this recording we don't have a query up here.
+2:35
+So don't be surprised if you get to the third step and you log the value of type filter and it isn't what you might think it would be.
+2:42
+To test it out you can simply type up into the URL question mark type equals, and then whatever you want.
+2:49
+Alright, you should have everything you need.
+2:50
+Pause now and work on the challenge.
+2:58
+Alright let's get started.
+2:59
+We will just do this right above our state declaration and we'll create a new search params object here.
+3:06
+So search params.
+3:07
+And we're not yet at the point of using set search params, but we might as well do it now because we know we are going to use it in the future.
+3:15
+So we will call use search params and I need to import that from react router dom.
+3:22
+Then maybe right below our state, let's buy some space here, and we'll say type filter is equal to search params.
+3:30
+And remember this is an instance of the native constructor URL search params.
+3:35
+That comes with a number of methods that we just get for free like dot get.
+3:39
+And dot get is where we specify as a string the name of the key in the key value pairs of our search params, and it should return the value at that key of type.
+3:50
+So I'll go ahead and console log type filter.
+3:54
+And again because we don't have a query string in our URL this I think will be null is what we discovered.
+4:00
+Yeah so it's null.
+4:01
+Now I can test it out by putting in the URL question mark type equals and it really doesn't matter I'll just say blah blah blah hit enter and there it is.
+4:11
+In our case notice that we're getting it twice and that's because we are rendering the component, we're grabbing the search param of type, we're console logging it, and then our useEffect is running.
+4:22
+It's going and getting the data and then it's setting state so it's re rendering this component which is then running our code again.
+4:29
+That's nothing to be concerned about right now.
+4:31
+Okay great work.
+4:32
+The next thing we'll be doing is going back to our silly little Star Wars characters app and we will apply the search parameter to filtering the array.
