@@ -1,0 +1,176 @@
+
+Transcript
+0:00
+Before we even jump into the real challenge on this scrim, I want you to think for just a second.
+0:05
+We have here our host man detail page.
+0:08
+Where on this page are we going to start writing our nav bar code?
+0:12
+Take a look at what we currently have, where the outlet currently sits, and what it's supposed to look like.
+0:17
+Here we have the nav bar and then the information.
+0:19
+So if you need to you can pause and think about it, otherwise I'm just going to be quiet for five or seven seconds and let you answer the question.
+0:27
+Well the outlet represents the switching out views or the user interface that will be changing from one route to the next, and we show that our navigation bar is above that switching out view.
+0:39
+So we're going to add our nav bar code above our outlet here, right here.
+0:44
+Okay that sets us up for the challenge.
+0:45
+Let me type that out.
+0:46
+Okay this is fun.
+0:47
+The challenge text is actually here below where you're going to be writing your code.
+0:51
+Now I did add the nav element with the correct class name and the CSS styles that you need just to make sure that everything looks okay.
+0:59
+So you should be able to just add your links as part of the challenge, and the style should kind of work out okay.
+1:05
+So the challenge is to add the links to the nav bar that's going to be above this information that's showing up below here that swaps out from one view to the next.
+1:14
+And if you need to check it out, I mean it just says details pricing and photos.
+1:18
+So that's really what I mean by check out the Figma design to see what the text of the links should be.
+1:23
+We also, as you might notice, want to make it so that there's a clear indication as to which route we're currently on, so you'll have to remember how you can do that.
+1:32
+And of course you can look at the other parts of the code base where we're doing that.
+1:35
+We're already doing that in this navbar and this navbar.
+1:38
+And remember the details link here is just leading you back to host vans ID.
+1:44
+It doesn't go to host vans ID slash details or anything like that.
+1:48
+So you'll have to remember the little trick we recently learned so that clicking the details link will take you to that route instead of one of the other nested routes.
+1:56
+Okay, that's enough of me talking.
+1:58
+Pause now and add our final navbar to our app.
+2:03
+Thank goodness it's our final navbar, am I right?
+2:05
+Okay let's go to add our links here.
+2:08
+Now because we want to indicate based on the current route, a different kind of style for each link, we're not just going to use the link we're going to, which we're already importing, we're going to also use nav link.
+2:20
+So we need to make sure we import that.
+2:22
+Then we'll get rid of this and we'll say we're going to add a nav link and we're going to have three of them for details pricing and photos.
+2:31
+So let's just type in that text here details pricing photos.
+2:35
+Now I do know that I'm going to be adding a few other things here so I'm just going to split things out onto their own lines right now And we'll put a little space just so it's a little easier to understand what's going on here.
+2:48
+Okay first of all I need the to path so we'll say to equals, and let's work on getting these right.
+2:54
+So hopefully the pricing and the photos was fairly easy.
+2:58
+Because I'm inside of my nested route I can just say pricing and photos.
+3:02
+I don't need to specify the entire absolute path leading up to this.
+3:06
+This one is the tricky one, because the details should lead us kind of back to the route where we're currently writing this code.
+3:14
+In other words, all this code is living at slash host slash van slash and then the ID, I'm going to use just a dot and that represents the current path.
+3:23
+Remember this host van detail is being rendered at the ID path or endpoint here, hostman's ID.
+3:30
+And so when I say to dot that means just go back to hostman's ID.
+3:35
+And actually I think this is a majority of what we're trying to do.
+3:38
+So let's hit save.
+3:39
+We're going to see a little bug here.
+3:41
+Oh actually we're not gonna see that little bug till we get the styling in.
+3:44
+But I hopefully can navigate.
+3:46
+Let's hit pricing.
+3:47
+Awesome.
+3:47
+This is so cool.
+3:48
+Photos, details, that takes us back to detailed info goes here.
+3:52
+Perfect.
+3:52
+Now let's add the actual active class that we need by using the style.
+3:58
+And again this is going to be a function that takes an is active prop or parameter and we want it to return if is active is true.
+4:08
+We'll return we haven't created this yet but we'll create some active styles.
+4:13
+And yikes this is starting to bleed off the page here.
+4:16
+So active styles or null.
+4:19
+Okay sorry that that's being covered up there because I can scroll up and we can see that's the same.
+4:24
+Or I could make this a little bit smaller.
+4:26
+It's a little too small.
+4:27
+Okay.
+4:27
+Oh that wasn't me.
+4:28
+There we go.
+4:29
+Good enough for now.
+4:30
+Okay.
+4:30
+These are working.
+4:32
+No.
+4:32
+I have to hit save and we have to create active styles.
+4:35
+So let's go up here maybe just before our use effect we'll create an active style so that's an object and you know what I'm going to steal it from my other ones.
+4:46
+So we'll just come back, spend detail, put it right there, oops, let's replace this whole thing and hit save.
+4:53
+Okay this is where we see the little bug.
+4:55
+Remember we have both of these matching because details is not a sibling route per se to pricing and photos.
+5:03
+We look here once again the host van info is being displayed at as an index route which means it's at this path.
+5:10
+And that means that this is matching currently even when I'm in pricing.
+5:14
+So to fix that I simply need to add, let's go back down, the end prop.
+5:20
+So I can say end, we'll hit save, and there we go.
+5:23
+Okay so now details is the only nav link being displayed or being highlighted rather, pricing, photos, Perfect.
+5:29
+I hope everything went well.
+5:31
+One of the final major pieces that we're going to be working on is actually getting the correct information displaying here inside of our nested routes.
+5:40
+At first glance it might seem like it's easy because, well, we've already got this information, why not be able to display it down there?
+5:46
+But remember, we only have an outlet here.
+5:49
+We're not actually coding out the detailed info or the pricing or the photos here in this file where we have the information from our fetch request.
+5:58
+So we have a little bit of work to pass the information that we've gathered to the child routes so that they have access to that information in order to display it correctly.
+6:08
+Fortunately React Router has made this fairly easy, so we'll be able to do that pretty quickly.
+6:12
+For now, start to get excited.
+6:14
+We're almost done with the majority of our app.
+6:16
+We have a couple loose ends to tie off, but those things are fairly minor in comparison to all the amazing work
+6:24
+that you've done so far on this project.
+6:24
+Once you're done with your little happy dance and maybe doing a lap around your house or something, let's get back to work and we will figure out how to get the information into our child routes.
