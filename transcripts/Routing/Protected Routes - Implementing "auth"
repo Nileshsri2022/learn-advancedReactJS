@@ -1,0 +1,55 @@
+Transcript
+0:00
+Because this isn't strictly a course about authentication, we're not going to be going out of our way to implement real authentication in our app.
+0:07
+So for this first step, when we say we're going to check the authenticated status of the user, we are going to be dirty cheaters here.
+0:14
+We're just going to say const auth or maybe we'll say const authenticated.
+0:21
+And we'll just go ahead and say true.
+0:23
+Of course, in reality, one popular way
+0:32
+the the username and password of a real user in their database, and then it would send back some kind of token, probably in a cookie.
+0:39
+And that way any future requests made by the logged in user would have a cookie attached to it that had a token that the server could authenticate to make sure that it was a valid token.
+0:49
+If all of that doesn't make sense, that's okay.
+0:51
+Because like I said this isn't a course on authentication.
+0:54
+So for now we're just going to modify our variable called authenticated and for now we'll just set it to true.
+1:01
+So that will make this part pretty easy for us to do.
+1:04
+In fact I'm going to make this a bit of a mini challenge for you.
+1:09
+This is one of the really nice things of having pre written our plan out is that it becomes really easy to actually turn our, you could say, pseudo code or our comments into real code.
+1:19
+So your mini challenge is to write out this part of the logic.
+1:22
+For now, don't worry about this top part.
+1:24
+We're just going to check if they are authenticated, we want to render the outlet.
+1:28
+Pause now and work on this mini challenge.
+1:36
+Okay.
+1:36
+Well, it's basically exactly how it sounds.
+1:38
+We're going to say if authenticated, and this is of course the authenticated boolean that we set up up here.
+1:45
+Then we're going to return our outlet.
+1:47
+We actually already have that line of code.
+1:49
+And perfect let me delete this mini challenge text and I'll go ahead and hit say actually before I hit save think what exactly is going to happen when I hit save
+2:02
+We're currently sitting here on the protected route, but we did say that we are authenticated, and if we are authenticated, which we are, we are going to return the outlet.
+2:11
+Therefore, I think nothing should change.
+2:13
+We're still going to be able to see the protected route and of course go to the home page which is not protected.
+2:18
+So let's clear out this part of our plan and we will go ahead and start implementing this next part of our plan.
