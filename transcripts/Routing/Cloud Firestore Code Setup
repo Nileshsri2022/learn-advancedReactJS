@@ -1,0 +1,71 @@
+Transcript
+0:00
+One thing that's really nice about us making all of our fetch requests inside of a separate sort of utility file like API JS is that we can just make changes to how this data is getting fetched, and we won't have to make nearly as many changes in all of our components and pages that are calling these functions to get the data.
+0:18
+In other words, the component doesn't really care how the data is being fetched.
+0:22
+It just cares that the data comes back in the, you could say, shape that we're expecting.
+0:27
+And then it's the responsibility of these fetching functions to handle actually the data correctly and throwing errors if the data isn't coming in correctly and shaping that data to look the way that the components are expecting.
+0:39
+So what we'll mostly be working on is refactoring these functions, and in order to do that we need to initialize our Firebase instance here inside of our API JS file.
+0:49
+Which means we are going to need that configuration object that I mentioned before.
+0:53
+If it's no longer in your pasteboard and you need to go copy it again, that's okay.
+0:56
+It's really easy to find.
+0:57
+You You can go to your Firebase console inside of the van life project that we made, and you can click this gear icon next to project overview and click on project settings.
+1:07
+That will, of course, take you to the project settings page.
+1:10
+And if you scroll down inside of this general tab, you'll see that same configuration object that we had before.
+1:16
+So this is when you would want to click the rectangle to copy the entire object down so that we can come to our API JS file and we'll put a few lines of separation here.
+1:26
+And I'll go ahead and paste that in.
+1:29
+We can just get rid of these extra comments that we don't need.
+1:32
+Okay.
+1:32
+We avoided a lot of tedious typing by putting that in.
+1:36
+Now as you might have noticed, Firebase is a whole suite of tools that we can use, and the tool that we specifically care about at this point is using the Firestore database.
+1:45
+And so having initialize app here is a great way for us to get access to that web app that we created, but I do also need to import specific tools dealing with Firestore.
+1:56
+So I'm going to add an import here called get Firestore and this is going to come from Firebase slash Firestore.
+2:04
+And one thing that's really cool about Firestore is its ability to have real time data.
+2:09
+There are tools that come from this Firestore package that we are importing from that allow our application to make a real time sort of WebSocket connection to the database.
+2:19
+Which means if the data in the database were ever to change, I can set up listeners inside of my app that will react to any changing data in real time.
+2:28
+This is perfect for something like a chat application where the array of chat messages is being saved in the database, but I don't want to have to refresh my app in order to pull the latest data down.
+2:40
+I just want any new chat messages that are sent to Firestore to automatically push their way into my application.
+2:47
+However, as cool as those features are, we are not going to be using any of those in this project.
+2:52
+And so I found that there is a sort of subset of this Firestore package that I can include by just typing slash light, which will still give me the capabilities of reading, writing, updating, and deleting data from my Firestore, but it won't come with any of those real time features.
+3:08
+By doing this, I can save myself a little bit of load time by pulling down a package that is a little bit lighter weight than the full version of the Firestore package.
+3:17
+That said, everything we're about to do is completely compatible with Firebase slash Firestore.
+3:22
+So if you wanted to add some kind of real time component to this fan life app, then all you'd have to do is come delete slash light.
+3:29
+But just for a couple minor speed benefits, I'm gonna keep it here.
+3:32
+Okay.
+3:33
+We went and grabbed the app by calling initialize app, and now I can use this app in order to get a Firestore database.
+3:40
+So I'll say const db equals what comes back by calling get Firestore, and I'll pass in my app so that it knows which app I want the Firestore database from.
+3:51
+And at this point we are perfectly set up to start refactoring the fetching functions below.
+4:00
+So that's what we're going to start working on.
