@@ -1,0 +1,80 @@
+
+Transcript
+0:00
+Changing our star component turned out to be a pretty easy affair because the star component wasn't really a compound component.
+0:06
+It was using the toggle compound component sort of ecosystem to make the functionality work, but with our menu things are a little different.
+0:15
+The menu itself is a compound component and so it has a whole ecosystem of child components that it will need to be able to pass the values from our toggling logic to all the children.
+0:27
+Now remember back when I said that there's usually a bunch of different ways to solve any given challenge.
+0:32
+In our case, the toggle is actually providing a pretty useful function to our menu.
+0:37
+If we were to create maybe ten other components that were also compound components like the menu and provided toggling logic to those compound components, then having the toggle headless component may be useful to us.
+0:50
+But just for the sake of seeing something in a different way, we're going to reset up context for the menu and then make the necessary changes to all of the children so that they can access the context values that we need to pass to them.
+1:04
+This is a lot to do, and it's kind of a culmination of this section.
+1:07
+You're going to get your hands on the use toggle hook that we created.
+1:10
+You're also going to be asked to remember how to set up context that we learned quite a while ago now.
+1:15
+As far as challenges go, we'll take this in smaller bites.
+1:18
+So let me type out the first part of the challenge.
+1:22
+Okay the first parts of this challenge are to first of all go through all four of our menu components and remove any reference to toggle.
+1:30
+This is going to seriously break the menu component.
+1:33
+Oh and we're still showing the star.
+1:35
+I went over in index JS and replaced it with the menu, I just haven't hit refresh yet.
+1:39
+So let me do that.
+1:40
+Okay.
+1:40
+Our menu's here.
+1:41
+It's working just fine because we haven't yet hacked apart the toggle references yet.
+1:46
+And then part two of the challenge is to use our use toggle hook to create some new state, and this time let's call the variables that we get back open and toggle open.
+1:55
+Alright, pause now and work on parts one and two of this challenge.
+2:04
+Alright, any line that says toggle has got to go.
+2:07
+So I'm just going to get rid of all three of those lines including our import and we'll change the formatting here.
+2:14
+Go to my menu button, toggle toggle toggle.
+2:16
+Let's get rid of those.
+2:18
+It's a little bit painful because we put so much time into this.
+2:21
+We'll cut those out.
+2:21
+It's also pretty cathartic because our code is getting a lot cleaner and our menu items do not use toggle.
+2:28
+Okay so we only had three to modify.
+2:30
+Next let's go ahead and start fixing this.
+2:32
+So I'm going to import my use toggle from my hooks folder slash use toggle and then I will create some new state.
+2:42
+We're gonna call it open and toggle open by calling use toggle.
+2:48
+Okay.
+2:48
+This is where it gets a little scary.
+2:50
+I'm gonna hit refresh and we're going to be broken.
+2:53
+I can't close my menu, it's open by default, but that's okay.
+2:56
+We're going to refactor this until it works.
+2:58
+Play around with the code as much as you want and when you're ready we'll move on to the next parts of the challenge.
