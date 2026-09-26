@@ -1,0 +1,80 @@
+
+Transcript
+0:00
+Before moving on, let's have a quick quiz on compound components.
+0:04
+As I usually like to do with my quizzes, I want you to actually click into each one of these and type down your answer.
+0:10
+The process of thinking through it and typing it down is going to be what actually gets your brain thinking about these questions.
+0:16
+And then we'll go through each of these answers together before we continue on in this section.
+0:20
+So pause now and answer these three questions.
+0:28
+Okay.
+0:29
+Number one.
+0:29
+How would you explain the concept of compound components in React to someone who only knows the very basics of React?
+0:35
+I find it helpful to compare a new topic to something that the person learning this topic might already be familiar with.
+0:42
+So that's why in my example I used the concept of HTML elements that also work together.
+0:48
+Put simply, the concept of compound components is creating multiple components that work together to accomplish one greater objective.
+0:56
+We can see this fairly simply in the concept of compound elements in HTML like the ecosystem of table related elements.
+1:04
+And now we're starting to bleed over into question two.
+1:06
+So let me type down a succinct answer for this.
+1:10
+So one way you might say this is that compound components are components that work together to accomplish a greater objective than what might make sense to try and accomplish with just a single component alone.
+1:22
+Okay, number two.
+1:23
+What are some examples of HTML elements that work together to add functionality or styling to each other?
+1:29
+I think the most basic example that I can think of has to do with using the unordered list and the list item elements.
+1:36
+Maybe instead of a comma, let's put an ampersand there so we can put a comma between these.
+1:41
+Another has to do with a select box.
+1:43
+So you have the actual select element that is in combination with option elements.
+1:50
+The select box is the holder for all of the options, and the options are children of the select box.
+1:56
+And then a much more involved ecosystem of compound elements in HTML would include the table element and, well, all the other table elements because there's a lot of them.
+2:07
+Okay.
+2:07
+And number three, how can compound components help you avoid having to drill props multiple levels down?
+2:13
+Well because compound components use the concept of children in React, in essence we get to flatten the number of levels that we are trying to drill props down.
+2:22
+Let's use the select and options as an example.
+2:25
+So in HTML, if I have a select box, and this is going to have a closing element as well.
+2:33
+And inside of that select, I'm going to have a number of option elements.
+2:37
+If I had some kind of state, we'll just say const state is some object.
+2:43
+If I have this state that's living in the component that is rendering the select element, Because I'm using this compound element setup these are native HTML, not React components per se, but I think you get the concept If I needed to pass this state down to my options, I could just do it right here.
+3:02
+It's like having a window into the children of the select elements, through which I could just pass any properties that I need to directly instead of having to first pass it to my select element and then go over to the file that contains my select element and pass that down through props to my options.
+3:19
+So let me actually write that down as an answer.
+3:23
+So once again, compound components flatten the hierarchy that I would otherwise need to pass props through.
+3:29
+Since I need to provide the children that need to be rendered, the parent most component will have direct access to those so called grandchild components,
+3:43
+Alright.
+3:44
+Alright.
+3:44
+Hopefully this quiz went okay for you.
+3:46
+Let's move on.
