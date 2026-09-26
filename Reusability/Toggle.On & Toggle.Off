@@ -1,0 +1,114 @@
+
+Transcript
+0:00
+As it turns out, our toggle on and toggle off components are fairly straightforward to understand, so I'm going to make them a challenge for you to work on.
+0:08
+You can see the three step process here that I've outlined.
+0:11
+I want you to create a new component toggle on that will accept children in props.
+0:15
+It's also going to need to pull in the on state that comes from context, and then depending on what the on state is, you should conditionally render either children or null.
+0:25
+You can read the instructions for more details.
+0:28
+Pause now and build the toggle on component.
+0:36
+Alright, let's give this a shot.
+0:37
+We will of course import react from react this will be lowercase, and export our function.
+0:45
+Toggle on.
+0:46
+This will accept children and props.
+0:49
+And well that's number one, so we also need to import our toggle context from our toggle component.
+0:57
+And we'll use use context to grab the on state, passing in our toggle context.
+1:04
+And then simply enough we can return, and I'll use a ternary, we'll say is on true.
+1:09
+If so then we will return the children because this is the component that should display the children if on is true.
+1:18
+And if on is not true then we are just going to return null.
+1:22
+This is actually pretty short.
+1:24
+I don't think I need this on its own line.
+1:25
+Let's just put this all in one line.
+1:27
+Before we go and test this I think I'm going to tack it onto our toggle.
+1:32
+So I'll import toggle on and then we'll say toggle dot on is equal to toggle on.
+1:38
+Okay.
+1:38
+And then in our index.
+1:40
+Js we can test this.
+1:42
+Let's see.
+1:42
+We'll see in a little bit how we can actually start nesting all of these in kind of a crazy way.
+1:47
+For now I'm just going to do this below the button and we'll test our own separate children.
+1:51
+We'll say toggle actually this should be toggle dot on toggle dot on and let's put the toggle is on.
+1:58
+Okay it's not showing up but that's because our state is off.
+2:03
+I think I could just click this and see there we go, the toggle is on.
+2:07
+The styling is pretty funny, it's kind of bumping the star around and stuff.
+2:10
+We also need to remember that the star is still maintaining its own state.
+2:13
+That's something we'll do probably next.
+2:16
+But this is a great start.
+2:18
+Naturally, that leads us to a second challenge, which is just to handle the toggle off.
+2:23
+So let me type that out.
+2:25
+This time I'm not going to give you much detail, I'm just going to tell you that you need to build the toggle dot off component.
+2:30
+As a reminder, the idea behind toggle dot off is that it'll display whatever children you pass to it when the toggle is off, or the state is false.
+2:38
+So pause now and build our toggle dot off component.
+2:47
+Essentially this will be exactly like our toggle on, so I'm just going to copy the toggle on, sorry if that's cheating, and we will change the name to off.
+2:56
+And then really the only thing that needs to change is what order we're rendering things in.
+3:00
+If on is true, then we want to display null.
+3:03
+But if not, then we want to display the children.
+3:07
+We'll do the same thing testing this.
+3:08
+I'll go to my index.
+3:10
+Js, we'll bring in toggle dot off, we'll say toggle dot off is equal to toggle off.
+3:18
+And I can test this by, let's duplicate this, and we will say off.
+3:24
+And now when I refresh instead of seeing nothing below my empty star I should see the toggle is off and then the toggle is on.
+3:30
+It's pretty hard to read because of the black text, sorry about that, but because it's rendering whatever children you put in here you can surround this in an h one and make it whatever color you want style it just like normal.
+3:41
+Really all we've done is we've taken the logic for conditionally rendering things and we've encapsulated them inside of a headless component whose purpose is just to display the children based on the state that exists inside of the parent toggle component.
+3:56
+As As far as I know there's really no time in which toggle dot on and toggle dot off would be displaying at the same time.
+4:02
+It will always be one or the other.
+4:04
+This is probably a good time to remind you that what I'm building here isn't necessarily a standard in React or anything, it's just an exercise in using the tools that we've learned so far in React.
+4:15
+You can get as creative and crazy as you want.
+4:18
+Now like I mentioned, the star is still using its own internal state, so I think that's something we probably need to change.
+4:24
+Now that we have an on and off component, we should be able to conditionally render the different icons that we're getting from React icons and essentially do away with this entire Star JS component.
+4:37
+So that's what we'll do in the next scrim.
