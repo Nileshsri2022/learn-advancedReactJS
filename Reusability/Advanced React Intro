@@ -1,0 +1,24 @@
+
+Transcript
+0:00
+Welcome to this module where you will learn all about some of the more advanced topics in React.
+0:06
+I can't tell you how excited I am to finally launch this course.
+0:10
+For anyone who has taken my original advanced React course, this is a complete rewrite and of the entire course.
+0:17
+This has been a great opportunity to bring that course up to date, use the most modern aspects of React, trim away some of the practices that are really no longer used in React, all to make this a great resource for you as you aim to improve your skills in React.
+0:34
+I can hardly wait to dive in, so let's talk about what we are going to learn.
+0:37
+This course is divided into three main sections, reusability, React Router six, and performance.
+0:45
+Let's take a minute to look at the topics in each one of these sections that we'll be covering.
+0:49
+So first is reusability.
+0:51
+One of the core concepts of React is the ability to create small pieces of code that you then reuse across your app.
+0:59
+Sometimes you'll create components that you only intend to use one time, and sometimes you'll have components that need to be flexible and reusable.
+1:07
+This can help simplify your codebase and make things much more maintainable, especially in larger codebases.
