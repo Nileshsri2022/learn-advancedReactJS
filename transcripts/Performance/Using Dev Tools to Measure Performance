@@ -1,0 +1,100 @@
+
+Transcript
+0:00
+Hopefully you remember me saying that it's important to measure any performance problems that you're having before you just start optimizing everything without direction.
+0:08
+So I wanted to give you just a taste of what it means to use the developer tools to measure your performance, but this will just be a very high level overview.
+0:17
+The best thing you can do is to actually dive into the developer tools and just start playing around.
+0:23
+Now the developer tools are chock full of really amazing tools that you can use as a web developer to diagnose problems you're having and perform temporary fixes before actually committing them into your code.
+0:35
+But for this section on performance, we are specifically going to be concerning ourselves with the performance tab.
+0:42
+You can see here I've pulled up the developer tools, and by the way there are different developer tools for different browsers.
+0:48
+I'm going to be showing the Chrome developer tools, which you can actually find not just in Chrome, but in other browsers that are also based on the Chromium browser.
+0:57
+For example, in this screenshot I'm actually using the Brave browser, but it's Chromium based, and so the developer tools are the same.
+1:03
+The Firefox developer tools might look a little different, but as far as I know they will have most or all of the same functionality.
+1:10
+So I'm up here in the performance tab, and you can see there's a number of options that we can start looking at.
+1:16
+The first and easiest thing to start messing with in the performance tab is the throttling.
+1:22
+So we have CPU throttling and network throttling.
+1:25
+Because you're a software engineer, there's probably a good chance that you're working with a machine that's fairly powerful.
+1:31
+However, the users of the software that you're creating may not be on such a powerful machine.
+1:36
+And so with the developer tools, we can artificially throttle or slow down the central processing unit to more closely mimic a slower machine or a mobile device or whatever it might be.
+1:48
+I'm honestly not sure why it's four x and six x specifically.
+1:52
+There is probably a good reason for it.
+1:54
+But oftentimes, I will go to a six x slowdown, and if that's just way too slow then I'll speed it up a little bit with a four x slowdown.
+2:02
+This will allow you to catch any performance issues that your app might be having that you would otherwise miss because of the potentially powerful machine that you're using when you're developing the app.
+2:12
+Similarly we have network throttling.
+2:15
+And you can see here there's a preset for fast three gs, which is a cellular network speed.
+2:20
+And so network throttling is very useful when you need to see what would happen if your app was not running on let's say super fast Wi Fi like you might have at your job or at home.
+2:30
+So the CPU and network throttling are some of the easiest ways to start diagnosing problems in your app.
+2:36
+However, the performance tab in our Chrome Developer Tools is even more powerful than that.
+2:40
+One of the core features has to do with profiling your app.
+2:44
+I created a little animated GIF here that shows you an example.
+2:47
+In fact, this is using the little app that I have here.
+2:50
+We'll talk about this in a minute, so don't be too concerned about what's going on here.
+2:54
+But if you watch this, you can see you can hit the recorder, go over to your app, and perform some kind of task, and then stop the recording.
+3:03
+And you'll see that there's just a ton of information that's there.
+3:06
+It will show you all of the JavaScript processes, the functions that ran, how long everything took.
+3:12
+It'll have screenshots of everything along the way.
+3:15
+And believe me, I know that it can be a bit intimidating, but the more you play around with it the more you'll start to appreciate all of the power that it has.
+3:23
+Now nothing we've talked about so far has anything specific to do with React.
+3:27
+These tools will work with anything that you're developing for the front end web.
+3:31
+However, the React team has gone out of their way to create specific React developer tools.
+3:36
+You can click the screenshot you see here to go over to the page that you see here in the screenshot.
+3:41
+And there you'll find the browser extension that you'll need just depending on which browser you're using.
+3:45
+If you're not using Chrome or a Chromium browser, Firefox or Edge, if you scroll down on this page, you'll see an option for installing the developer tools as an NPM package instead.
+3:55
+Now the React developer tools also have their own profiler and you can see it's very similar to the profiler that we used in the built in Chrome developer tools.
+4:04
+You click record, you perform some kind of action on your site, you click stop, but this time it will give you a chart that's very specific to React.
+4:12
+It'll show you your components, what got rendered, why it got rendered, how long it took for everything to render.
+4:18
+It'll even show you how long it took to commit as we talked about in that third phase of the rendering process.
+4:25
+I tend to find that the React developer tools are a bit more helpful when it comes to profiling a React app than trying to use the built in profiler, but the truth is both of them have their strengths and their weaknesses.
+4:36
+By the way, you'll notice that the React profiler is actually under a separate tab in our developer tools.
+4:42
+It's not here in performance.
+4:44
+If after you install the extension you're not seeing it, you'll probably want to click these little arrows here and some additional options will show up including the profiler.
+4:53
+So like I mentioned, that's a very high level overview.
+4:56
+I mostly just wanted to introduce you to it so that you could follow my advice about actually measuring the performance problems that you're having, and getting a little bit of a leg up using throttling to confront any potential issues that might happen before they're actually reported to you by your users on either a slow network or a slower device.
