@@ -1,0 +1,153 @@
+Transcript
+0:00
+I've added a little feature here where we can sort all of the items by alphabetical order.
+0:04
+And I've also, if we look in our data, bumped the number of items up to three thousand.
+0:09
+Now truth be told, if you have a list of three thousand items, then there's a better way than to just shove everything onto the page like this giant list we have here.
+0:17
+But we'll mention those a little bit later.
+0:19
+For now, let's assume this is the requirement we have.
+0:22
+Here on line twenty four, I am sorting the products by making a copy of the original product's data and then running the dot sort method.
+0:30
+The reason I'm making a copy first is because dot sort is a destructive method, which means it would be directly altering the product's data and I don't want to modify the product's data.
+0:40
+Then I created a little piece of state that's just a boolean.
+0:43
+We're calling it sort.
+0:45
+And down here, we're deciding if sort is true, then I want to display the sorted products that I sorted up here above.
+0:51
+And if it's false, we will just display the original products data array.
+0:56
+And down below when we're mapping over it, we're using whichever the results of this ternary was as our visible products.
+1:01
+That's what we're mapping over to display a product.
+1:04
+Okay.
+1:04
+I also have these few lines of code here, one where I'm taking a start time and an end time, and then subtracting the two, just so we have a demonstration of how long it took to perform this operation between these two lines of code.
+1:17
+And as I mentioned in this note, while you're doing this challenge, I recommend you open your dev tools and I think you need to leave them open.
+1:23
+Change your CPU to a six X slowdown just so that it will highlight how long these operations actually take.
+1:28
+Now truth be told, they don't take very long.
+1:31
+We can see that the first time it rendered it only took fourteen milliseconds.
+1:34
+If I click sort, it's going to take eight milliseconds.
+1:38
+And honestly any jankiness you feel with the delay after clicking this, that clearly took longer than eight milliseconds to display everything.
+1:46
+But that's because most of the delay and the jankiness is happening because I'm trying to render three thousand items here on this page.
+1:53
+But for highlighting how long things actually take, it's pretty helpful to have these few lines of code for us.
+1:59
+Now also notice that when I change my counter, it's also running my sort method.
+2:04
+And we can see that it's a non zero amount of time that it's taking to do this because it is rerunning that sort method every time I re render this component, which is happening every time I increase my count.
+2:17
+Okay.
+2:17
+That finally brings us to your challenge.
+2:19
+Once you have your six X slowdown throttle happening in your developer tools, I want you to comment these lines out and then uncomment these other timer lines.
+2:28
+So there's one right here on line thirty, and then these ones here on line forty and forty one.
+2:32
+I want you to uncomment those out and then write your code here that uses use memo to make sure that we don't recalculate this whole sorted products if we're for example just changing the state of of our counter.
+2:43
+I'm gonna leave it up to you to figure out what that means.
+2:45
+It needs to go in your dependencies array of the use memo hook.
+2:48
+And of course, as always, if you need to refer back to previous materials, there's absolutely nothing wrong with that.
+2:54
+And I think you should have everything you need.
+2:56
+So pause now and work on the challenge.
+3:04
+Okay.
+3:04
+Let's start by commenting these out so we don't get any conflicts, and we will uncomment these timer lines.
+3:11
+And we'll just get rid of our challenge text here in the middle.
+3:15
+Okay.
+3:16
+So I'm still going to be creating a sorted products array.
+3:20
+So I'll set that up as a variable, but then instead of directly running my dot sort method on the copy of the product's data, I'm going to use react dot use memo.
+3:30
+We have to spell this right.
+3:33
+So that react has a chance to determine if the function I put in here needs to run again or not.
+3:38
+So we will open up a a function body and before I lose my place and all of the curly braces and parentheses, I'm going to add my dependencies array and we'll come back to the dependencies array.
+3:49
+I'm just going to take the logic from here and put it inside.
+3:54
+We have to undo the comments and format here.
+3:57
+I want this function to return this value and well that brings us to the dependencies array.
+4:04
+Now some of you might have thought that we want to put sort in here and that's completely understandable.
+4:09
+However, I don't think sort is the best thing for for us to put inside of this dependencies array.
+4:14
+And that's because we're creating a version of the sorted products on the first render of this component anyway.
+4:20
+And changing sort to true or false really only changes what actually gets displayed if it's the sorted products or the products data.
+4:27
+It doesn't trigger React to then do the sorting of the products.
+4:31
+So really what I wanna say is if the products data ever changes, then I need to resort my products.
+4:38
+Again, there's other ways to structure this where you just don't perform the sort if the user never clicks the sort, but that would kind of break this practice a little bit.
+4:46
+Again, like before, we don't currently have a way to make any changes to products data, so I'm guessing that this will really only happen one time.
+4:54
+But we have our timer from the beginning and the end.
+4:56
+Let's go ahead and test this out.
+4:58
+So I'm gonna hit save.
+5:00
+See that the first time it renders it does take some time.
+5:04
+It says it took eleven milliseconds but now let's change our counter.
+5:08
+And look at that.
+5:09
+The sorting operation takes zero milliseconds.
+5:12
+And that's because it's not running it again.
+5:14
+It's just skipping it.
+5:15
+So our date dot now for start time two and end time two are essentially at the exact same time because it's able to skip this code knowing that it has already this calculation and none of the dependencies in our array have changed.
+5:29
+The same should happen for sort.
+5:31
+We'll click sort And it says that it took zero milliseconds.
+5:35
+You can see that it was a bit janky in how long it took to actually display everything.
+5:39
+But again, that's because of how long it takes to render three thousand items on this page.
+5:44
+Alright.
+5:44
+So we have seen why use memo is useful to help us avoid recalculating any expensive calculations if it's not necessary to do so.
+5:52
+But there is another use for use memo that you may find from time to time.
+5:56
+And that has to do with maintaining referential equality of some complex data type from one render to the next.
+6:03
+That's a lot of big words, but in the next lesson we're going to start down this path that will help us understand when we might use use memo to maintain this referential equality of complex data types.
+6:14
+And in order for that to make any sense, we are first going to look at another performance optimization called React dot memo, not to be confused with use memo.
+6:23
+So that's what we'll be doing next.
