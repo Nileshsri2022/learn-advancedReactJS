@@ -1,0 +1,73 @@
+Transcript
+0:00
+Welcome to your final challenge.
+0:02
+In this scrim, you're going to be fully typing our final React component here in keyboard dot TSX.
+0:08
+It's got almost everything that we've learned so far, from vanilla TypeScript to more React specific typing.
+0:14
+So here is your final challenge.
+0:17
+Fully type the keyboard component.
+0:19
+You'll have to handle the return value of keyboard, you'll have to handle the props, and you'll have to explicitly type all variables inside of the keyboard component.
+0:28
+Remember that you can always refer to the other components in the editor to check out how we've done certain things before.
+0:34
+Good luck on your final challenge for this section, and I'll see you on the other side.
+0:43
+Welcome back.
+0:44
+I hope you enjoyed your final challenge.
+0:46
+Let's walk through it together.
+0:48
+First, we're gonna type the component's return value, and we can see that it's definitely going to return a JSX element.
+0:54
+So first, we'll have to import the type of JSX from React, like we've done so many times before.
+1:01
+And then we'll type the return value over here with JSX dot element.
+1:05
+Next, we'll handle the five props.
+1:07
+And just like we've done so many times before, we'll create a new type, and we'll call it keyboard props to adhere to the naming conventions.
+1:15
+And then we'll specify all five of these inside of it.
+1:17
+So alphabet will be a string.
+1:20
+Guest letters is an array of strings.
+1:23
+Current word is a string.
+1:26
+Is game over is a boolean, and add guest letter is a function, so we'll have to provide the arrow syntax.
+1:34
+Now it returns nothing, so we'll put void here.
+1:37
+And it does take one parameter called letter, which we know is a string.
+1:42
+And now that we have this, we can use it to type our props by tacking it onto the end here with a colon and keyboard props.
+1:49
+And now we can move down and tackle any and all variables inside of the component itself.
+1:55
+We're gonna work backwards, so I'm gonna start with the smallest pieces first and then work out to this map function and then the variable that contains it.
+2:02
+So first, I'm gonna do class name.
+2:04
+We've seen c l s x before, so we know this is going to be a string.
+2:08
+Then iswrong is a boolean, and so is iscorrect, and also is guessed.
+2:14
+Moving up, we have this letter parameter, which we know is a string, so we'll wrap it in parentheses and type it string.
+2:21
+Then the return value of this arrow function is this entire JSX element, so the type would be a JSX element.
+2:29
+And finally, keyboard elements.
+2:32
+Just like other maps that we saw in other components, this would be an array of JSX elements.
+2:37
+So JSX element and then the array.
+2:41
+And with that, the final React component of our assembly endgame project has been typed.
+2:47
+Well done.
