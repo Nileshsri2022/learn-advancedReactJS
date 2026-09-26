@@ -1,0 +1,42 @@
+
+Transcript
+0:00
+So far, we've only typed one aspect of React, which is use state.
+0:04
+Most of what we've done has been typing plain JavaScript stuff like functions, variables, and that kind of thing.
+0:10
+There are more React specific typing that we can do, but that's more doable if our app is split into components.
+0:16
+And that's what I've done to our project here.
+0:19
+So let me just run the app with NPM install and NPM run dev so we can match up some components to the visuals.
+0:26
+So everything that we once saw in the app dot TSX file, all the functions that determined how things are rendered, have been pulled into components in our components folder.
+0:35
+All of these components have been imported, and they're being used in the JSX down here.
+0:40
+All the components but one take a bunch of props in order to render the elements the same way that the previous iteration did.
+0:47
+So from top to bottom here, we've got confetti container, which renders the end game confetti.
+0:52
+We've got the header component, which renders this static content right here.
+0:57
+We've got game status, which if we click on an incorrect letter, takes care of the status bar that pops up to say goodbye to the languages.
+1:06
+Next up, we've got language chips, which renders these languages and handles the death of them.
+1:12
+And then we have word letters, which handles the empty or revealed character spaces for the word that we're trying to guess.
+1:19
+Next, we have ARIA live status, which controls the visually hidden status updates designed for just screen readers.
+1:25
+And then we've got keyboard, which is pretty self explanatory.
+1:28
+This component handles the on screen keyboard that users use to guess the word.
+1:33
+And finally, new game button.
+1:35
+Now this is the button that pops up at the end of a game.
+1:37
+So if we try and complete this, which I don't think I will correctly, we have the new game button right here.
+1:44
+So this scrim was just to introduce the new setup.
