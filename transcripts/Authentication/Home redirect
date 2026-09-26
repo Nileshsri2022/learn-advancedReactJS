@@ -1,0 +1,266 @@
+
+Transcript
+0:00
+Now that we have RLS protecting our sales deals table, let's talk a little bit about our roots.
+0:06
+This is the current situation.
+0:09
+The flow is a user visits the home path.
+0:11
+They see the sign in page.
+0:13
+If they have an account, they'll enter their credentials, and then a session will be created, and they'll be navigated to the dashboard route.
+0:21
+But what happens if somebody's logged in and they manually navigate back to home?
+0:27
+Well, currently, it's just gonna show them the sign in page.
+0:30
+That's not ideal because they don't need to sign in.
+0:32
+They already are signed in.
+0:34
+Let me show you this now.
+0:37
+So let me sign in as Dwight again.
+0:40
+Here we are.
+0:41
+And if I now navigate to home directory, we're back to the sign in component, but we do have a session.
+0:49
+We can see that in the console there.
+0:51
+So we need a redirect that checks whether a session exists, and if it does, always redirects the user to slash dashboard.
+0:59
+So we want it to look like this.
+1:02
+After the user visits home, we're gonna have a route redirect, which checks if there's a session.
+1:09
+If not, we go to the sign in page as normal.
+1:11
+But if there is, it immediately goes to dashboard.
+1:15
+That means an authenticated signed in user is unable to see the sign in page.
+1:21
+Only when they log out and a session is removed, they will then see the sign in component.
+1:26
+So every time the user visits home, the app will ask.
+1:31
+Okay.
+1:31
+Let's do this together then.
+1:33
+So let me just sign out again so that we're back to our starting position.
+1:39
+There we go.
+1:40
+Now I'm gonna create a new file in roots, and I'm gonna call it root redirect.
+1:49
+Let me just write out the boilerplate.
+1:54
+There we go.
+1:55
+And because we're checking the session, we need to import our custom hook so that we can get the session through context.
+2:04
+There we go.
+2:04
+And then up here, we're just going to destructure the session.
+2:09
+There we go.
+2:10
+Now the logic is gonna say, if session is well, let's have a look in auth context and remind ourselves that we initialize session as undefined.
+2:22
+That was our loading state, and then get session will either set it to null if the user's not logged in or with the session object data.
+2:33
+So we should really have a little check here whether it's still undefined and hasn't been set yet.
+2:41
+So before get session manages to check for the session object, we want to return a sort of loading.
+2:48
+This is gonna happen so fast.
+2:49
+We probably won't even see it, but it's good to have.
+2:52
+Nonetheless, just do a little loading div.
+2:55
+Okay?
+2:56
+But if that's not the case, then we need to work on let's have a look here.
+3:00
+So yeah.
+3:03
+If session null, we want to see the signing component.
+3:10
+And if there's data in the session, we want to go to slash dashboard.
+3:16
+Let's have another look at our slide.
+3:19
+K.
+3:19
+So as it hits this file, no session, I e, null, go to the sign in page.
+3:26
+And if there is a session, we go to dashboard.
+3:28
+Brilliant.
+3:29
+So how could we do that?
+3:31
+Well, why don't we use our question mark?
+3:33
+So we've got session question mark, and then we'll have our colon.
+3:40
+So this left side of it will be if there is session data in there, and we're gonna want to navigate to here.
+3:47
+So because we want to render a redirect as part of the component's output, we don't use the use navigate hook here.
+3:55
+We actually use navigate with a capital n, and it's again from React Router DOM.
+4:02
+So this, okay, is for declarative navigation, whereas use navigate that we used, do you remember, in sign in?
+4:14
+That's for imperative navigation when you want to navigate in response to some event or action.
+4:22
+So here, we have a programmatic navigation after successful sign in.
+4:26
+So we use navigate from the use navigate hook.
+4:30
+Whereas here, we want to render a redirect as part of our component's output.
+4:35
+Typically, these are used in conditional rendering scenarios, and that's exactly what we have here.
+4:40
+Okay?
+4:41
+So it would look like this.
+4:42
+This is a component, so we use our angle brackets, and we have a capital n, and we use a two to say where we want to go.
+4:52
+And we can copy this and put it the other side of the colon.
+4:56
+So if there is data, we want to go to slash dashboard, so I can copy this in here.
+5:01
+Now if there's not, I want to see the signing component.
+5:05
+If we look at router, signing component is home.
+5:09
+So that's not gonna quite work, is it?
+5:12
+Because if we look again at our slide, home needs to render the route redirect that we're writing at the moment.
+5:19
+So we're gonna need a new path for sign in.
+5:23
+So I'm gonna get you to set that up in a second, but let me finish this.
+5:27
+I am going to use the path we're about to code.
+5:31
+So it's just gonna be called, funnily enough, sign in.
+5:35
+Doesn't exist yet, but it will in a minute.
+5:38
+So we can get rid of this.
+5:40
+We can get rid of this as well.
+5:42
+Do read up about the difference between navigate the component and the use navigate hook that we used here.
+5:51
+Okay.
+5:51
+This looks good.
+5:52
+Let me save.
+5:53
+And now it's your turn to update the router file.
+5:58
+Here's the challenge text.
+5:59
+So I'd like you to update the route path to use the new route redirect component that I just wrote.
+6:06
+I'd like you to add a new route for slash sign in that renders the sign in component.
+6:12
+And then in header, I'd like you to update the navigation.
+6:16
+Let's have a look at header.
+6:18
+Oh, yes.
+6:19
+Our navigation now on sign out,
+6:24
+we can update that navigation to go straight to sign in.
+6:28
+Let me just change this to save and test that when signed out takes you to the sign in path, and when signed in takes you to slash dashboard, I e redirects you there.
+6:41
+Okay.
+6:41
+Good luck.
+6:42
+I'll see you in a minute.
+6:47
+Okay.
+6:48
+I hope that went well.
+6:49
+So we need to import our new root redirect component, and it's in the roots folder.
+6:58
+There we go.
+6:59
+And I'm gonna copy this, add it there.
+7:02
+So we need to update home path to use the route redirect.
+7:07
+There we go.
+7:08
+Add a new route for slash sign in that renders the sign in component.
+7:15
+Bingo.
+7:16
+Let me save this.
+7:18
+And then in header, update the navigation to sign in when the user successfully signs out.
+7:25
+So on a successful sign out, we now need to be redirected to sign in.
+7:31
+Great.
+7:32
+Save that file.
+7:34
+We can test.
+7:36
+So if I go to home, ah, I immediately get navigated to slash sign in.
+7:42
+And if I log in, I'm now at slash dashboard.
+7:46
+But if I go back to home, it redirects to slash dashboard.
+7:52
+Fantastic.
+7:52
+And let's check our sign out button.
+7:54
+Takes me back to slash sign in.
+7:56
+And let's check that sign up works.
+7:58
+Yes.
+7:59
+We can keep going back and forth between those two routes.
+8:03
+Well done.
+8:04
+Let me get rid of the challenge text.
+8:07
+Okay.
+8:07
+Fantastic.
+8:08
+Another job ticked off our list.
+8:11
+Next up, we're gonna be protecting our dashboard route so that only authenticated users can get there.
+8:18
+Remember, our RLS is stopping us seeing the data fetched from sales deals or stopping us adding if we're not logged in, but we can still get there, can't we?
+8:29
+Let me show you that here.
+8:30
+If I navigate to dashboard, I can still get there.
+8:34
+So we want to protect this route so that only authenticated users can get here.
+8:40
+That will mean the RLS is like the last line of defense for the data, but we'll have checking our application to make sure only logged in users can even access slash dashboard.
+8:51
+Okay.
+8:51
+I'll see you in the next screen.
