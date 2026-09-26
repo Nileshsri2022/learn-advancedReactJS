@@ -1,0 +1,43 @@
+Transcript
+0:00
+In order for us to talk about the next topic that we're going to cover in this course, we need to have some sort of authentication built in.
+0:07
+So we have a design here for a simple login page and fortunately for you, I've actually already built this.
+0:13
+So let's walk through the code that I wrote so that we're not just tossing you into the middle of a bunch of new code.
+0:19
+What we have here is our login page.
+0:21
+This is our brand new page.
+0:23
+I have a new icon in my navigation bar that just represents the login page.
+0:28
+There's some CSS styling and whatnot and this is just a basic react form.
+0:32
+It's not doing anything currently.
+0:34
+You can see we have a handle submit that's just console logging our form data.
+0:38
+That handle submit, of course, will happen on the on submit event for the form.
+0:42
+The login form data is just an email and password held here in React state, which is being updated by any changes that might happen in the input elements here.
+0:51
+We have an on change event, which is running our handle change function, which is simply updating our local React state.
+0:58
+So why do we need a login form?
+0:59
+Well, the next thing we're going to be covering is a topic called protected routes.
+1:04
+What we've had so far is a link to our host page, and the idea of this host page is that the currently logged in host will be able to see the information that's relevant to their renting of their vans.
+1:15
+So we have the dashboard, income, reviews and then this vans page which if you remember in our server we are just hard coding this to grab the vans with the ID of one two three.
+1:26
+That's right here.
+1:27
+We're getting the list of vans from slash host slash vans.
+1:30
+We get all the vans where the host ID is one two three.
+1:33
+This is obviously pretty naive as we're just hard coding it, but this will be good enough for now for us to talk about protected routes, which will require us to be logged in in order to access from our site.
+1:45
+So without further delay let's jump in and start learning about protected routes.
