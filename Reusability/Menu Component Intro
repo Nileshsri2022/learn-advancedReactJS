@@ -1,0 +1,116 @@
+
+Transcript
+0:00
+Let's turn our attention now to the next component in our component library and that's going to be a simple collapsing menu component.
+0:07
+I have here a couple screenshots.
+0:09
+You can see when it's closed, it's essentially just a button and when it's open, you click that button and it will display the little menu that will pop up below it.
+0:17
+There's a lot of ways we could go much more in-depth than that, but for the sake of what we're learning, we're just gonna keep it pretty simple.
+0:23
+You're welcome to click on either of these screenshots, which will take you to the Figma design.
+0:27
+However, I am gonna be providing all the styles that you need.
+0:31
+And a fun fact is the button that we created earlier is the exact button we're going to be using to add to our menu.
+0:37
+Now what I've done is I've built an initial version of this menu.
+0:40
+It's a little bit silly because it goes way more in-depth than it probably needs to, but let's just take a second to walk through how the code is set up currently.
+0:47
+We can see we're rendering a menu.
+0:49
+That menu is taking a button text, which already maybe that's ringing some alarm bells since we just talked about children and how we can make this a little bit better using children.
+0:58
+But we're passing in the button text, which is the text of the button up there, and then we're passing in an array of items, which is what should be rendered in the menu.
+1:07
+If we go over to the menu component, we can see it's pulling in a menu button component and a menu drop down component.
+1:14
+It's setting up some state which will allow both of these components to know whether they're open or not.
+1:19
+We're rendering the menu button, which again we're passing in button text as a prop.
+1:24
+We're also passing in our click handler, which will just toggle it back and forth from true to false and false to true.
+1:30
+And then we're just conditionally rendering our menu drop down.
+1:32
+We're passing in the items to the menu drop down.
+1:35
+And if we look at menu button, it's just a simple button.
+1:38
+This is actually the button that we pulled in from the button in the component library that we just built.
+1:43
+If we go look at menu button, it's simply rendering one of the buttons that we just created with the menu library.
+1:48
+Obviously we're using children in this case, so it should be clear that there's gonna be some changes to the way that we have this written.
+1:54
+And if we go to the menu drop down we can see it's just rendering a div and it's taking the items, it's mapping over them, and it's creating a div for each one of those items.
+2:03
+Again, it's pretty naive.
+2:05
+It's a little bit over complicated, but that's kind of the point I was going for.
+2:09
+The reason I initially built it this way is because I have found that beginners in React will tend to reach for props first before ever considering any alternatives.
+2:19
+And one of the main purposes for these next few lessons is to learn about different ways that we can make our components a lot more reusable.
+2:26
+So that leads us to the question of what's the problem with the way that this is written.
+2:30
+Well, some complications that we'll run into is that the way it's written is very inflexible and is also tightly coupled.
+2:36
+That just means that the way the code's written, it would be hard to split any of these pieces apart to make them more reusable elsewhere.
+2:43
+It's also pretty opaque.
+2:44
+When we're looking from the outside, all we know is that we're rendering a menu and we're just passing these things into it.
+2:50
+Now since we're the creators of the menu component, we know exactly what's going on there.
+2:55
+But if we're trying to parse the code that we're looking at, I now have to go over to the menu and better understand exactly how these components are all playing together and that just makes it a little more of a black box that I can't see into.
+3:07
+Along the same lines of it being kind of inflexible it's not very dry.
+3:11
+Remember dry stands for don't repeat yourself.
+3:14
+The point being if I maybe somewhere else on my site needed to render another menu that was similar but not exactly like this, I might run into some trouble because I would either have to change my menu component so that it would work in both scenarios, or I would have to copy and paste this whole folder and make it specific to that other use case with a bunch of repeated code.
+3:35
+Another problem that we can see is something that some people like to call prop drilling.
+3:40
+The next scrim will go much more into detail about exactly what prop drilling is, but the idea is that here I'm rendering a menu.
+3:47
+I'm passing in an array of items, for example, or the button text even.
+3:51
+And so I go to the menu and the menu itself does not actually care about the button text nor does it care about the items.
+3:59
+Its main concern is creating this state, but because of the way we've organized it, the menu also needs to be in charge of drilling those props further down.
+4:07
+It needs to pass the button text to the menu button, and it needs to pass the list of items to the menu drop down.
+4:13
+But itself, it doesn't really care about those things.
+4:16
+So that's the idea of prop drilling.
+4:18
+We're gonna talk about that next like I said.
+4:19
+So while we're building this menu component we are gonna learn some of the coolest things about React.
+4:24
+The first thing we're going to dive deep into is compound components.
+4:27
+We're going to see how compound components will solve a big portion of this whole prop drilling problem that we're having.
+4:33
+We're also gonna briefly touch on the react dot children API.
+4:37
+This is different than props dot children which we learned about in the button component.
+4:41
+The reason I say we're only going to briefly touch on it is because it's really not going to be the long term solution for us.
+4:47
+But learning about React dot children is going to lead us to context, and context is one of the coolest things about React.
+4:54
+There are some split opinions about when you should and shouldn't use context.
+4:58
+I'm hoping to discuss both of those and allow you to make your own decisions with that.
+5:02
+And using either React dot children or ultimately context in our component is going to allow us to create something that we could call implicit state.
+5:10
+That's gonna make a lot more sense when we jump into it.
