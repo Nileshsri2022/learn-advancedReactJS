@@ -1,0 +1,84 @@
+
+Transcript
+0:00
+Before we can start jumping right in to create the different components in our toggle ecosystem of components we need to set up context.
+0:07
+So that's your challenge here.
+0:08
+As a quick reminder, you need to first create a new context.
+0:12
+You'll want to do that outside of the toggle component, but in this case we can do it inside this file.
+0:17
+Sometimes it's done in a separate file.
+0:19
+If you want to do that, you can.
+0:21
+You need to make sure that you export that context instance that you create from the file so we can use it in other components.
+0:27
+Then you'll need to use the context provider and wrap the children that we're currently run that we're currently returning from this toggle component and in that context provider you'll need to pass the state values that we've set up here as the value prop prop for the context provider so that child components down the tree can have access to those values.
+0:45
+I know it's been a minute since we've set up context so you may have to refer to your previous lessons.
+0:50
+That's completely fine.
+0:52
+Again, I'd encourage you to do everything you can to do this on your own before just skipping ahead and watching me do it for you.
+0:58
+So pause now and set up context for our toggle component.
+1:07
+We can create new context by using react dot create context and we will save that in a variable.
+1:14
+Let's call it toggle context.
+1:17
+Notice that I used a capital T here in toggle context.
+1:20
+That's because later we're going to be using toggle context dot provider, and by later I mean right here in step three, to wrap the children that we have down here below.
+1:30
+And React expects any custom React components to have a capital letter at the beginning.
+1:35
+So if I forgot to mention why we're using a capital letter here for our context, that's why.
+1:39
+Okay number two, I need to export that context.
+1:42
+I guess I could do it anywhere.
+1:44
+For some reason I feel compelled to do it at the bottom, so I'm going to say export.
+1:48
+And these are all of our named exports so it'll be in an object and I will say toggle context.
+1:54
+Number three, we'll use the context provider.
+1:57
+So for us that will be toggle context dot capital p provider to wrap the children that's returned from the toggle component.
+2:04
+Right now we're just returning children.
+2:06
+Let's go ahead and wrap these in parenthesis
+2:12
+this needs to be dot provider and then we'll close that and let's wrap the children inside there.
+2:18
+And now that it's inside JSX I need to put those in curly braces.
+2:22
+Okay so that's number three and then a context provider is essentially useless unless we give it some values to pass down to the children.
+2:31
+So the value is going to be, let's see, the only thing we have in state right now is on and then we have this set on function that we can use.
+2:39
+I know that I'm going to have my button access the set on function and I'm going to need my toggle dot on and toggle dot off to have access to the on value.
+2:49
+So I'm going to put a set of curly braces which puts me into JavaScript and then another set of curly braces which means I'm passing an object down as my value.
+2:59
+And I'll pass two things in the value.
+3:00
+We'll pass the state of on and then we will also pass our toggle function which is what we set up here to change that value.
+3:08
+We know that the button component is going to need access to that toggle function so that it can change the state in the parent toggle component.
+3:16
+And that should just about do it.
+3:18
+Let's clean up the challenge text here and let's hit refresh and everything is still working.
+3:23
+Of course the star is just using its own internal state.
+3:26
+We're going to replace that with the toggle soon enough.
+3:29
+Now that brings us to the first of the compound components inside of toggle we're going to create and that is the button.
+3:35
+So when you feel comfortable with what we've worked on here with the context, let's move forward and work on our button.
