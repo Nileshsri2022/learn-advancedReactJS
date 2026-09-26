@@ -1,0 +1,72 @@
+
+Transcript
+0:00
+Something you'll see really commonly in React is when the developer doesn't write the entire props object up into here, but instead, destructures it when it comes in.
+0:08
+So instead of saying props, which represents the full object, I would put some curly braces and then inside of there I can pull out the pieces of that object that I want, like children, which we know we're going to need down here.
+0:21
+I can get rid of props dot because I'm not pulling in the object anymore.
+0:25
+And like I mentioned briefly, we're going to be adding a variant.
+0:28
+This is an example of a non standard property or attribute that I really won't want to put on my button necessarily, but instead will run some code to change something based on the variant.
+0:41
+That'll make more sense when we get to it.
+0:44
+However, that leaves me with a little bit of a problem because all the props that I was using the spread syntax on before are no longer coming in.
+0:51
+I only have access to the children property and the variant property.
+0:55
+Fortunately, the fix for this is really simple.
+0:57
+It's very similar to the spread syntax.
+1:00
+In fact, it's the exact same thing as the spread syntax, but we call it the rest syntax.
+1:04
+And that allows me to essentially say, and give me all of the rest of the properties of this object.
+1:11
+But in this case, it's going to put it into a new object that has a variable name set to rest.
+1:16
+Now the word doesn't have to be rest.
+1:18
+I could say rest props.
+1:20
+I could say props, but I'll say rest here in this case.
+1:24
+If I go to the next line and I console log rest, I need to take my props out of here because props is not defined right now.
+1:33
+I'll hit save, go to console, and you'll see I have my style prop and my on click prop that I was passing in just like before.
+1:41
+And actually you'll even see I had passed in this variant prop.
+1:44
+If you don't set this equal to anything, then React will automatically assume its value is true.
+1:50
+So I can go here and console log variant.
+1:54
+You'll see I get true as one of the values.
+1:57
+Let's pretend that didn't happen though because I didn't intend that, but the point is rest does not contain variant or children because I had already pulled those out when I was destructuring.
+2:07
+If I don't destructure variant and only destructure children, now rest will contain variant because that is included in the rest of the properties of the props object.
+2:18
+So I just wanted to show this because it's a very common syntax that you will see if you're jumping into an existing code base or perusing some code on GitHub or whatever it might be.
+2:28
+Now to truly bring this back to where we were if I hit save my click is not working anymore I do need to come back and I'm going to put my curly braces and spread in the rest of those properties just like I was doing before with props.
+2:42
+So I hit save.
+2:43
+Let's get rid of our console log here so it's not so cluttered.
+2:47
+And we are getting this warning about receiving a true let's get rid of variant here because that was unintended.
+2:53
+Okay, now I can hit my login with Google and I get my console log back again and the green style is also being applied.
+3:00
+Now at this point we've taken a bit of a deviation from reusability, but before we move on I do want you to just sit and play with this code.
+3:07
+Again, one of the biggest benefits of doing this course in Scrumba is that you get to play with the code very very easily.
+3:12
+So you should be looking for really any excuse you can to jump into the code base, shut me up by pausing the video, and just playing with what you see.
+3:20
+A lot of times things won't really click until you have maybe messed them up a little bit and then figured out a way to fix them again.
+3:27
+Once you've had a chance to do that, let's get back on track and talk more about reusability.
