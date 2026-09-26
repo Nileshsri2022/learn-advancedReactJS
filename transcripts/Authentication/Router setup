@@ -1,0 +1,196 @@
+
+Transcript
+0:00
+To implement authentication, we need the users to be able to sign up, sign in, and also see our dashboard.
+0:08
+We're gonna utilize React Router DOM for this purpose so that there can be different routes for the sign up, the sign in, and the dashboard.
+0:18
+In case you've not come across React Router Dom, it allows client side routing without full page reloads.
+0:26
+This creates a smoother, more app like user experience compared to traditional server side routing.
+0:32
+It allows us to maintain the URL that reflects the current state of our application.
+0:38
+So the URL would say slash sign in when they're in the sign in component or slash sign up or slash dashboard.
+0:46
+That means the users can bookmark specific pages, share links, and use the browser's back and forward navigation buttons.
+0:54
+React Router DOM also makes it easy to implement authentication based route protection so we can prevent unauthorized users from accessing certain routes, and it enables navigation based on user actions like form submissions or other events.
+1:10
+So we're gonna be preparing our app by implementing React Router DOM and then next, React's context API.
+1:16
+But since this is mainly a super base course, not a React course, I'll be doing the majority for you.
+1:23
+If you're interested to learn more about React Router Dom and the context API, which is coming up next, click this screenshot to check out Bob's advanced React course here on Scrimba So let's make some folders in source.
+1:36
+We're gonna need a components folder.
+1:40
+Let's add the form and header.
+1:55
+There we go.
+1:56
+All fixed.
+1:57
+And then let's make a roots folder,
+2:02
+and we'll put dashboard in there.
+2:20
+Am I gonna install React Router DOM using n p m install react dash router dash dom.
+2:32
+Now we're gonna create a new component called sign in dot j s x.
+2:41
+So this is the flow we're looking for to start with.
+2:44
+The user visits the home directory.
+2:46
+They see the sign in page.
+2:48
+There's gonna be a link there which can take them to the sign up page and a link there that's gonna take them back to sign in.
+2:56
+If there's any error there, it's gonna just loop back, and similarly, any error in the sign up is gonna loop back.
+3:03
+But if there's a successful sign up, that will also sign them in.
+3:07
+Okay?
+3:08
+So they'll add their email and password to the database, but they'll sign in as well, and that will create a session.
+3:15
+And, also, if they're already signed up and they just sign in, that will create a session as well.
+3:22
+And then they'll be navigated to the dashboard route.
+3:25
+And then from the dashboard route, they can sign out, which will remove the session and navigate them back to sign in.
+3:32
+On a successful sign in or up, because remember, they both sign in the user, Superbase sends a token to the client, and the client library creates a session in local storage.
+3:43
+That's as much as you need to know right now.
+3:45
+We'll be talking about this in much more detail in later scrims.
+3:49
+So let me quickly write a boilerplate code here,
+3:56
+and I'm gonna call our company Paperlike a boss.
+4:00
+Okay.
+4:01
+Now let's create a router dot JSX.
+4:07
+So the element we need from React Router DOM is called create browser router, and we call it here.
+4:17
+And this function creates a router configuration.
+4:21
+So we call that router,
+4:26
+and it takes an array of router configuration objects.
+4:31
+I've changed my mind.
+4:32
+I want you to help me out here.
+4:33
+Time for a challenge.
+4:35
+I'd like you, as I mentioned, to pass an array of route objects to create browser router.
+4:43
+Each root object must have the following properties, a path and an element.
+4:50
+So start by making an empty array and then add some objects in that array, and each object needs to have two properties.
+4:59
+Path, the URL path as a string, and the element, the React component to render.
+5:06
+So I only want two routes from you.
+5:08
+The route path is the home path, and I want you to render the sign in component, that new one, and the dashboard path slash dashboard, which will render both the header and the dashboard components, bit like what we have in app dot JSX.
+5:25
+Bit of a hint there for you to help you with the dashboard path, and don't forget to import all of our components in this router dot j s x.
+5:34
+Okay?
+5:35
+Good luck.
+5:36
+See you in a minute.
+5:40
+Okay.
+5:41
+I hope that went well.
+5:42
+So let's make an empty array and then two objects.
+5:47
+And then each object is gonna have a path and an element.
+5:52
+So why don't we copy this for our second one?
+5:55
+And the first path is gonna be home, and the second path is gonna be slash dashboard.
+6:02
+And the home path is going to render the sign in component.
+6:05
+So let's import that at the top.
+6:08
+And we need to go into the components folder and hit sign in.
+6:13
+And the component needs to have our angled brackets and it's self closing.
+6:20
+And then the element for the dashboard route is both the header and the dashboard, so let's import those as well.
+6:29
+Now as we've got two components here, React Router's element prop needs one root element, just like a component's return statement.
+6:40
+So if we think about a return, we have to go for smooth and then these empty fragments here.
+6:48
+So now that's returning just one root element.
+6:52
+So then we've got header
+6:56
+and dashboard.
+7:01
+Okay.
+7:01
+Brilliant.
+7:02
+Let's clear up this.
+7:04
+Now let's finish off the setup of the React Router DOM.
+7:08
+In main, we we need to import the router provider and that router that we created here.
+7:16
+So this is from React Router DOM again, and we need that router that we created.
+7:24
+Okay.
+7:24
+There we go.
+7:25
+So instead of our app rendering this, we want our router.
+7:31
+So we can actually replace the app here, and we use the router provider.
+7:36
+And then we have a router prop, and we pass that router that we created in router dot JSX.
+7:43
+We save.
+7:45
+And now our new home path, as we asked for here, is rendering the sign in component.
+7:52
+There's our nice h one.
+7:55
+And then if we manually navigate to dashboard, we see our sales dashboard.
+8:02
+An app is now redundant.
+8:04
+Thank you for your service.
+8:05
+Let's delete them.
+8:10
+Brilliant.
+8:11
+Let's just check home one more time.
+8:13
+Yeah.
+8:14
+Fantastic.
+8:15
+Okay.
+8:15
+Thanks for your help with that.
+8:17
+So we can add more routes when we need them here.
+8:20
+Now on to setting up the context API.
+8:22
+See you in the next screen.
