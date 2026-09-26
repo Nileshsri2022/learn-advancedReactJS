@@ -1,0 +1,98 @@
+
+Transcript
+0:00
+In the last scrim, I showed you how to query the largest deal in our super base table, but now it's your turn.
+0:07
+Our final goal is to make a total sales this quarter bar chart.
+0:11
+So that's the query you are going to write now.
+0:15
+Have a think of the SQL we need because you're gonna be using that super base translator that you saw me use in the last scrim.
+0:21
+We're gonna need the name and then a combined total of that rep's deals.
+0:27
+So, basically, a total sum of the value column when it's grouped by each sales rep, and we want it to return a single value, the total.
+0:37
+We're gonna have to run some code in Superbase to enable, hint, hint, aggregate functions.
+0:43
+Because of the potential performance risks with these, they've actually been disabled by default by Superbase.
+0:50
+So we can enable them by running some code in the Superbase SQL editor.
+0:55
+So if you head to your dashboard and on the far left, just below the house is the SQL editor, click that, and that will take us to this screen.
+1:04
+And in a second, you're going to be given the code in the challenge to paste up here and then click on run bottom right, and that will enable these aggregate functions.
+1:15
+So challenge time.
+1:16
+So here is the code you need to run-in that SQL editor, and then I'd like you to write the SQL for this total sales this quarter bar chart in the super base translator.
+1:27
+So it's a bit of a hint here, and you may see an error at the bottom of the translator, which may prompt you to get involved with the group by.
+1:36
+And then you click JavaScript and then copy the client code that it gives you into the fetch metrics function here, and then you can log the response to the console.
+1:46
+So you remember in the last scrim, I commented out the destructuring that Superbase gives us, and then I created a const response.
+1:54
+And then the whole response from Superbase, assigned to that variable.
+1:57
+And then below it, I just used the console dot log response.
+2:01
+And then save and check your console.
+2:04
+Good luck.
+2:06
+Okay.
+2:06
+I hope that went well.
+2:07
+Let's go through this.
+2:09
+So I have run this code in my super base project, and now I'm gonna write the SQL for number two.
+2:15
+So I'm thinking about what I need here, and I definitely need to select name, and then I need to use this aggregate function.
+2:22
+So if I'm adding up, I think I need the sum.
+2:24
+So this is what I've gone for here.
+2:26
+Select name and sum the value from the table.
+2:31
+But here's that error I mentioned.
+2:33
+Superbase reminds us that every nonaggregate select target must also exist in a group by.
+2:39
+So name is a nonaggregate select target.
+2:41
+So what we need to do is add group by name, and the error goes away.
+2:45
+And then I click JavaScript, and then the code it gives me, I'm going to paste here.
+2:50
+So it's given us a from the same table as before, but the select is slightly different here.
+2:55
+We've got name, and then it's value dot sum in the super base syntax.
+2:59
+Now as before, log this to the console.
+3:02
+I'm going to comment out this and then create a const response.
+3:08
+And then below, I can just console log the response variable.
+3:13
+And I save, and I cross my fingers.
+3:16
+And, yes, here we are.
+3:17
+This is the whole response we're getting back from superbase, and the parts we're interested in is the error key and the data key.
+3:23
+So that's why superbase suggests we destructure these into variables.
+3:29
+So in the data key, we've got an array of objects.
+3:33
+And this is Andy's deals summed up, and this is Dwight's deals summed up, and Jim's deals.
+3:38
+This is for my project, but you should have seen the summed up values for your project.
+3:43
+And then if there was an error, it would be here.
+3:46
+Now on to storing this data somewhere so we can use it in our app.
+3:49
+See you next time.
