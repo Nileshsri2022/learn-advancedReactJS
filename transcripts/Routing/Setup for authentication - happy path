@@ -1,0 +1,78 @@
+
+Transcript
+0:00
+In order for us to learn the last few topics we have to learn with react router, we need to implement the authentication at least in a kind of fake way.
+0:08
+So I've done a little bit of setup for you here.
+0:11
+First of all you may or may not have noticed but over in the API JS file you might have seen that there were a few extra functions here and that is because I was so kind as to go through our vans pages and our host vans pages and update everything to include a sad path as well.
+0:27
+We did that together on the vans page alone, but I also did it for the vans detail, the host vans, and the host vans detail pages.
+0:35
+All of which now include loading states and error states.
+0:38
+But I'm getting sidetracked.
+0:39
+The reason I point that out is because also in our API JS file we have this new function called login user.
+0:45
+It just takes an object we're calling creds for credentials that will have an email property and a password property and it makes a request to this endpoint slash API slash login.
+0:56
+This also is something I've added over in the server file.
+0:59
+Again, this is not something you need to know.
+1:01
+This is supposed to be happening kind of in the background.
+1:03
+But there's this new API endpoint called slash login.
+1:07
+You can see from the note that the way that we're implementing this is not real in any way, but it'll get the job done for us for now.
+1:13
+And I've registered a new user in the database up here where I've created this user with the email of b at b dot com and a password of p one two three.
+1:23
+So that just means when you're filling out the form you'll need to make sure to use those credentials if you want to successfully log in.
+1:29
+Okay.
+1:29
+Let's get back to the login page and look at the challenge.
+1:31
+We need to hook our form up so the first thing you'll do is import that login user function from the API JS file, and then you'll call the login user function when the form is submitted, and your task is just to log the data that comes back from calling login user.
+1:46
+Again, make sure to use this email and password that you see here.
+1:49
+And a quick note, login user does return a promise because it is written as an async function, So you'll either need to chain a dot then on it or you can create a separate async function and use the async await syntax if you'd like.
+2:02
+Okay, enough talking.
+2:03
+Pause now and work on this challenge.
+2:11
+Okay let's go up here and we will import login user from dot dot slash API.
+2:18
+I think that's where it is.
+2:19
+We'll come down here inside of our handle submit.
+2:23
+After the prevent default, we will call login user.
+2:26
+I don't think I'm going to bother with creating a separate async function in this case, so I will just pass in the login form data which is already in the shape of an object that has an email property and a password property.
+2:39
+And then we will get the data and simply console log the data.
+2:44
+Get rid of this console log.
+2:46
+Let's cross our fingers, hit refresh, put in b at b dot com and p one two three.
+2:53
+Let's hit login and check the console.
+2:55
+Okay, cool.
+2:56
+We got the user object back which includes this property called token.
+3:00
+Usually in real authentication, I would then take at least some of the information about this user and save it somewhere like in context or local storage or session storage or something along those lines.
+3:11
+And oftentimes this token will be sent back to you in the form of a cookie from the server so that it will just automatically be handled and sent on every future request.
+3:20
+But again, we're not going to be bothering with any of that because it doesn't directly relate to react router per se.
+3:28
+Okay, this is a great start.
+3:29
+Let's keep moving forward.
