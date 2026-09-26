@@ -1,0 +1,72 @@
+
+Transcript
+0:00
+Hello again.
+0:01
+Here I have opened the utils dot j s file in the original assembly endgame project.
+0:07
+Let's grab everything and close the original.
+0:10
+And over here in our source folder, we're going to create a new file and call it utils dot t s, and we're gonna paste everything.
+0:17
+There are two functions here that we can work on.
+0:19
+There's get random word and get farewell text.
+0:22
+Get random word generates a random index based on the length of the words array, which we're importing up here at the top.
+0:29
+It then uses that random index to return a random string from the words array.
+0:35
+Time to recall what you've learned about typing functions from the last section for a few challenges.
+0:40
+First, type the return value of get random word, and then type the random index variable over here.
+0:47
+So give it a go, and I'll catch you in a bit.
+0:53
+Now we know from looking at the code and the name of the function and hovering over the function that get random word returns a single word in the form of a string.
+1:02
+So we can type the function's return value accordingly with colon string.
+1:07
+And as for random index, looking at both the name of the variable and the code itself as well as hovering over the variable, we know that it will return a random index, which is a number.
+1:18
+So we can type that pretty easily as well with colon number.
+1:22
+And just with these two little additions, our get random word function is now fully typed.
+1:28
+Now also in the utils dot t s file, we have the get farewell text function.
+1:33
+Now this one takes a programming language name as a string and returns yet another string down here saying goodbye to that language as it gets snapped out of existence.
+1:43
+We can already see up here that TypeScript is throwing a tantrum for the language parameter.
+1:49
+If you hover over it, we can see that it's implying an any type, which we know is a no go.
+1:54
+But this isn't the only instance that we can type in this function.
+1:57
+So here are your challenges for the get farewell text function.
+2:01
+First, type the parameter, then type the return value, then type the options array, and finally, the random index variable down here.
+2:10
+So go for it, and I'll see you on the other side.
+2:17
+Let's first handle the parameter of language since that's the one that TypeScript is all up in arms about.
+2:23
+We know that the language being passed in is a string, so let's do colon string to type that right away.
+2:28
+And now we can type the return value of the function, which we know is also a string.
+2:34
+And inside of the function, we're presented with an array of options that this function can choose from to farewell the language.
+2:40
+This is, and you'll be very familiar with this by now, an array of strings.
+2:45
+So we'll type it with colon, string, and then an empty array.
+2:48
+And then moving down to the bottom where it says random index, we know that index is a number, so we'll just have to type this with colon number.
+2:57
+And if you're getting a little bit of deja vu with this line right here, you're not the only one.
+3:02
+We've definitely done this exact same thing before up here in get random word.
+3:07
+I think we're doing a bit of repeating here, so we're gonna do a spot of refactoring and extra typing in the next scrim.
+3:14
+So I'll see you there.
