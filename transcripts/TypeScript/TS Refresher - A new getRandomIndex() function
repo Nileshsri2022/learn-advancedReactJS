@@ -1,0 +1,57 @@
+Transcript
+0:00
+In the last scrim here in utils dot t s, we realized that we have two of the exact same line in both the get random word function and the get farewell text function.
+0:10
+They both return a random index based on the length of an array, which is something we might do a lot in a game setting.
+0:17
+So we're going to refactor this into its own function and then type what we've refactored.
+0:21
+And by we, I mean you.
+0:23
+Your challenge is to dip into your JavaScript knowledge banks to refactor our code so we have a get random index function that both of our other functions can use.
+0:33
+I'll start us off with function get random index, and I'm gonna let you finish the rest.
+0:39
+First, complete the get random index function, and then add type annotations where relevant.
+0:44
+And then finally, use the get random index function in get random word and get farewell text.
+0:50
+Have a go, and I'll see you on the other side.
+0:56
+This is what I did.
+0:57
+First, I completed the function.
+0:59
+I know that it's going to take a parameter and it's gonna be an array, so I'll call it r.
+1:04
+And then inside of it, I'm going to return math floor math random times array length.
+1:12
+And you'll see that this is exactly the same thing as we've done before.
+1:16
+Then I added type annotations in a few places.
+1:18
+First, it's this array parameter that TypeScript is already flagging.
+1:22
+That's easy.
+1:23
+It's an array of strings.
+1:25
+So string and then an empty array.
+1:27
+And then we'll type the function's return value, which we know should be an index, and therefore the type is a number, so colon number.
+1:34
+Now we can use it.
+1:36
+First in get random word.
+1:37
+We can remove the random index line completely, and in the return statement, we're going to call get random index, and we're going to pass in the words array.
+1:47
+And then we can do exactly the same thing for get farewell text.
+1:50
+We'll cut the random index line completely, and then in the return statement, we'll call get random index.
+1:57
+And this time, we'll feed in the options array.
+2:01
+And that's all the TypeScript that we can do here in utils dot t s.
+2:04
+Now that we've handled a lot of the TypeScript in our regular JS or TS files now, let's finally look at the React component itself in the next scrim.
