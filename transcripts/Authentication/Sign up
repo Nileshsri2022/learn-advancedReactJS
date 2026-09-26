@@ -1,0 +1,278 @@
+
+Transcript
+0:00
+Users can sign in, sign out, but not yet sign up.
+0:04
+So let's fix that.
+0:05
+Remember a few scrims ago, we had to manually add a user on superbase dot com to our auth dot users table.
+0:13
+Well, we now want users to be able to use our form in the sign up component.
+0:20
+Here it is.
+0:21
+It will add them to the auth dot users table, and remember, also sign them in at the same time, meaning that Superbase will issue them the JWT.
+0:29
+The client library will create that session object, and they'll be navigated to slash dashboard.
+0:35
+We already have the front end code for the sign up component, and we're gonna see a lot of similarities in the auth and form submit functions since the logic is essentially the same.
+0:45
+Okay.
+0:45
+I'm going to write the auth function, and then I'm gonna hit you to help me finish the sign up component.
+0:54
+So here we've got sign in user, and we've got sign out.
+0:58
+And below here, let's write sign up.
+1:01
+Since it's essentially the same logic, I'm gonna be a little bit lazy.
+1:05
+And copy the sign in user function, and now we're gonna call it sign up new user.
+1:12
+Okay.
+1:13
+So we need to change this method here, and it's simply called sign up.
+1:18
+Do have a look in the super base docs for this method.
+1:22
+The user provides their email and password, so this is all gonna be the same.
+1:25
+We can change this to sign up.
+1:29
+Superbase sign up success.
+1:33
+And then it'll be unexpected error during sign up.
+1:38
+And this can stay the same.
+1:40
+Okay.
+1:41
+That was pretty easy.
+1:42
+Now we don't need to forget to add it to our context value object so that we can access it in sign up dot j s x.
+1:51
+There we go.
+1:53
+Okay.
+1:54
+So when I wrote the sign in form handling, I challenged you to set up the use action state and extract the form data, and I wrote calling the auth function and error handling.
+2:05
+Let's swap roles this time.
+2:07
+So I'm gonna start off helping you a little bit by importing our use auth hook, and then we're gonna extract the sign up new user function from this hook.
+2:18
+And I'll set up the use action state, and then you'll finish it off.
+2:22
+So let's import it at the top, and then we say use action state, and we destructure error.
+2:32
+Submit action, and it is pending.
+2:37
+And then here, we're gonna pass in our async arrow function, and then initial value of our error state is gonna be null.
+2:49
+And then in here, remember, it's the previous state and the form data.
+2:55
+And I'll do some extracting of the values.
+2:58
+So we've got email, and we use the form data dot get.
+3:03
+And this one's gonna be password.
+3:05
+There we go.
+3:06
+Okay.
+3:07
+That's a decent amount of help for you.
+3:09
+And before I set you loose, let's add this to the form's action prop.
+3:16
+Okey dokey.
+3:17
+Change time.
+3:20
+So I've put it in here because this is where we need to be coding.
+3:23
+You can do it below here.
+3:25
+This might look a little bit daunting, but remember, you can always reference if you need some help to sign in dot JSX because it's gonna be essentially the same.
+3:34
+So I'd like to call sign up new user, passing in the email and password parameters, destructure the response into three parts.
+3:44
+Now if you need some help with that, it's absolutely fine to look in here and see what we're returning here.
+3:50
+So remember, we've got success, we've got error, and we've got data.
+3:55
+Handle errors by returning the error, so that's one of those destructured parts here using the error constructor.
+4:04
+Handle success checking two parts of the response.
+4:08
+Have a think what that means by navigating to slash dashboard and appropriately returning.
+4:15
+And then four, handle any other cases as a final fallback.
+4:19
+So remember, we've talked about a use action state.
+4:22
+This function here must return something to update the error state.
+4:28
+So it's really good practice to have a return at the end of the logic as a final fallback.
+4:35
+The sign up request to Superbase could succeed, I e, there's no errors, but the response data doesn't contain a session object for some reason.
+4:43
+There could be a delay.
+4:45
+It's always good to have this fallback.
+4:46
+Okay?
+4:48
+Alright.
+4:48
+Take it slow.
+4:49
+Don't be scared to reference this if you need a little bit of help.
+4:55
+See you in a minute.
+4:59
+Okay.
+4:59
+Brilliant.
+5:00
+One step at a time.
+5:01
+So we call sign up new user, and we pass in the email and password like that.
+5:07
+We destructure the response.
+5:10
+So we've got success boolean, we've got data, and we've got error.
+5:16
+And this time, let's call the error sign up error.
+5:20
+And we need to not forget that await word because it's async.
+5:25
+Okay.
+5:25
+Number one, done.
+5:27
+Number two, handle errors, and we're calling the error sign up error.
+5:32
+So we say, if sign up error by returning the error using the error constructor.
+5:39
+So we return, and we go for new error, and we just pass the sign up error.
+5:44
+There we go.
+5:45
+Number two done.
+5:46
+Number three, handle success.
+5:49
+So we know that success is a boolean, so we can just say if success, but we've been reminded to check two parts of the response.
+5:58
+So we haven't checked data yet.
+6:00
+And remember, the true check whether this has worked is whether we have data back from superbase.
+6:08
+So we're gonna also check with the double ampersand the data, but it's what in the data that's really important that shows that we've signed up and also signed in.
+6:18
+Well, sign in is all about whether we have that session.
+6:23
+And we saw the response back from sign in.
+6:27
+The data object we get back has a session property.
+6:30
+And then we remember to be really careful with this data.
+6:33
+We're gonna add the optional chaining operator here just in case we try and access this before it's on Mac and to mitigate any runtime errors.
+6:45
+So if there's success, what do we want to do?
+6:47
+Navigating to slash dashboard and not forgetting to appropriately return.
+6:53
+So we need to return something.
+6:54
+Remember, we're updating the error.
+6:56
+Well, it's starting at null, and there's no error, so we don't wanna change it from null.
+7:02
+So let's just return null.
+7:04
+Let's finish off this navigate part.
+7:07
+So we need to import the use navigate,
+7:12
+and then we need the navigate function.
+7:16
+There we go.
+7:17
+And then we can simply use navigate and pass in the path we want to go to.
+7:25
+Okay.
+7:26
+Lovely.
+7:27
+That's number three.
+7:28
+Number four, handle any other cases as a final fallback.
+7:32
+So final means it needs to be the last thing after all of these ifs.
+7:36
+And just so we definitely return something, let's just return null.
+7:42
+Okay.
+7:43
+All of that's done.
+7:44
+Tidy this up.
+7:46
+There we go.
+7:47
+So we deal with any error back from super base or actually any unexpected error as well because remember, unexpected errors were also returning an error here.
+7:58
+Great.
+7:59
+And we're being really careful on checking whether we have the session in the data back from Superbase and that we've returned that success as true, and we've got our fallback.
+8:10
+Okay.
+8:11
+Save that.
+8:13
+And now, just like we did in sign in, I can use this error down in the return to create an error message.
+8:21
+Let me type this out quickly as it's the same as before.
+8:25
+There we go.
+8:27
+And then let's work on all of the accessibility we need.
+8:31
+We can copy this down here,
+8:35
+and then let's just use is pending here to conditionally render the button.
+8:43
+Okay.
+8:43
+There we go.
+8:44
+Let me see if I can sign up a new user.
+8:47
+It's gonna be Jim this time.
+8:50
+Fantastic.
+8:51
+No error, and we see Jim's email address in the header.
+8:54
+And when I check my auth dot users table in my project on Superbase, I see Jim there.
+9:02
+I'd like you to pause the video now and try signing up a user into your project.
+9:08
+Once you've done that, I want you to check your auth dot users table and make sure the new user is there.
+9:14
+Okay.
+9:14
+Fantastic.
+9:15
+We can log in.
+9:16
+We can log out.
+9:17
+We can sign up.
+9:19
+We're really getting there, but I think it's time for a refactor.
+9:24
+See you in the next screen where we'll discuss why.
