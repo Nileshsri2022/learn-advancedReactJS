@@ -1,0 +1,156 @@
+
+Transcript
+0:00
+I'm guessing a lot of you are seeing exactly where this is going, but the point is we can use state in combination with context so that context can have the job of passing values down to the children or grandchildren in the tree in the components that are sitting as children of the provider.
+0:17
+And state can be in charge of updating the value and triggering re renders inside of React.
+0:23
+So that said, I'm hoping you're able to put two and two together and figure out how to accomplish this next challenge.
+0:30
+Okay.
+0:31
+The first part should be pretty straightforward.
+0:33
+I want you to add some states to our app component.
+0:36
+The default value should be the string light and then pass that state as the value to the context provider.
+0:41
+I bet with the amount of practice you've had creating states so far you should be able to do this in about thirty seconds.
+0:47
+If not, that's okay.
+0:48
+Pause now and work on the first part of this challenge.
+0:56
+Okay let's see how fast we can do this.
+0:58
+We're going to have the theme and set theme and we'll set this equal to react dot use state.
+1:06
+The default value will be the string light.
+1:08
+And then we're going to pass the value of our state, which is theme, to our context provider and time.
+1:15
+Okay these are short and simple.
+1:17
+Let's add a part two to this challenge.
+1:19
+In fact I'll just get rid of this one and update it.
+1:24
+Okay, next you are to create a toggle theme function that uses set theme to change the value of theme from light to dark or dark to light.
+1:33
+Pause now and work on part two of the challenge.
+1:41
+Again pretty straightforward we'll add a function called toggle theme and it's going to call set theme.
+1:48
+Because we need to know what it previously was we'll use the callback function here.
+1:52
+We'll say previous theme.
+1:54
+I guess because this isn't a boolean I can't just flip it So we'll say whatever the previous theme was, or rather if the previous theme was light, then we want the new theme to be dark and otherwise we want it to change from dark to light.
+2:07
+Okay.
+2:08
+Again, those first two parts of the challenge should be fairly straightforward for you.
+2:11
+Part three might be a little tricky, but I know that you can do it.
+2:14
+You'll probably have to do a little bit more critical thinking than hopefully the muscle memory that allowed you to create the state here.
+2:21
+But I know you can do it and of course if you get stuck we're going to walk through it together.
+2:25
+So let me type out the challenge.
+2:28
+Okay up until now we have only dealt with passing a single value as the value that we're passing through our provider.
+2:35
+However, in this case we want to pass more than just one thing.
+2:37
+We want to pass our theme and our toggle theme function.
+2:41
+So your challenge is to figure out how to pass both of those things in the one value prop that we have to pass through our context.
+2:48
+So pause now and work on this challenge.
+2:56
+Hopefully you remembered that there's a couple different complex data types that we can use in JavaScript to pass more than one value.
+3:02
+Those are the array and the object.
+3:05
+In reality either one would work here, although I think you would much more commonly see people use objects to pass the values down through our context.
+3:14
+Now the syntax might look a little bit strange.
+3:16
+We're going to pass not just this first set of curly braces because that's what brings us into JavaScript land outside of JSX.
+3:24
+But once we're inside JavaScript we need to put a set of curly braces again so that we are representing an object.
+3:30
+And at this point I can do theme colon theme, that means the object property should be theme and the value should be whatever the theme and state is, and then comma will say toggle theme, or rather the toggle theme property should be the toggle theme function.
+3:45
+And then using the object shorthand in e s six, we will just go ahead and because these are exactly the same remove those altogether and just pass theme and toggle theme.
+3:54
+Just to be clear, you don't have to write it this way first and then delete part of it.
+3:57
+You'll get very used to just writing it exactly like this from the get go.
+4:01
+Okay, we're not quite done with this because you might remember that before we were passing a simple string as our value, and currently our button and our header components are both expecting to receive a simple string as their value.
+4:14
+So the next part of this challenge will update this.
+4:17
+In fact we should be able to hit save and probably see that we'll either get some errors or we'll just completely break our app.
+4:25
+Well it's not quite as broken as I would have expected, but you can see that we're using the dark theme even though our state says it's light.
+4:31
+The button styles are missing a little bit, so we have some work to do here.
+4:35
+So let me update to part four of the challenge and that should fix everything.
+4:40
+Okay for part four, now that we're passing an object instead of just a string through context, we need to update the button component and the header component to receive the correct values again.
+4:50
+I'm not gonna go into too much more detail because I want you to think about that and figure out how to do that.
+4:55
+Pause now and work on part four of this challenge.
+5:03
+Okay, we should just be able to go to our button and value now represents the entire object, not just this string that we had before.
+5:11
+And the object we were passing down has a theme property and a toggle theme method.
+5:16
+So in button, again, this is an object, so I guess I could say value dot theme, or I could just destructure it when I'm receiving it and only grab the theme property from that object.
+5:27
+And I guess this will look a little bit funny because it'll say theme dash theme, but that's okay.
+5:32
+Let's see.
+5:33
+We're working in the button.
+5:34
+Let's hit save.
+5:35
+And okay our button is looking a lot better than it was.
+5:38
+If I go to app and maybe I'll set the state default to be dark and hit save.
+5:45
+We have a white background button and now we have a dark background button.
+5:48
+Perfect.
+5:48
+We'll go back to light, hit save, and then we'll do the same thing for our header.
+5:53
+We'll say we're just going to receive the theme property and let's change value to theme and hit save.
+6:00
+And oh, we're also using the value down here.
+6:02
+So we'll update theme there.
+6:04
+Awesome.
+6:04
+Light theme.
+6:05
+If I switch it to dark in my state default we have the dark theme.
+6:10
+Awesome.
+6:11
+Now as you can tell there's a couple things we still need to fix.
+6:13
+First of all, of course, the button isn't actually doing anything.
+6:16
+And second of all we have this dark dash theme that's still being hard coded here.
+6:20
+Because this scrim has already had four parts to the challenge, let's actually fix those final things in the next scrim.
+6:26
+Once you feel good with everything we've accomplished here, let's move forward.
