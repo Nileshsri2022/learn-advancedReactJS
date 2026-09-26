@@ -1,0 +1,80 @@
+
+Transcript
+0:00
+At first glance it might seem a little trivial to be working on a button component in React, however, I promise that as we go forward we are going to learn some really important topics that will help set us up for success with the other parts of our component library.
+0:13
+For future reference, in any of the components that we're working on in the component library in this section, I'm going to include a slide that will have a link to the Figma design file should you want to go see some of the specific design aspects of that.
+0:25
+However, that said, I am probably going to just include most of the CSS, if not all of the CSS, just to keep us focused completely on React.
+0:34
+Now you can see that here I have rendered a simple HTML button.
+0:37
+I've included some basic styles on the button that you can see on the page, but I just wanted to show you that to let you know you need to use the HTML button element so that you can pull in those styles.
+0:48
+I'm going to remove this and refresh.
+0:50
+You'll You'll see we have a blank page now.
+0:52
+This challenge is meant to be more of a review using props in React.
+0:55
+And so in this case what I want you to do is to give your custom button component, which you need to create a new file for and everything, a custom text prop.
+1:03
+And whatever string text you pass to it is what will show up inside the button.
+1:07
+Now I'm just going to be honest, if this challenge is, well, really challenging for you, then you're probably not ready to jump into this advanced react course.
+1:16
+Instead, I highly recommend that you spend a little more time writing some of the more basic React that you hopefully learned in my introduction to React course before this one.
+1:24
+In the end this challenge should be actually very simple for you.
+1:27
+Alright, that's enough of me blabbering.
+1:29
+Pause the screencast, work on this challenge.
+1:36
+Okay let's start by creating our component.
+1:38
+I'm going to create a new file that I call capital B button dot JS.
+1:43
+We will import react from react and we will just do all of this together.
+1:48
+We'll say export default function button and it will return native button element in HTML.
+1:58
+And let's just start by saying we'll type manually click here and then over in our index.
+2:03
+Js, I'll actually just uncomment this because I did most of the work for you, Get rid of the comment and we'll delete this and put our custom button component.
+2:12
+And because I'm hard coding the click here part, I should be able to refresh and see see this work.
+2:17
+Okay our click here is working, awesome.
+2:20
+Now once again this is a practice for props, so I'm going to pass in a text prop and let's put click here, actually let's do something different, uh, we'll say click the button just so we know that it's working.
+2:32
+And then in button JS we need to receive props here, and then instead of hard coding click here, I'm going to use my curly braces, we'll say props dot text because text is the name of the prop that we gave it here.
+2:44
+Let's hit refresh and click the button awesome.
+2:47
+Now that I know that that's working I'm just gonna change this back to click here.
+2:52
+Okay, again this should have been a fairly simple challenge for you and there's absolutely no shame if you need to go back and learn a bit more of the react basics before moving on.
+3:00
+Now one thing that this reminds me of is that input type equals submit.
+3:05
+I don't know if you have seen this before but in forms, especially in older days, they would include buttons to submit a form as an input, which was type submit, and then you would give the button a value.
+3:17
+So let me refresh this so you can see the default value is submit, and then I could change what the button text said by, let's just say button text, by changing the value property that I pass to my input.
+3:29
+Okay.
+3:29
+This works, but I personally really hate this.
+3:32
+I don't love how overloaded the input is.
+3:35
+I also don't love that in some places in HTML I make text show up on the screen by putting it between an opening tag and a closing tag.
+3:44
+Whereas in other parts of HTML I include it as a value.
+3:47
+I kind of understand it because it's an input element, but the point I'm driving at is that we want to make it so that our button can actually not take a text prop, but will take an opening and a closing or use an opening and closing tag where we can put the text inside.
+4:04
+Now you can see if I hit save, this is not going to work because our button component is not currently prepared for that.
+4:10
+So that is what we're going to tackle in the next lesson.
