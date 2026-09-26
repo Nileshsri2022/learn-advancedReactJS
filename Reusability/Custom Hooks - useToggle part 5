@@ -1,0 +1,68 @@
+
+Transcript
+0:00
+Okay.
+0:00
+Here's the next parts of this challenge.
+0:02
+I've removed parts one and two just so that it didn't look too overwhelming, but of course you can just go back to the last scrim if you need to remember what those were.
+0:10
+Because we got rid of our toggle which was what was providing the context for all of the children, our first task is to set up some context again for our menu.
+0:19
+I know that we had context here and that's probably what you're screaming at me.
+0:23
+Bob, we had context here and then you've made us rip it out.
+0:26
+Well now I'm making you put it back.
+0:28
+When you create the context, make sure that you export it so we can access it in the other menu components.
+0:33
+And it does need to be a named export because we're already using a default export.
+0:37
+Then once you've created the menu context, you can wrap our div with the menu context provider.
+0:43
+And then I want you to think what the values we should pass to that provider are.
+0:47
+I know it's been a minute since we created some context from scratch, so if you need to you can pause here, open a new tab, go back to our past lessons on context to refresh yourself on how context works, but really go through all of those steps.
+1:00
+Don't just skip ahead and watch me do it.
+1:02
+The process of re researching what you have already learned and then typing it out is really going to cement it into your memory so that you can do this much more naturally in the future.
+1:12
+So pause now and work on these parts of the challenge.
+1:20
+One thing that can be tricky to remember is when you're creating context you don't want to do it inside of your component function instead we're going to do it outside of that.
+1:30
+Actually I'll do it down here.
+1:31
+We're going to say menu context is react dot create context.
+1:38
+And then before I forget I'm just going to export that menu context.
+1:42
+Hopefully this wasn't too tricky to remember that this has to be a named export surrounded in curly braces if it was, I'm sorry.
+1:49
+Okay and then we're going to wrap our div with a menu context dot capital p provider
+1:58
+and this needs to go below the others and then we'll format.
+2:01
+Okay that's number four.
+2:02
+And then part five is what's going to be the value that we actually care for our child components inside of this context to have access to?
+2:11
+Well over in toggle we can see that we are passing the on state and the toggle function.
+2:17
+So we can just do the exact same thing with our menu, but now we're calling it open and toggle open.
+2:23
+This is another tricky thing is these set of curly braces are opening you up to JavaScript, but then I'll need a second set of curly braces to provide an object as the value that I'm passing down.
+2:35
+And that object will have two properties open and toggle open.
+2:40
+And once again this syntax is simply short for saying open colon open and toggle open colon toggle open.
+2:46
+So I'm going to keep it simple.
+2:49
+And okay we're primed now to fix the other components.
+2:52
+We figured out it was just the button in the drop down that needed access to the context values.
+2:57
+And so that's what we'll be doing in the next challenge, and hopefully that should be the last step we need to get a working menu again.
