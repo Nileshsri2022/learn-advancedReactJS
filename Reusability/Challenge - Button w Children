@@ -1,0 +1,42 @@
+
+Transcript
+0:00
+Okay.
+0:00
+In this challenge, you are essentially gonna do exactly what we just did with the marquee.
+0:05
+So change our button component to take children and move the text prop here for click here into the children of the button.
+0:13
+And while we're at it, let's change it to say something a little more exciting like buy now so that it's not quite as boring.
+0:18
+And then you'll have to remember what changes you'll need to make to your button component so that those children will be displayed.
+0:24
+As always, we'll go through this together, but I want you to give this your best shot.
+0:27
+If you need to reference the last lesson before being able to complete this, that's completely fine.
+0:32
+I would recommend not just watching me do it if you get stuck after ten seconds of trying.
+0:37
+Really give it your best effort.
+0:38
+So pause now and work on this challenge.
+0:46
+Well first let's modify our instance of our button here.
+0:49
+Instead of having a text prop we're going to make it into a component that has both an opening and a closing tag and then in between those tags we will say buy now.
+1:02
+And then like we saw before if I refresh just now we're gonna have a button that has nothing inside of it and that's because our button component has no idea how to deal with or where to render the children elements that we're putting inside of it.
+1:14
+So over here we're receiving children as props and instead of props dot text, which we're no longer passing, we're going to use the implicitly passed props dot children.
+1:25
+I can hit refresh and there we go.
+1:27
+Back to working.
+1:28
+Hopefully that challenge went pretty easily for you.
+1:30
+If not, that's okay.
+1:31
+You can study it again, practice again, try to start over from the beginning and see if you can do it.
+1:36
+And then when you're ready let's keep moving forward.
