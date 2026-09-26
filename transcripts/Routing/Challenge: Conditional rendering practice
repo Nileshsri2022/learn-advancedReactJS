@@ -1,0 +1,114 @@
+
+Transcript
+0:00
+Okay.
+0:00
+We'll actually be doing two challenges.
+0:02
+The first one is to conditionally render this clear filter button only if there is a type parameter currently being applied in the search parameters.
+0:10
+We've been working a lot down here at the bottom of the file and changing the search parameters down here, But remember, every time we navigate to a new URL, even if it's the same base URL with a different search parameter, this entire component is getting re rendered, which means we have this value up here called type filter, which will always be up to date with the newest filter that we've applied.
+0:32
+So understanding that, conditionally render just this button and then we will jump into the next challenge right after that.
+0:38
+So pause now and work on challenge number one.
+0:46
+Because this whole component is getting re rendered, we have this type filter variable which will tell us if the type is existing.
+0:53
+So it'll either be simple luxury rugged or it will be null if there is no type parameter in our search parameters.
+1:02
+So I can conditionally render this clear button by first wrapping it in a set of curly braces.
+1:08
+And we'll just use some shorthand here.
+1:10
+We'll say if type filter exists it's got a value then render this button.
+1:16
+Commonly we will put something like a set of parentheses around the component like that, and then we'll say otherwise render null.
+1:25
+So just don't render anything there.
+1:26
+Okay let's clean up the formatting a little bit.
+1:28
+I'll put a little space here too in case that's easier to read.
+1:32
+And for some reason I want to put this on the same line.
+1:34
+I don't know if that's better or worse, but it should be clear either way.
+1:38
+Okay.
+1:38
+Let's go ahead and hit save.
+1:40
+The clear filter should disappear.
+1:42
+Perfect.
+1:42
+Because we don't have any parameters right now.
+1:45
+And then when I click on these it appears.
+1:47
+Awesome.
+1:48
+Okay.
+1:49
+Let me type out the challenge number two for you.
+1:52
+Okay.
+1:52
+One of the things that's added in our CSS is if there is a filter applied then that color that you see when we hover will actually stay on the button as long as that filter is applied.
+2:03
+Currently it's not doing that because it's only showing that on hover.
+2:06
+However, there's a class called selected that I created in the CSS that should make it so that it will stay that color if that filter is applied.
+2:14
+Well, more specifically, if that class exists on the button.
+2:17
+So your task is to conditionally render the selected class name if the type filter is equal to the value that the button wants that filter to be.
+2:26
+I hope that makes sense.
+2:27
+I gave you a little bit of a hint here since it's a little bit difficult to explain, But notice here that I'm using template strings, but down here we are not.
+2:34
+We're just using regular quotation marks.
+2:37
+That's something that you will need to change.
+2:39
+Oops, not there.
+2:40
+Here.
+2:40
+Okay.
+2:41
+Pause now and work on challenge number two.
+2:48
+Okay this line is going to get a little bit long.
+2:50
+In case you're working on a small screen I'm just going to squish this, which clearly I haven't optimized my styles to handle a really really small screen like that.
+2:59
+So because we're going to be interpreting some JavaScript inside of this string, we're going to use string interpolation.
+3:04
+So I'm going to select these class names and we'll change this to a template string and oh I need to surround this with curly braces.
+3:14
+Awesome.
+3:15
+Okay and now I'm going to stick in my dollar sign curly braces so I can say if type filter is equal to and then we will just grab these values here, simple, luxury, or rugged, then we will apply the selected class but otherwise we'll leave it as an empty string.
+3:35
+You know what, just in case that is a little too wide let's go ahead and just put this on the next line like that.
+3:41
+Okay first let's hit save and well this is good news, the symbol is already highlighted because when I hit save we had clicked the type equal symbol before.
+3:51
+Okay luxury, rugged, and clear.
+3:54
+Now just by way of information, one thing that I tried to do was use a nav link to accomplish the same thing.
+4:01
+But it turns out the nav link does not care about your search parameter.
+4:05
+So when I used a nav link and I accessed the is active property on the render prop class name and tried to use that instead of the type filter equals the simple, it just didn't work.
+4:16
+Well what happened is all of them were highlighted because this route slash vans is active and the to prop was sending them to the same path.
+4:24
+It just was changing the query string.
+4:26
+So just a little extra information for you, as if there wasn't already enough to try and digest in this course.
+4:32
+Alright, at this point we have just a few more little odds and ends that we need to add to our app, so we're going to start working on those.
