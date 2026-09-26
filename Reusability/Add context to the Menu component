@@ -1,0 +1,116 @@
+
+Transcript
+0:00
+Alright, let's apply everything we've learned about context to the menu component that we've been working on.
+0:04
+I've written out your challenge here.
+0:06
+This is just going to be part one, which is setting up the context, and then part two will deal with using the context in the other components.
+0:12
+So pause now and work on part one of the challenge.
+0:21
+What we're doing now is creating an implicit state just for the menu component.
+0:25
+In our previous example we were wrapping essentially our entire application in the context provider, but here we really only care to create context within the bounds or the scope of our menu.
+0:38
+Any other elements that we put on the page outside of our menu will not be affected or will not have access to the context that we provide to our menu.
+0:47
+And that's pretty much what we want it to be.
+0:49
+We don't want the context to bleed outside of our menu in this case.
+0:53
+So outside of my menu component, I'll create my context.
+0:56
+Let's maybe do it here below the challenge.
+0:58
+We'll say my menu context, it really doesn't matter what you call it, is equal to react dot create context.
+1:06
+While I'm at it I'll go ahead and export my menu context.
+1:11
+And for now we're just going to be ignoring the open state that we have set up right here.
+1:15
+In fact, you might have noticed I went through and I removed the React children.
+1:20
+Map.
+1:20
+I also went through and removed the open toggle click handler here in my menu button and the open state in my menu drop down.
+1:28
+Although I am using this, it will just always be closed for now because we're pulling in an undefined value.
+1:33
+So let's go back to the menu and we'll work on this a little more.
+1:36
+I have my menu context.
+1:37
+Now let's wrap the whole menu with my menu context dot provider, again with a capital P.
+1:44
+And then lastly we need to give it a value.
+1:46
+We mentioned that we're going to put a boolean in here so I'm going to use my curly braces because it's not just a string.
+1:52
+And we're just going to hard code false in here for now.
+1:55
+Again this represents whether or not the menu should be open.
+1:58
+I think usually menus tend to be collapsed or closed as their default, so we'll start with false.
+2:04
+We're going to be hard coding this and then eventually using our state here to update it.
+2:08
+Okay.
+2:09
+That represents everything from part one of the challenge.
+2:11
+I'll go ahead and clear this out.
+2:13
+In fact, let me comment this out for now just so that it's not confusing.
+2:17
+We'll hit save.
+2:18
+Okay.
+2:19
+Now it's time for part two.
+2:21
+Okay, here in the menu drop down your challenge is to pull in the value from context, which again remember we defaulted to false here, and make it so that it uses that boolean value to conditionally render our menu.
+2:35
+Right now we're using open which used to come here through props, but since we got rid of the react dot children dot map that was augmenting this child with the additional props, we're no longer receiving that.
+2:46
+Keep in mind that we have not yet fixed the button so it will not work to click the button.
+2:51
+However, because we have false here what it should do is hide this menu and then if you come back to menu and change this to true it should show the menu when you refresh it of course.
+3:01
+I'll put this back to false for now, bring you back to the menu drop down, pause now, and work on part two of this challenge.
+3:13
+I'll start with a really easy one to forget and that is to import the menu context from our menu component.
+3:22
+Then inside of the body of my component here I'll grab the value.
+3:26
+And you know what, we can actually just call this open.
+3:28
+We can really call it whatever we want.
+3:30
+And I'll say react dot use context.
+3:34
+I do need to provide the menu context so it knows which one to pull from.
+3:38
+And then because I chose the variable name open, this kind of should just work again.
+3:42
+We'll hit save and our menu disappears.
+3:44
+That's good.
+3:45
+It might seem bad, but it's good because we had put the value of false.
+3:49
+Now the moment of truth is if I change this to true and our menu shows again, awesome.
+3:54
+That means it's using this value instead of the value that we were passing through props before to determine whether or not the menu should open.
+4:02
+Okay a couple things that you might have been screaming at your screen about.
+4:05
+First of all, we do want to use this state.
+4:08
+We don't want to be using this hard coded value here.
+4:11
+And so you might see where this is going.
+4:13
+Instead of providing a hard coded value we're going to combine state and context so that we can update the context value that's being passed down to the children.
+4:22
+Let's go back to our light and dark theme switcher to see this in action and then we'll come back here to apply what we learned to our menu.
