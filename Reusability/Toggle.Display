@@ -1,0 +1,132 @@
+
+Transcript
+0:00
+Okay, here we are reaching the very end of our toggle component and actually this whole section in general.
+0:06
+As such this challenge will be a little bit more difficult.
+0:08
+I am splitting it into a few parts so as to not throw too much on you all at once.
+0:12
+Part one of the challenge is I want you to create a toggle display component and attach it to the toggle like we did with these other ones and call it toggle dot display.
+0:21
+Inside of that toggle display component, it should grab the on value from the toggle context, and it should render the children by calling children as if it were a function passing to it the on value from context.
+0:32
+I've given you a hint here.
+0:33
+When you're receiving children in the toggle display component, you'll call children as a function and you'll pass on as the parameter to that function.
+0:42
+At this point for part one, don't worry about trying to use toggle display quite yet unless you're feeling adventurous because that's what we'll be doing in part two.
+0:49
+So pause here and work on part one of this challenge.
+0:57
+Okay let's get started.
+0:59
+Inside of toggle I'm going to create a new file called toggle display dot JS.
+1:06
+We'll import React from React and export our function.
+1:11
+I know now that it's going to take children as a prop so I'll just put it in here now.
+1:16
+I need to access the on state from the toggle context So I will import toggle context and that's coming from the toggle file, toggle JS, And I'll use use context to grab the on value.
+1:31
+So use context and I have to pass to that the context I'm trying to use, so toggle context.
+1:37
+And we're expecting children to be a function, so I'm going to call children and I need to return whatever value calling the children function returns.
+1:46
+In this case I'll just be expecting that the children I place inside of toggle display will be rendering JSX because that's ultimately what we need to do.
+1:54
+And before I forget I need to pass children the on value from context.
+1:59
+Let's go over to toggle JS, no, index JS and we'll pull in the toggle display components.
+2:06
+So we'll import toggle display
+2:10
+and we'll set it up as another sub component here in our compound components, Toggle dot display.
+2:17
+Let's hit save.
+2:19
+No errors, that's good news.
+2:21
+And actually I believe that brings us to the end of the part one of this challenge.
+2:25
+I'm assuming if you struggled with this that the most difficult part was understanding how we're calling this children as a function and passing the value to it.
+2:33
+Again, that's completely okay.
+2:35
+It may take some time, but don't just blow through it.
+2:37
+Spend the time you need to really understand what exactly is going on here.
+2:41
+It's also a little hard to understand when we're not actually using our toggle display component yet, so let's go ahead and make that part two of the challenge.
+2:49
+Okay.
+2:50
+For part two, I want you to remove our toggle dot on and toggle dot off, but don't get rid of this div because we'll need that later.
+2:56
+And instead you should render our new toggle dot display.
+3:00
+There's some details here that you need to make sure that you read through talking about how toggle dot display will take a function as a child and what to remember with curly braces and such.
+3:09
+And from that child function you should return this div, but instead of hard coding filled in here as a class name, you'll want to conditionally apply the class name filled depending on the value of on that's coming from the toggle context.
+3:23
+I know that's a lot to take in, but I also know that if you've been following along carefully you should be very well prepared to do this.
+3:30
+Even if it's a struggle, that's completely okay.
+3:32
+Just put your effort into it.
+3:33
+If you need to take a break before finishing it, that's completely fine too.
+3:37
+So pause now and work on part two of this challenge.
+3:45
+Alright.
+3:46
+Let's give it a go.
+3:47
+I'm going to move my toggle on and off because we're not wanting to conditionally render this div, but I'll be coming back for this div in just a second.
+3:56
+Inside of my toggle button I'm going to render a toggle dot display.
+4:01
+And like the other ones this will also take children, but it's going to be slightly different so I need to close my toggle dot display element here and then inside instead of providing what I want to display, I'm going to provide a function.
+4:15
+Because a function is JavaScript and I'm currently inside of JSX, I'm going to use my curly braces and I could provide a function declaration just like this, but more commonly you'll see this as an arrow function.
+4:26
+So that's what I'll go ahead and do this time.
+4:28
+This function will receive the value of on from the toggle context and give me the power to return whatever JSX I want to return.
+4:37
+So this is where I will grab my div from below because that is what I want to display.
+4:42
+But then instead of hard coding filled, I'm going to conditionally display filled.
+4:47
+And let me move this to some template literals here so I can insert filled based on a JavaScript expression.
+4:54
+I know that I want box to always be there, but then I will also check if on is true then I want it to also include the filled class name.
+5:02
+Otherwise we'll just leave it as an empty string.
+5:04
+Oh and I closed my template a little too early let's see that needs to go right there.
+5:10
+And I need my curly brace right there.
+5:12
+Okay there we go.
+5:13
+Now before I hit save let's go to style.
+5:15
+Css really quick.
+5:16
+We'll see that a box has a background color of white but if it's got the filled class as well it changes the background color to blue and we have a transition for the background color that will ease the background color between those two.
+5:30
+Okay.
+5:30
+Let's give it a shot.
+5:31
+I'll hit save, click my box, and awesome.
+5:34
+Toggle on and off were great when we just needed to kind of rip something out of DOM and shove something new into the DOM in its place, but toggle dot display gives us a little bit more power to do exactly what we need to do based on the internal state of our toggle compound component.
+5:50
+Great work on these challenges.
+5:51
+I know that they've probably been some of the more difficult challenges that we've had in this entire section.
+5:56
+As always once you feel good about everything that we've done here let's keep moving forward.
