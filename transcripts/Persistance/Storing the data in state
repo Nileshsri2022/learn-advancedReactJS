@@ -1,0 +1,95 @@
+Transcript
+0:00
+Time to store the data we've received from Superbase in state and handle any potential errors we get back.
+0:07
+Okay.
+0:08
+Challenge time again.
+0:09
+I'd like you to import use state up at the top here and create a new state variable.
+0:14
+That's gonna be right at the top of the dashboard component.
+0:17
+Please call it metrics and include a corresponding set of function and then initialize it as an empty array.
+0:23
+Then use the try catch syntax in the fetch metrics function.
+0:28
+I'd like you to wrap all of this in the try.
+0:31
+That's the super base request.
+0:32
+And then if there's an error, throw this error.
+0:36
+After this if statement, log the data variable, that's this one here, to the console and use the state setter function that you made in challenge number one to store the data variable in the metric state.
+0:50
+Then catch the error, that's this error variable here, and log it to the console with a custom message.
+0:56
+Save command or control s to check that everything's working as it should.
+1:01
+Alright.
+1:02
+Good luck.
+1:05
+Okay.
+1:05
+I hope that went well.
+1:07
+So let's work through this challenge.
+1:09
+I'm going to import use state here because it's also from React,
+1:14
+and then I'm gonna create a new state variable.
+1:17
+So let's call use state, and let's pass in that empty array that we're going to initialize it with.
+1:24
+And then we're gonna make the state variable and the setter function.
+1:29
+So in square brackets, we're gonna call the variable metrics and then set metrics for the setter function.
+1:37
+Okay.
+1:37
+Number one, done.
+1:39
+Number two, try catch syntax.
+1:41
+So let's set that up here.
+1:44
+There's the try, and then we're gonna catch something and do something with that.
+1:49
+Okay.
+1:49
+That's all ready for later.
+1:51
+So we've wrapped the super base request in the try.
+1:55
+Now number three, if there's an error.
+1:58
+So we need an if statement.
+1:59
+So if any error, we're going to throw that error.
+2:04
+After this if statement, log the data variable to the console.
+2:07
+Console dot log data and use the state setter function to store this.
+2:13
+So we called our state setter function set metrics, and we're gonna pass in the data variable.
+2:20
+Number five, catch the error.
+2:23
+So we're gonna put error in here because we've thrown it here and log it to the console.
+2:29
+So now we can use console dot error.
+2:33
+And let's say error fetching metrics because that's what we were doing, and then the actual error.
+2:41
+Brilliant.
+2:41
+Let's command and save and check the console.
+2:45
+And, yes, we're still seeing the data logged here.
+2:50
+So that's still working, but importantly, we are now updating state with the data we're getting back from Superbase.
+2:58
+In the next screen, we're gonna be formatting this data ready for our bar chart.
+3:02
+See you then.
