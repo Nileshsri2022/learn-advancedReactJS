@@ -1,0 +1,134 @@
+
+Transcript
+0:00
+Okay, so here we are.
+0:01
+We have our navigation bar, we have our outlet, and the place where our navigation bar lives is also the place where we're getting our information from the server.
+0:11
+It's saved into state locally on this component, and if we were just rendering a child component, we could pass this information down through props to that component.
+0:22
+In this case, we're not rendering the host bin info, photos, or pricing because we don't know which one of those is going to appear in the place of this outlet.
+0:30
+Fortunately React Router makes it really easy for us to get information into the components that are rendered as part of this outlet.
+0:37
+And so this challenge is actually going to be a bit different than what I usually do.
+0:41
+Let me go ahead and type it out.
+0:43
+The reason this is different is because I'm not going to teach you how to do this before I ask you to try and do it as part of the challenge.
+0:49
+Instead, I've linked the documentation to something called use outlet context.
+0:54
+This goes directly to the React Router docs on outlet context, and it will show you both how to set it up on this side of the equation as well as how to write the code on the receiving end.
+1:05
+In other words, in the hostman info, photos, and hostman pricing components over there.
+1:11
+So go over to the documentation, read through what they have.
+1:14
+It talks a little bit about TypeScript.
+1:16
+We're not using Type Script, so at this point you don't need to follow the advice that they have for TypeScript users.
+1:22
+Okay.
+1:22
+Pause now, go to the docs, and work on this challenge.
+1:27
+This makes a lot more sense if you already have some experience using context in React, because in this case essentially outlet is just a context provider.
+1:36
+In React if I were creating this I would create a value prop, but the way that they've defined it I create a context prop.
+1:42
+And whatever value I pass to my context prop will be receivable in my other components using a hook called use outlet context.
+1:52
+So we'll just go ahead and import that here for now.
+1:55
+And I guess while I'm at it I'll put this into my other components as well since I'm going to need the outlet context in each one of these.
+2:03
+Okay, let's actually pass something to our context before we go too far down that route.
+2:08
+As I mentioned we have the information in state called current van.
+2:12
+So let's go ahead and just pass the current van as the value of our context.
+2:17
+In this case we're passing the van object as the entire context value.
+2:22
+I guess what I could do is surround this in another set of curly braces, which in this case means I'm going to pass an object, and it will have a current van property whose value is the current van object.
+2:33
+So this is the shorthand of saying this.
+2:36
+I do tend to see something like this a little more frequently than just passing the entire object by itself with nothing else.
+2:44
+So I think just for the sake of sticking with the example that the documentation gave, I'll do it this way.
+2:50
+Which means when I'm receiving it in the host van info, we'll go ahead and say my const, and I can't just say the current van is equal to use outlet context because current van is an object that has the current van property.
+3:06
+So I can just destructure that right in line while I'm doing that.
+3:09
+Again we'll go ahead and copy this into our other components.
+3:13
+And now I should have access to my current van.
+3:16
+So I can render let's go ahead and create a section and let's, I don't know, maybe render this as an h4 since we're pretty far down this nested route that we have going here.
+3:28
+And we're going to display the name, and I can access that with current van dot name.
+3:34
+Actually these are all kind of the same if you look at the design they're the same level of typography so we'll just use h4s for everything.
+3:41
+Say the category is current van dot I guess type.
+3:45
+This probably should say type instead of category.
+3:47
+That's alright.
+3:48
+We'll say the description is current van dot description.
+3:52
+And well the design has let's go back here visibility public.
+3:56
+That's not actually part of our current van so we'll just kind of hard code that one.
+4:00
+Visibility public.
+4:02
+Hopefully that didn't throw anybody off off too much looking for the visibility information inside the current van.
+4:07
+I'm really sorry if it did.
+4:08
+Okay well the route we're in is the detailed info so let's hit save, scroll down, and awesome.
+4:14
+Okay we have some styling work to do.
+4:15
+I'm just going to handle that for you.
+4:18
+Okay easy enough.
+4:19
+Now I should be able to just go to the photos and the pricing and do exactly the same thing.
+4:24
+So I won't make you sit and watch me do all that.
+4:27
+Okay and just like that we're rendering an image where we're pulling in the current van dot image URL.
+4:33
+We'll hit save and go over to photos.
+4:36
+Perfect.
+4:37
+Of course if this were a real site we'd probably have multiple photos, but we're not going to worry about that because it doesn't pertain strictly to react router.
+4:45
+Okay and I will just do the same thing for the pricing.
+4:48
+Okay let's hit save.
+4:50
+We'll go over to pricing and perfect.
+4:53
+We have covered a ton of ground here.
+4:55
+I mean look at the app that we've been building.
+4:57
+We have three different levels of navigation.
+5:00
+We've learned about relative routes, relative navigation links, and, well, there's just too much to list.
+5:06
+Assuming you've been able to follow along and do all of these challenges, you really should be super proud of yourself.
+5:11
+Now we still have a couple features that I think would really be beneficial for us to add, and it's going to teach us a couple more aspects about React Router along the way.
+5:20
+But this would be a great time to take a break, congratulate yourself, maybe show off all that you've been learning to a friend.
+5:26
+And when you're ready, we'll move on to learning just a few more pieces about React Router.
