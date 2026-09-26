@@ -1,0 +1,100 @@
+
+Transcript
+0:00
+Time to talk about row level security.
+0:03
+So even though we can't be navigated to our slash dashboard route from our home path, users could still try to access dashboard directly via the URL.
+0:14
+So if I type dashboard here
+0:17
+ah, problem.
+0:19
+So I'm not logged in right now.
+0:21
+I'm not authenticated, so this is a safety issue.
+0:25
+Our fetch metrics function has run to access the data for the chart, and that data has been sent.
+0:32
+But if we remember, because I'm not logged in, my request is being sent with the anon key, which has that role of anon.
+0:40
+If I was logged in, it would have the role of authenticated.
+0:44
+So remember my earlier metaphor that JWTs are signed certificates sent in the request letters to our project's castle.
+0:53
+Well, if this a non key with this role anon is a bit like a visitor's pass and a full logged in authenticated role is like a full employee badge, then row level security policies are like the bouncers stationed at each room or table's door, each bouncer following specific orders about which letters, requests, they should allow through.
+1:16
+These orders tell them to check the sender's certificate, JWT, and the contents of the letter, the request, to determine if access should be granted.
+1:26
+For example, a bouncer might be instructed to only allow letters from authenticated citizens who are requesting to view, say, their own data or to allow letters that are adding new items to a specific room table if they come from users with the right permissions.
+1:44
+So each bouncer RLS policy has their own set of rules that they follow to decide whether to let a letter through the door based on who sent it and what they're trying to do.
+1:54
+So right now, because we have RLS disabled, even requests with this anon key with the role of anon are being allowed through the door of the sales deals table.
+2:06
+We need a bouncer there to check for a full employee certificate with that role of authenticated, I e somebody who is logged in.
+2:15
+So what is RLS?
+2:16
+Well, it allows you to define policies which control access to individual rows in a table.
+2:22
+So an example of this could be a sales rep for our app can only see their own deals, not everyone's deals.
+2:29
+That's not something we're gonna be doing, but you could implement that.
+2:33
+It restricts access to authorized users.
+2:36
+So you can say only users who meet specific conditions can access their data.
+2:41
+An example, only authenticated users can view the sales deals table.
+2:46
+This security is at the database level.
+2:49
+It's enforced directly in the database.
+2:51
+It can't be bypassed by the application layer, and it's more secure than application level checks.
+2:57
+Policies are executed every time the table is accessed.
+3:00
+So each time a letter gets to the door, the bouncer will check it, and it happens automatically.
+3:06
+There's no need for us to remember to add any security checks in our code.
+3:10
+The default is to deny.
+3:12
+So when RLS is enabled, all access is denied by default.
+3:17
+So you can imagine all of the bounces get brought together and are told by their manager, RLS is going to be enabled.
+3:24
+And they all get to their specific doors, and they stand outside them, and they don't allow anything through unless they get specific policies instructions, kinda like a full lockdown.
+3:36
+And they're context aware and flexible, meaning that policies can use the current user's context, like their unique ID I've mentioned, to make decisions.
+3:47
+And you can have different policies for different types of operations, so for a select query, an insert, an update, or a delete.
+3:53
+What can we write policies based on?
+3:56
+The JWT.
+3:58
+So Supabase gives us these little helper functions, auth dot UID.
+4:02
+When we write the policy, that returns the unique ID from the JWT.
+4:07
+Auth dot JWT returns the whole JWT, so you can go into it a bit deeper.
+4:12
+Auth dot role is that role of either a non or authenticated, and auth dot email is fairly obvious.
+4:18
+We can combine these with database queries so we can check additional conditions or relationships and the data being sent.
+4:27
+So imagine an insert query.
+4:29
+The policy or the instruction for the doorman can be check what's trying to be inserted, and there can be conditions on that.
+4:36
+So combined gives you really flexible, powerful security rules, and the world is your oyster when coming up with these.
+4:43
+Okay.
+4:43
+That's enough theory.
+4:44
+In the next scrim, we're gonna be turning RLS on and writing a policy.
+4:48
+See you then.
