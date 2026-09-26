@@ -1,0 +1,175 @@
+Transcript
+0:00
+Now this challenge is going to be a bit more involved.
+0:03
+However, assuming you've been following along doing the challenges, really pushing yourself, maybe reaching out to the community, um, Discord when you've needed help, you should have the tools and the knowledge to complete this challenge without too much trouble.
+0:15
+However, it is still supposed to be difficult that's why I'm making the scope of this challenge a little bit larger, but I know that you can do it.
+0:21
+Our task is to refactor our menu component so that it doesn't have any of its own context or state or anything like that.
+0:27
+Really any logic of its own, but then to use our toggle headless component, I guess ecosystem, to display our menu down here below our star.
+0:37
+The first thing I would do is to first remove all the context and state logic from the menu components.
+0:42
+Also you'll notice when I brought in our button and our menu I put them all into a components folder.
+0:47
+So the structure is a little different but just try to keep in mind that it's inside of a components folder.
+0:52
+So the first thing I would do is remove the context and state logic from the menu components and then I would bring it down here and use our toggle component and it's I guess you could call it sub components to add our menu to this app component down here below our star.
+1:06
+Again a little more involved.
+1:07
+I think you'll maybe find it a bit cathartic to remove so much logic from our menu.
+1:12
+So now is your time to shine.
+1:14
+Give this challenge your best shot and when you're done we'll go through it together.
+1:23
+Okay first let's go through the frankly pretty fun process of getting rid of all the context and state inside of our menu.
+1:30
+So we can get rid of our menu context, we can get rid of all this state, because we don't have context.
+1:37
+We don't have a context provider anymore and we don't need to export context here.
+1:41
+And wow, look at that component.
+1:43
+Really all it's in charge of now is having a class name and rendering its children.
+1:48
+It's still going to be pretty important for us to have the menu set up as a compound component instead of going back to having the menu kind of render everything because that way we don't have to deal with prop drilling.
+1:58
+Especially when sometimes you'll find the data for your menu are coming from some outside resource like your database or maybe a headless CMS or something.
+2:07
+We still want to avoid prop drilling as much as we can.
+2:10
+So we'll go through the same process.
+2:12
+Our menu button does not need context.
+2:15
+It doesn't need this from context, and because we're not using context we won't be using any internal functions or anything so we'll just have a button.
+2:22
+Now the way that we've simplified it here might make it seem like this menu button is pretty pointless.
+2:27
+It's just rendering a button and rendering its children.
+2:30
+Well in fact that's exactly what the button component does.
+2:32
+At this point we could get rid of our menu button, but we're going to revisit this and see a slightly different way to compose it together with our toggle later on down the road.
+2:41
+So we're going to leave this here for now.
+2:42
+Our menu drop down will be the same thing.
+2:45
+We'll get rid of our menu context.
+2:46
+We don't need this from context because we're not getting the open state from context anymore we will remove the conditional rendering.
+2:55
+Awesome.
+2:56
+Same thing as the menu just a div with the class name and then rendering its children.
+3:00
+Menu item, let's see this is already set up the way we need it to be, so we're good here.
+3:05
+Now let's go back to index.
+3:06
+Js, let's bring in our menu component, and remember it's in the components folder.
+3:12
+We'll grab it from index so we can use that one menu that has the sub components that are nested with dot syntax like we have here.
+3:19
+And maybe before we even set up toggle let's just get our menu rendering.
+3:23
+So we'll render our menu.
+3:25
+Inside of that we had a menu dot button.
+3:29
+Let's see we used a series of sports before.
+3:31
+Maybe I'll make this more like a regular website.
+3:34
+We'll say that this is the menu and then inside of our menu drop down we'll have things like home and about, contact and blog maybe.
+3:41
+So we'll have menu dot drop down, inside of there we have a series of menu items, item, let me duplicate this and once again we'll do home, about, contact, and blog.
+3:55
+I bet some of you had much more interesting menus than I did.
+3:58
+If you did, feel free to take a screenshot and share it with the Scrumba community either on Discord or on Twitter.
+4:04
+Okay.
+4:04
+Let's cross our fingers and maybe fix any bugs that we have along the way.
+4:07
+Awesome.
+4:08
+Okay.
+4:08
+Now our menu button doesn't work anymore because we've removed context completely from it.
+4:12
+I might want to add just a little break here just so it's not quite so smashed together.
+4:17
+Okay, that's a little better.
+4:18
+And now it's time for us to use our toggle component to add the functionality back to our menu.
+4:24
+Hopefully this wasn't too much of a challenge.
+4:26
+Fortunately the components of our toggle are fairly straightforward, or rather they kind of describe themselves what they do.
+4:33
+So we do need to wrap our menu in a toggle and that way we can set up a new instance of context here, and that way instead of trying to shove our menu inside of this toggle, if we had done that then clicking the star would have affected the menu and clicking the menu would have affected the star because they would be sharing the same state from context.
+4:52
+So let me move this toggle all the way down, and we'll indent.
+4:56
+This way our menu will have its own context.
+4:58
+Now before the menu component was creating the context, and that was kind of its only job.
+5:04
+So theoretically we could get rid of this menu component like this, but similar to our star up here we're going to end up refactoring this again and compose them together a little more meaningfully.
+5:14
+So I'm going to leave the menu here for now.
+5:17
+Because we removed the logic from our menu button, we need to add back the logic from our toggle so that it still will work.
+5:24
+So we'll wrap our menu button with a toggle dot button
+5:31
+like this and that should add functionality to our menu button to flip the state that exists in our toggle.
+5:37
+Now it won't do anything now because we're not displaying with toggle on and toggle off anything.
+5:42
+So we know that we want our menu drop down only to show if the toggle state is on, so I should be able to just wrap my menu drop down with a toggle dot on.
+5:53
+In this case I probably don't need a toggle dot off because I don't need to display anything when the state is off.
+5:59
+I just want the menu to disappear when the state is off.
+6:02
+And okay let's, uh, let's hit save.
+6:04
+Let's cross our fingers.
+6:05
+Well this is a good sign the menu is gone.
+6:07
+So let's hit the menu button and awesome we now have the logic for our menu completely offloaded to our headless component, and we can still click our star.
+6:16
+It's completely independent, and we've used the logic from our toggle to have two different things that otherwise would have had a lot of duplicated code.
+6:24
+Now I can just hear a bunch of you saying at this point, but Bob, look at how crazy this markup is.
+6:29
+What we're showing on the screen is a star and a little menu, but we have somewhere along the lines of thirty or forty lines of code just to display those two things, and you're completely justified in thinking that.
+6:40
+So what we're going to do next is to see a slightly different way that we can compose these elements together but still make it so that our markup here in our app is a little more declarative.
+6:51
+Meaning it will say something like star.
+6:53
+Kind of like we had before but internally it will be using the toggle components to set up this whole state ecosystem instead of having each one create its own internal logic.
+7:03
+I'll undo this so that we're not completely broken in case you want to continue playing around the code for a little bit.
+7:08
+I know this was a lot to take in.
+7:10
+Hopefully you're starting to see that essentially we've created an ecosystem of this compound component that allows us to compose them together in ways that hopefully just kind of make sense.
+7:20
+And if you did struggle with this challenge, now that you've seen me do it, just scrub backwards before I've made any changes to the beginning of the challenge and try it again on your own.
+7:29
+Repetition is your friend whenever you're learning anything new.
+7:32
+It's going to make you a better developer if you just take the time.
+7:35
+So once you feel good about that let's go ahead and clean up this craziness by composing our components together in a slightly different way that will be a little more clean.
