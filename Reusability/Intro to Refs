@@ -1,0 +1,158 @@
+
+Transcript
+0:00
+There's a hook in react called use ref, and you may have seen it from time to time.
+0:04
+So let's dive in and see what exactly a ref is.
+0:07
+Fortunately, refs are actually pretty easy to understand.
+0:10
+Something that helped clarify exactly what a ref is for me is to think of it as being just like state, except changing them doesn't actually cause a rerender.
+0:19
+Usually you'll end up seeing them used for manual DOM manipulation if for some reason you have to do an imperative DOM manipulation instead of doing things in the more React kind of declarative way.
+0:30
+But like I said, what really helped me understand what's going on is to think of them as any value that you want.
+0:36
+It doesn't have to be a DOM node of any sort even though that is oftentimes what they're used for.
+0:42
+To highlight this I want to start a very simple counter from the ground up and we'll use a combination of use state, use effect, and use ref to really understand what's going on under the hood.
+0:53
+The first thing I'll do is throw together a really simple counter.
+0:55
+Really the only purpose of doing this is so that we have an easy way to manually trigger state changes and re renders in our little app here.
+1:03
+Okay let me catch you up where I am in building this.
+1:06
+First I just created a simple on state variable.
+1:09
+The idea is that with this force render function, it's just going to flip that variable, or rather that boolean from false to true or true to false.
+1:17
+That's completely inconsequential to what we're trying to do.
+1:20
+The only reason I created that is so that I can force React to do a rerender.
+1:24
+I also set up this use effect that has no dependency array, which means every time the react component re renders it's going to run our effect.
+1:32
+And not just re renders, it does it the first render as well.
+1:35
+So if I hit save and refresh this, you'll see we get this console log rendered right at the beginning.
+1:40
+Now every time I click the button it will also render.
+1:42
+And now that I have a way to trigger a rerender, I'm going to set up a counter that can count how many times this has been rendered.
+1:50
+Okay, now what I've done is I've used a state variable.
+1:53
+This is going to be a problem as we're about to see.
+1:56
+I've used a state variable that is in charge of tracking the render count.
+2:00
+And then inside of our use effect, I'm using the set render count function in order to update it.
+2:06
+You can see I'm just adding it by one and the idea is supposed to be every time we render in react it will run our effect since we don't have a dependencies array here.
+2:16
+It will update our render count and then we should be good to go and we'll see how many renders we get every time I click this button.
+2:22
+Okay, let's see what happens when I hit refresh.
+2:24
+I haven't saved this code yet, so let's see what happens.
+2:29
+Okay, this, it's going crazy.
+2:30
+It reached the maximum update depth.
+2:32
+It was an infinite loop.
+2:34
+And the reason was because inside of our use effect we were updating state.
+2:38
+State causes a rerender, then it would rerender and it would run our effect which would cause a re render, which would run our effect, and so forth.
+2:46
+This is one example of where refs can come in handy.
+2:49
+Remember, they're just like state except changing them doesn't cause a re render.
+2:53
+So let's see the syntax for that.
+2:55
+Instead of using a setter function, actually instead of using state at all, we are going to create a new ref.
+3:01
+It's not quite as complicated because it won't have its own setter function.
+3:05
+In fact with refs you just modify them directly, which you might know from my introduction to react course you would never do that with state, but with refs you can.
+3:13
+So I'm going to say render count.
+3:16
+We'll just use the same name so we can use it everywhere else.
+3:19
+And I set that equal to react dot use ref.
+3:23
+Just like state I can give it an initial value.
+3:26
+So we'll say that our render count should start at zero and like I mentioned we can modify render count directly.
+3:32
+So that's what we'll do inside of our react dot use effect.
+3:35
+Every time react re renders we will modify our render count.
+3:38
+Now one thing that might trip you up a lot, it certainly trips me up a lot, is that render count that gets created by React dot use ref.
+3:45
+It does not just save this bare value that we give it.
+3:48
+Instead it's an object that has a dot current property.
+3:52
+Actually let's console log render count and hit save.
+3:56
+Oh we have a problem down here, let's get rid of this.
+3:59
+Okay you can see that render count is an object with a current property and the value of that current property is zero.
+4:06
+I don't personally know why it creates an object with a current property and nothing else, but that is just something you'll have to remember about refs.
+4:13
+So here I want to update my render count dot current property, and I want to set it equal to whatever it used to be plus one.
+4:22
+Because I am updating this current property directly I don't have to worry about any kind of callback function like we do with state.
+4:29
+So instead I could just say render count dot current plus plus, which of course will increment it by one.
+4:35
+Now down here, like you saw, this created an error, and that's because we used to have render count here, but remember render count is an object.
+4:42
+React doesn't like you trying to stringify an object inside of your JSX, so I need to access the dot current property.
+4:49
+Alright, let's get rid of our console log here and we will refresh.
+4:53
+Okay, we have our render count as zero.
+4:55
+So now when I click the button it will force a render just by switching an inconsequential variable in state.
+5:02
+Causing the re render will run our use effect again because we have no dependencies array here, although I suppose we could put a dependency array for our on variable.
+5:11
+But because render count is a ref updating it is not going to cause another re render, so we won't be stuck in that infinite loop that we were before.
+5:18
+So I'll click this force re render with state change button, We get render count of one, two, three, four, five, and so forth.
+5:25
+In fact, we can see this effect a little bit more.
+5:27
+Let me write another function really quick.
+5:30
+Okay, I created a second button, sorry this is so ugly, but clicking that button will run this function increment render count.
+5:37
+This is maybe breaking down the naming that we have chosen here because we're going to see that clicking this button does not actually change our render count.
+5:44
+So I think I just clicked it four times.
+5:46
+Now I'm going to force a re render with a state change and we'll see by changing the state, we now show a render count of six.
+5:52
+Maybe I clicked it five times and then updating the state went from five to six.
+5:56
+And only by updating our state did we re render and then show that we have actually been increasing our ref count this entire time.
+6:03
+Again, the naming is breaking down because we did not render six times.
+6:06
+We only rendered two times, the initial render and after I clicked the state change button.
+6:10
+But hopefully this is starting to stick.
+6:12
+I think we've covered it plenty for now, but like I did mention in the slide, most frequently refs are used for manual DOM manipulation.
+6:19
+So although it is sending us down a little bit of a rabbit hole, I want to show you a very simple example of that just so that you're familiar with it.
+6:26
+And then we're going to come back to our component library and we're going to see how we can fix that bug that we were having using refs.
