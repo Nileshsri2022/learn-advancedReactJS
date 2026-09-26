@@ -1,0 +1,90 @@
+
+Transcript
+0:00
+There are a few things that we can type right off the bat using what we learned in just the last section.
+0:05
+We're going to start simple and have a look at the original words dot j s file.
+0:10
+This file contains and exports an array of words or for our purposes, an array of strings.
+0:15
+Let's copy all of the content and then close the original and the folder.
+0:19
+And in our source folder, we're gonna create a new file and call it words dot t s.
+0:24
+Now we're giving this the file extension of dot t s instead of dot j s because we're going to be using TypeScript here, and I'll paste the contents from the original.
+0:33
+Now let's throw you straight into a challenge.
+0:37
+Using what you learned in the first section of learn TypeScript, can you type this words array?
+0:42
+Remember that you can hover over variables to see what Type Script implies to be the type.
+0:47
+I'm hovering over these words right now, but you're gonna need to hover over it yourself if you want to see the IntelliSense pop up, or you can try to imply the type yourself.
+0:56
+I'll see you in a little bit.
+1:01
+Welcome back.
+1:02
+This one should be pretty straightforward.
+1:04
+We can clearly see that this is an array of strings.
+1:07
+And if you did hover over the words variable, it would say the same thing.
+1:11
+So we'll start the type annotation with the colon and then add string and the array.
+1:16
+And now this is fully typed.
+1:18
+Next, we're going to have a look and handle this languages dot JS file.
+1:23
+Before we start analyzing it too much, let's create its TypeScript counterpart in our app.
+1:28
+So we'll copy all of the content here and then close it as well as the original folder.
+1:32
+And in our source folder, we'll create a new file and call it languages dot t s.
+1:37
+Again, dot t s instead of dot j s here because we're going to be using TypeScript, and we'll paste the contents.
+1:43
+This one is similar to words dot t s.
+1:45
+It contains and exports an array of data, but here we have an array of objects, and each object contains three properties, a name string, a background color string, and a color string.
+1:57
+And here comes another challenge for you.
+1:59
+Type this languages array, and just note that there are two valid ways that you can do this.
+2:05
+And remember, you can hover over things to get a pop up of what TypeScript thinks the type should be.
+2:14
+Like we said before, there are two ways to go about typing this languages array.
+2:19
+First, we can use an inline object directly as the type annotation.
+2:23
+So we'll start with a colon, and then we're gonna open an object.
+2:26
+Inside, we're going to start typing the properties right away.
+2:29
+So name is supposed to be a string.
+2:32
+Background color is also a string, and color is yet another string.
+2:37
+And since this is an array of objects, we'll make sure to add the square brackets to the end of the object here.
+2:44
+Now this is just one way.
+2:45
+We can also use a custom type, which is actually the recommended method.
+2:49
+So up here, I'm going to create a new type and call it language.
+2:53
+As its value, we're going to grab the object that we just wrote, and we're gonna put it up here instead.
+2:58
+And now to type languages, we just have to refer to the type language that we just created up here.
+3:05
+And this will work just as well.
+3:07
+In fact, the way that we've done it now will actually come in handy a little bit later, so stay tuned for that.
+3:13
+That was your quick refresher on basic and custom types, and we've already started refactoring and adding TypeScript to our original assembly end game project.
+3:21
+In the next Grim, we're going to have a look and start typing some functions.
+3:25
+So I'll see you there.
