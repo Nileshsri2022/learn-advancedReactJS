@@ -1,0 +1,91 @@
+Transcript
+0:00
+To help us understand the concept of our headless toggle component that we'll be creating, we're just going to use the super simple star favoriting component that I created earlier.
+0:09
+You can see all it's doing is setting a boolean state, creating a toggle function, and depending on what that state is, it will either be a filled star that we're getting from react icons or it will just be an empty star.
+0:22
+There's a couple class names and when either one of them is clicked it just toggles from true to false or false to true, but our goal will be to pull the logic out of the star component and put it into a more generic headless toggle component.
+0:35
+So to get us started I have a quick challenge for you.
+0:37
+This is just really basic react stuff.
+0:40
+I want you to create a toggle component.
+0:42
+It should initialize the boolean state.
+0:44
+It should have a function called toggle, which will just flip the boolean when the function runs.
+0:49
+As it says, don't worry about even rendering or returning anything from the component right now.
+0:53
+We'll get to that next.
+0:54
+So pause now and work on this challenge.
+1:02
+Again these are some of the very beginnings of when you first learned react so we will just say import react from react, we'll export default our function called toggle, we're going to initialize some states so we'll say, I don't know, you probably chose a different name for this but I'll maybe call my toggle as either being on or off.
+1:23
+So I'll say on and then set on.
+1:27
+That's equal to react dot use state.
+1:30
+We'll initialize it as false.
+1:33
+Then we'll create our toggle function And this will call set on.
+1:38
+It'll look at the previous version of on and just flip it to the opposite.
+1:44
+Okay, we have a good start.
+1:45
+Now ultimately what we're going to do is we want to take our star component and we want to use context with our toggle so that we can provide some kind of internal state which will allow us to handle the logic of flipping that switch from on to off or off to on, and then provide the current state to whatever children it has.
+2:06
+If you remember from the preview that we saw, we're essentially going to be using a toggle component as a parent and having it render children and then we're going to find a way to provide the state that we initialize in our toggle to the components that we render as children.
+2:22
+However this is different than what we were doing with the menu because in the menu when we were creating this kind of ecosystem of compound components, we had control of what the children were going to be.
+2:33
+We expected a menu to have a menu drop down and a menu button button to have more children of menu items and so forth.
+2:41
+In this case though, we want to find a way to take our toggle component, which is more of our library component, the generic one that you could hopefully use in multiple different instances, and provide the state from within the toggle component to any other children that might need to use that state from the outside.
+3:00
+I think that'll make more sense when we get a second example up and we have toggle in multiple places, but for now it's enough to know that we are going to use our toggle as a parent component to whatever other components we want to put inside.
+3:14
+Now if I hit refresh right now, we're going to have an error because we haven't actually imported toggle and things are not set up inside of Toggle to correctly render this, so that is your next challenge.
+3:27
+Simply enough, your challenge is to fix what I just broke.
+3:30
+You'll know that it's working again when the star is displayed, but I'm going to be intentionally vague here so you kind of have to go through the debugging process and figure out exactly what's wrong, or rather what's missing for this to be fixed.
+3:41
+Alright, pause now and fix the broken code.
+3:50
+Alright.
+3:50
+Well, a great place to start is the error message.
+3:53
+We can see that toggle is not defined and that's because we're trying to call toggle but we haven't imported it.
+3:58
+So let's import toggle from toggle.
+4:02
+That should fix that problem.
+4:03
+Now we don't show anything on the screen, and that's because our Toggle component is not rendering anything.
+4:09
+And in this case, we should know that we want to render the children.
+4:13
+So let's go ahead and we'll add our return here, and let's pull in our children so that we have access to that and we will just render the children.
+4:24
+In fact we can actually just render it this way.
+4:27
+Because the children are JSX elements this will work just fine.
+4:31
+If it makes you more comfortable you can surround this in a div or maybe let's do some fragment tags like this.
+4:39
+Maybe just so that we can see it a different way I will just render the children for now.
+4:44
+If I need to add some class names or a div or something like that then we can maybe modify that later.
+4:50
+Okay so we have our star back and everything is working again.
+4:54
+Let's clean up some of these old challenge texts.
+4:58
+Okay this is a great start, however you probably noticed that we're initializing some boolean state here in the toggle as well as in the star, and in fact we're not actually doing anything with the state that we initialized in our toggle.
+5:10
+So that will be the topic of our next lesson.
