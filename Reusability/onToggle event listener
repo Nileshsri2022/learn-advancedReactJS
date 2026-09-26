@@ -1,0 +1,186 @@
+
+Transcript
+0:00
+I want us to start by focusing on the star component.
+0:02
+So I've moved our menu outside of here and just commented it out.
+0:06
+Again currently our star is just a UI element.
+0:09
+It is either filled or not filled but there's really not much more we can do with it.
+0:14
+In reality if you had a component like this on your site and you wanted the user to interact with it you're probably trying to persist some kind of data somewhere.
+0:22
+If you imagine the Twitter heart or the Facebook like button or some kind of star rating if you had zero to five stars, when you click that it's probably sending a signal to a server which is then saving that information in a database somewhere.
+0:35
+Right now we have no way to hook into our star and make changes or run code whenever the toggle underneath the hood of the star is changing.
+0:44
+So let's go ahead and add that.
+0:45
+If we look at the way things are structured right now we have an app component that's rendering the star and the star under the hood is rendering the toggle.
+0:52
+That's where it's getting its functionality from.
+0:54
+And so the first thing we need to do is upgrade our toggle component to be able to accept an on toggle function.
+1:01
+The name is purely something I chose.
+1:02
+It doesn't have to be on toggle.
+1:03
+It can be whatever you want it to be.
+1:05
+That prop that we will allow toggle to accept will take a function, and whenever the on state changes, it will run that function.
+1:12
+And then in order to expose access to this on toggle function, even though the toggle component is being used under the hood by the star, we need to give the star its own prop that it can accept a function that will run whenever a change happens.
+1:26
+Then whatever function is passed to, we'll call this one on change, we will just simply pass to the toggles on toggle and we'll call it good from there.
+1:34
+Inside of the function we provide on change is where we can run any kind of code like accessing our server or whatever it might be.
+1:41
+So let's go ahead and get started with this.
+1:43
+Here in the app, there's not that much we can do.
+1:45
+I guess I could start preemptively adding props to my star, but let's actually go all the way down to our toggle and start from there.
+1:52
+And in fact, I think this is a great place to do another challenge.
+1:57
+Okay.
+1:58
+Your challenge is to first accept an on toggle property to our toggle component.
+2:03
+Then using a use effect, I want you to run the on toggle function that was passed in through props anytime the on state changes.
+2:12
+Now it may have been a minute since you've done anything with use effect, so I included a link here to my introduction to react course that goes specifically to the intro to use effect lesson.
+2:21
+So if you need to brush up on useEffect, you can click on the screenshot here that will take you over to that course.
+2:27
+Then once we've set up the useEffect here in toggle, you need to go into star j s and pass the on toggle prop whose value should be a function.
+2:35
+And for now, that function can just run a console log.
+2:38
+You'll see in the note there's a little more we'll need to do here eventually.
+2:41
+There's a little bug where it will run the function as soon as you load the page, but we're going to address that bug a little bit later.
+2:47
+So now it's your turn.
+2:48
+If you need to go brush up on use effect now, this is a great time to do that.
+2:51
+Then come back here and you can work on this challenge.
+2:54
+Pause now and see if you can complete it.
+3:01
+Alright, first we need to accept an on toggle, and well that's number one that's probably the easiest thing we'll do.
+3:08
+Then we need to set up a use effect and so I'll say react dot use effect.
+3:13
+Use effect takes two parameters.
+3:15
+The first one is a function.
+3:17
+The second one is an array of dependencies.
+3:19
+If the value of any item inside this array changes from one render to the next, then it will run whatever we put inside of our function here.
+3:27
+And we want that to happen whenever the on state changes.
+3:30
+So I'll open up my function and for now I'm just going to say on toggle and just kind of blindly run it.
+3:36
+There's a couple problems with this.
+3:38
+One is we aren't handling the case where maybe on toggle was not passed to our toggle, but we'll fix that pretty easily in a minute.
+3:44
+Okay so that's number two.
+3:45
+Number three, we need to go to star.
+3:47
+Js and pass an on toggle prop to our toggler.
+3:51
+So we'll say on toggle is equal to a function, and I'll just stub something out here and actually I'll just say console log toggled.
+3:59
+And I lost my curly brace.
+4:00
+Okay.
+4:01
+Alright.
+4:01
+Let's hit save.
+4:02
+We'll give this a shot.
+4:03
+Okay.
+4:03
+So this is the bug I was talking about.
+4:05
+As soon as it loaded, it ran our toggled function.
+4:08
+This doesn't make a whole lot of sense right now because the user didn't actually toggle anything.
+4:12
+It's just what happened when the toggle component first mounted, but we'll address that bug soon enough.
+4:16
+However, that's actually good news for us because it should be working.
+4:19
+Every time I make a change, we get the on toggle function running, which is console logging toggled.
+4:24
+Now this was half of the equation because if you remember we need to expose access to on toggle through the star component so that in index.
+4:32
+Js we can add something like on change whenever you change the star or whenever someone stars or un stars this component, we want to run a function.
+4:40
+So let's do that as another challenge.
+4:43
+First, let's clear out the challenge text from here so it's not cluttering things up.
+4:47
+And then we'll go to star JS and I'll type out a challenge for you.
+4:52
+Okay this one's pretty straightforward.
+4:54
+You need to receive a prop called on change in our star component.
+4:57
+Again that name is arbitrary you could really call it whatever you want.
+5:01
+And pass the on change that gets passed in as a prop to our on toggle prop for the toggle component.
+5:07
+Then to complete the loop over in index JS, add an on change prop to the star component instance and it'll be a function that for now just will run console log.
+5:16
+So pause now and work on this challenge.
+5:24
+Okay.
+5:25
+Well, we'll accept an on change prop.
+5:28
+Easy enough.
+5:29
+And then instead of running this console log we will just call on change.
+5:34
+Actually we're not going to call it because that will run as soon as this component loads, but we're going to pass the value of the function to on toggle so that on toggle can run this on change function when the time is right.
+5:46
+Currently we're not passing on change to this component, so let's go over to index js and we'll say on change equals and then we'll make it a function that just runs a console log.
+5:57
+We'll say maybe star was clicked.
+6:00
+Okay let's cross our fingers, hit save.
+6:02
+Okay we have that same bug where it's running as soon as the component mounts but it should work now whenever we click the star it's running our function.
+6:10
+This might seem pretty silly but again instead of a console log this would more likely be something that speaks to your database, an API call that is actually persisting the fact that the user clicked on the star and probably favorited something or whatever it might be.
+6:23
+So you have to use your imagination a little bit.
+6:26
+But the cool part is we've sort of broken open this star component and exposed a specific function that we want users to have access to.
+6:35
+And by users, I mean the people using the star component in our app.
+6:39
+The end user who's using our app or our website doesn't really care.
+6:42
+Well, they do care that their data is being persisted.
+6:45
+So in that sense, this is for the benefit of both kinds of users.
+6:48
+Okay.
+6:49
+Awesome work.
+6:49
+Hopefully, you were able to complete those two challenges because we're gonna do it again and we're gonna do it with the menu.
+6:54
+That's what we'll do in the next lesson.
