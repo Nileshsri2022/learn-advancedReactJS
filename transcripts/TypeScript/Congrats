@@ -1,0 +1,31 @@
+Transcript
+0:00
+And would you look at that?
+0:01
+We've taken our beloved Assembly Endgame app from Learn React and leveled it up with TypeScript.
+0:08
+Functionally, the app still works the exact same way, but now it's fully typed, which means better readability, fewer bugs, and a smoother developer experience.
+0:17
+Same app, but stronger and just a little bit fancier.
+0:21
+Here's a quick recap of what we've covered in this TypeScript plus React section.
+0:26
+We started with a refresher on Vanilla TypeScript.
+0:29
+Then we looked at how to type use state properly depending on what we're storing.
+0:34
+We then went over typing React components using the imported JSX element type.
+0:39
+And from there, we looked into typing component props, both the inline way and the cleaner approach using custom prop types.
+0:47
+We also touched on imported types so we can keep things modular and clean.
+0:51
+And finally, we covered typing function props, which is super common in React when you're passing callbacks around.
+0:58
+So there you go.
+0:59
+Same app, new superpowers, less guesswork, fewer bugs, and way more peace of mind.
+1:06
+So thank you so much for coming along with me on this TypeScript and React journey.
+1:10
+Until we meet again, I've been your teacher, Rachel Johnson, and I'll see you next time.
