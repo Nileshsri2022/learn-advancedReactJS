@@ -1,0 +1,60 @@
+
+Transcript
+0:00
+One thing to know about me is that I'm a huge proponent of self reliance.
+0:04
+Now don't get me wrong.
+0:05
+I think if you are stuck, you should definitely reach out for help.
+0:09
+But I think it's really important to try and solve your problems yourself for a fair amount of time before you just give up and ask somebody else to solve it for you.
+0:18
+And so that premise will hopefully make sense of the challenge that I'm about to give you, which is to go to the documentation, learn about this hook called use navigate, and then use it in sending our user to the slash host route after they've successfully logged in.
+0:33
+So let me type that up as a challenge.
+0:36
+I believe this shouldn't be too terribly difficult.
+0:39
+You can click on the screenshot here to send you to the documentation.
+0:43
+And once you've had a chance to read up on it and make sense of it, come back to our van life app and implement it here.
+0:49
+Pause now and work on this challenge.
+0:56
+Okay.
+0:57
+In the documentation, it shows that we can use a hook called use navigate.
+1:01
+So we'll import that And maybe just right here below our location, we will grab the navigate function.
+1:08
+Where location is an object with data inside, this navigate that we get from calling use navigate is a function that we can call when we want to programmatically send the user somewhere.
+1:18
+So maybe right here below our set error to null, we will call navigate and we will send the person to the slash host route now this does make this set error of null seem a little bit bit silly because we're just going to immediately navigate them somewhere away, but I guess that's okay.
+1:34
+We'll leave it there for now.
+1:35
+I will get rid of my console log for now though.
+1:37
+And okay, let's hit save.
+1:40
+We'll give it a whirl.
+1:41
+I'll type in b at b dot com.
+1:43
+Need to spell that right.
+1:45
+And then p one two three for the password.
+1:47
+We'll hit log in.
+1:49
+And okay.
+1:49
+It sent us to the host route just like we would have thought.
+1:52
+Hopefully that wasn't too bad that I didn't teach you anything about use navigate really.
+1:56
+I figured it was simple enough to discover just from the documentation.
+1:59
+I also want to get you practiced in turning to the documentation whenever you have troubles or just to peruse it and see what kinds of cool things you can do with a library.
+2:09
+And I would get used to that because that is going to be very similar to the next challenge that we do.
