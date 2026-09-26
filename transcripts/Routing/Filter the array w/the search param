@@ -1,0 +1,114 @@
+
+Transcript
+0:00
+A notable thing that we are doing here is we are not using state in order to maintain the information about the filter or the filtered down list of characters or eventually the vans.
+0:10
+But instead the filtering and the getting of the parameter and everything, this is all happening right here at the top of our component.
+0:18
+Notice it's also not happening inside of a useEffect or anything like that.
+0:22
+The process of getting a search param is really fast and the process of filtering down, in this example, the list of characters is also really fast.
+0:30
+And so this isn't something that necessarily needs to happen as a side effect inside of a useEffect in React.
+0:37
+Instead, if we just put it here at the top level, then every time this component re renders it will redo this work, and that's not that big of a deal.
+0:44
+We don't need to worry at this point in over optimizing this because it's not showing us any performance problems.
+0:51
+So here we're creating our character elements, which is what char ls is short for, and it's simply taking the full list of Star Wars characters up here and mapping over it to create the JSX elements that we want to display right here.
+1:04
+So actually I want to type out just a quick challenge for you.
+1:08
+I want you to think how we might approach solving this problem of filtering our list of Star Wars characters down based on the type filter that we just grabbed from the search params.
+1:17
+If you want a little extra credit there's not really extra credit, but if you want to, I guess, feel extra good about yourself, then you could actually try to do this for yourself.
+1:26
+Right now we can see that there is a query in our URL.
+1:29
+URL.
+1:29
+It says type equals Sith.
+1:31
+So if you're able to successfully do this, then it should grab Sith from the URL or from the search parameters and it should only show the two Sith characters that we have.
+1:41
+One kind of gotcha here is notice that the type in the object has a capital s in it, whereas the parameter has a lowercase s.
+1:49
+That's something that you will need to take into account when you're working on this.
+1:53
+Okay, pause now and either just think through how you might approach solving this problem, or if you're feeling extra confident, try doing it yourself.
+2:06
+I'm sure that there are a number of different ways to solve this problem.
+2:10
+The first way that comes to mind for me is to simply chain a dot filter on our Star Wars characters before we then map over the array.
+2:19
+Dot filter returns an array, but it will be a more limited array than what the full array of Star Wars characters has.
+2:26
+Dot filter returns an array, and then we can just chain the dot map on top of the array that gets returned from dot filter.
+2:34
+If it's easier to understand you also could just set up a completely separate array variable.
+2:39
+Like maybe you call this displayed characters, and that would be equal to star wars characters dot filter.
+2:45
+And then you could just change this to say we'd get rid of this filter and we would say displayed characters.
+2:51
+So that would also be a legitimate way to do that.
+2:54
+Actually, in fact, you know what, I think I am going to do it this way just because there is a chance that we have no filter.
+3:00
+In fact, we know that there will be cases where we don't have a filter.
+3:04
+And so I may want displayed characters to sometimes equal the full list of Star Wars characters.
+3:10
+So that might look something like this.
+3:12
+If I say, do we have a type filter first of all?
+3:15
+So I'll put a question mark.
+3:16
+Let's actually move it down to this line.
+3:18
+If type filter is a value, in other words it's in our case either Sith or Jedi, then displayed characters will be equal to the full list of Star Wars characters dot filter.
+3:29
+And we'll figure this part out in just a second, but otherwise it will just equal star wars characters.
+3:36
+Okay let's figure out our filter.
+3:38
+Dot filter takes a function.
+3:40
+We're going to have access to each one of the characters in this function.
+3:44
+We need to return true or false.
+3:46
+If we return true then it will keep this current character in the new array, and if we return false it won't.
+3:52
+And so we can say if the character dot type, and remember these have capital letters, so I'm actually going to say character dot type dot to lowercase, if that is equal to our type filter then this will evaluate to true, and therefore this character will get saved into the new array of displayed characters.
+4:13
+We already switched this to say displayed characters, so let me clear up this challenge text, add a little space here, and we already have typekal sith.
+4:22
+Let's see if this works.
+4:24
+I'll hit refresh.
+4:25
+Cool, look at that.
+4:26
+Okay, we have just the two Sith Star Wars characters in our list.
+4:30
+I should be able to change Sith or type equal Sith to type equals Jedi and hit enter.
+4:36
+And awesome!
+4:37
+Okay, everything is filtering down just like we'd think.
+4:39
+Let's test it out without a search parameter.
+4:42
+So I'll delete the search parameter up there, and we have everybody.
+4:46
+Awesome work.
+4:47
+I really hope that went okay.
+4:48
+Of course, as always, if it didn't, just go back and try it again.
+4:51
+And actually, even if you were able to do it, try scrubbing back to the beginning before we had any of this code and try doing it again anyway.
+4:58
+Next up is for us to apply this concept of filtering based on the search parameters to our van life app.
