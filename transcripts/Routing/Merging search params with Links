@@ -1,0 +1,133 @@
+Transcript
+0:00
+The main reason I think I want to show you how I figured out to do this is because I actually struggled with this for a long time, and I don't even mean when I first started coding.
+0:08
+I mean just as I was preparing these lessons I was really trying to figure out the best way to do this and I think I've come up with a good way, but a caveat to that is that it's not the only way.
+0:18
+There are certainly a thousand different ways that someone could solve this problem.
+0:22
+So I'm going to split this into two parts.
+0:24
+The first part is how we can generate a query string like we see here in our links so that it will merge any existing query parameters with the one that we're trying to add.
+0:34
+And an important thing to know about that is we won't even be using these set search params for that.
+0:39
+We'll truly just be using vanilla JavaScript in a sort of helper utility function that we'll create right here.
+0:45
+And the second part is how we can do that using the set search params because there's some gotchas with using the set search params method that tripped me up for quite a bit of time.
+0:55
+So let's start with how to generate a query string like this.
+0:58
+This does require us to understand the URL search parameters constructor a little bit, but it's not too bad.
+1:04
+It's just vanilla JavaScript.
+1:06
+The idea is that instead of hard coding a string here, we're going to call a function.
+1:11
+But this time, because the to prop is not an event handler like on click is, we can't pass it a function like this because it will just never get called.
+1:20
+Instead we are going to run a function as soon as this component loads and that function is going to generate a string which will get put in its place inside of the to prop.
+1:31
+So let's get rid of this callback function and maybe we call this generate or gen new search param string.
+1:40
+It's kind of a mouthful.
+1:41
+And I'm going to make it so that this function will take a new key and a new value.
+1:47
+And in the case of the Jedi link we're going to say that the key is type and the value is Jedi.
+1:55
+Keep in mind I haven't written this function yet so nothing's going to work quite yet, but let's go ahead and copy this to this one.
+2:03
+And here we will say what we really want to do is change the type to null, or in other words we'll just remove the type property from the search params entirely.
+2:15
+Okay, let's actually create this function.
+2:17
+So I'll say function gen search params, this is going to take a key and a value like we mentioned.
+2:23
+And what we're going to do is create a new set of search params.
+2:26
+And I'm going to do that by using the new URL search params constructor.
+2:31
+Keep in mind this has nothing to do with React router.
+2:33
+This is completely outside of the purview of React router at this point.
+2:37
+The only thing we will use is we're going to initialize our new URL search params with the value of the old search params.
+2:45
+We didn't talk about this before, but you might remember I mentioned that URL search params is very flexible in how you can initialize it.
+2:51
+And you can take another URL search params object and use that to initialize your new URL search params.
+2:58
+So that's what we're doing here.
+2:59
+And then all we're going to do is use those methods that we mentioned like dot set and dot delete in order to alter the search params object that we just created.
+3:08
+Now we do have a couple different options for value.
+3:11
+It could either be a string or it could be the value of null.
+3:15
+And so we're going to check for that.
+3:16
+We'll say if there's no value or maybe more specifically if the value is equal to null then we're going to use the method dot delete on the search params object.
+3:28
+Again this isn't something that I've taught per se.
+3:30
+I'm just showing you one possible way to do this.
+3:33
+Maybe I'm teaching this more to solidify it for my own understanding since this was such a struggle for me to grasp.
+3:39
+Okay.
+3:39
+And for the delete method, we're supposed to pass a string of the key that we're trying to delete.
+3:45
+We know that it's going to be type down here, but since we're passing that in as the value of key or the parameter of key, so we'll just say SP dot delete key.
+3:55
+If the value is not null, we'll say else, then we want to use a method called set, and set is going to take two parameters.
+4:03
+It takes the key and the value.
+4:06
+In our case this will say set the search parameter of key equal to whatever the value is that we passed in.
+4:12
+So the key that we passed in will be the key, the value that we passed in will be the value.
+4:17
+Now we need to return something from this function because it's running as soon as the component loads and we know that we want it to return a string that has a question mark at the beginning.
+4:26
+Let's go ahead and console log SP dot to string.
+4:32
+This is another method that we mentioned, and we will see what that generates for us.
+4:37
+Again it should run as soon as we refresh the page.
+4:40
+Okay we get type equals Jedi, oh I forgot to change this one to Sith, let's do that.
+4:44
+Okay we get type equals Jedi or type equals Sith now, and so we want to return that.
+4:50
+Let's go ahead and return SP dot to string, but we also want it to start with a question mark.
+4:55
+So let's just go ahead and put that into a template literal.
+4:58
+We'll say question mark and then we'll interpret the value of sp dot to string there.
+5:04
+Okay let's hit save.
+5:05
+Let's click on the buttons are not quite ready but let's hit well they should still work like they were before.
+5:11
+Okay so the links are working just like they were before but now let's go ahead and add name equals Bob and I'll click the link for Jedi.
+5:20
+And look at that, it actually concatenated the ampersand type equals Jedi on top of the name equals Bob.
+5:27
+Now let's go ahead and hit Sith just to make sure that that's working, and then we'll hit clear.
+5:32
+And sure enough it only got rid of the type property on our search params.
+5:36
+Okay.
+5:36
+Again, this is not something specific to React router but because it was such a struggle for me I really want to at least have some reference to how you could do this in case you run into this problem so that you don't have to spend three or four days down a crazy rabbit hole trying to figure out how to do this.
+5:52
+In the end, I guess that's a little disappointing because this isn't a whole lot of code to solve this problem.
+5:57
+But that's okay.
+5:58
+Sometimes in the pursuit of education that's just what happens.
+6:01
+Okay, in the next section let's actually tackle how we might do this using the buttons and the set search params setter function.
