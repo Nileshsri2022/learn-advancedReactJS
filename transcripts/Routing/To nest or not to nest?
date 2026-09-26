@@ -1,0 +1,100 @@
+
+Transcript
+0:00
+Okay, so what gives with having this van slash colon ID here if we were just talking about how we can nest the routes so that we don't have to include these nested route definitions in our paths.
+0:10
+Well I want to refer you back to when we first started talking about nesting the route component.
+0:15
+The primary reason you would want to do that is when you want to keep displaying some user interface on the page, some part of your page will stay the same while other parts will display differently, or new things will display on the page when you're changing from one route to the next.
+0:29
+And then we talked about how there's kind of this caution sign when the only reason you want to nest routes is because you want to avoid some kind of repetition in your route paths.
+0:37
+Let's take a look at that.
+0:39
+So the vans and vans ID, we have this slash vans page, and it starts with explore our vans, and then we click on one of these and nothing has remained the same.
+0:49
+I mean, our navigation bar and our footer will remain the same, but that's outside the purview of these paths here, these routes here.
+0:57
+So looking at these two pages, because none of it is sharing the same UI, there isn't necessarily a reason for us to nest a route for just the colon ID portion inside of a nested route for vans.
+1:10
+In fact, doing so would make us create a route that has a path but no element, because as soon as we put an element in a parent route we have to include an outlet for that parent route, and because we're not sharing any UI, that parent component would be a layout route that only has an outlet in it, and we end up with a whole extra component that's not really doing anything.
+1:31
+In fact, maybe just for kicks and giggles, it could be fun for you as part of a challenge to see what that would look like so we can nest this van slash colon ID route inside of a Vans route.
+1:42
+Let me actually type that up as a challenge.
+1:45
+Okay.
+1:45
+I'm gonna call this one a thought experiment because I personally don't believe that the way we're going to write this is going to be an improvement
+1:59
+So I want you to rewrite the Vans route.
+1:59
+Let me actually put this as a So I want you to rewrite the vans route.
+2:02
+Let me actually put this as a little separation so you know what you're working with.
+2:05
+You're working with these two routes here.
+2:07
+I want you to rewrite them so that they are nested.
+2:10
+In this case, because there's no shared user interface between the slash vans and the slash vans slash ID route, the parent vans route that you create won't have its own element prop.
+2:19
+It's only going to have a path prop.
+2:21
+And that does mean that as part of this thought experiment, you're going to have to figure out how to render something at the slash Vans route if the parent route here in the definition won't have its own element.
+2:33
+You can read the hint here which should help a little bit.
+2:35
+So pause now and work on well, hey, it's not a challenge.
+2:38
+Let's maybe say work through this thought experiment.
+2:47
+Okay, let's go ahead and create a parent route that's actually wrapping these other routes.
+2:55
+Go like that.
+2:56
+And in this case we need to move our path of vans up to the parent route.
+3:02
+But because there's no shared user interface I'm not going to put an element here.
+3:06
+Again putting an element at the parent route would mean that I would need some kind of outlet inside that element so that it had a place to display the children routes.
+3:15
+But because we have no shared user interface I would just be creating a layout route that had nothing but an outlet in it, which is totally extraneous.
+3:23
+That's not necessary at all.
+3:25
+So for this first child, the Vans page, I do want that to render when it's at the slash vans route.
+3:31
+Well we just learned about the index prop where I tell this route to render this element at the parent's path.
+3:38
+Technically speaking it usually wants some kind of outlet in the parent element, but in this case because we have no parent element it's just going to render the VANS page with no shared user interface between all of these children routes.
+3:50
+And that's exactly what we want, so that should work out okay.
+3:52
+Then the only other thing I need to change because we're already nested inside of this path equals vans is I don't need to repeat the vans and the slash here.
+4:01
+I can just say that the path is colon ID.
+4:03
+So let's hit save and things seem to be working the way that they were, which is good.
+4:08
+That's what we'd expect.
+4:09
+Again, we're now using four lines instead of two lines, which of course isn't that big of a deal, but it is doing some weird things.
+4:15
+Like we have a route which has no element, and now we have to specify another child route using the index route.
+4:22
+So again, as a thought experiment I wouldn't necessarily recommend doing this.
+4:25
+Maybe there's a scenario where it makes sense, but when there's no shared user interface between these routes there's really no reason to do a nested route setup like this.
+4:34
+So while that was fun to play around and get some practice under our belts, let's go ahead and undo everything we just did.
+4:40
+Honestly, that's a really great part about practicing, especially in an environment like we have here on Scrimba.
+4:46
+You can mess with the code and maybe even get something completely completely wrong and it's not gonna break anything.
+4:51
+If you're anything like me, I suffer from some severe perfectionism sometimes and it can be really liberating to realize that it's okay.
+4:59
+When I'm just practicing I can mess everything up and then just go back to where I was before.
+5:03
+I think that's pretty cool, but now it's time for us to move forward.
