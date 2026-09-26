@@ -1,0 +1,100 @@
+
+Transcript
+0:00
+In order to handle search parameters in a react router app we're going to use a hook called use search params.
+0:07
+You can click on the screenshot here to go directly to the documentation.
+0:11
+And one thing that's really nice about use search params is that it is very similar to the signature of use state.
+0:17
+Let me show you what I mean.
+0:18
+So here we have a very simple app that has a list of Star Wars characters.
+0:23
+They're either Jedi type or Sith type.
+0:25
+We have some conditional styling happening where they're either blue or red depending on their type.
+0:31
+And our goal is to make a couple buttons.
+0:34
+So one will say Jedi, one will say Sith.
+0:36
+Clicking them will add a search parameter to the URL which will then make it so that it filters this list and only shows either the Jedi or the Sith.
+0:44
+To start out we can use the hook for use search params.
+0:48
+We'll just do it here at the top of our component.
+0:50
+We can say const and then we will destructure an array that comes back by calling use search params.
+0:57
+Just like in use state, we will get back the value of the params we're creating.
+1:02
+So we'll call it search params and that's in the first index of the array that we're destructuring.
+1:08
+And the second thing we'll get back back is a setter function just like in u state.
+1:12
+So we'll call it set search params.
+1:14
+Let's go ahead and console log search params and let's see what we get.
+1:19
+Okay so this is not just a regular object or a string or anything like that.
+1:23
+It's actually an instance of the browser native URL search params object.
+1:28
+Because of this, the search params object that we have here actually has a whole set of methods that we can make use of when we need to.
+1:35
+And if you're interested, you can go look at all of the methods in the URL search params documentation on MDN.
+1:41
+You can click the screenshot here to go there.
+1:43
+One of the methods that is very useful is one called dot get.
+1:48
+And we can provide the name of a key in a key value pair for our search parameters, and it will return the value of that parameter.
+1:56
+So for example we are going to be using a parameter called type, and so if we say search params dot get type it will return that and then we are going to console log whatever gets returned, or rather it will return the value of that.
+2:08
+So I'm going to hit save, but I want you to take a look at what is currently in our URL and determine what you think the console log is going to return.
+2:17
+Well we currently don't have a query string in here so let's go ahead and hit save.
+2:21
+And it looks like from the search params object when we try to get the parameter of type, the value is null.
+2:28
+So let's go ahead and actually put a question mark and we'll say type equals sith.
+2:34
+We'll hit enter.
+2:35
+It should re render our component and we'll see if our search parameters are working.
+2:39
+Okay look at that.
+2:40
+When we console log the search params that get type we get the value of sith.
+2:45
+If we want a more full picture of what our search params are actually containing at any given time, we can use a method on the search params called dot to string.
+2:54
+And I'll hit save.
+2:55
+You can see what that does.
+2:56
+So we get type equals Sith.
+2:57
+Remember we can separate the parameters with an ampersand.
+3:00
+So if I had another one like and scrimba equals awesome, and that needs to be equals.
+3:07
+Okay.
+3:07
+We can see that the search params dot to string will return the entire query string.
+3:12
+It doesn't include the question mark in the beginning though so that's something to keep in mind.
+3:16
+Okay so we have a way to get, let me change this back, we'll say we want to get the type and I'll go ahead and get rid of, even though scrim is awesome, I'm going to get rid of this other parameter here.
+3:28
+Okay we have a way to get the value of type which currently is sith.
+3:32
+Soon we're going to learn how we can actually set our search parameters so that we can change it on the click of a button.
+3:37
+But before we even do that, I think it would be useful for us to use the value in the search parameter to filter down our list of Star Wars characters so that it only displays the type that is in the search parameters at any given time.
+3:50
+So that's going to be the next thing that we learn, but actually at this point let's get your hands on the keyboard.
+3:56
+Let's take the small portion that we've learned so far, we'll apply it to the van life app, and then we'll come back to this and learn how to do the filtering.
