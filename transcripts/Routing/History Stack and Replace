@@ -1,0 +1,122 @@
+
+Transcript
+0:00
+We currently have a bit of a strange bug in our app and in order to really highlight it I had to set things up just a little bit differently.
+0:07
+Remember before we had just completely skirted the auth required component by having const authenticated equals true or equals false when we were trying to work on protected routes.
+0:18
+Well now what I'm doing is setting local storage in order to just keep a value of whether we're currently logged in or not.
+0:24
+Again, this is not the real way you would do this, but it's going to help us learn what we need to learn for this next part.
+0:30
+So when the user logs in, I'm adding this line local storage dot set item for logged in and setting the value to true.
+0:38
+As you just saw in auth required, it's grabbing from local storage whether the user is currently logged in and if not, then it's navigating to the login page and passing the state just like before.
+0:48
+And then just for simplicity's sake, up in our header I included this button right here that runs this function called fake logout.
+0:55
+It's super ugly, I know, I'm sorry.
+0:58
+This fake logout function simply removes the item from local storage.
+1:02
+So that brings me to what the bug actually is.
+1:05
+Let's say we're just on our home page we try to go to the host route it tells us we need to log in first so I log in with b at b dot com and p one two three I hit log in and this successfully takes us to the host page as we just saw.
+1:19
+However, if I hit the browser's back button, it sends me back to the login page.
+1:24
+This is a confusing workflow because it's not uncommon to hit the back button trying to go back to the page you were at before the login page.
+1:32
+But here we get this message that says you must log in first from our navigation state and it's just a confusing experience in general.
+1:39
+I can hit forward because I've already logged in and come to my protected route, but it's just not a great user experience in the end.
+1:47
+Understanding why this is happening and how to fix it requires us to know a little something about the history stack.
+1:52
+So when we went to our site, let's say we come to the home page.
+1:56
+We might even then navigate to the about page.
+1:59
+And then when we click the host page, and you'll want to look at this closely, you'll see that it tacked on both the host route and the login route to our history stack.
+2:08
+That's because we did render the host route, it just simply then navigated us to a different route, the login route.
+2:15
+And of course you saw these come in together, that happened immediately.
+2:18
+We were sent from host to login.
+2:20
+Then once we successfully log in, we go to the host route again, but our login page is still a part of our history.
+2:27
+So the way we can fix this is fortunately really easy in React router.
+2:31
+When we navigate from the login page over to our host route again, we're going to include an option in our navigate function that says replace true.
+2:41
+This option will make it so that instead of tacking on another entry in our history stack, it's going to replace the current location with the old one.
+2:50
+So you'll have to watch it quickly.
+2:52
+You'll see when we are transferred to the host page, it's going to remove the login and replace it with the host.
+2:58
+Of course, we can already see a little bit of an issue here, but we're gonna come back and fix that later.
+3:03
+So easy enough, we can go to our code where we have our navigate, and let's see we're still in our header.
+3:08
+Let's go over to our login.
+3:10
+Right here when we navigate to slash host we can just provide this option to replace the current entry in the history stack with this object that says replace true.
+3:21
+So let's give this a test.
+3:22
+We'll hit save.
+3:24
+Maybe I go to the home page and then host.
+3:26
+Oh I need to log out first.
+3:28
+I mean use my silly button here.
+3:30
+We'll go to host.
+3:31
+We need to log in.
+3:33
+B at b dot com.
+3:35
+P one two three.
+3:37
+I'll hit login.
+3:38
+That takes me to the host page.
+3:40
+And now when I hit back, we're still here on the host page.
+3:43
+But at least we didn't go back to the login page.
+3:46
+We can tell that that is what was gonna happen because, well, that's what our history stack looks like.
+3:50
+So the next thing we can do is to make it so that when we go from our about page to our host page you're gonna have to watch this very carefully but it won't tack on two entries to our history stack but instead it will replace the host route with the login route I'll do that one more time just so you can see.
+4:06
+It drops down host onto the entry stack but it actually gets replaced with the login route.
+4:12
+And then like before when we navigate away from the login route to the host route, it's going to replace that as well.
+4:18
+And now we have a history that is mended in a way that makes a little bit more logical sense for the user.
+4:24
+Fortunately, this also is very easy to do.
+4:26
+If we go over to our auth required we have a navigate component that is rendering and all we need to do is add this prop called replace Theoretically I could be more explicit and say this is equal to true but I don't need to do that just the presence of the replace prop is good enough.
+4:45
+Okay so we'll go ahead and hit save.
+4:47
+Let me do my fake logout.
+4:49
+We'll come to host.
+4:50
+That takes us to the login page b a b dot com p one two three login that takes us to host and now when I hit back I go to the home page which is where I was before I tried to get to the host page.
+5:03
+And of course I'm still logged in.
+5:05
+I can go to the host page and everything is working great.
+5:07
+In the end all we ended up doing was adding the replace prop to our navigate component inside of our auth required layout route and over in our login page adding this option for replace true.
+5:19
+With those two things combined, we were able to completely remove the redirection to our login page from our history stack, which as we see makes a bit of a better user experience in the end.
