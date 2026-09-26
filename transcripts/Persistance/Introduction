@@ -1,0 +1,106 @@
+
+Transcript
+0:00
+Welcome to section one.
+0:02
+My name is Jonathan Hill, and I'm excited to take you through this section on persistence along with section two on authentication.
+0:09
+We are gonna be using React along with Superbase.
+0:13
+Right off the bat, I want to let you know that during this course, you will have to sign up for a Superbase account, but everything we are using falls into their free tier.
+0:22
+So no need to dig out those credit cards.
+0:25
+So what is Superbase?
+0:27
+It's an open source Firebase alternative founded in two thousand and nineteen.
+0:33
+Both Superbase and Firebase are back end as a service or BaaS platforms.
+0:40
+This is when we outsource the behind the scenes aspects of a web or mobile application so that we only have to write and maintain the front end.
+0:49
+Superbase is a database infrastructure built on Postgres with a super simple setup and interface.
+0:57
+We're gonna see that in the next few scrims.
+0:59
+So why do we need something like Superbase?
+1:02
+Well, you know when you build a full stack app, you have a front end and a back end.
+1:07
+And on the back end, you need somewhere to store your data, to authenticate, store assets.
+1:13
+Perhaps you want some AI features with vector embeddings.
+1:17
+Well, Superbase comes into play.
+1:21
+It aims to get developers started and set up incredibly quickly.
+1:25
+However, it still allows for more complex engineering features and scalability along the way.
+1:32
+Superbase basically provides back end services along with front end client side SDKs that can connect this infrastructure to your JavaScript frameworks.
+1:43
+More on this later.
+1:44
+When you see it in action, trust me, it will make sense.
+1:48
+Now I won't lie.
+1:50
+The choice between Nicki Minaj or Dan Aykroyd was tough.
+1:53
+Anyway, onwards.
+1:55
+So for these two sections, we're gonna be working through some user stories.
+1:59
+So you're suddenly in a dev team at a sales company, and this user story has just dropped.
+2:06
+We're being asked to create a bar chart showing total sales for the current quarter for each sales rep.
+2:13
+They want the chart to update in real time when new deals are added.
+2:18
+The current deals they have are in a particular format, name and amount, so we have to stick to that going forward.
+2:25
+And then they're also interested in a form to be able to add new deals to the database.
+2:31
+So what are we gonna be learning in section one?
+2:34
+Well, we're gonna be creating a super base project and table.
+2:37
+We're gonna be connecting this database to the front end.
+2:41
+Most of the front end code for these sections will be written for you.
+2:45
+We're gonna query the database to fetch the data.
+2:48
+We're gonna be setting up a real time database subscription, and we need to insert data via the form.
+2:54
+And, of course, because it's Scrimba many challenges along the way.
+2:58
+When you watch me during this course, I will be interacting and using data from my own super base table.
+3:04
+But during challenges, the Scrimba platform will seamlessly let you work with your own database.
+3:11
+This is done via environment variables, which I'll talk you through setting up shortly.
+3:16
+As I said, I'm Jonathan Hill.
+3:18
+I'm a School of Code Boot Camp grad.
+3:21
+I've been dabbling with code for a few years now.
+3:24
+I'm a former music teacher and musician.
+3:26
+I spent a few years as a guitarist on cruise ships, and I'm a very proud cat dad to two Siberian fluffs.
+3:34
+In case you're not aware already, at Scrimba, we give every one of our students access to a Discord community where you can celebrate your wins, ask questions, get help, get code reviews, join a weekly town hall meet, and loads more.
+3:48
+This Discord is available to free and pro members.
+3:51
+Do click on this slide, and it will take you to an invite for joining the Discord community.
+3:58
+Okay.
+3:59
+That's enough chat from me.
+4:00
+Let's get going.
+4:01
+See you in the next scrim.
