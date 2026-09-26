@@ -1,0 +1,66 @@
+
+Transcript
+0:00
+The first thing I'm going to do just for the sake of best practice is to take my fetch completely out of this component.
+0:07
+Considering I may want to fetch these vans somewhere else instead of repeating this code over and over, it's a better practice for me to create some kind of library or utility where I can get the vans that I need from a function and then inside of my component I would just call that function.
+0:24
+So let me create a new file.
+0:25
+We'll just call it API dot JS which is supposed to indicate that we are going to be interfacing with the API and I'm going to export.
+0:34
+We'll use an async function that we call get vans.
+0:38
+Since I'm transitioning from what wasn't an async function before to an async function I'm going to be essentially using this code but rewriting it using async await So let's paste this in as a reference but we will change up what this looks like.
+0:54
+We'll say the response is await fetch.
+0:57
+Then we will get the data.
+0:59
+We'll say const data equals await res dot json.
+1:03
+And then this function's job is basically done.
+1:05
+It just needs to return the data and I think it was the vans property on that data that we cared about.
+1:11
+So we'll get rid of these lines of code.
+1:13
+We're going to come back and actually work on the sad path for this because right now it's assuming that this fetch request is going to work just fine.
+1:21
+But let's refactor back here.
+1:23
+We will import our get vans function.
+1:28
+And then instead of manually calling our fetch request here, I could keep using my dot then promise resolution syntax by saying get vans dot then.
+1:37
+But while we're at it I might as well update this and use an async function.
+1:40
+Now it's important if you remember from the introduction to react course that I taught if you took that, that you can't just change your function here from useEffect into an async function.
+1:50
+So the easiest thing is just to create a brand new async function inside here.
+1:53
+So we'll say async function, maybe we'll call it load vans just to get a different name.
+2:00
+That's going to call get vans and we will save that data.
+2:06
+We will just say const data equals and then we get to await get fans because we now are inside of an async function.
+2:14
+And before I forget because I do this all the time I'm going to call my load vans function even though it's not quite done yet.
+2:20
+Otherwise sometimes I end up pulling my hair out wondering why it's not working when it's just because I forgot to call the function.
+2:25
+Okay so now I get to call my set vans function and pass in the data that we got from calling get vans.
+2:32
+And just to make sure that this is working, I'm going to get rid of this four hundred response and make it so that it's working again.
+2:39
+So let's hit refresh.
+2:41
+Okay good.
+2:42
+Our vans are showing up.
+2:43
+We've made a little bit of refactoring using this API JS file and cool.
+2:49
+Now let's start working on actually coding up the sad path.
+2:52
+Just for the sake of compartmentalizing the topics that we've been learning, we're going to do that in the next lesson.
