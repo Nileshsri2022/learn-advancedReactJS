@@ -1,0 +1,24 @@
+
+Transcript
+0:00
+Okay.
+0:01
+We're on to this new section on authentication.
+0:06
+A new user story has dropped.
+0:08
+We've now been asked to allow a user to sign up as either a rep or an admin account type.
+0:15
+They wanna be able to sign in and out.
+0:18
+They want reps to only be able to add deals for themselves, whereas admins can add deals for any of the reps.
+0:24
+They want there to be data security, so people who are not logged in can't see the data on the chart.
+0:31
+And the last quick thing, they want some of the account information about who's logged in to be in the header of the dashboard.
+0:39
+That means we're gonna be setting up a router and context, listening for a session, learning about JSON web tokens, signing users up and in and, I guess, out as well, and writing some low level security policies and a database trigger, plus, of course, challenges.
+0:58
+If you need motivation, check out the Scrimba Discord community, see what everyone else has been building, and then let's get going.
+1:05
+See you in the next Scrimba
