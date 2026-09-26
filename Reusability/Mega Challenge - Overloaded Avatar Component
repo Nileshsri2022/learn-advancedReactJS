@@ -1,0 +1,198 @@
+
+Transcript
+0:00
+This challenge is going to be a little bit of a doozy compared to some of the previous challenges that we've done, but don't let that scare you.
+0:07
+You are completely prepared to complete this challenge.
+0:10
+You're gonna be building an avatar component, but this avatar component is going to be something called overloaded and that just means that it can be displayed in multiple different ways depending on how it's configured.
+0:22
+Let me show you exactly what I mean.
+0:23
+So just like you might expect with an avatar component, there is the ability to display it with a photo, but if a photo is not provided there's another option where someone can use the avatar component to display someone's initials.
+0:35
+And we're gonna take it even one step further where someone could use our avatar component in a completely anonymous way and that will simply display a little person icon instead of any initials or photo.
+0:46
+Now to be totally honest, there's probably a million different ways that you could write this component to accomplish this task, but I'm gonna give you some directions so that you're not just spinning your wheels or taking a shot in the dark.
+0:57
+The users of our avatar component, if they want to display a photo, then they will use our avatar as a self closing component and they will at least provide a source attribute.
+1:08
+Additionally, we will accept an alt attribute because under the hood there will be an image and we always want to be able to provide an alt on that image.
+1:16
+If someone wants to use our avatar component to display initials, then it will not be a self closing element, but instead will have an opening tag and a closing tag.
+1:25
+The initials will simply be passed in as a string in the children of our avatar component.
+1:30
+And lastly, if they want it to just be completely anonymous, then we will allow them to just do a self closing avatar component with no additional props or information passed in.
+1:39
+Let's look at the actual text of the challenge.
+1:42
+Again you can always maximize these slides again if you want to take a look at what we just looked at in terms of the usage of the component.
+1:48
+And just to make styling a bit easier for you I've already included all the styles you'll need and I've even given you what classes you should include on the div that will wrap the ultimate solution.
+1:59
+And just to make sure that makes complete sense, if you are going to be accepting the initials as the children of your avatar component, then in the end it should render a div with the class name of avatar space avatar dash letters.
+2:13
+And then I'm not gonna tell tell you exactly what happens in between these because that's part of the challenge for you to figure out.
+2:18
+If you're feeling really stuck on the logic of how this is gonna work, you can always go over to hints dot MD, which is a file I've added here where I explain some of the logic that you can use.
+2:27
+But I really would like you to try your very best to figure this out before jumping straight to the hints dot MD file.
+2:34
+Also, just for some fun extra credit, doesn't really have to do with React per se, but if you want to make it so that the background color for the initials or the anonymous versions of the avatar component are randomized, then that could be a really fun thing.
+2:49
+I've included the styles with some helper classes here that will change your background colors.
+2:54
+So really all you need to do is to randomly pick one of these class names in the code of your avatar component.
+3:02
+Also let's go check out index JS because I have instances here already written for you just so that you have a better idea of exactly what I'm looking for.
+3:10
+And that's why we have avatar component here because right now I changed avatar to just have this h two that says avatar component here.
+3:18
+This is primarily what you'll be changing in this challenge.
+3:21
+Oh and lastly you might have noticed that I did import this IO person sharp, which is the avatar icon that you will use for the anonymous version of our avatar.
+3:30
+It's not a hundred percent exactly like this design, but it's pretty darn close.
+3:35
+Okay.
+3:35
+I'm sorry that setup was so long, but I do expect you to really give this your best shot.
+3:39
+We're going to walk through it together because this is just a normal challenge.
+3:42
+It's not a solo project, But remember that these challenges and especially this challenge because it is a little more in-depth is going to be a really excellent way to test your own skills, see if you're ready to keep pushing forward in the course, or if alternatively you need to spend a little more time studying, a little more time asking questions in the Scrimba community to make sure that you've really internalized what we've learned so far before moving forward.
+4:06
+Okay.
+4:07
+I'm off my soapbox.
+4:08
+Pause now and work on this challenge.
+4:16
+Alright.
+4:16
+Hopefully that went okay and you don't hate me any more than you already did before, but let's go through this together.
+4:22
+I'm gonna scroll all of this challenge stuff out of the way and let's just get started right up here.
+4:27
+Now the logic for this is that if there is a source prop coming in, we can see here the use of this.
+4:34
+If we have a source prop coming in then we know that we want to use the photo version of our avatar.
+4:39
+That's probably a safe bet because neither of the other versions of our avatar will have a source prop.
+4:45
+Similarly with the initials it's the only one that's going to take children.
+4:49
+So we know that if there is a children prop coming in then we want to use the initials version, And then we can kind of do this as an if there's a source then use the photo version, if there's, uh, children then use the initials version, And else in all other instances, let's just use the anonymous version.
+5:07
+This is not a foolproof way of doing this, but it should work for completing this challenge.
+5:11
+If that didn't make sense I'm sure it will in just a second.
+5:13
+Let me get rid of this h two because that's not very helpful to us.
+5:17
+And actually what I think I'll do is do a little bit of commenting or pseudo code.
+5:21
+So I'm going to say that if there's a source prop render the image version, we'll say if there's children then render the initials version and then I'll just say else render the anonymous version.
+5:36
+Right now our component is not taking any props so let's pull those in.
+5:40
+We know we want to look at the source and we also mentioned that we want to accept the alt in case there's a photo that we want to include the alt text for.
+5:48
+And we'll also accept the children there.
+5:51
+Now let's start turning some of our pseudo code into real code.
+5:54
+So I'll say if source is defined, in other words a source was actually provided, then we want to return a div and inside that div we will render our image.
+6:06
+So let's put these on their own lines like that.
+6:09
+I can pass the source that we received in props and I might as well go ahead and pass the alt if it was provided.
+6:16
+And then if we look above for the image version we just need to include a class name of avatar on that div.
+6:24
+Now I think if I hit save I might run into an error because these ones will have no option.
+6:30
+Oh no error okay well we have our image loading that's awesome.
+6:33
+Of Of course our other ones are not loading because this source is not provided and therefore there's no real return happening from our avatar component.
+6:41
+So let's go ahead and fix that.
+6:43
+Now because I'm returning inside of this if I don't necessarily need to use an else if.
+6:48
+I can just say another if statement.
+6:50
+I'll just put it down here.
+6:51
+If we have children and actually let me get rid of these here, the pseudo code as we're coding this up.
+6:57
+If there's children then render the initials version.
+6:59
+So let's see.
+7:00
+I'm going to just steal this return but we don't want to render an image we just want to render the children because that will be the initials.
+7:09
+And then up above we see that if we're doing the initials it should be avatar space avatar dash letters.
+7:16
+So I'll just put that in here.
+7:17
+Let's hit save.
+7:19
+Cool.
+7:19
+Okay.
+7:20
+Now we can see this has a red background and that's because if I go to style dot CSS, you might have noticed that I set up some CSS variables up here.
+7:29
+If you're not familiar with CSS variables, don't let this freak you out.
+7:33
+In fact, I'm just gonna go ahead and copy my red down here and get rid of this just in case.
+7:38
+This is essentially what's happening.
+7:40
+It's a hard coded background color for avatar letters and then you can see I've also hard coded this color for avatar icon.
+7:47
+I'll go ahead and steal that as well just so that nobody is mixed up with CSS variables in case you haven't seen them before.
+7:54
+That's the next one we're gonna get to.
+7:55
+Let's go back to our code here and in this case we're going to just say else because we'll assume that this has handled the other two instances.
+8:04
+And if they're looking for the anonymous one, I'm going to steal this.
+8:08
+In this case, we don't have children, but we will have our icon and that is this IO person sharp.
+8:15
+Okay and then the class was changed to avatar icon.
+8:19
+Let's get rid of our comments here, Hit save and awesome.
+8:23
+We have all three different versions of our avatar component working.
+8:26
+Okay.
+8:27
+I know that this challenge was a bit more in-depth than some of the previous ones that we've done.
+8:31
+I tried my best to prepare you for the difficulty, but if this was a real struggle for you just know that that's completely okay.
+8:38
+I do want you to spend some extra time going through this over and over again, practicing this, maybe redoing the challenge if you weren't able to complete it or even if you were able to complete it.
+8:48
+And I wanted to point out that this isn't some standard way of accomplishing this task.
+8:52
+Really, all we've done here is used the tools that we've learned in react so far to solve the problem that was in front of us.
+8:58
+You may have found some completely different way to solve this or you might even be finding some imperfections in the way that I've chosen to solve it here.
+9:06
+If we were making this into a real component library there are a number of other things that we would have to check for and make sure that we were guarding against, but to be honest that's not really the purpose of this section.
+9:17
+Instead, I wanted you to see that we can just use the JavaScript and the React that we already know and love to build something that's really cool and ultimately very flexible.
+9:26
+In truth, a really overloaded component like this, like I mentioned overloaded just means that it can be displayed in multiple different ways depending on how you're configuring it, It's not usually best practice in your regular day to day life with React, but in our case because we're building a component library things are a little bit different.
+9:43
+We're trying to find ways to reuse components, and then of course we would just have to document the heck out of the API that we're giving to the people using these components so that they know exactly how they're allowed to use the components.
+9:56
+Alright.
+9:56
+With that sort of mega challenge behind us, let's move forward.
+9:59
+We're going to jump into some really exciting new topics regarding reusability in React.
