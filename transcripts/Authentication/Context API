@@ -1,0 +1,188 @@
+
+Transcript
+0:00
+Now that the React Router DOM is set up, let's move on to context.
+0:04
+Whether the user is authenticated, signed in, not will affect which routes they can access.
+0:10
+As I mentioned in the past, Squim, when a user signs in, Superbase sends them a token, and the client library converts this data from this token into a session object, which includes info about the user.
+0:24
+And we need to keep track of this in state through our app.
+0:29
+Eventually, we're gonna be protecting the dashboard route by saying, only when there is one of these super base sessions can the user navigate here.
+0:39
+We're gonna be centralizing the management of this state along with the auth functions.
+0:44
+So for instance, in sign in, when we have a form here, we're gonna be sending the info from the form, email and password, to Superbase.
+0:54
+And that sign in or sign up or even log out, we're gonna put all of those auth functions in a file.
+1:02
+Let me make it here.
+1:03
+Let's call it auth context.
+1:09
+So in here, we're gonna have auth functions, things like sign in, sign up, log out, and we're gonna track the session state.
+1:21
+And to be able to access all of these in other files in our project, we're gonna use the React's context API.
+1:29
+This is a way to pass data through the component tree without having to pass props down manually at every level.
+1:36
+It's a solution for global state management in React.
+1:39
+It'll mean we have clean separation of authentication logic from UI components.
+1:45
+It'll help with easier refactoring because it'll all be in this one file.
+1:49
+We have uniform logic.
+1:51
+All components use the same logic for authentication, reducing the risk of bugs or inconsistent behavior, and testability will improve too.
+2:00
+So this will be user info and sign in status.
+2:05
+Let's actually put this file in a new folder called context, and let's put this auth context in there.
+2:14
+Okay.
+2:14
+So the first thing we're gonna do is we need to import create context from React.
+2:20
+Then in this top level, not inside the component, we're gonna create the auth context object.
+2:27
+So let's call it auth context, and we'd use that create context we just imported.
+2:33
+And now we can write our auth context provider component.
+2:41
+Okay.
+2:42
+I mentioned this session.
+2:43
+Let's create some session state to hold this.
+2:47
+This will help us see what we're doing in a minute.
+2:50
+So let's also import use state, and then we'll make some session state here.
+2:57
+Okay.
+2:57
+Super.
+2:58
+So in the return here, what we're gonna do is we're gonna access the provider property from this object here.
+3:07
+So we're gonna use the dot provider,
+3:10
+And the reason we have a closing tag here is because all the components inside this provider will have access to the context values.
+3:18
+So let's make a value prop here, and we're gonna create an object in here that contains the auth state and the functions.
+3:27
+So we have more curlies to make an object in here, and the only thing we have at the moment is this session.
+3:33
+So the way to wrap our app is we're gonna provide the auth context to the children.
+3:39
+So in main, we can actually wrap our app, which remember is this router, with the auth context provider here.
+3:49
+So let's import that here,
+3:52
+and it's from that auth context dot j s x.
+4:02
+So now this is the children of the auth context provider.
+4:07
+So let's save main, and we go back in here, and we pass the children as props.
+4:13
+So let's extract the children.
+4:16
+There we go.
+4:17
+And then we can use children here to make sure that it's inside this provider.
+4:24
+So all the components inside this provider have access to the context values.
+4:30
+And because we've wrapped the router here, the whole app, everything we've got at the moment is gonna have access to the context values.
+4:43
+All consumers that are descendants of a provider will rerender whenever the provider's value prop changes.
+4:50
+So we can imagine that a session is created when a user logs in or it's removed if they log out.
+4:56
+That's gonna fire a rerender of the children with the new session value.
+5:02
+When React renders a component that subscribes to this context object, it will read the current context value from the closest matching provider above in the tree.
+5:12
+The last thing we need to do is we're gonna write a little custom hook to access the auth context, the values from the provider.
+5:20
+So let's call this use auth, and we're gonna return and use something called use context.
+5:27
+So let's import that as well.
+5:32
+And we pass to use context that auth context object we created right at the start of this scrim.
+5:38
+So use context is used to grab what's in the value of the provider.
+5:44
+So now when we call use auth inside a component, that component is now subscribed to the context, which means whenever the value provided by the auth context dot provider changes, the component will automatically rerender with the new value.
+5:59
+This means the component always gets the latest authentication state and functions from the context.
+6:06
+So let's save this and give this a crack.
+6:09
+Ah, I want context folders to be in source.
+6:12
+That's my little problem there.
+6:13
+Okay.
+6:13
+Sorted.
+6:16
+So we can now access this context anywhere we want.
+6:19
+Let's try and sign in.
+6:21
+So I'm going to import the hook, and then right at the top of this component because use auth returns the current value of the auth context, the value, remember, is an object.
+6:33
+Let's just see that again.
+6:35
+It's this inner curly object here.
+6:38
+So we need to destructure that immediately with the curlies.
+6:42
+It's only the session in there at the moment, and that's what we're gonna test now.
+6:45
+And then we use the use auth hook.
+6:48
+And now session is available in this component.
+6:51
+So why don't we log it to the console?
+6:54
+And we save.
+6:55
+And because we made it undefined to start with, we can see undefined.
+7:00
+But let's test it by changing this.
+7:03
+Why don't we go to assistant to the regional manager?
+7:09
+So we save that, and we can see immediately it's changed in the console, and that's coming from this console log here.
+7:16
+So we're getting session here.
+7:18
+And as I mentioned, eventually, session will include lots of information about the user that we're gonna be using in our app.
+7:24
+And the fact that there is a session object will tell the app that they are authenticated and logged in.
+7:30
+Okay.
+7:30
+Let me just clean this up,
+7:34
+and we'll change this back to undefined.
+7:37
+Okay.
+7:37
+Fantastic.
+7:38
+So we now have two routes, home and dashboard.
+7:41
+We have our auth context as a central file for our auth functions and state.
+7:45
+Have a way to pass these through our app when they're needed, thanks to context.
+7:49
+We now need a way for the auth state session to be updated when a user logs in up or out.
+7:56
+That's our task in the next screen.
+7:58
+See you there.
