@@ -1,0 +1,99 @@
+Transcript
+0:00
+Okay.
+0:00
+I've got a challenge here that is mostly going to be testing your problem solving abilities more than really learning anything new specifically in React.
+0:07
+Our goal is to make it so that when we're using a button we can provide a size prop and set it either to SM for small or LG for large, and then to have the button itself know how to resize itself based on the incoming size prop.
+0:24
+You can see in the challenge that it says you should accept the size prop and set the class name of the button, so that would be right down here, you would add class name, to either button dash small if the incoming size prop is s m or set the class name to button dash large if the incoming size prop is l g.
+0:44
+I've already written the CSS for this right here.
+0:47
+You can see we have a button small and a button large.
+0:50
+Don't worry about the green thing.
+0:51
+We're going to talk about that later.
+0:53
+Now before anybody dives too deep on a rabbit hole, I want to make sure that you don't try to manually add a class name over here, like adding a class name to this button.
+1:02
+For now, don't worry about doing that.
+1:04
+However, just to make sure that's not a confusing instruction, instruction, you will be adding class name to your button here in this button JS file.
+1:11
+You can see I wrote the text for this challenge underneath the signature for our component but above the return.
+1:18
+A lot of times I like to do any display logic that I need to do right in between these two pieces.
+1:24
+That's not required.
+1:25
+There's other ways to do it as well.
+1:26
+There's actually a lot of different ways to solve this problem.
+1:29
+So go ahead and give it your best shot.
+1:31
+Pause now and work on the challenge.
+1:38
+Alright, let's jump in.
+1:40
+Since we're currently using this destructuring props method up here, I'm just going to go ahead and accept the size prop as a named prop that I'm destructuring.
+1:49
+And then a really simple way to do this would be to simply set a variable, let's call it maybe size class, and then to do a couple if statements that says if the size prop that I pulled in is equal to s m for small, then we'll set the size class equal to, I'll just copy it so that I don't mess this up, button small.
+2:13
+Since this is pretty small I'm just going to get rid of my curly braces there and put it all on the same line and then I'll say actually I'll just copy this and say if it's large then set it to button large.
+2:27
+If you looked closely you might see there are specific styles that we're overriding with the small like the padding and the font size.
+2:34
+With the large we're just overriding the padding, but those properties are included in the button itself.
+2:40
+We have the padding here and well the font size is the default sixteen pixel font that will come with the browser.
+2:46
+But this is one way to accomplish the idea that the medium sized button, if you remember from our design here, is going to be the default.
+2:54
+And then if we override those defaults with the extra classes then we'll get the small and large.
+3:00
+Just in case you were wondering why we're only handling the small and large instances instead of the medium one as well.
+3:06
+And like everything there's other ways to accomplish this.
+3:08
+Okay.
+3:08
+Now that I should have my size class determined, I can simply add a class name and set it equal to whatever size class was determined to be.
+3:18
+Now over here I have this already set to size of l g, and so let's hit save, and awesome, we have a larger button.
+3:27
+Now you might also notice that this button is much larger than the one in the design.
+3:32
+That's because they were close enough that it was a little bit difficult for me to tell the difference between the medium and the large, so I made it almost comically large in the style CSS right here with large.
+3:42
+But we'll change that back later.
+3:44
+Now what's this green class about?
+3:46
+Well when I was testing this out I realized that if we set the class name of our button equal to something specific, then if when I'm using an instance of my button I also decide to set a class name equal to something else, so let's say class name equals green, and I'll hit save, and you'll see that we get the green styling, which just changed the color of the text to green, but we lost the large button styling.
+4:11
+And what I actually want you to do is to pause and to poke around the code and see if you can figure out why we're losing the large styling that we got.
+4:19
+Pause now see if you can figure out why this problem is happening.
+4:21
+You don't have to fix it, but just see if you can figure out why the problem is happening.
+4:31
+Well, remember, in our button JS, we are explicitly accepting the children prop and the size prop, but we're also taking all of the rest of the props that are there.
+4:40
+And in this case, the class name is one of those rest of the props.
+4:44
+And then we spread them in after we explicitly set the class name.
+4:48
+I'm actually curious about this.
+4:50
+If I get rid of my class name and put it after I spread in the rest, I bet if I refresh, now I'm getting the large styling, but not the green styling.
+4:59
+That's because this is doing it in order.
+5:01
+It's spreading in our class name as a part of the rest of the props, and then it's also overwriting that class name with the class name that we determined from our little logic code here.
+5:12
+So this is a problem we need to fix.
+5:13
+We're going to fix it in the next lesson.
