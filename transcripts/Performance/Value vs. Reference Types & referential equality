@@ -1,0 +1,98 @@
+
+Transcript
+0:00
+Let's take a quick aside to understand the concept of referential equality.
+0:04
+I think this is going to make the next few lessons a bit simpler to grasp.
+0:07
+So what exactly is referential equality?
+0:10
+Well in JavaScript, all functions and values are stored in the memory of your machine.
+0:15
+And JavaScript makes a distinction between two different types of these values.
+0:21
+One type is called a value type or oftentimes called a primitive type.
+0:25
+This includes booleans, numbers, and strings.
+0:27
+Now there are some edge cases like the value of undefined, which is considered a value type.
+0:33
+But for simplicity let's specifically talk about booleans, numbers, and strings.
+0:37
+Okay, so primitive or value types is one kind of value that JavaScript makes a distinction about.
+0:42
+The other kind is called a reference type, or sometimes called a complex type.
+0:47
+And these include objects, arrays, and functions.
+0:50
+And the reason we're talking about this is that JavaScript will manage the memory for these types differently.
+0:55
+Okay, let's look at how it does it differently.
+0:57
+With a value or a primitive type, two values are considered equal if they have the exact same value, and it doesn't mention here, but if it has the exact same data type.
+1:07
+This is probably really easy to understand for you at this point.
+1:10
+If I were to say let a equal one, and then say let b equal one, and then we're to console log a triple equals b, what's happening here is I'm using the triple equals operator to compare the item on the left side of that operator and the item on the right side.
+1:27
+And I'm expecting JavaScript to then turn this equation or this equality check into a boolean.
+1:34
+Okay well because a is the value of one and the type of number, and b is the value of one and the data type of number, the triple equals will give me the result of true.
+1:45
+If I change b to be the string of one, the values are both one, but a has a data type of number and b has a data type of string, and therefore the triple equals will equate these as false.
+1:56
+At this point, some of you may be saying, well, you could just use the double equals.
+1:59
+And yes, that will get you true because a double equals will only check the values.
+2:04
+It won't check the data types, but to be completely honest I have just never heard of anybody really making good use of the double equals.
+2:11
+It might as well not exist in JavaScript as far as I'm concerned.
+2:15
+Okay, this concept is fairly easy to understand.
+2:17
+So how is this different when it comes to a reference or a complex type?
+2:21
+Well, a reference or complex type are considered equal only if they reference the exact same thing in memory.
+2:27
+In JavaScript, it doesn't care if two objects look exactly the same as each other.
+2:32
+If they were created twice, then they occupy two different places in memory and therefore are not considered equal.
+2:38
+So let me change A to be an empty object and B to also be an empty object.
+2:43
+If I use the triple equals and I compare these two, then I get false even though they look exactly the same.
+2:50
+If I put some keys and values in them, let's say it's got one property name and the value is Joe, these are identical in every way.
+2:58
+But JavaScript will still see them as two distinct objects in memory and therefore are not the same.
+3:04
+The only way that a triple equals b would evaluate to true is if I specifically say let b equal a.
+3:11
+By doing this, I am now referencing a as my value of b.
+3:15
+And so they occupy the same place in memory, and now this is going to be true.
+3:20
+At this point I could go down a rabbit hole and talk about how reference types are passed by reference and value types are passed by value, and that's where the names come from.
+3:29
+And the difference between referencing an existing object and making a copy of a primitive type.
+3:34
+But to be honest, none of that is crucial for our understanding with how React deals with some of these performance tools that it gives us like use memo and use callback.
+3:43
+So for our purposes, I think this will be good enough.
+3:46
+As a sort of preview, let me go ahead and put this back the way it was before.
+3:51
+And we're gonna get more in detail over the next lessons, but the way that this relates to React, if you imagine React creating a new object at the top level of a component and then re rendering and comparing that object, the old one, with a new one that was also created, you might see that even though everything about the object has remained exactly the same, React, or rather JavaScript, is going to compare these two to each other, and it's going to think that they are different objects.
+4:19
+Now for the sake of completeness, I believe React under the hood is actually using object dot is instead of a triple equals.
+4:26
+The two are almost identical.
+4:28
+There are some tiny changes between using triple equals and object dot is, but the fact is object dot is is still going to give us false here because they are two distinct objects in memory.
+4:39
+Okay.
+4:39
+This should be a good enough setup for us to come back here and to understand how useMemo can help us maintain referential equality of a complex data type from one render to the next.
+4:49
+So let's move on to that.
