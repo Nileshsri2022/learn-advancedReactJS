@@ -1,0 +1,112 @@
+
+Transcript
+0:00
+Okay.
+0:00
+I even did some heavy lifting here and added this link for you, and of course you can tell that I added all the styling to our van list detail page, at least the beginnings of it.
+0:10
+So we have this back to all vans link, and this is supposed to take us back to this page slash host slash vans.
+0:17
+So let me click on this.
+0:18
+We have a quick mini challenge for you.
+0:20
+I want you to change the two so that it goes back to all vans.
+0:24
+A major hint is how we just talked about the difference between saying CD space dot and CD space dot dot in a UNIX terminal or in a terminal.
+0:33
+And we mentioned how dot represents the current route when we're talking about React Router relative links.
+0:39
+But before you get started, a major caveat on this is that it's probably not going to do what you think it'll do.
+0:45
+But I do want you to give it a shot, see if you can figure out what I want you to put here, and then we're going to learn one little extra tweak so that it will fix the problem that you're about to see.
+0:54
+Okay, pause now and work on this mini challenge.
+0:58
+Hopefully your thought was to say, well if I don't want the current route, in fact, let's see what happens.
+1:02
+I'll hit save, I'll click back to all vans, and, well, nothing changes.
+1:06
+And that's because dot means the current route, which is slash host slash vans slash one.
+1:11
+So theoretically, I should be able to say, well, let's go back a route, dot dot.
+1:16
+I'll hit save, and what happens is, well, it takes us too far back.
+1:20
+We go to slash host.
+1:21
+We want it to be at slash host slash vans, this page here.
+1:24
+So why did it do that?
+1:25
+Well, something that I mentioned but didn't really dive deep into is the fact that when we're using relative links what it's relative to is the route hierarchy here.
+1:36
+It's not necessarily relative to the path that we currently see in the URL.
+1:41
+Why does that matter?
+1:42
+Well, when we're here in this route, slash band slash ID, or in this case slash van slash one, sorry, slash host slash van slash one to be more specific, when I use the dot dot relative path, the default in React Router is not to go back exactly one route, which would be slash vans, but it's to go up one level into the parent route.
+2:03
+And our parent route is host or slash host, which is why currently clicking back to all vans takes us to slash host.
+2:11
+Remember, we realized that the vans list page and the vans detail page here didn't share any user interface, And so we chose not to have a nested route for Vans like we might have otherwise.
+2:23
+In fact, just for fun, I'm going to show you what it might look like and we'll see how it's a little bit ridiculous if we were to nest this route.
+2:31
+So I'll create a closing element rather for the route.
+2:35
+We'll stick our vans colon ID in there.
+2:38
+And now because we want this host vans to show up on the index of slash vans, we'll have to create another route that's going to be actually you know what, let me put some space around this just so we can see it a little easier.
+2:50
+This one is going to be the index.
+2:52
+In other words, the host vans is what we want to show up in the outlet of the parent route here.
+2:59
+Well we don't have an outlet in host vans, so we would need to just render an outlet.
+3:05
+Let's bring in outlet from react router dom.
+3:08
+Now because I'm nested I don't need to specify vans slash colon ID.
+3:12
+In fact it would be wrong to specify vans slash colon ID because that would mean slash host slash vans slash vans slash ID.
+3:20
+So let's get rid of the vans slash part.
+3:23
+Okay, that was a bit of work and we have this kind of ridiculous just rendering an outlet in the parent here, but let's hit save.
+3:29
+Everything seems to be working and now that the parent of my slash ID route is slash vans, the dot dot should work.
+3:38
+Let's cross our fingers, we'll hit back to all vans and sure enough that takes us back there.
+3:42
+Now Now the reason I was mentioning this is a bit ridiculous is because this is a lot of work just to get that back button to work.
+3:48
+So I'm going to undo all of that, go back to the way we were.
+3:51
+We have no shared user interface between these two so there's not a really compelling reason to have a nested route scenario like we just saw.
+3:59
+So how do we fix this problem?
+4:00
+Well React Router has us covered.
+4:02
+If we go to the host layout no, the host VAN detail our link, one option for a prop that we can pass is something called relative.
+4:12
+And what we can tell it is to be relative to the path not the routes.
+4:17
+This means that when we say we're going back a route we mean that we're going back one level in our routing structure, in our path structure, not up a level in our routing hierarchy.
+4:30
+With this setup React Router knows that there's a slash here and it knows that we're just going to go back one little path segment, which would be this host vans path.
+4:39
+So let me put my money where my mouth is, let's hit save, back to all vans, now successfully takes us just back to the parent path, not the parent route.
+4:48
+That might have been a lot to take in, I know we went kind of quickly.
+4:51
+If you need to watch this again, that's okay.
+4:53
+Understanding this relative path thing took me a while to fully grasp.
+4:57
+But I am grateful that React Router introduced this relative equals path prop because that wasn't always there, and it really helps us out in scenarios like this.
+5:07
+Okay, I promise we're done talking about relative links.
+5:09
+Let's get back to what we were working on, which is getting this navigation bar working.
