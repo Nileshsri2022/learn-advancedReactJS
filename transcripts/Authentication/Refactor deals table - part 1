@@ -1,0 +1,102 @@
+
+Transcript
+0:00
+Onto refactoring our sales deals table.
+0:03
+Rather than identify the owner of each deal in sales deals by the name column which we've been used to, we need a user ID column.
+0:13
+So follow along with me now.
+0:15
+In your super base project, please navigate to the table editor.
+0:19
+That's the second icon down on the left.
+0:22
+Click your sales deals table.
+0:24
+Click the green insert and choose insert column.
+0:28
+We're gonna call our new column user underscore ID.
+0:31
+It's gonna have type UUID.
+0:34
+Then scroll down, and we need to add a foreign key relationship.
+0:38
+Remember, this user ID will be a foreign key to the ID in user profiles.
+0:45
+So choose public schema, choose the user profiles table, and then again it says which column in public dot sales deals, and that's the user ID column.
+0:55
+This new column we're adding at the moment is gonna be a foreign key to the ID column you need to choose in user profiles.
+1:04
+Then click save.
+1:05
+You might want to delete the name column, but we're gonna leave it for now.
+1:09
+We're gonna delete it when we modify our fetch metrics function.
+1:13
+So let's think about RLS then.
+1:15
+Currently, we've got this very broad authenticated users can do anything on sales deals.
+1:22
+This this is that first policy we wrote.
+1:25
+Our goal is to limit reps to only being able to add deals for themselves, whereas admins can insert for anybody.
+1:32
+So since we want to add more restrictive policies regarding inserting data, we're gonna have to replace this policy here, our original one, so that it's just for select commands.
+1:45
+You might be thinking, why don't we just leave it?
+1:47
+Well, this broad policy, if we did leave it, would take precedence over more restrictive policies we write as super base policies are additive.
+1:58
+You can kind of imagine them as combined with an or, which means that the most permissive policy takes precedence.
+2:07
+If we left it, we'd have this policy saying authenticated users can do anything, and then we think of it like, or our new restrictive policy that reps can only add deals for themselves.
+2:21
+But because there's an or, this broad one would catch all of the scenarios, making the more restrictive one essentially redundant.
+2:29
+So we're gonna have to replace that one with one looks like this, which is just for selects, leaving us to now write new policies for insert on this table.
+2:39
+So this is what we're looking for now, a new policy that says allow select from sales deals to authenticated roles, replacing the previous one that said allow any request.
+2:52
+So this is your task now.
+2:54
+Okay?
+2:55
+I'd like you to go and delete the previous policy on sales deals, the one which was called authenticated users only here, and I'd like you to write a new one that's just for select, and I'd like you to try using the target roles clause.
+3:12
+Remember, this means that we don't need to bother with the using auth dot role equals authenticated.
+3:20
+We can just choose authenticated in the target roles, which will create a to clause here.
+3:25
+And think back to what we had to put in the using clause if we use the target roles because something has to be in that using clause.
+3:33
+Otherwise, Superbase won't let you save the policy.
+3:36
+So pause the video now and go and delete the old authenticated users only policy and write it again, but only for selects, and use that to authenticated via the target roles drop down.
+3:47
+And when it says you need something in the using clause, go for the word true.
+3:52
+I was gonna get you to try and remember it, but I'm just too nice.
+3:55
+Now before you save your policy, continue the video to check your work, and I'll show you here what it should look like.
+4:02
+Pause now.
+4:05
+Okay.
+4:05
+I hope that went well.
+4:06
+So it's supposed to look like this.
+4:08
+I've called mine authenticated users can fetch.
+4:11
+I've chosen just for selects.
+4:13
+I've used the to authenticated and the word true in the using clause.
+4:17
+Okay.
+4:18
+Now you can save yours.
+4:19
+And now that select is dealt with, let's deal with the new insert commands.
+4:27
+See you in the next scrim.
