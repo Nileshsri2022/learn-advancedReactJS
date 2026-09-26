@@ -1,0 +1,90 @@
+
+Transcript
+0:00
+We saw how compound components can be a solution to the prop drilling problem by flattening the structure of the code.
+0:07
+Let's look at a diagram that kind of describes what was happening.
+0:10
+So this was what we had originally.
+0:12
+We had an app component that was rendering a menu component.
+0:15
+Inside the menu component, it was rendering a menu button and it was rendering a menu drop down.
+0:21
+And then inside the menu drop down component it was rendering however many menu items it needed.
+0:26
+And in order for each of these pieces to work together correctly we had our data in our app and we passed the data, in this case it was the item, the array of sports, to the menu.
+0:37
+And then the menu had to pass that to the menu drop down as an array of items.
+0:42
+And then the menu drop down looped over that array of items and it passed each item to a menu item component.
+0:49
+And then finally, the menu item component could render the string in that array that it needed to render.
+0:55
+When we refactored this to use compound components, the structure completely changed.
+0:59
+Our app component still had the data that we needed, but because everything was sort of flattened and the app component was rendering all of the separate components together, it was able to simply slide the data right into place where it needed to be.
+1:14
+However, we know that this isn't the final answer because our button is not working.
+1:19
+If I refresh this, I can see my button's not doing anything.
+1:22
+And that's because there was actually a little bit more happening with how we had things structured before.
+1:26
+Our menu didn't just receive props with the data, it also established some state.
+1:32
+And that state was the boolean called open.
+1:34
+It also made a toggle function.
+1:36
+I guess I can look at this now because we still have it.
+1:39
+Here we have our state and we have this toggle function.
+1:41
+And before what it was doing is it was passing the toggle function down to the menu button so that when it got clicked it could toggle the state.
+1:48
+And it wasn't passing state down to the menu drop down.
+1:51
+It was using the state to conditionally render the menu drop down.
+1:55
+So I've used a little dashed arrow here to make that clear.
+1:57
+It wasn't actually passing props down.
+2:00
+But the struggle that we have now is how are we gonna do that?
+2:03
+The menu still has state as we just saw.
+2:06
+We still have state in this toggle, but how can we pass the toggle function down to the menu button?
+2:11
+Or how can we pass the state or use the state to conditionally render the menu drop down?
+2:17
+Right now all that's being rendered between our div is children and children isn't a JSX element that I can add some prop to like this.
+2:26
+So what exactly are we to do?
+2:28
+Well, this is where something that we could call implicit state comes into play.
+2:32
+Now I think the term implicit state has been coined more by the community than the React ecosystem itself.
+2:38
+I don't know for certain that you would actually find the term implicit state anywhere in the React docs, but the idea behind it is that we will find a way to pass state and some props down to the children elements of our menu so that they can do more than just receive the data they need like they're getting here, but they can also interact with each other and have the functionality that we need them to have.
+3:01
+So implicit state can be handled in a couple different ways.
+3:04
+The first way that we're gonna look briefly at is by using an API that's provided by React called React dot children.
+3:11
+This is different than props dot children.
+3:12
+Notice that there's a capital c here in children.
+3:15
+But honestly, we're not gonna spend a whole lot of time on that.
+3:17
+I do want to introduce it to you since you will likely come across it in the wild at some point, but then we're going to quickly move on to learning context.
+3:26
+And if you've spent any meaningful amount of time looking into React or taking other React courses, you will likely have already heard of context or maybe even understand the idea of it.
+3:35
+Context is actually a pretty broad topic, so we're gonna spend a fair amount of time with it.
+3:40
+But as a stepping stone to get there, we're going to first look at React dot children.
+3:44
+So that's what we'll be doing next.
