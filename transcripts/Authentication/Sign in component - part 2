@@ -1,0 +1,192 @@
+
+Transcript
+0:00
+Okay.
+0:00
+Time to finish off where we left off here.
+0:03
+So we've already extracted the form data.
+0:05
+Let's put some more comments in as like a little to do list.
+0:09
+So number two, we need to call our sign in function.
+0:15
+Now remember, we're gonna be centralizing all of our auth functions here.
+0:19
+We've not got a sign in function yet, but we'll be doing that shortly.
+0:23
+So we need to call that sign in function here.
+0:27
+We need to then handle any known errors from super base.
+0:31
+An important thing we need to know about use action state is that it returns the new version of state.
+0:37
+And remember, we're using state as an error.
+0:41
+So whenever we handle any errors, need to remember to return the right thing.
+0:45
+So because we're handling an error here, let's just put in brackets here, return some sort of error.
+0:52
+Then number four would be to handle success.
+0:56
+And if we successfully sign in, then we want to be redirected.
+1:00
+I'm gonna also put return null because we don't update the error state because there's no error.
+1:07
+And then number five, we want to handle any other cases as a source of safety net In case it's not known errors or it's not successful, we need a safety net to make sure we return something.
+1:21
+And then lastly, we're gonna handle unexpected errors.
+1:27
+And here, we would return some sort of error.
+1:31
+Okay.
+1:31
+Brilliant.
+1:32
+Okay.
+1:33
+Let's use one of our try catch blocks as well.
+1:36
+So let's start the try here,
+1:40
+and then we're gonna be catching just above number six.
+1:47
+Okay.
+1:48
+To help going forward, we're gonna decide what we want to be getting back from this sign in function that we're yet to write.
+1:57
+So I'm gonna decide by destructuring here that I wanna get back a success boolean, the data if it's a successful sign in, and also the error if there's an error back from super base.
+2:10
+And let's call that error sign in error.
+2:13
+And we're gonna put await because this is asynchronous, and we don't know what this is called yet.
+2:18
+So I'm just gonna write sign in function.
+2:23
+And because we're gonna have to be passing our email and password to it, let's just do that now so we don't forget.
+2:30
+Now the fact that we know that we're gonna get this back is gonna really help us Because to do number three, we can say if and we know that the super base error will be called sign in error.
+2:41
+We're going to return because remember we must return something to update this error state with.
+2:47
+Let's use the error constructor.
+2:49
+So we go new error capital e, and we pass to it that sign in error from superbase.
+2:56
+Okay.
+2:57
+I feel like we may need to comment all of this so that we don't get any red lines.
+3:01
+That's fine.
+3:02
+Now number four, handle success.
+3:06
+So how do we know if it's been successful?
+3:08
+Well, we've decided that we want to receive a success Boolean.
+3:12
+So we can say if success, and we've said we want to redirect it.
+3:18
+So let's just put navigate to and it would be to our dashboard route.
+3:23
+And then we need to remember to return null also, so we can get rid of that.
+3:28
+Now reminder, we can also get rid of that.
+3:31
+So now let's just talk a little bit about the data we get back from Superbase on a successful sign in.
+3:37
+It's gonna be in this format.
+3:39
+It's an object with user and session properties.
+3:43
+Now we already kind of know what the session is because that's what our get session or on all state change is gonna be looking for and giving back to us, but this user property is just for convenience.
+3:55
+Funnily enough, this user is actually included down here in the session object, but super base is just helpful, and it puts it right here as a property of the main data that it returns.
+4:06
+So the way we know that there's been a login success, we can use this success, but the real way that we know is whether there is a session object.
+4:16
+So why don't we be extra careful and we say there also has to be data in data dot session?
+4:24
+Because remember, this would be the data, and we have to go into it with the dot.
+4:28
+Now in the scenario, if sign in fails and data is undefined because there's no data back from superbase, let's use the optional chaining operator so that we don't get any potential runtime errors.
+4:42
+Okay.
+4:43
+Fantastic.
+4:43
+And then number five, as a safety net, we can just return null.
+4:48
+As I mentioned, in case any of these ifs don't return, we've got a sort of last line of defense there safety net.
+4:55
+And then we handle unexpected errors.
+4:57
+So we can log this to the console with a little message sign in error, and let's go for error dot message again as we did before.
+5:09
+Nice.
+5:11
+And then we don't need to forget to return an error here as well.
+5:15
+So we can actually almost do the same as we did here.
+5:19
+We want a nice friendly error message that we can render in the UI.
+5:24
+That looks pretty good to me.
+5:27
+Okay.
+5:27
+Very nice.
+5:28
+Let's get rid of these comments and spell this correctly.
+5:35
+Here we go.
+5:35
+And then we can uncomment this when we finally write our sign in function in auth context.
+5:41
+Now let's finish off our accessibility in the return here.
+5:46
+So we can't quite do the link yet, but we'll leave that for later.
+5:50
+But let me type this out, and then I'll explain it.
+5:54
+So if there's an error, we've made aria invalid true.
+5:57
+This is, remember, our error state from use action state.
+6:01
+Similar thing with aria described.
+6:03
+If there's an error, we're using signed in error, and then we're disabling this if is pending, our sort of loading state is true.
+6:12
+Totally the same on the next input, so I'm just gonna copy and paste that.
+6:17
+Just finish off this class name and Aria busy.
+6:22
+And then let's do a little bit of conditional rendering here.
+6:26
+There we go.
+6:27
+We probably won't even see this because it'll happen so fast, but it's good to have anyway.
+6:32
+And then a quick error message.
+6:36
+There we go.
+6:37
+So if there is an error in that error state, then we'll just log the error on the UI.
+6:43
+Great stuff.
+6:44
+We should be able to check that that error is working.
+6:47
+If I just use any old random stuff here.
+6:52
+There we go.
+6:52
+Brilliant.
+6:53
+We get the console log, and we get our error message just below the button.
+6:58
+Very nice.
+6:59
+Next up, we're gonna be writing this sign in function in our auth context central file.
+7:06
+See you there.
