@@ -1,0 +1,95 @@
+Transcript
+0:00
+Let's say a product manager comes to you and says, well, when a filter is applied, we don't want it to say back to all vans.
+0:06
+We want it to say back to and then the filter van.
+0:09
+So back to luxury vans or back to simple vans.
+0:12
+So that's what your challenge is and I'm not going to give you too much more information.
+0:17
+There's certainly more than one way to do this, but I want you to put on your thinking cap and try to figure it out.
+0:22
+So pause now and work on the challenge.
+0:29
+Well, one way I could do this is to take the string let me open my console I could take the location dot state dot search string and try to just do some regular string manipulation like split it on the ampersands and then split it on the equal signs and grab the one that's after the type or something like that.
+0:47
+However, because the string is a query string, one way to solve this is I could create a new instance of URL search params and then I have access to the methods like dot get to get the value of the type param.
+0:59
+So that's one way I could solve it.
+1:01
+Another way I could solve it is in vans.
+1:03
+I could just pass more state through.
+1:05
+So right now we have the search.
+1:06
+I could also say I want to pass the type in.
+1:10
+Say the type is going to be equal to, and in this case we already have access to that with type filter.
+1:15
+Let me put these on their own lines.
+1:17
+And then if I do that over in VANDITIL I can grab that string by location dot state dot type.
+1:24
+Since I've already got that typed out I might as well just keep going down this path.
+1:28
+So we'll hit save.
+1:29
+Let's go back to all vans and, uh, just do a refresh.
+1:33
+We'll say rugged.
+1:35
+Okay so now you can see the location dot state is an object that has search and type.
+1:40
+So I'll just do something similar here.
+1:42
+We'll say const type is equal to location dot state question mark dot type.
+1:49
+And if that doesn't exist, like for example, if location dot state is null, then we'll just set the type to well, actually let's set it equal to all because we do want it to say back to all vans if there is no filter applied.
+2:03
+And now I can take this type and just conditionally render this word here.
+2:07
+We'll just say back to and then put type vans.
+2:12
+Okay.
+2:13
+Let's see if this works.
+2:13
+Let me close the console.
+2:15
+We'll hit save.
+2:17
+Okay.
+2:17
+It says back to rugged vans.
+2:19
+So I think it's working.
+2:20
+Let's go back.
+2:21
+We'll clear the filter.
+2:23
+We'll go back to one of them.
+2:24
+Back to all vans.
+2:25
+That's great.
+2:26
+Let's Try luxury.
+2:27
+Back to luxury vans.
+2:29
+Simple.
+2:30
+Awesome.
+2:31
+Again, we even talked about multiple different ways that you could solve this.
+2:34
+At that point, it's just sort of a JavaScript challenge.
+2:37
+As a quick recap, passing state through the links can be a really useful thing.
+2:42
+Okay, hopefully that challenge went okay.
+2:43
+Again, review it if you need to and then when you're ready we'll move on.
