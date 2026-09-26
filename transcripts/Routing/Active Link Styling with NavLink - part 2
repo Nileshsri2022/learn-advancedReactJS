@@ -1,0 +1,124 @@
+
+Transcript
+0:00
+Okay.
+0:00
+We're gonna do more of the same thing inside of our nested host view dashboard here or navigation bar here.
+0:07
+We have our dashboard, our income view, and our reviews view, and none of them are really giving us a good indication as to which one is currently selected.
+0:16
+So your challenge is to do the same thing here.
+0:18
+You should know that there's a little caveat.
+0:20
+I included it in this note here.
+0:21
+There's a little bug that you're going to run into.
+0:23
+It's nothing to worry about while you're doing the challenge, but we'll be fixing it right after we do the challenge.
+0:28
+This time around I'd recommend using an inline style and instead of fusing a class name, and I'll tell you why after we do the challenge.
+0:35
+But let's get your hands on the keyboard, pause now, and add the nav links to our host layout navigation bar here.
+0:47
+This time around we will not be keeping any of our links, so I'm just going to replace my link import and I'll select all of these links while I'm at it.
+0:56
+We'll replace it with nav link.
+0:57
+That gets us a fair amount of the way there.
+1:00
+Then I'm going to because there's some repeated code and it's gonna get a bit long I'm going to put some of this stuff on its own lines just like before
+1:10
+And let's go up to this 'to' line and on the next line we're going to add a style prop instead of a class name.
+1:16
+Again, the value is not going to be a string or anything like that or even just to play an object.
+1:23
+It's going to be a function and that function will return the object that we want.
+1:28
+And we will receive in that function an object with an is active property.
+1:35
+And we'll use that to determine if we want the active styles.
+1:39
+We haven't created that yet but we will.
+1:42
+Or if we don't want any additional styles applied.
+1:45
+Let's go ahead and create this active styles.
+1:47
+I'll just put it right here.
+1:49
+Say const active styles is an object and let's pull in these properties now because this is an object and not just a CSS string get rid of this stuff, we're gonna have some syntax errors if we try to just copy over the CSS.
+2:07
+So we will use the regular inline styles in react where we need that to be camel cased.
+2:13
+These will need to be strings and instead of semicolons we will use commas.
+2:19
+Easy enough.
+2:19
+I think everything is set up.
+2:21
+Let's hit save.
+2:22
+Okay we can see the bug here.
+2:24
+We have both our dashboard and our reviews showing as the active links, but we can see that for the most part it's working.
+2:30
+We have income and reviews working and then if we go to dashboard neither income nor reviews are highlighted or have the active styles on them.
+2:38
+So why exactly is it matching both the dashboard and the reviews?
+2:42
+Well an important thing to understand about React Router under the hood is that it is not just matching a single route.
+2:48
+It's matching multiple routes whenever you have a nested route like this.
+2:52
+What I mean by that is under the hood React Router is matching actually I think three routes here.
+2:57
+The first one is the slash route.
+2:59
+If we go to our index here, as you might remember we have this parent route that has the path of slash, and that one is getting matched.
+3:07
+In other words, React Router is considering this an active route, and that's really good for us because we want it to render this layout.
+3:15
+Secondly, it's matching the host route, and that's again really good because we want it to render our host layout route.
+3:23
+So when we're at slash host it's matching both the slash route and the host route, and therefore the link for the slash host route is being matched, or rather the nav link is showing as this being an active route.
+3:38
+Now when we go to income at the dashboard it was matching two of these routes, this slash and this host.
+3:44
+When we're at income it's matching three routes, the slash, the host, and the income route.
+3:49
+Because one of those matches is the host route, this one here, our nav link is considering this host link as an active link.
+3:57
+And therefore we get the dashboard being highlighted even when we know that it's really the reviews page or the income page that is the active page.
+4:06
+We didn't see that problem up with our main navigation bar because we decided not to change our logo here to the nav link.
+4:14
+We kept it as the original link, so we didn't run into this problem.
+4:17
+But I think we would have if we had changed this van life logo to a nav link because it is slash and host is slash host.
+4:27
+Anyway, I think you get the idea.
+4:28
+How do we fix it?
+4:29
+Well, it's really easy.
+4:30
+There's a prop that we can add to our nav link that's just called end.
+4:34
+And what end does is it tells React Router to end the matching here.
+4:39
+So if a more nested route matches, it won't also match this link on this route.
+4:45
+So we hit save, we'll go over to income, and now dashboard is no longer highlighted.
+4:50
+This might look a little funny if you're not terribly familiar with it.
+4:53
+When you just provide a prop name and not set it equal to something, it considers it a boolean.
+4:58
+This would be equivalent to saying end equals true, or at least it would be functionally equivalent.
+5:04
+In the documentation, they just use end, so I'm going to stick with the way that they do it in the React Router docs.
+5:10
+Awesome work.
+5:11
+Let's keep moving forward.
