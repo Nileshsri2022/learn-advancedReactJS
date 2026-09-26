@@ -1,0 +1,108 @@
+
+Transcript
+0:00
+Okay.
+0:00
+We've done tons of practicing.
+0:02
+We've had a chance to touch every piece of the same code that we're about to write.
+0:05
+So the challenge is a little bit vague.
+0:08
+I'm not going to give you specific steps.
+0:10
+I just want you to complete the menu component so that everything is working again, but now using context and state.
+0:16
+I'll let you figure out exactly what that takes.
+0:18
+But assuming you've followed along with all these challenges, I know that you're prepared for this.
+0:22
+So pause now and work on this challenge.
+0:30
+Okay, let's see where we are.
+0:32
+Well, we have this value of true that's being hard coded here.
+0:35
+Instead we're going to replace that with our state of open but it's going to be more than that because we need the button to have access to our toggle function.
+0:43
+So instead of just passing a boolean, I'm going to pass an object where one of the properties is called open and its value is the boolean of open in our state.
+0:53
+But I'm also gonna pass the toggle function.
+0:56
+Okay, let's clean up this challenge just to save some space here.
+1:00
+And now our menu button will need access to toggle.
+1:03
+I don't believe it cares whether or not it's open and we're not going to get it from props, but instead we need to import our menu context from oh and this needs to be destructured.
+1:15
+This will be from our menu component and we'll use
+1:21
+the react dot use context to catch the toggle value passing in the menu context.
+1:30
+And then we just need to set up the on click handler so that it runs toggle.
+1:36
+Let's hit save and click the button just to make sure that there's no errors.
+1:39
+And okay.
+1:40
+So we're not displaying the menu correctly yet, but that's okay because we haven't gone to the drop down.
+1:46
+But if I were to go here and maybe just make sure that things are getting passed along correctly.
+1:52
+Let's say toggled, click it.
+1:53
+Okay.
+1:54
+Our function is running and state behind the scenes is updating.
+1:57
+Now we just need to go to our menu drop down and do the same thing.
+2:02
+Oh, we're already bringing in our menu context but it's not just a boolean value anymore.
+2:07
+It is the property in an object.
+2:10
+And so we'll destructure it and it's gonna be the same name, fortunately for us.
+2:15
+So I'll hit save, click the button.
+2:18
+Awesome.
+2:18
+Things are working exactly like we'd expect.
+2:21
+Go to the menu and probably should change this to be false by default just because usually the menu is not open by default.
+2:29
+And cool.
+2:30
+Now as a reminder, in this instance, we are not wrapping our entire application in context.
+2:37
+Instead, we are wrapping the contents of our menu and all of its children in context and we're doing that inside of the menu component so that it will have some implicit state that any of the children anywhere inside will have access to via context.
+2:52
+The beauty of this is if for some reason someone were to change maybe the structure here and decide to wrap our menu drop down in a div.
+3:03
+Okay.
+3:04
+I'll hit save and we're not going to be broken because context is sort of teleporting the state from the menu down to any component that needs access to it as opposed to what we were doing before with react dot children dot map, which was just to go over the top level children and to give those children new props.
+3:24
+This div is kind of a silly thing.
+3:25
+Let's get rid of it here.
+3:27
+Great work getting up to this point.
+3:29
+I really hope that you have been pushing yourself to complete all of the challenges.
+3:33
+If you haven't, then I do recommend you go back and just redo them.
+3:37
+It's a really simple thing.
+3:39
+It will exercise your skills.
+3:41
+It will make it really stick better in your mind than if you were to just watch me do it and hope that you would somehow internalize what we've been practicing.
+3:49
+At this point, we are essentially done with the core features of our menu component.
+3:54
+However, we are going to dive even one layer deeper into reusability and see how we can create something called a headless component.
+4:02
+Don't worry, it's not as scary as it sounds.
+4:04
+And that headless component will allow us to be even more flexible with how we compose our components together.
