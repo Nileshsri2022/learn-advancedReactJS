@@ -1,0 +1,185 @@
+Transcript
+0:00
+Okay.
+0:00
+The rest of the challenge is actually gonna be a bit of a doozy.
+0:03
+This one's a little bit longer.
+0:05
+So brace yourself, but it should all be stuff that either you currently know or will be really easy to find from a quick Google search.
+0:12
+So our job as a developer is never really done until we have also coded the sad path so that our user will have a better experience if something does go wrong.
+0:20
+The notes here should be fairly detailed for you.
+0:23
+Essentially you're going to be adding a status state and an error state and then doing a few things based on the values of those states.
+0:30
+So just make sure that you read through these steps very carefully.
+0:33
+Okay so you should have everything you need, pause now and work on this challenge.
+0:43
+Okay let's start with number three here.
+0:45
+We're gonna add a status state.
+0:47
+So we will come down here and maybe just put it right below our other state we'll say status and set status is equal to use state and it says to start it off as the string of idles.
+1:00
+So we'll do that.
+1:01
+When the login form begins submitting, set it to the string submitting.
+1:05
+So that will happen right here.
+1:07
+We'll go ahead and set the status to submitting and when it's done submitting and the data has come back set it to idle again okay so that means we're going to do more than just console log the data let's open up this function and the first thing we will do is set status to back to idle I think is what it said we're going to see a little issue with this in a second but we'll cross that bridge when we get to it Next, we need to disable the button when the status state is submitting.
+1:36
+This might have been something that you needed to Google way down here on our button.
+1:40
+There is an attribute to button elements.
+1:42
+This is just in vanilla HTML.
+1:44
+This has nothing to do with react specifically where I can say disabled.
+1:49
+And so I can refresh this page and you can see when I hit login it kind of looks like it's clicking the button but nothing really is happening in the background.
+1:57
+That's because the button is disabled.
+1:59
+However, we don't want the button disabled all the time.
+2:01
+We just want it disabled when the status is set to submitting.
+2:05
+So in react I can set this equal to an expression and say if the status is equal to submitting.
+2:13
+I'll go ahead and separate this out a little bit.
+2:16
+And you know what?
+2:16
+This wasn't part of the original challenge but I'm going to change the text to say something different if the status is currently submitting.
+2:24
+So I'll say if the status is submitting, uh, we'll do a ternary then I want it to maybe say logging in with an ellipsis and then otherwise to say login.
+2:36
+And I'll do this on their own lines as well just for readability.
+2:40
+Okay.
+2:40
+Let's see if this has any impact on our code.
+2:43
+I'll hit log in without providing an email and password.
+2:46
+It says logging in.
+2:48
+And this is where we get that little bug because we're stuck on logging in.
+2:51
+We only set our status back to idle if the happy path happens.
+2:56
+And that's not really what we want.
+2:57
+We want it to happen whether it's successful or has an error.
+3:01
+So you might already be familiar with dot catch which we are going to talk about in just a second, but there's another one called dot finally which will run no matter what And I can just put whatever code I want to run at the end of the promise.
+3:15
+So I'll go ahead and put my status in there.
+3:18
+And let's try this again.
+3:19
+We'll hit refresh, click login.
+3:21
+Okay.
+3:21
+It went back to login after saying logging in and we get our message that says no user with those credentials found.
+3:28
+If If you're curious about where that's coming from we can trace it back.
+3:30
+We're making a call to the login user function which is happening in API JS.
+3:36
+If there is no user found or in other words if it returns a not okay status, which happens if it's a four hundred or five hundred level response, it's going to throw an error and it has this object which is exactly what we see down there in our console.
+3:49
+And we can go to this endpoint in our fake server and see let's see right here.
+3:54
+If there's no found user then it throws a four zero one response and it has that no user with those credentials found.
+4:01
+Okay.
+4:01
+So back in our login page.
+4:04
+Let's go up to our challenge.
+4:06
+We did three, we did four.
+4:08
+I'll go ahead and clear those out.
+4:10
+We'll add an error state and default it to null okay let's just do that right after our status we'll say error and set error and that's react dot use state with an initial value of null and you know what just so that I do have something here I am going to put back my console log of data But now I'm going to chain on a dot catch that will accept the error and we will just have it set that error in state.
+4:39
+Okay.
+4:39
+And that is number five.
+4:41
+And then lastly, we're almost done.
+4:43
+We need to display error dot message below the h one if there's ever an error in state.
+4:49
+I can do that with some conditional rendering.
+4:51
+We'll go right here below the h one.
+4:53
+And you know what?
+4:54
+It's going to be very similar to what we had here.
+4:56
+So I'm going to copy this and move it down below the h one.
+4:59
+But instead of location dot state dot message we want to check if there is an error we'll say if there's ever an error and I guess it wouldn't hurt for us to double check that it has a message property as well.
+5:13
+So we'll say if there's an error and if it has a message property, then we will display this h three and again not going to be location dot state dot message but error dot message Again at least at the time of recording I see a few red squigglies here.
+5:29
+That's just because Scrumba is not yet familiar with this optional chaining but I promise it'll work.
+5:35
+So let's hit save.
+5:37
+We'll just hit login without providing our email and password.
+5:40
+And cool.
+5:41
+No user with those credentials found.
+5:43
+Now I'm not loving that I chose to call this class name login first.
+5:47
+It feels like maybe something like login error would make a little bit more sense.
+5:51
+So let's just go ahead and change that and then in our CSS we will change this to login dash error.
+5:57
+Okay so clicking on host we get the you must log in first warning.
+6:01
+We try to log in without the correct credentials and we get the no user with those credentials found.
+6:07
+That's all great.
+6:08
+I will now log in correctly be at b dot com p one two three login and ah we did get our console log and it looks because we have a token that it was successful but we still see some error messages there.
+6:21
+I suppose this isn't too big of an issue because next what we'll be doing is actually re redirecting the user to another location in our app, and these error messages will be inconsequential.
+6:31
+But maybe just for the sake of completeness, I'm going to right after things were successful, I'm going to set my error back to null.
+6:39
+This isn't going to handle the you must log in first thing, but but in the end we're going to redirect somewhere else and it doesn't matter that much anyway.
+6:47
+Okay.
+6:47
+Wow.
+6:47
+That was a lot of boilerplate code that we had to add.
+6:50
+And it was a huge challenge.
+6:52
+If you were able to get through that entire challenge, then I think you are pretty safe to say that you have your react fundamentals down.
+6:59
+If you weren't, that also is completely okay.
+7:01
+However, I don't want you to maybe just watch me implement it and say, okay, yeah, I get it.
+7:06
+I could do that now again if I needed to, but rather to scrub back to the beginning and actually do the challenge.
+7:12
+Really, it's being outside of your bubble of comfort and practicing this over and over that will actually build the strength you need in your React fundamentals.
+7:20
+Okay.
+7:21
+The next thing we're going to do is work on actually navigating the user to the host routes after they successfully log in.
