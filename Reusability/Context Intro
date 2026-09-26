@@ -1,0 +1,46 @@
+
+Transcript
+0:00
+Okay, finally we have reached context, which is going to be, I promise, the final solution for getting our menu button to work and also the next few components that we're going to be working on.
+0:10
+As a quick update, I've returned the code back to the way it was.
+0:13
+We're not doing a react dot children dot map or anything inside of the menu drop down.
+0:18
+Each of the components is only taking the prop that it actually needs or I guess I should be more specific and say that they're only destructuring the props that they need.
+0:26
+And the first thing we're gonna do is make sure that we understand what context is doing.
+0:31
+Here's that diagram that we were looking at again from before.
+0:33
+As we mentioned, what oftentimes happens is you will have some state that is required in multiple places that are sort of disparate or relatively disconnected within your app.
+0:43
+Instead of going down the whole rabbit hole of drilling props down through as many levels as we need to get it to the right place, we're instead going to use context.
+0:52
+The way we will use context to solve this problem is we're going to add a new parent component to the entire application.
+1:00
+And I guess I should take an aside really quick and just say it doesn't always have to be your entire application.
+1:06
+The strategy should probably be that you put your provider not as high in the DOM tree as you can, but as high as you absolutely need to.
+1:14
+For example, if only a small subsection of my components needed context data, then I should probably just put my provider somewhere as the common ancestor and not just immediately default to putting it at the very top of my app.
+1:28
+That's not terribly important for you right now but that's just something I wanted to make sure that I got out there.
+1:33
+Our provider will contain values and in our case it can contain any kind of JavaScript value.
+1:38
+It could be a string or an object array or even a function.
+1:42
+And any component that needs access to the values that the provider is holding will use a hook called use context.
+1:50
+And by using the use context hook, that component will immediately have access to the values that the provider is able to give.
+1:58
+And I've put these in dashed lines here because I wanted to be clear that we're not manually passing anything down.
+2:05
+As long as we give the provider a value and we use the use context hook, any component that is a child of the new parent provider that we had is able to get the values from the provider.
+2:17
+As such it is kind of similar to teleporting the data from a very parent component way down the tree to a child component.
+2:25
+Hopefully you can start to see with all the pain that we just went through of drilling props down and using React dot children dot map how exciting it is to have access to something like context.
+2:36
+So without any further ado, we're going to jump into this syntax of actually using context and start applying applying it to our menu button.
