@@ -1,0 +1,73 @@
+Transcript
+0:00
+One thing about the way that the code is currently running is that we are only initializing the fetch request to get our vans after this component has already been rendered to the page.
+0:10
+The experience is a little bit jarring.
+0:11
+If I hit refresh you'll see we get parts of our page and then it starts to load as the data comes in.
+0:17
+We do handle this a little bit differently.
+0:19
+I think under host vans we have a tiny little loading state right there, which in my opinion is a better user experience than what we have going on here.
+0:27
+Unfortunately the way that we are handling that in the host vans page, I think right here, is by assuming if the vans length is not greater than zero then we are loading something.
+0:39
+However, if we have an error the van's length is not going to be greater than zero.
+0:44
+It's going to be stuck on loading forever.
+0:46
+Or maybe this is a new host on our platform.
+0:48
+They don't have any vans listed.
+0:50
+And so when they come to this page, it's going to say loading forever even though there are no vans for it to load.
+0:55
+So this approach was pretty naive and we're going to find a better way to do that.
+0:59
+So let's go over to our vans page.
+1:02
+And a relatively common way to do this is to set some loading state.
+1:06
+So I'll go ahead and create a loading and set loading boolean, which we will save in React dot use state, we'll initialize the loading state as false.
+1:17
+But then as soon as we call our load vans function we will set the loading state to true.
+1:24
+And as soon as we're done setting the vans in our state we will set the loading state as false again.
+1:30
+So it will only be true for a short amount of time while it's getting the vans, but this allows us to use this boolean of loading to either conditionally render something on the page or what I think I'm going to do just for the sake of simplicity is use an early return.
+1:45
+So I'll say if loading is true then instead of returning the whole JSX that we see down here we'll just do something simple like an h one that says we are loading.
+1:55
+It's not going to be beautiful.
+1:57
+We could conditionally render something maybe underneath our buttons, but for now this will get the job done.
+2:03
+Let's hit save.
+2:04
+Here we see our loading for just a second and then our vans pop in.
+2:08
+In fact, while we're doing this, just to make it a little bit more apparent, if I go to server JS I can add this little feature that says maybe like it will take let's say two seconds for things to load.
+2:19
+This isn't a syntax you need to know again because it's specific to Mirage JS.
+2:24
+But now if I hit save it will very clearly show loading for a lot longer than it did before before things actually get loaded.
+2:30
+Okay, that wasn't so bad.
+2:32
+We created a loading state.
+2:33
+We set the loading to true before we did our fetch request, and then after the fetch request we set it back to false, and we handle the user interface case when things are currently loading.
+2:44
+Remember, we would need to then do this for every component that is loading data, like the van detail page, the host vans page, and I think even the host vans detail page has a fetch request.
+2:56
+Yep.
+2:56
+For now, we're just going to worry about the vans page.
+2:58
+And it's again not so much the sad path per se because we're not throwing errors right now.
+3:03
+But of course if we were to throw errors like we were doing before where we're just hard coding a error response from the server, we are not yet fixing that problem.
+3:13
+So we're going to have the app crash, and that's not good.
+3:17
+So in the next screencast, we're going to start talking about how we can better handle these errors.
