@@ -1,0 +1,100 @@
+
+Transcript
+0:00
+Okay.
+0:00
+I mentioned before that we had written our little API get Vans function in a happy path sort of way that didn't account for any errors that might be happening.
+0:09
+And so behind the scenes, I went through and I added this little check to make sure that the response has come back okay.
+0:15
+This is something that's built into fetch.
+0:17
+It will have a res dot okay property.
+0:20
+And if it's a four hundred level or five hundred level response code, then it will not be okay.
+0:25
+That will be a false value.
+0:26
+So if that happens, then we're throwing an error, and currently, we're not handling that error in our Vans JS page.
+0:33
+This is still assuming a happy path.
+0:35
+And I've changed the server again like we saw to only respond with with a four hundred response.
+0:41
+So let's go to vans dot j s x and let's handle our sad path here.
+0:46
+Now you'll notice that this says loading here, and that's because if I refresh this, we'll see that our man's never come back, but our error is successfully throwing.
+0:55
+So let's go ahead and fix this.
+0:57
+Now when I'm making this request, because I don't know for certain that it's going to work correctly, I'm going to wrap it in a try catch block.
+1:05
+This is the common way to do this inside of an async function.
+1:09
+So I'll move my set vans up here, the try will assume the happy path, but now I have the ability to catch any errors that might happen and the catch block will be the sad path.
+1:22
+Now what should happen when I get an error?
+1:24
+Well, first let's just console log the error to see what shows up.
+1:28
+And actually, let's go ahead and console log something like there was an error.
+1:33
+Open the console.
+1:34
+Okay.
+1:35
+We get there was an error and look at that.
+1:37
+We get our error that we threw from the server no.
+1:41
+From the API file.
+1:42
+This object here that has a message, status text, and status, we can see that that is coming through in our console just fine.
+1:49
+So now we are handling that error.
+1:51
+We're not displaying anything, but we no longer show loading.
+1:55
+We just don't have any vans to display.
+1:57
+That's not super useful for the user, so let's go back to vans JSX.
+2:02
+We'll buy ourselves some room by closing the console.
+2:05
+And similar to what we did in the loading state, we're going to create another state that is for errors.
+2:12
+So we'll say if there is an error, we will still have set error.
+2:18
+We'll probably start this out as a null error, and if there is an error that happens here in my catch block, we will set the error, and we'll just pass in that object that we got from the error that got thrown earlier.
+2:33
+Let's go ahead and get rid of our console logs and just because it exists I'm going to use a finally block.
+2:39
+I don't get to use this super often so go ahead and put our loading to false because whether we get the vans or we get an error we want to set the loading back to false.
+2:48
+Okay.
+2:49
+Now we can handle the case when there is an error.
+2:51
+We have this early return for loading.
+2:54
+We'll do the same thing if there's an error.
+2:56
+So we'll say if there's an error, we'll return let's just do another h one for now, and we'll say there was an error.
+3:05
+And then we'll go ahead and just stick the error in there.
+3:07
+Let's see what that looks like.
+3:09
+Again, I'm hard coding an error in my server JS, so we know that it will error loading, and it's taking a lot longer than before.
+3:17
+Ah, okay.
+3:17
+So I can't do this whole error object here.
+3:20
+Let's maybe do error dot message, I think is what it was.
+3:23
+Okay.
+3:24
+There was an error failed to fetch vans.
+3:26
+It's not beautiful just like our loading isn't beautiful, but it is some feedback to the user that tells them that something happened.
