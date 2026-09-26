@@ -1,0 +1,200 @@
+
+Transcript
+0:00
+Okay.
+0:00
+Let's make our use effect on update custom hook.
+0:03
+I'm going to create a new folder on my main level.
+0:06
+This is probably overkill, but I'm going to call it hooks.
+0:09
+I guess just in case we decide to create other hooks, I'll create a new file and I'll give it the name of our new hook.
+0:15
+So it's use effect on update dot j s.
+0:19
+An important thing to know about hooks is that there's an extremely strong convention that you need to follow, and that is that you're going to always start your hook with the word word use.
+0:27
+Lowercase u use.
+0:29
+After that you get to call it whatever you want.
+0:31
+So we chose to call it use effect on update.
+0:35
+The idea is that it's basically the same thing as a use effect except it will only run the effect after the first render.
+0:42
+In other words, anytime the app is updated, not first mounted or first rendered.
+0:47
+And I want this to have the same signature as the regular built in use effect, which means I'm going to have two parameters.
+0:54
+And actually I want to make this a little quiz.
+0:58
+Okay.
+0:58
+See if you can remember what the two parameters are are in the native react dot use effect.
+1:03
+And I know this might seem silly, but I want you to actually click in here, pause the screencast, and actually type your answer down.
+1:09
+So pause now and answer this mini quiz question.
+1:17
+Okay.
+1:17
+So the two parameters to use effect, the first one is a callback function, or we could call it the effect function that we want to run and the second one is an array of dependencies.
+1:31
+As a reminder, any value that we put inside of this array, if it ever changes, then React will run our callback function again.
+1:38
+If it doesn't change from one render to the next then it will not run our callback function again.
+1:43
+So with that in mind there's a mini challenge I want you to do.
+1:47
+Okay go ahead and update our use effect on update function here to accept the same parameters that we just talked about.
+1:54
+Pause now and work on this mini challenge.
+2:02
+Okay this one should be easy enough.
+2:04
+As our parameters to our function we're going to accept some kind of callback function and maybe just for the sake of clarity we'll actually call this the effect function.
+2:13
+And the second parameter is an array of dependencies.
+2:16
+Let's call this depths just for short.
+2:18
+Okay we've already written the logic for this.
+2:20
+It's inside of our toggle component.
+2:23
+So let me go grab those things.
+2:25
+This use ref is only being used in this use effect here.
+2:29
+And the whole purpose of this that I have highlighted is just to run the on toggle function, but only after the first render.
+2:35
+So I'm going to cut this out and we'll clear some lines here.
+2:38
+It always feels really good to remove some code.
+2:41
+Then over in our hook we will paste that inside of our function.
+2:45
+Let's clean this up.
+2:47
+Now I'm referencing a few things that don't exist here.
+2:49
+First of all, we need to import React.
+2:55
+And secondly, there's a couple of old values in here that we no longer have access to because we're not inside of the toggle JS file.
+3:02
+However, we are bringing in some parameters that we're also not using.
+3:05
+So here's another part to the mini challenge.
+3:09
+Okay your mini challenge this time is to update our code here so that it uses the parameters we accepted as part of our custom hook instead of the values that are hard coded and only existed inside of the toggle component.
+3:21
+Pause now and work on this challenge.
+3:29
+Well instead of having access to on toggle, we now have access to an effect function.
+3:35
+And we're going to keep the ref and everything else the same because we are of course still wanting to maintain the value of whether or not this is the first time it's being rendered, but instead of calling on toggle we will just call whatever effect function gets passed to our hook.
+3:49
+And then secondly we don't have access to this on variable, and so we're just going to take whatever array of dependencies they give us, or we give us, when we use our custom hook here, and We're just going to set those as the dependency array.
+4:02
+I am expecting this to be an array when it gets passed in so I don't need to surround this in square brackets because that would put an array inside of an array.
+4:10
+So let's not do that.
+4:11
+I'll clean up the challenge text.
+4:13
+Okay well currently this custom hook is living inside this file, but there's no way to get it out of this file.
+4:19
+So let's go ahead and export it as a default export.
+4:23
+And back in our toggle actually you know what I think we had removed let's add our on toggle prop here again so that we can actually test this if it's working.
+4:33
+And we'll just console log toggled.
+4:36
+Okay.
+4:36
+If I go to toggle we're of course no longer using on toggle because we ripped out that use effect that is now inside our custom hook.
+4:43
+So if I hit save, the toggle I believe will still work, but of course our callback function is not working or rather the on toggle function that we're passing is not doing anything.
+4:52
+Okay.
+4:52
+So let's import our use effect on update custom hook that we created.
+4:58
+This one's going to be a bit more nested because I created a separate hooks folder.
+5:02
+So it's outside of the toggle folder then outside of the components folder and into the hooks folder grabbing use effect on update.
+5:11
+Okay.
+5:11
+This is going to be your time to shine.
+5:13
+The other ones were mini challenges and mini quizzes.
+5:15
+This is going to be a regular sized challenge.
+5:19
+Okay, your challenge is to use our brand new shiny custom hook that we created to set up this effect again and you'll know that it's working when the console log we created right here runs when you check the box or when you click the box, but it won't run when you first render the component.
+5:36
+Remember we created this use effect on update to be very similar in its signature to regular use effect.
+5:42
+And of course you can go over to the useEffect on update code to get a reminder of what we did over there.
+5:47
+Pause now and work on this challenge.
+5:55
+Okay.
+5:56
+Let's take our useEffect on update and we will call it.
+6:00
+The first parameter is going to be a callback function.
+6:03
+And we're actually going to see a way to simplify this in just a second, but for the sake of familiarity let's just do it this way.
+6:09
+Before we fill this out, I'm also going to add my second parameter, which is the array of dependencies.
+6:14
+And just like before, we want our effect to run anytime the on variable in state changes.
+6:20
+Okay.
+6:20
+Let's fill out our function here.
+6:22
+Well now that use effect on update is dealing with creating the reference to its first update and checking the conditional logic on whether it's still the first render or one of the subsequent renders, all we need to do is call on toggle.
+6:35
+So let's hit save.
+6:36
+Okay we didn't get a console log on the first render, but now clicking the box awesome gives us our console log running.
+6:43
+Now I did mention there's a way that we could simplify this.
+6:45
+We can actually make it down to a very reasonable one line solution.
+6:48
+If you wanna give that a shot, you can pause now and see if you can figure out how we could
+6:59
+simplify this.
+6:59
+Okay.
+6:59
+Sorry if that was a little vague in terms of the challenge, but what we have here is a function whose only responsibility is to call this function.
+7:08
+And under the hood use effect on update is calling this function.
+7:11
+So we could just pass on toggle directly to use effect on update.
+7:16
+Now if we wanted to do other things other than just calling on toggle, we would want a full callback function here that first did those other things and then called on toggle.
+7:25
+But right now, it's gonna be enough just to call on toggle whenever the on state changes, and we're down to one really succinct line.
+7:32
+Let me clear up our challenge text and we'll hit save.
+7:35
+We'll click the box and see that everything is still working.
+7:39
+Okay.
+7:39
+Now this has just been a little glimpse into the cool things that you can do with custom hooks.
+7:45
+And at this point, I actually have some good news and some bad news.
+7:49
+But just to make sure that you stay hooked, get it?
+7:51
+That was a joke.
+7:53
+I'll be telling you the good news and the bad news in the next scrim.
