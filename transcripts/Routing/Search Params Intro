@@ -1,0 +1,121 @@
+Transcript
+0:00
+You may have noticed that we completely skipped adding this filtering section on our Vans page.
+0:06
+This is the list of all Vans, not just the host Vans.
+0:09
+In fact, you can even see this screenshot doesn't yet include the little host link up at the top.
+0:13
+In fact, you can even see that this screenshot doesn't include the host link that we added to our navigation bar.
+0:19
+But don't worry, we didn't forget to do it, and now it's our time to tackle this feature.
+0:22
+The reason we put it off till now is because it will require us to learn about something called search parameters or query parameters.
+0:30
+I pretty commonly hear it called both of these things, so I just put search slash query parameters because you'll hear it spoken both ways.
+0:38
+Let's talk for just a minute about what query parameters are.
+0:41
+The idea of a query parameter is that it can represent some kind of change in your user interface, what you actually see on the page in your app.
+0:49
+Probably the most common tasks for query parameters are whenever you need to do any kind of sorting of your list or filtering of something on the page, or if you have a ton of results and you need to do pagination.
+1:03
+We have a pretty limited selection of vans on our site, but if we had say two thousand vans that were listed, we might want some kind of pagination that said we only show ten results at a time, and the user can click through the pages to see more.
+1:16
+Pagination like that, and the kind of filtering that we're going to be working on in this app, usually happens within a query parameter.
+1:23
+We're going to see in just a second what that actually looks like and how you implement it, but for now we're just talking about the theory.
+1:29
+A really helpful way that I have found to think about query parameters is to think of them as a single source of truth for some of our application state.
+1:39
+I've talked about this before in another React course that I've created, and the idea is that it can be really important to ensure that the state you're maintaining in your app, no matter where that actually is happening, has a sort of central hub that we call the source of truth so that everything else just derives the way that it looks based on that single source of truth.
+2:01
+Some examples of this might be something like React state or local storage or as we're seeing here the query parameters that are in your URL.
+2:10
+Or you might be using a third party library like Redux, where that single source of truth is maintained in memory in a Redux store, for example.
+2:19
+So like I mentioned, sometimes query parameters which will exist in the URL can be used as a single source of truth for parts of your application state.
+2:28
+A really helpful metric that I have used is to ask myself, should a user be able to revisit or share this page exactly like it is and have the experience be the same, or rather have the results be the same?
+2:41
+If the answer is yes, then it might be worth considering raising the state of our filtering or sorting or pagination or whatever it might be up to the URL in a query parameter.
+2:53
+So you might be thinking, well what about React state?
+2:55
+Maybe you've even done some filtering or sorting, or maybe even pagination using React state as the single source of truth.
+3:03
+Something you've probably noticed about React State is what happens when you refresh your page.
+3:08
+In fact, I want you to think for a second.
+3:10
+What does happen when you refresh your page?
+3:12
+Say you're maintaining a counter and you've clicked the button seven times, so the count is currently seven, then you hit refresh.
+3:19
+What happens?
+3:20
+The counter resets to whatever you initialized your state as.
+3:24
+Hitting refresh on your browser is akin to loading the app up for the first time.
+3:29
+So assuming you initialized your counter at maybe zero, when you hit refresh your counter is gone, your state is wiped away, and everything starts fresh.
+3:38
+As such, can you share the current state using react state of your app with a friend?
+3:43
+Well no, if I had a counter app and for some reason I wanted to share the current count with a friend and I copied the URL and sent it to them, when they load it up it's going to be fresh state for them in their browser, so it won't include my account that I saw on my end.
+3:58
+Maybe a more realistic example using our van life app, if we maybe had four different filters and some kind of text search or maybe even a location search, like if we wanted to only see the vans that were in our vicinity so that we could easily go pick them up, that might be part of the filtering that we're doing on our list of vans.
+4:18
+So then let's say I want to take that list that I've curated through my filters, text search, location search, whatever it might be, and share it with a friend.
+4:26
+Well if I'm holding all of that state in React state, I really can't do that in a meaningful way, at least not without some kind of crazy workaround.
+4:34
+So this would be a great example where the state of my filters and text search and whatever else it might be might be better to raise out of React and up into the URL.
+4:45
+In reality, React Router is handling our URL, but under the hood it's using the native browser APIs that are dealing with the URL.
+4:53
+Now one thing that I've noticed over the last year, maybe two years, is that the best practices about using React State, and actually about using other parts of React like useEffect, they're always changing.
+5:05
+In fact, later in this course we are going to see an example of how we're not even going to be doing our fetching of our let's see, where do we have our vans here we're not even going to be doing our fetching inside of a useEffect and saving the results in state, which might seem crazy.
+5:20
+That might be the only way you've ever done fetching.
+5:23
+But there's some serious drawbacks to the way that this is happening.
+5:26
+Anyway, we're getting down a rabbit hole.
+5:28
+So let me bring us back.
+5:29
+We'll see really quickly how query parameters are actually structured.
+5:33
+As I mentioned, it's part of your URL and it represents key value pairs of information that can live directly in your URL.
+5:40
+I'm almost certain you will recognize this pattern.
+5:43
+You create query parameters by first starting with the question mark.
+5:47
+So in our app, if we have slash vans, we would include in the URL a question mark, and then we would associate some information like the key of type, and we would set it equal to a value of, in this example, rugged.
+6:01
+Remember all our vans have this kind of type here that's simple, rugged, and luxury.
+6:06
+Well if we only wanted to see all of the rugged vans that were available, then we might include a query parameter where the type is equal to rugged.
+6:14
+And there's nothing that stops us from having multiple query parameters.
+6:18
+You may have seen URLs that were extremely long.
+6:21
+I think if you go to Amazon, any product page that you find will have a really long URL.
+6:26
+And If you look at it, it will have a number of different query parameters.
+6:30
+Theoretically, there should only be one question mark in the URL that begins the query parameter segment of the URL.
+6:36
+But you can have multiples that are separated by an ampersand.
+6:39
+So for example, if we wanted to be able to filter by the type of rugged, but also filter by price, or maybe even more common is to do something like sort by price if we wanted to see prices low to high for example, Then we simply include multiple key value pairs in our query parameters by separating them with an ampersand.
+6:59
+And you would just do more and more ampersands with key value pairs in between if you wanted more query parameters.
+7:04
+Okay, I promise I'm done talking about theory.
+7:07
+Let's work on now implementing some query parameters and some filtering into our app by including the little filters that we have so far been neglecting from our design.
