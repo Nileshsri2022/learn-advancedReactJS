@@ -1,0 +1,42 @@
+
+Transcript
+0:00
+Check it out.
+0:01
+I found a loose end that I just forgot to fix when we were learning about relative paths because here we have a link that still has an absolute path.
+0:09
+I actually also found one over in the host vans page, which you'll go check out next.
+0:13
+So I'm gonna make you make these changes, change the absolute path in this link and the one over in host vans dot JSX to be relative paths.
+0:21
+Pause now and work on these many challenges.
+0:29
+We know it's an absolute path because it starts with a slash, and so we had to give the entire route all the way up to the ID here.
+0:36
+But we don't need to do that because we're already living within the context of slash vans.
+0:42
+So we can just get rid of slash vans and then the slash and we can just have the van ID.
+0:46
+However I can actually take this even one step further.
+0:48
+If we look closely at the server the IDs are strings already.
+0:53
+And so rather than create a template string and then just the only thing I'm rendering is the value of the ID, we can just get get rid of our template strings entirely and say van dot ID like this.
+1:05
+We can save and we can see that these are working just like they were before.
+1:11
+Okay let's clean this up and let's head over to the host vans page.
+1:17
+We're just doing the same thing, so I'm going to clean this up too.
+1:20
+And here we have slash host slash vans slash ID.
+1:24
+And we can just do exactly what we did before and just display the ID.
+1:28
+Because again, this component is living within the context of slash host slash vans already, And so the link is relative to say just append the ID on the end of the URL.
+1:39
+We'll hit save, go over to host vans, and clicking on any of these.
+1:45
+Okay, works great.
+1:46
+Okay, there's at least one more loose end we need to clean up so we'll do that next.
