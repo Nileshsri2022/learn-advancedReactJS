@@ -1,0 +1,138 @@
+
+Transcript
+0:00
+Alright, so I've mentioned a couple times so far that React dot children is not going to be our ultimate solution, so let's take a quick look to see exactly what is the limitation or the shortcomings of using react dot children.
+0:12
+The first major problem we're going to find by using react dot children is that it's really fragile, or you could say delicate.
+0:18
+Let me show you what I mean by that.
+0:19
+Let's say we were to go into our menu compound component here, and remember the menu component is using React dot children to provide some additional props to its direct immediate children.
+0:31
+And as we talked about, the direct children are just the menu button and the menu drop down.
+0:36
+In this case, that's all we really need to provide data to.
+0:39
+But let's say for whatever reason someone decided they thought they might want to add a little extra styling to the menu drop down by surrounding it in a div and giving it a class name, think for a second what's the problem that this is going to create.
+0:55
+Well, menu drop down is no longer an immediate child or a direct child of menu.
+1:00
+In fact, if I hit save, we'll see that there's an error here because we're trying to give a native div tag an additional prop called toggle, and divs have no idea what toggle is.
+1:11
+So I have broken my compound component by simply trying to be a little bit flexible with it.
+1:17
+Compound components are supposed to be flexible, and to me this doesn't look very flexible.
+1:21
+Let's get rid of this div.
+1:24
+Another major limitation, and this truly is major, is that it's very limited in its depth in how deep we can use React dot children.
+1:32
+Remember this diagram when we were talking about prop drilling?
+1:35
+We talked about how we could avoid the prop drilling problem by introducing compound components, and that's true for any state or data that's living out side of the compound component that we want to pass into it.
+1:47
+However, for implicit state that is living inside or within the ecosystem of our compound component, we are still having to use React dot children to drill props down.
+1:58
+And to show you what I mean, I actually want to make this into maybe you could call it a discovery challenge.
+2:03
+So let me type something out for you.
+2:06
+Okay the first thing I want you to do is to go into the menu button, menu drop down, and menu item components and make sure that you are accepting both toggle and open.
+2:17
+Right now the menu button is accepting toggle but it needs open.
+2:21
+The menu drop down has open but not toggle, and the menu item has neither.
+2:25
+Then in all three of those components I want you to simply console log the values of toggle and open.
+2:32
+Then I want you to think ahead of time what you think is gonna show up when you hit refresh, then hit refresh and see how that compares to what you thought.
+2:39
+The reason I'm calling this a discovery challenge is because you're not actually building anything new.
+2:43
+It's just to get your hands on the computer to play around with the code, sort of experiment with what you see here.
+2:49
+So pause now and work on this challenge.
+2:57
+So if you did this, you probably noticed that the menu button had access to toggle and open.
+3:03
+The menu drop down also had access to toggle and open.
+3:06
+In other words, when you console logged it there was real values that showed up.
+3:10
+I think the toggle just shows up as toggle with parentheses to represent that it's a function, but the menu item did not have access to that.
+3:18
+That should be relatively intuitive to us because we know that in menu we're looping over the children and providing open and toggle, but the menu item is not a direct child of menu.
+3:30
+It's a grandchild.
+3:31
+It's rather a child of the menu drop down.
+3:34
+So if for whatever reason we needed access inside the menu item component to either open or toggle, how do you think we would go about doing that?
+3:42
+In fact, let's make this into another little challenge.
+3:46
+This will be a way to test your actual understanding of what we've been talking about regarding react dot children dot map and everything like that.
+3:53
+What I've gone ahead and done was actually add toggle and open to each one of these components which is what you should have done in the last challenge anyway.
+4:01
+I also added it to menu item because theoretically if you were following the challenge you came down here and you tried to console log open and toggle.
+4:09
+We'll get rid of the actually we'll leave the console log there so that we can see when things are happening.
+4:14
+So your challenge this time is to make it so that the children of menu drop down will also have access to toggle and open.
+4:21
+Pause now and work on this challenge.
+4:28
+Keep in mind, the purpose of this is not because this is actually what we're going to be practicing in React too often.
+4:35
+The purpose is just for discovery.
+4:37
+It's helpful to play around in the code even if you know you're doing something you're never gonna do in the real world because it helps you deepen your understanding of how React is working under the hood.
+4:47
+And in this case it's going to help us understand what some of the shortcomings of React dot children are.
+4:51
+Just like we mentioned before, we were prop drilling the state through all of these components and using compound components helped with that, except when it dealt with implicit state.
+5:02
+Because the menu component doesn't know about menu item, which is a grandchild of it, we are going to have to manually change our children call from menu drop down to use react dot children dot map.
+5:15
+And we'll say for the children components that it's going to receive we're going to pass down or we're going to run rather a callback function.
+5:25
+This callback function will take each individual child and then we're going to use react dot clone element.
+5:31
+Let's say we're cloning the child and we're adding these props.
+5:34
+We're gonna add toggle and open.
+5:36
+This is exactly what we did in the menu component so this should be review at this point.
+5:42
+And, well, let's make sure that we are returning that.
+5:45
+Of course, we could use the implicit return because we're using an arrow function, but let's just keep this explicit return here for education purposes.
+5:53
+Okay.
+5:53
+Now in my menu item, I remember am accepting toggle and open.
+5:57
+Before, these were undefined.
+5:59
+So let's go ahead and console log them and cool.
+6:03
+You can see it console logged four times because we have four menu items there, and we are actually getting our values.
+6:09
+Now imagine if the compound component were a pretty complex compound component, and maybe it's not quite this large, but we would have to write react dot children dot map and react dot clone element for every nested layer of compound component that we were expecting just to be able to get the implicit state working.
+6:28
+Anyway, I think I'm beating a dead horse at this point, so we can move on.
+6:31
+But this is all coming to bring us to this idea.
+6:34
+Wouldn't it be great if there was a way to teleport data to the components in the tree that actually need it without having to do any of this prop drilling?
+6:43
+And that's exactly where React Context comes into play.
+6:46
+In the next few scrims we're going to be diving into understanding and using context.
+6:51
+So that's what you have to look forward to.
+6:53
+This is a really exciting part of react.
+6:55
+So let's dive right in and get started.
