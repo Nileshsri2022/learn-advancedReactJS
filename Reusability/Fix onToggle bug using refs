@@ -1,0 +1,79 @@
+Transcript
+0:00
+Now it's your turn to apply what we've learned about refs to help us fix this bug where it runs our on toggle function as soon as the component loads.
+0:10
+I've tried to outline some steps for you to follow in completing this challenge.
+0:14
+First of all, you need to create a ref, and let's call it first render, which defaults to true.
+0:19
+The idea is this ref is tracking whether or not it is still the first time rendering.
+0:24
+And since when we create it, it will be the very first time that React is rendering this component and therefore it will be the first time it's rendering.
+0:31
+So true makes sense.
+0:32
+And then in the use effect down here, we want to check if the ref's value is true.
+0:37
+If it is, we need to manually set it to false.
+0:40
+And if it isn't, well, that's kind of your part of the challenge.
+0:43
+You've got to figure out what to do if it is not the first time rendering.
+0:46
+As a hint, don't forget that your boolean value is going to be saved under the dot current property.
+0:51
+In fact, when I was solving this before recording, I also forgot to do that and ran into a bug again.
+0:57
+So don't forget to do that.
+0:58
+Okay.
+0:59
+So pause now and fix the bug with our on toggle function.
+1:08
+Okay, so let's create a ref called first render.
+1:12
+We'll use react dot use ref.
+1:14
+We're going to set the value to true as it mentions in the challenge, and then most of our work is going to be down here in our use effect.
+1:21
+So instead of just blindly running on toggle, I'm going to instead check if it's called first render dot current is equal to true, or because that's a boolean I can just say if first render dot current, then what I need to do is tell first render to set itself equal to false.
+1:41
+That way when it renders again it will do this check.
+1:44
+It will see that it is not the first time rendering and we'll do an else and we'll put our on toggle function in there.
+1:51
+Because right now our menu is passing an on open prop that is running this console log, before whenever we hit refresh we got this menu toggled to display in the console.
+2:02
+The way we'll know that this is working is if I hit save and it does not display menu toggled, but when I click the menu and toggle the menu, it does display menu toggled.
+2:11
+So let's give that a shot.
+2:13
+I'll hit save.
+2:13
+Okay.
+2:14
+That's a good start.
+2:14
+There's no console log.
+2:16
+Now let's hit the menu button and there's our console log.
+2:19
+Awesome.
+2:20
+Something I just realized that we never really explicitly addressed is why we don't just set a variable equal to the value that we're trying to save.
+2:29
+For example, why not just say first render equals true, and then hope to use first render as the value to help us fix this bug.
+2:36
+It's really helpful to remember that React is just running this entire function every time the component needs to render to the screen, Which means if we don't use something that's specifically intended to sort of bypass the render cycle, like refs are, then every time this component renders it's going to run this function and it's going to reset first render equal to true every time.
+2:58
+So this might have been your first inclination is to reach for just saving it in a variable.
+3:03
+And then we already discussed why it's not a good idea to do it in state because if you're trying to modify it inside of a useEffect, it's going to continually re render your app in an infinite loop.
+3:13
+So that's an instance where refs come in handy.
+3:15
+Okay, that's awesome.
+3:16
+We fixed that bug.
+3:17
+As always, play around with the code, and when you feel ready, we'll move on.
