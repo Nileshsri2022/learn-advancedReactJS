@@ -1,0 +1,179 @@
+Transcript
+0:01
+Okay.
+0:01
+Now for some UX limitation for reps.
+0:04
+We already have RLS policies only allowing reps to add deals for themselves with their own IDs and admins to add for anyone.
+0:12
+But let's also create a similar limitation in the UX.
+0:16
+We're gonna use a ternary when rendering the form, and we're gonna say, if the logged in user's account type is rep, then limit the name input to the logged in user's name.
+0:28
+If any other account type is logged in like an admin, display the drop down like we've been used to in the past.
+0:34
+So above generate options, we're going to work out the current user out of the user's state.
+0:42
+So let's call that const current user.
+0:46
+And out of the user's array that we have, we're gonna use the dot find again.
+0:52
+This is gonna be quite similar to this line.
+0:55
+Here, we found the user in the array that had the same name as the submitted name from the form.
+1:01
+Here, we need to find the user in the array which has the same ID as the user that's logged in at the moment's ID.
+1:11
+Now remember, we have data about the logged in user from the session.
+1:18
+So it's being passed through context, so we can just add it to this destructuring.
+1:24
+There we go.
+1:25
+And let's write our arrow function, and we say we're looking for the user in here where the ID of that user is the same as the ID in the session.
+1:37
+Now if you think back to the previous screen when we learned all about the session, we know there's a user property in the session object.
+1:46
+So we can go session dot user, and in that inner object, we've got an ID property.
+1:53
+Now do you remember in the header?
+1:55
+Whenever we use this session through context like here to display the email address of the logged in user, we had to use the optional chaining operator because when the app first loads, there's no guarantee that the user's data is loaded yet.
+2:09
+So to make sure we don't get a runtime error, we're gonna do the same here.
+2:13
+We're gonna say question mark over there and a question mark over there.
+2:17
+So now we can use this current user object for our conditional rendering, and it's this part here.
+2:24
+So above it, I can say, if the current user's account type is rep, we use the question mark, and then we'll have two smooth brackets with a colon in between.
+2:38
+This will be if that's true, and then the other side will be if it's false.
+2:43
+So because this is gonna be for if it's false, I'm gonna wrap this in smooths, get rid of this, put this down here.
+2:55
+And then in the first smooths, we can actually copy all of this and modify it.
+3:01
+Because we no longer want this to be a select, we actually want it to be now an input.
+3:06
+Remember, reps are just gonna have their name in the input, and it's gonna be read only, so they can't change it.
+3:12
+I'm just gonna add a few properties here.
+3:15
+So the value of this input is gonna be the current user's name.
+3:19
+So we can go current user, making sure we use the optional chaining, and that reminds me we need it here as well because, remember, current user is dependent on the session.
+3:31
+And then we get the name as dot name.
+3:33
+And then to be really clever, we're gonna use the or and an empty string in case that's not available yet.
+3:40
+We're gonna make it read only.
+3:43
+We need a class name
+3:46
+and some accessibility.
+3:47
+Okay.
+3:48
+That's looking good now.
+3:50
+And then we're just gonna clean up this because remember, we're not using metrics anymore.
+3:54
+We want the default value of this select to be users dot name.
+4:02
+Great.
+4:02
+So we've got that full back empty string and full back empty string.
+4:07
+And you know what?
+4:08
+Let's go the extra mile.
+4:09
+So thinking about our generate options function, in a company that has sales reps making deals and admins doing other things, there's no point us really generating options which include admins.
+4:20
+Right now, we're mapping around all of the users fetched from user profiles.
+4:24
+So why don't we filter the admins out?
+4:28
+So before the dot map, we can do a dot filter.
+4:32
+This uses an arrow function as well.
+4:35
+So we say, if there's a user where that user's account type is rep, keep them in.
+4:44
+Filter everyone else out.
+4:45
+That's how dot filter works.
+4:47
+Okay?
+4:47
+So we filter out anybody who's not admins, and then we map around them and create the options for all of those reps.
+4:54
+Okay.
+4:54
+Awesome.
+4:55
+Little challenge for you now.
+4:57
+Since we're not using metrics anymore, you can see it's gone gray.
+5:00
+I'd like you to remove the redundant metrics prop being passed to the form component.
+5:05
+So it won't just be here.
+5:06
+It'll also be somewhere where we're passing the metrics to the form component.
+5:10
+Think about where that is.
+5:12
+And then save and test the form's conditional rendering that we've just written by logging in as an admin account and as a rep account.
+5:21
+For reps, you should see their name in the name input in the form.
+5:26
+And for admins, you should still see the drop down of all the rep accounts that you have in your project.
+5:32
+Okay.
+5:33
+Good luck.
+5:33
+See you in a minute.
+5:36
+Hope that went well.
+5:38
+So we're just gonna remove metrics here.
+5:41
+Save that.
+5:42
+And then we look in dashboard.
+5:43
+We scroll all the way down, and here's where we're passing metrics as a metrics prop.
+5:49
+Save dashboard.
+5:50
+Great.
+5:51
+And we can now test.
+5:53
+So I'm gonna log in as my rep, Dwight.
+5:58
+And there we go.
+5:59
+We see his name in there, and it's read only.
+6:01
+I can't change it.
+6:04
+And then my admin is Pam.
+6:08
+And there's a drop down there.
+6:09
+You won't be able to see the actual drop down, but I can confirm that it is giving me options for all of the reps in my project.
+6:17
+Fantastic.
+6:18
+So form component tick.
+6:20
+We're so close to finishing off this big refactor.
+6:23
+All we've got to do is fix the fetch metrics function so our beautiful bar chart works again with the new deals that we've been putting in our sales deals.
+6:32
+You then.
