@@ -1,0 +1,126 @@
+
+Transcript
+0:00
+Okay, if you're feeling rusty on receiving context then you might want to go back and watch our previous lesson on how to do that because your challenge is to create our toggle button component.
+0:11
+It needs to receive the toggle function from context and I put two parts here because there's two parts that you'll need to do in order to correctly receive the context.
+0:21
+And then I want you to render a div from that component that has an on click that simply calls toggle.
+0:26
+And then I guess I also should have put that it also renders children.
+0:30
+There will be something interesting happening under the hood where you have button that has an on click or rather it's a div with an on click, but it also renders its children.
+0:39
+We'll be getting to that a little bit later, but for now follow these steps as part of your challenge and then we'll be going through this together.
+0:45
+Pause now and work on creating our toggle button component.
+0:55
+Okay.
+0:55
+Like always let's import react from react.
+0:59
+Actually I'll move this up to the top and we will export default the function toggle button.
+1:07
+I already know this is going to receive children so I will accept those props.
+1:12
+Then before I start rendering something which is step three, let's go through step two.
+1:16
+I need to receive the toggle function from context.
+1:20
+Now the two parts that I have is first I need to import my toggle context.
+1:24
+And the only reason I need to import that is because use context requires me to pass the full context object.
+1:30
+So I'm going to import toggle context.
+1:33
+This is a named import so I have my destructuring call there and this is going to come from dot slash toggle.
+1:39
+And then the second part is I'm going to grab the toggle function from react dot use context and we'll pass the toggle, not button, toggle context to it.
+1:51
+Let's go ahead and just console log the toggle function.
+1:55
+Okay and now we should be set up to return, Let's do a div, it will render the children inside the div but the div will have an on click that will run toggle.
+2:08
+Now hopefully you were able to get through this part of the challenge.
+2:11
+I really want to be able to test this to make sure that it's working but right now they're a little bit disconnected So I'm going to do a little more work.
+2:19
+I'm going to create an index JS file inside of my toggle folder and then I'm going to pull everything together kind of like we did before when we use the dot syntax for our compound components.
+2:30
+So I'm going to import the toggle from toggle.
+2:33
+We'll import toggle button from toggle button.
+2:37
+Then I'm going to kind of augment the toggle with a component called button or dot button toggle dot button and set that equal to the toggle button component that we created.
+2:47
+And then I need to export default my toggle.
+2:51
+And now that I've done that I will need to fix here.
+2:54
+I'm pulling in toggle from dot slash toggle slash toggle.
+2:58
+We'll do index and let's see.
+3:01
+I'll hit save and oh not quite.
+3:04
+Let's see.
+3:04
+Index ah I called my file toggle dot button dot j s, but here I'm referring to the name of the component inside.
+3:12
+I think actually to keep things a bit more consistent I'm going to rename the file rather than change my import.
+3:18
+So we'll just call it toggle button dot JS without the dot and then that should fix that.
+3:22
+Okay we're rendering again.
+3:24
+Awesome.
+3:25
+Okay now remember I was talking about how we have this div that's handling an on click but we're also rendering children and the idea is the children will be what we actually want the physical button to be.
+3:36
+Well here's one of the first times we'll get to see the true flexibility of what we're creating.
+3:40
+In the index JS I'm going to surround my star with toggle dot button.
+3:46
+We'll clean that up and what might be confusing here is when I hit save, actually let's go to toggle button and no let's go to toggle and inside of our toggle function we'll just console log something that says that it was toggled so that we know that it worked.
+4:01
+And then back to index JS what we're going to do is we're going to click on the star and we'll see that it's calling our toggled function.
+4:08
+But why is that?
+4:09
+The star doesn't have an on click on it.
+4:11
+It's the the toggle button that has an on click on it in fact if I were to go to my star and add oh actually you know what we already have an on click here from our very first time when we created this.
+4:21
+Let's go ahead and add a console log here so we can see that this is working.
+4:26
+In fact we can tell it's working because the star is filled.
+4:28
+It's changing internal state.
+4:30
+Maybe I'll say star state toggled here.
+4:33
+Okay.
+4:34
+I'll hit save, we open the console, I'll click the star.
+4:37
+You'll notice that both of my toggle functions are running.
+4:40
+We don't need to necessarily dive super deep into this, but what's happening is something called event bubbling.
+4:45
+When you have a series of components that are nested inside of each other, if you trigger an event of some kind like the click event on click event inside of maybe the nested child component, in this case we are listening for that event and calling this toggle function here, which is where we get that the star state was toggled in our console.
+5:04
+But then the event continues to bubble up the DOM tree and hit any event listeners or rather click event listeners in any of the parent components of our star.
+5:14
+So our toggle button, even though it is technically not the one that's being clicked, we are able to trigger the on click event from it because of event bubbling.
+5:23
+Again, it's not entirely crucial that you perfectly understand event bubbling, but I wanted to make it clear just in case there is any confusion that we can still capture events from the children of our button, but what our button is relying on is event bubbling for it to capture the on click event and then trigger the toggle function that will toggle our internal state.
+5:44
+So let me go back to the star.
+5:45
+We'll get rid of this console log and in fact we're going to get rid of any internal state here because we'll see that we aren't gonna need it anymore because our toggle is going to handle all of that state for us.
+5:56
+One last reminder before we move on to talk about the on and off compound components with our toggle is a quick reminder that what we're doing here is abstracting the logic from our star in this case to another headless component so that we can reuse that component in multiple places.
+6:13
+Right now I just have an example with a single star, but eventually once the toggle is ready we're going to use it in multiple places and see just how powerful having this headless component will be for us.
+6:24
+So once you feel good about everything that we've done here, specifically the toggle button, not so much worried about understanding the event bubbling thing, At that point, you can move forward, and we'll work on our on and our off components in our toggle compound components.
