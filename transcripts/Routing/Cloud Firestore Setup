@@ -1,0 +1,124 @@
+
+Transcript
+0:00
+Mirage.
+0:00
+Js has been a great companion for us thus far, but it's time for us to move on to using a real database.
+0:06
+In the next few scrims, I'll be walking us through updating our API JS files so that it's calling to Firebase instead of calling to our Mirage JS fake server.
+0:16
+And I'm going to be moving through it relatively quickly because in the front end developer career path this probably isn't the first time that you are being exposed to using Firebase.
+0:25
+So first things first we need to go set up a new project in the Firebase console so that we can then include Firestore as part of that project.
+0:33
+Now assuming you've mostly been following along here in the Scrimba platform, this would be a really good time to branch off to your local machine and start developing locally instead of just following along here on Scrimba.
+0:44
+The reason is I'm going to be including the credentials for my Firebase instance, but you will likely want to include the credentials for your own Firebase instance and not have to replace it every single time you want to do something here in Scrimba.
+0:57
+Plus, I'll assume that you want to deploy this somewhere, and when you go to deploy, you will need it on your local machine anyway with your own Firebase credentials.
+1:05
+So if you want to download the project as it stands now, you can click on the gear icon in the lower right of the Scrumba interface.
+1:11
+It's very possible that this will change at some point in the future.
+1:15
+So even if there's an entirely new look to Scrimba, you can still search for an option somewhere that says download as zip.
+1:21
+Once you click that, it will download it to your machine.
+1:23
+You'll need to unzip it, and then open the folder that unzips in Versus Code.
+1:28
+The first thing to do is then to open up the integrated terminal in Versus Code, or really any terminal, it doesn't have to be Versus Code, your Your editor doesn't even have to be Versus Code if you don't want it to be.
+1:38
+But the point is, navigate to that folder in your terminal and type in npm I or npm install, and then when that completes you can type in npm run dev.
+1:47
+I've chosen to do those both in the same line here just by concatenating them with this double ampersand.
+1:52
+And once the installation and the setup is completed, you should see something similar to this where it will give you the address and the port on your local machine where you can visit this project.
+2:02
+At this point, it's time for us to head over to Firebase.
+2:05
+You can click on the screenshot here or the link up here that says Firebase to head to the Firebase console page.
+2:11
+And once you're there, you can go ahead and click get started.
+2:14
+We're sent to a welcome screen, and we can click to create a new project.
+2:18
+And by the way, if this isn't your first project on Firebase, you should see some pretty intuitive options somewhere to create a new project.
+2:25
+So just click that instead if you're not seeing a page like this.
+2:28
+That will take us to the create a project page.
+2:30
+We can enter in a project name.
+2:32
+We'll call this one van life and hit continue.
+2:35
+You have the option to include Google Analytics if you'd like.
+2:38
+It does require a bit more setup than I'm willing to do at this point, so I'm going to turn that check mark off and hit create project.
+2:45
+This will create a brand new project for you.
+2:47
+And when it's complete, you can click the continue button, and this will drop us into our project overview page.
+2:53
+Now with our Firebase project, you can create multiple apps for your Firebase project.
+2:58
+For example, if you had both an iOS app and a separate web app, then you could create separate apps for those.
+3:03
+We're only concerned about the web app, so I'm going to click this web icon here with the little angle brackets in order to create a new web app in this project.
+3:12
+Once again, we have this form that we need to fill out.
+3:14
+We're going to just put in van life for our app and click register app.
+3:19
+And now we can see some configuration information that's going to be pretty important for us.
+3:23
+This would be a great time to click the little rectangles at the bottom in order to copy it.
+3:28
+But even if you do end up losing what's in your pasteboard, it's pretty easy to come back here and I'm gonna show you how to do that.
+3:34
+Still, we can click copy and then continue to console.
+3:37
+So this is the console page for our specific web app that we just created, and we are going to be including the Cloud Firestore database in this app.
+3:45
+Right here you can see a big orange rectangle that says Cloud Firestore.
+3:49
+You can click that or if for some reason this looks different at some point in the future you can just click Firestore database on the left side under the build drop down menu.
+3:58
+That will take us to the cloud Firestore page, and we can click create database.
+4:02
+And we'll be given the option to start in production mode or test mode.
+4:06
+For now, we're just going to use the test mode.
+4:08
+And just in case you are relatively new to Firebase, one thing that's unique about Firebase is it doesn't ask you to hide your API keys from your front end code.
+4:18
+Usually when you have an API key, you don't want anywhere on the front end to have access to it.
+4:22
+You would need to instead make requests to your own custom server and let your custom server make requests to your service, like your database, for example, or whatever API you're accessing.
+4:33
+The reason is because the end user isn't able to see what's happening on your server, but they can see everything that's happening on their client.
+4:41
+So if you have an API key in the front end on your browser, or rather in your front end code, then a savvy person would very easily be able to go in and see what it is.
+4:50
+However, with Firebase, they use these security rules in order to restrict what information can be read or written instead of expecting you to hide your API key.
+5:00
+In fact, you probably noticed that back here.
+5:02
+I'm completely okay having my API key exposed here in the slide because I have security rules set up that no one can write to my database.
+5:11
+Anyway, that's a long winded way to say, let's just start in test mode.
+5:14
+This basically allows read and write permissions for about a month from the time that you set this up.
+5:20
+Which means at some point in the future, you'll need to come back here and edit these security rules, which will mean you'll have to do a little bit of research to understand that a bit better.
+5:28
+We'll click next and we can choose from the drop down menu whatever geographical location is closest to you and hit enable, and this will drop us into our cloud Firestore database.
+5:39
+Now what I've gone ahead and done was created the collection and the documents that we need for our van objects, the ones that are currently in our server JS file right here.
+5:48
+I just copied this information and brought it directly over to Cloud Firestore so that we will be able to just start getting data from cloud Firestore right from the get go.
+5:58
+Okay.
+5:58
+With all of that, we are now set up to start using Firebase as our source of data for van life.
