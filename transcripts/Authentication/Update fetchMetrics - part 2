@@ -1,0 +1,178 @@
+
+Transcript
+0:00
+Now that I've given you an example of how the SQL syntax works for joins, it's your turn to write our updated query.
+0:08
+However, before we start, do you remember when I told you that we don't need to specify which table if it's a unique column name?
+0:16
+Well, that's okay if we're sticking to SQL.
+0:20
+But remember, we're gonna be passing this SQL through the SQL to REST API super based translator tool.
+0:27
+And to avoid any potential confusion, I'm gonna ask you to always be specific.
+0:33
+So let's get rid of this line.
+0:35
+Let's now update this example to be specific.
+0:40
+This helps the tool understand which table each column comes from and generate the proper syntax.
+0:46
+So here's the challenge text.
+0:48
+I'd like you to write an updated SQL query below.
+0:51
+Let me get you started so you know where it's gonna be.
+0:54
+Number two, start by selecting from the sales deals table since we need to sum the values.
+1:00
+Now this is important because in Superbase, aggregations like sum need to be done on the main table we're querying from.
+1:08
+We can't do sum on a table that we're joining to, so we have to make sure that sales deals is after the word from and user profiles is after the word join.
+1:18
+Join with the user profiles to get the names.
+1:21
+Your query should show each rep's name and their total sales value.
+1:25
+And here is that little reminder we need to be explicit.
+1:29
+Go for table name dot column format.
+1:32
+Okay.
+1:32
+You can always have a look at the previous query to help remind you of certain things.
+1:37
+Hint.
+1:37
+Hint.
+1:38
+Good luck.
+1:39
+See you in a minute.
+1:42
+Okay.
+1:42
+So let's do the join part first.
+1:44
+So we need from, and then we need inner join.
+1:48
+So I asked you to say from sales deals, and then join will be user profiles.
+1:56
+Then we need that word on, and we specify how we're gonna do that.
+2:01
+So we can always look back at this slide.
+2:04
+Sales deals dot user ID equals user profiles dot ID.
+2:13
+There we go.
+2:15
+Okay.
+2:15
+So the join's done.
+2:16
+Now just the select to do.
+2:19
+So we need to sum the values.
+2:22
+So we're gonna do that in a similar way.
+2:24
+Some bracket and values, that's from sales deals.
+2:30
+So let's be specific, and then the names from user profiles.
+2:36
+Actually, that's called name, not names.
+2:38
+And this is called value, not values.
+2:42
+And then we check our previous query, and we see we need to group by the column that's not being aggregated, and that's this column.
+2:50
+And we need to make sure we use the same wording that we did in the select.
+2:55
+Okay.
+2:56
+There we go.
+2:56
+Finished.
+2:57
+So we've been explicit.
+2:58
+We've made sure that we are from sales deals in a join user profiles on the correct columns, and we've not forgotten the group by.
+3:08
+Fantastic.
+3:09
+So I'd like to pause the video, copy this, and paste it into that super base translator, choose JavaScript, and then continue the video.
+3:17
+See you in a second.
+3:24
+Okay.
+3:24
+So, hopefully, you will have seen this.
+3:27
+So the first part of the select, that's from the main table, the first table that was after the from.
+3:35
+Then it uses the spread operator to include yields from the joined table, and then the exclamation mark and inner specifies an inner join with the user profiles table.
+3:48
+And then the bracket says which column from that join table.
+3:52
+Now the reason we chose inner join was because we only want to see sales deals that have an associated user profile.
+3:59
+If a user is deleted from user profiles, then we don't want their sales deals showing up in this query.
+4:06
+So I can delete this now.
+4:08
+Okay.
+4:09
+Let's put a console login here so we see the data.
+4:13
+Okay.
+4:13
+I save this, and let me log in as Dwight.
+4:21
+And we've got a chart again.
+4:23
+Let's have a look at the console.
+4:25
+Fetched metrics.
+4:26
+Andy's aggregated, Dwight's aggregated, and Jim's aggregated.
+4:32
+So remember, this is for my project.
+4:35
+So if you want to check that yours is working, I recommend pausing the video, logging in, and checking whether your chart is working.
+4:42
+Okay.
+4:43
+Brilliant.
+4:43
+Let me just comment this console out now.
+4:46
+Now here in the super base client code that's been translated from our SQL, you might wonder where does it specify which column to join on.
+4:56
+Well, the join is automatically inferred based on the foreign key relationship that we set up in the previous scrims.
+5:03
+The sales deal's user ID column is the foreign key, which references the ID column from user profiles.
+5:11
+This is why we don't need to explicitly specify the join condition.
+5:16
+Superbase and Postgresed automatically uses the foreign key relationship defined in our database schema.
+5:23
+The exclamation mark inner syntax tells it to use an inner join, and it knows to join on the foreign key relationship between these tables.
+5:32
+This is one of the conveniences of using SUPBASE and POSTGREST.
+5:36
+It can automatically infer relationships based on our database's foreign key constraints, making queries more concise.
+5:45
+Okay.
+5:46
+We've got there.
+5:46
+We've finished the refactor.
+5:48
+You might have thought it was a lot of work, but now our database and app is really set up in a scalable way.
+5:54
+We could always add more columns to our user profiles table, and we're sticking to best practices of Superbase.
+6:01
+We only have a few more scrims in this section to go.
+6:05
+I mentioned I'm keen to add the account type in the header.
+6:08
+See you in the next scrim.
