@@ -1,0 +1,136 @@
+
+Transcript
+0:00
+Okay, so we know that we want to be able to filter the list, click on one of the vans, and then have some information that shows us what the filter used to be on the last page.
+0:11
+Like I mentioned, there's usually a lot of different ways to do things.
+0:14
+For example, one way that we could accomplish this is take the search parameter directly from the current URL and instead of linking to slash vans slash five in this example, we could just tack on that query string that represents the search parameters and have it actually lead us to slash vans slash five question mark type equals luxury.
+0:35
+And then when we're on this page, we would have that directly in the search parameters, and we could pull it from the search parameters and go back to all vans.
+0:42
+That said, I personally don't love the semantics of that solution.
+0:46
+And the reason is because if I'm looking here at slash van slash five, I can already tell that this is a luxury van.
+0:52
+The query string at the top that would say type equals luxury would feel redundant to me because this represents a single van.
+0:59
+It doesn't represent a list that I can filter down.
+1:02
+And at this point we could branch into two different user experiences.
+1:05
+Let's say you found this awesome van, you're really excited about it, you grab the URL and you want to send it to your friend.
+1:11
+If it has that query string in there then theoretically they could come to this page and they could click go back to all vans and it would take them back to just the luxury vans because it's been filtered.
+1:22
+And if that's your desired use case then that's the best way to go.
+1:25
+The URL is the only thing that will persist from one user to the next.
+1:30
+However, my argument would be that that's probably not as common.
+1:33
+So for this instance let's assume that we really don't care about keeping the filtering when we're sharing the URL to another friend.
+1:40
+And by that I mean on the detail page.
+1:41
+When we go back to all vans, if we filter it by luxury, we probably do want to share only the list of luxury vans when we're trying to decide what van we're choosing with a friend.
+1:51
+But maybe I'm making too many assumptions.
+1:54
+We talked about earlier how the search parameters are great for something that's going to persist, especially like I just said from one user to the next.
+2:01
+But I want you to pause for a second and see if you can remember what is the structure, or maybe what is the tool that we can use if we want to save some information while we're still here on our page, but we don't necessarily care if it's going to survive transferring the URL to another person.
+2:18
+That's where state comes in.
+2:19
+And in this case I'm not talking about React state.
+2:22
+I'm talking about something called history state, and don't let that be scary.
+2:26
+The truth is the browser has the ability to save some kind of state between one link or one URL and the next.
+2:33
+And React Router has made it very easy for us to add things to that link state.
+2:38
+So first what we're going to do is add some state to our link.
+2:42
+We're here in our Vans page, this is the Vans list page, and the idea is to say we want to link to the individual van but we want to pass some additional information to that page.
+2:53
+So the first thing we'll do is see how to pass that state to the next page and in the next scrim we'll learn how to, you could say, catch that state and make use of it.
+3:01
+And this here is actually so simple it's not even challenge worthy.
+3:05
+When I'm linking to a resource I can simply add another prop to my link called state.
+3:11
+And I could set the state to whatever I want.
+3:13
+It could be a string, I could just say whatever.
+3:15
+And when I get to my next route, the van slash ID page, I can grab that state and it will be the string whatever.
+3:22
+I don't prefer to pass raw values like this in my state.
+3:25
+I think it reads a little better to pass an object.
+3:28
+And so I'm going to use my curly braces to get into JavaScript and then I'm going to pass in an object.
+3:34
+And the idea here is we want to pass the information regarding the current type filter over to the next route so that that route, when we get to say one of these vans, can grab that information about the type filter knowing which type it was just filtering from, and can change the link here so that it goes back to just the, for example, luxury vans.
+3:55
+Now I could just pass a property maybe called type and say that it's going to be equal to whatever the current type filter is.
+4:05
+Remember type filter is coming from the search params and so it's either going to be just the plain string simple, luxury, rugged, or I guess it was null if there are no filters.
+4:15
+But let's think one step ahead.
+4:17
+If the idea is that I don't lose all of my query strings when I go into the van and then click back to all vans, I'm going to try and future proof this a little bit.
+4:26
+So if I do have other query strings like we had name equals Joe, and I go also to rugged so now I have two parameters.
+4:34
+I have name and type.
+4:35
+We go into an individual van.
+4:37
+When I click back to all vans, I don't just want to have the type filter there because maybe eventually we have this sorted by price or filtered by price within a certain range or whatever other filters or sorts we might have.
+4:50
+So yeah, let's try and future proof this.
+4:52
+Instead of just passing the type by itself, I'm going to take the entire query string and pass that down.
+4:59
+So let's get our object back and maybe what I'll do is let's just call it search params.
+5:05
+And actually I could just leave it like this.
+5:07
+I could just say search params is the search params value that we have.
+5:12
+This is the URL search params object.
+5:14
+But honestly, I don't think the VAN detail page needs the entire object.
+5:18
+I think really what it needs is just the query string.
+5:21
+This one's just a judgment call.
+5:22
+It doesn't really matter too much.
+5:24
+Maybe I will just call this search, and then we'll say the value is search params dot to string.
+5:30
+Again it probably just depends on the needs in your scenario.
+5:33
+But the point is this should take the entire search params in its stringified version and pass it along to the next route that we're linking to.
+5:43
+This is beneficial again if we have multiple search parameters, not just one filtering by type.
+5:48
+And just in case you forgot, let's console log search params dot to string so you have an idea of the value that I'm actually passing in the state here.
+5:58
+Hit save, open up the console, and of course right now there is nothing.
+6:02
+We'll hit luxury.
+6:03
+Okay so it's type equals luxury.
+6:06
+If I add other ones like and name equals joe, now we have type equals luxury and name equals joe.
+6:13
+Just note that it doesn't have the question mark at the beginning so we will need to add that manually.
+6:17
+We could either do it here or I'm just going to do it on the other side of the equation.
+6:21
+In the next scrim we'll talk about the VAN detail page and how we can grab the state that we're bringing in by adding it to the link to that page.
