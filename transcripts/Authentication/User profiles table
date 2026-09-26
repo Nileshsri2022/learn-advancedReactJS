@@ -1,0 +1,146 @@
+
+Transcript
+0:00
+Our first job in the big refactor to do list is to create a new user profiles table.
+0:07
+This is gonna be in the public schema.
+0:09
+So the green here represents public schema, and the orange is in the auth schema.
+0:14
+I'd like you to follow along with me so we do it together.
+0:17
+I'll do it in my project, and you create it in your project.
+0:21
+So I'd like you to navigate to your table editor.
+0:24
+That's the icon below the home on the left on superbase dot com.
+0:28
+And on the far left, it will say schema public and new table.
+0:33
+We're calling it user underscore profiles, just like that in the middle.
+0:38
+We keep enable RLS turned on, and then we look at the column.
+0:43
+So the ID and created at are already populated there.
+0:46
+We need to add a name column with type text and an account underscore type column, also type text, and let's put the default value as rep, which will be the account type with the lowest permissions.
+1:01
+So pause and add those now, please.
+1:06
+Then if you scroll down, we're looking for add foreign key relationship.
+1:11
+Remember in this slide, we said the ID column in user profiles has to be a foreign key to the ID from users.
+1:18
+So I'd like you to select the auth schema and the users table.
+1:22
+I think it's right at the bottom of the drop down.
+1:25
+And here it says select columns from auth dot users to reference to.
+1:29
+So on the left, it's the column in user profiles, which will reference to this column in auth dot users.
+1:36
+And we can see here it's the IDs of both.
+1:39
+And then scroll down and save at the bottom.
+1:42
+So we're referencing the auth dot users table to ensure data integrity.
+1:47
+We don't want a row to be inserted in user profiles if there's not a corresponding user with the same ID in users.
+1:55
+Every profile must belong to a real user in users.
+1:59
+So when a user signs up, the trigger we're going to write later will add their ID, name, and account, which will be in user metadata, into the user profiles table.
+2:10
+So thinking about RLS policies, do we need to write an insert RLS policy allowing this trigger to happen?
+2:18
+Well, if we think about how the data is getting into user profiles, it's via this trigger.
+2:23
+We're not actually writing an insert request in our application.
+2:27
+And when we write the trigger, we're gonna be creating it with the term security definer.
+2:33
+This means it runs with the privileges of the function's owner, I e us.
+2:38
+We're gonna write the function, and we have elevated privileges because we're the database owner.
+2:43
+It doesn't run with the privileges of the caller, the person who is signing up, who made the trigger happen.
+2:50
+So because we have these elevated privileges as the function's owner, if we had written RLS, the trigger would have bypassed the RLS anyway.
+2:59
+So that means we don't need to write an insert RLS policy for user profiles table.
+3:05
+But if we think ahead and we look back at this slide, how are we getting the name and account type so that we can use it in our app?
+3:13
+Well, remember this block here.
+3:16
+We're gonna have to fetch all of the profiles in our app to be able to verify account types and use the names in the chart.
+3:24
+So since this block is from user profiles, we need to write an RLS policy that will allow the data to be fetched or selected from user profiles.
+3:35
+So let's do that now.
+3:37
+If you could navigate to your authentication part, that's the thumb up.
+3:41
+Remember, the fifth icon down will look like this.
+3:45
+And then click policies just below configuration, and then you should see both tables now, the sales deals and the user profiles table.
+3:54
+Since this policy needs to be on the user profiles table, click user profiles, and then click create policy.
+4:01
+It should look like this.
+4:02
+It will automatically populate this table drop down.
+4:06
+Now the policy we need is basically gonna say authenticated users can view, select all of the profiles, all of the data from this table.
+4:15
+Let's use this opportunity to learn about the target roles to clause.
+4:20
+Remember that the superbase role is either authenticated or a non.
+4:25
+We saw it in the JWT.
+4:28
+Well, we can use this drop down to select authenticated and not actually need to use the super base helper function that we did in the past, that auth dot role.
+4:39
+In the past, we said auth dot role equals authenticated, but this to clause will actually do that for us.
+4:46
+It will actually add a to clause here.
+4:49
+You could try that, actually.
+4:51
+If you select the drop down and go all the way to authenticated, you'll see that it adds a to clause.
+4:57
+Now if we're not putting anything in the using clause because we don't need the auth dot role equals, that's gonna cause a problem because every policy needs something in the using clause.
+5:09
+Since the using clause is the core of RLS, it's where we define the logic for which rows a user can access.
+5:15
+The way we can get around this is using the word true.
+5:19
+It's a condition that always evaluates to true for every row.
+5:22
+It means the policy will allow the action for all rows.
+5:25
+It's kinda like saying no restrictions.
+5:27
+So this is the policy I need you to add.
+5:30
+We're gonna call it users can view all profiles.
+5:33
+You're not gonna have to touch the on because that's already populated.
+5:36
+Permissive is by default.
+5:38
+It starts on select, so you can leave that.
+5:41
+There's that two clause that has been created because I used the target roles drop down, and then I'm just writing the word true there.
+5:49
+So that means as long as they're authenticated, all users can select from user profiles.
+5:55
+So pause, finish this off,
+6:00
+and then click save policy.
+6:03
+Now we have the new table set up with an RLS policy.
+6:06
+Now it's time to modify the sign up component to add account type radio buttons and a name field.
+6:12
+See you in the next screen.
