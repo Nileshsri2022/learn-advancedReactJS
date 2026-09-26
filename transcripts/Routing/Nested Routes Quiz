@@ -1,0 +1,92 @@
+
+Transcript
+0:00
+We've talked quite a bit about nested routes, so let's pause for a minute on the curriculum, and let's go over a quick quiz dealing with nested routes.
+0:08
+Just like before, I do actually want you to click into the editor here and type down your actual answers to this quiz.
+0:14
+And again, of course, I'm not going to give you any kind of grade or anything like that.
+0:17
+The purpose is to help you reflect on what we just talked about and hopefully wake you up a little bit just in case you've been in a bit of a dream state.
+0:25
+I know sometimes when I'm watching a course I will tune out a little bit, and I'm hoping this will help combat that.
+0:31
+So pause now, answer the questions in this quiz, and then we'll go through it together.
+0:40
+Okay.
+0:41
+What is the primary reason that we would ever want to use a nested route?
+0:45
+We saw two possible reasons, but one of them is much preferable, or rather one of them is much more important than the other one.
+0:51
+And that is whenever we want to use some kind of shared user interface interface amongst multiple different routes.
+0:57
+So I'll type that down for reference.
+1:00
+If you have a larger app and there are a lot of nested routes that are all sharing the same name in its path, I suppose there could be an argument made that using a nested route could help avoid some of that.
+1:12
+More often than not we'll focus on this primary reason which is when we want to share user interface between the routes.
+1:18
+So what is a layout route?
+1:19
+Well a layout route is actual route that hosts or contains the shared user interface portion of the nested routes.
+1:27
+So its job isn't to display the primary content from the nested routes or the routes from which you're trying to display content.
+1:35
+Its primary job is to display just the shared portion that you don't want changing when you go from one nested route to another nested route.
+1:44
+As a segue into the next question, another important aspect of a layout route is that it will use an outlet component.
+1:53
+I'm not going to go too much more into detail about that in this question because that is what the next question is.
+1:59
+So what does the outlet component do and when do you use it?
+2:02
+Well, to answer the when do you use it part first, you use it inside of some kind of layout route, where that route is the parent to some nested routes.
+2:12
+So maybe even more specifically rather than referring to the term layout route, we would say that we use it anytime we have a parent route that's, I guess by definition, wrapping children routes.
+2:26
+And what does the outlet component do?
+2:28
+Well it's an outlet or a placeholder that represents the place in your parent route where the matching child route will render its contents.
+2:37
+So the parent route will oftentimes have the shared user interface like we talked about with a layout route.
+2:43
+And so that parent route element will contain the contents that you want shared across every child route.
+2:49
+And then the outlet is sort of like the concept of children if you have used compound components in React before, where it's a placeholder where the children route elements will render.
+2:58
+I think I just said the same thing two times, so hopefully it's starting to sink in.
+3:02
+Let me write up a summary.
+3:04
+This is worded a little bit differently, but it renders the matching child routes element prop, and we'll say prop given in its route definition.
+3:13
+Okay, so then what is an index route?
+3:15
+Well an index route is a child route that will match the path of the parent route if the parent route has a path defined.
+3:24
+That definition might be something you have to really think about a lot, but I promise the more you use it the more it'll make sense.
+3:30
+But remember we might have a layout route as a parent, which is containing any shared user interface you want amongst all the children routes, but you might also want another element beyond just the layout component to be rendered when the path of the parent route is matching or is rendered.
+3:47
+So a good way to think of an index route is like the default element that should render in the parent's outlet when the path matches the parent and nothing else.
+3:56
+I think that's a good one that we could write down.
+3:59
+I don't have the slides for the van life app right now, but a good example of this is how on our host page we have the route slash host and we want it to display both the little navigation bar for just the hosts that navigates us between the dashboard reviews vans and income.
+4:15
+But we also want to display all of the information from the dashboard.
+4:19
+We could have made the dashboard display at slash host slash dashboard, but just to keep things simple, we wanted slash host to display both the shared user interface of that little secondary navigation bar, but also all of the information from the dashboard.
+4:33
+Okay.
+4:33
+That wraps up this quiz.
+4:34
+Feel free to go back and review some of these answers.
+4:37
+If you'd like, you can, of course, go back and re answer them from scratch.
+4:41
+It might be a good way to really help it sink in.
+4:43
+And as always, when you're ready, we'll keep moving forward with our van life app.
