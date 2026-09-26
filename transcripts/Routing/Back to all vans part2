@@ -1,0 +1,52 @@
+
+Transcript
+0:00
+The design did show this back to all vans link inside the host vans detail page, and we already implemented that.
+0:07
+However, the design also shows that there's supposed to be one on the regular full list of vans detail page.
+0:14
+You can see it here.
+0:15
+We're supposed to have back to all vans.
+0:17
+Now there's actually a bunch of different ways to implement navigation with React Router.
+0:23
+And we've already seen using the relative, let's see where is it, host band detail this relative dot dot path which takes us up one level.
+0:32
+And we talked about the relative equals path which makes it so that it's a back button relative to the path, or rather it takes us up one level on the path but not one level in the route hierarchy as we have here.
+0:45
+So one thing we could maybe think to do is go here, just grab this link, we'll come to our host vans, no, our vans detail page and then just right here above where the van is supposed to go we'll just stick our link.
+1:00
+One thing that's I guess kind of nice about this is we have relative paths and so I think this should just work.
+1:06
+Now we have back to all vans.
+1:08
+We click it and sure enough it takes us back to slash vans.
+1:11
+Okay.
+1:12
+We could just stop there, but let's try to think of the users workflow here.
+1:16
+Maybe they're on the list of vans page and they filter by, let's say, luxury.
+1:21
+They click on good old reliable red and they maybe look at this and say, uh, that's not for me.
+1:26
+I'm gonna go back.
+1:28
+Now when they click back, what is it going to take them back to?
+1:31
+Well let's see.
+1:32
+We click back to all vans, and now we're back at the slash vans page, and they have lost their filtering.
+1:37
+Of course with only one simple filter it's not that big of a deal.
+1:41
+But if you imagine something like Airbnb where you set up maybe four or five or six different filters for what you're looking for.
+1:48
+If you were to go into one and then click a link that said back and it just took you back and removed all of your filters, that's not a great user experience.
+1:56
+Well it turns out there's a number of different ways that we can implement how to make it so that this takes us back to just the vans that we had filtered already by luxury.
+2:06
+So that's the next challenge we're going to be working on, but don't worry it won't be too difficult.
+2:10
+That's what we're going to start working on next.
