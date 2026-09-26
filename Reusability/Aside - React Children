@@ -1,0 +1,33 @@
+Transcript
+0:00
+If you started web development in the pretty early days, you might remember a native HTML element called Marquee, and that basically gave the same look that you see here, which is very reminiscent of HTML pages in the nineties.
+0:13
+These days, the native Marquee element is deprecated, so I have recreated it here in React with custom CSS.
+0:21
+And I'm not good enough at CSS to figure this out.
+0:23
+I just Googled it and copy pasted what I found.
+0:26
+But we're essentially doing the same thing we were doing with our button, where we're passing in the text for the marquee as a prop to our marquee component.
+0:35
+And as you remember, our goal is to make it a little more like native HTML where we can put an opening and closing marquee tag and then put the text that we want inside as a child.
+0:46
+Fortunately the process for doing this is really easy to understand.
+0:49
+All I need to do is cut the text that I am currently passing in as a text prop.
+0:54
+I'm going to get rid of that prop.
+0:56
+And then I'm going to create a closing marquee tag, just like this, and then just as you would expect I'm going to paste the text that I want to be inside of the marquee right between those opening and closing tags.
+1:07
+And this part is probably exactly what you would have expected.
+1:10
+Now if I hit save you'll see that there's no marquee showing up there anymore, and that's because if I go over to Marquee JS, I'm currently expecting a prop dot text, and really the only thing I need to change is to use an implicit prop that's called children.
+1:26
+This is something that React is adding to the props object.
+1:29
+If you ever have something between an opening and closing custom component tag, then it will add anything you put between those tags as props dot children to the component that you made.
+1:40
+I'll go ahead and hit save again and you'll see that the marquee is back exactly like we would hope.
+1:46
+Pretty straightforward stuff, So let's get your hands on the keyboard and we'll have you apply this exact same thing to the buttons that we've been working on.
