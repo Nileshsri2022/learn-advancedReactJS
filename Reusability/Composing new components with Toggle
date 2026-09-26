@@ -1,0 +1,150 @@
+
+Transcript
+0:00
+There's a couple different ways that we can clean up our markup that we have here.
+0:04
+As it stands our star doesn't really accomplish much.
+0:07
+It does obviously change what we get to see on the screen, and it is offloading the logic to our toggle component, but we don't necessarily need to clutter up maybe a higher component like our app with all of this composed logic using the toggle component.
+0:22
+So in this case it might make sense for us to take all of this logic and to just put it inside of its own component.
+0:29
+Inside of the components folder I'll create just a new file called star dot JS.
+0:33
+This one won't have a whole bunch of different parts to it so I'm just going to have it be a file instead of a whole folder and we will just import react from react.
+0:42
+I I didn't even make this a challenge because it seems like it's going to be simple enough.
+0:46
+Export default function star and we will just return the toggle component with all of its pieces.
+0:52
+Now we need to import toggle from dot slash toggle slash index.
+0:58
+And we are using the react icons here, so let's pull those out of our index file here.
+1:04
+We'll put them inside of star so it has access to those.
+1:07
+And then inside of index, we need to import our star from dot slash components slash star and then render our star.
+1:15
+Like I said I didn't even make this a challenge because we didn't do anything special we just copy and pasted everything that we had in the markup here, put it into its own component for the specific reason to give us the ability to just have a star component here.
+1:28
+We are going to be coming back to this in a little bit, but let's hit save and we're back to exactly what we had before.
+1:35
+But now we've reduced those, I think it was nine or ten lines of code, into just a single line of code that is a little more easy to read.
+1:43
+Now I imagine that wasn't anything new for anyone, but let's address the current state of our menu here.
+1:47
+It's true that it's only fifteen lines of code, so it's really not that bad, but I'm pretty sure we can do better.
+1:53
+Remember before we talked about how the menu component used to give us context, but now we've ripped that context out and we're using this toggle component instead, the menu isn't really providing us anything per se, but it also would look a little strange to surround this toggle with just toggle buttons that have menu dot button when it's never using a menu component.
+2:15
+I don't know.
+2:15
+Maybe it's just me.
+2:16
+But I'm going to show you another way that we can compose together the menu and the toggle.
+2:21
+Instead of exposing toggle to our app component and manually using toggle everywhere we need it, instead let's go over to menu and let's augment the default menu components using toggle, but sort of under the hood so that the user of our menu never needs to even touch toggle in the first place.
+2:40
+While I'm still in this file I'm going to grab this line here where we're importing Toggle and go over to my menu component.
+2:46
+And if you remember from Toggle it's just returning a Toggle context provider and then rendering the children.
+2:52
+So what I can do in my menu is import my Toggle, and then say you're going to render this div, but first I want you to render a toggle component and set up some context that this menu can have access to.
+3:06
+By composing these together, I've now augmented my menu to be a toggle component, but with some changes that are very specific to a menu component.
+3:15
+Which means over in my index.
+3:17
+Js, I should be able to get rid of this toggle here and have everything still work just like it was before.
+3:24
+You can see it outdented when I formatted, and that shows us that we're removing some layers here of what we had before.
+3:30
+I'll hit save, and let's see, we have an error oh and here I'm already inside of my components folder, you probably saw that before, So we're going to, let's see, go back a level from the menu and go into the toggle.
+3:44
+Let's see if that works.
+3:45
+Okay awesome.
+3:46
+The menu is working just like we had before, but now we're sort of embedding the toggle functionality into our menu so that when people use our menu they're not forced to also pull in toggle as they go.
+3:58
+So with that started I'm going to write out a quick challenge for you.
+4:02
+Okay, your challenge is to move all of the other toggle logic that we have here in our index to be part of the menu components internally.
+4:11
+And that way the person that wants to use our menu component by importing it and using it will never actually have to touch the toggle component at all.
+4:18
+Pause now and work on this challenge.
+4:26
+I'm actually going to force myself to get this right by removing my toggle completely from this file.
+4:32
+That way anytime I hit save, if I haven't finished the job, then it's going to throw an error.
+4:36
+In fact I'll just hit save now, we'll see an error that toggles not defined because I'm trying to use it down here.
+4:41
+So let's start refactoring this.
+4:43
+Now my menu button could be wrapped in a toggle button internally, so I'll just grab this and put it here.
+4:53
+And then I'll say instead of just rendering my button let's render a toggle button
+4:59
+and we'll wrap our button with the toggle button.
+5:03
+This will make it so that when we render a menu button, or in our case a menu dot button down here, right here, that it will already have access to flipping the logic in the toggle context that's being provided by our menu.
+5:17
+So I should be able to remove my toggle button components here.
+5:22
+We'll refactor and I'm not going to hit save yet because we're not done yet.
+5:26
+I removed that toggle component and I don't want to put it back.
+5:29
+So let's now do our drop down.
+5:31
+We'll essentially do the exact same thing.
+5:33
+So I'll take this import from toggle, we'll go to drop down, we'll import toggle, and we only want to show this drop down if the toggle is on.
+5:42
+So we'll just render toggle dot oops toggle dot on and wrap it around the div here.
+5:50
+We'll format it.
+5:52
+Let's go back to our index and remove toggle dot on.
+5:57
+We'll format this, hit save, and our menu is back.
+6:01
+Let's cross our fingers and hope that everything's working.
+6:03
+And awesome, it's working exactly like we want it to.
+6:06
+The nice thing about this is now we have our menu, which is very declarative in nature.
+6:11
+It's using compound components, so it does add a few more lines of markup here, but it's super easy to read and we don't have to do any kind of prop drilling.
+6:19
+Again if we imagine that we were getting the actual text for these items, and theoretically probably the URLs in which clicking each one should eventually lead us to from some third party place like our own database or API or a headless CMS or whatever it might be.
+6:34
+It's really easy to get that data here in our app component and then just put it into its correct spot without having to drill the props down.
+6:41
+At the same time, we don't have to require the users of our menu to also import Toggle and understand all the intricacies of the Toggle component.
+6:50
+Similarly with our star, because it's not even a compound component, we were able to just kind of hide all of that logic that we're getting from Toggle inside of the star component.
+6:59
+Again, this might have been a lot to take in.
+7:01
+Hopefully you're starting to see the true flexibility of our headless Toggle component.
+7:06
+I also want to reiterate that there's nothing about this that's special to React.
+7:11
+What we're doing here is more of a composition pattern, and there's no reason this kind of composition pattern couldn't happen in other frameworks or even in different ways within React.
+7:20
+Again at this point I'm not really attempting to teach new concepts per se, I'm more trying to drill the things that you have already been learning so that you can see them applied in different ways.
+7:31
+That said, it is time for us to jump into some new territory because right now our star is purely user interface.
+7:37
+It doesn't actually do anything when we click it other than just switching what shows up on the screen.
+7:42
+However, in reality we probably want to be able to run some kind of code when the star is toggled.
+7:49
+For example, on let's say Twitter, if you favorite a tweet by clicking the little heart icon, it's sending a signal to the database so that it can actually be saved in the database as a tweet that you favorited.
+8:01
+Right now, our star component has nothing exposed that gives the user an ability to run any kind of code.
+8:08
+As I've said, there's a lot of different ways to solve any given challenge, but we're going to look at one possible solution for how we can accomplish this in the next scrim.
