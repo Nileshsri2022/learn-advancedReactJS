@@ -1,0 +1,116 @@
+
+Transcript
+0:00
+In order to help us learn the syntax using context we're going to use this really simple little app here that just has a button that will switch the theme from light to dark or dark to light.
+0:10
+Nothing is working right now but when I refresh this app I've gone through and manually changed all of the CSS classes to be dark theme instead of light theme and then haven't refreshed yet so that the light theme is still showing.
+0:22
+So I'll hit refresh and you'll see this is what the dark theme will look like.
+0:25
+Obviously we want to make it so that clicking the switch theme button is what changes it and not manually going through and changing all of our CSS properties from dark to light or light to dark.
+0:34
+Now you might remember me talking about how there's a bunch of different ways to organize your code and to accomplish the same task.
+0:40
+A very simple example of this is that I could choose to put my context maybe here in my index JS and wrap my app component here.
+0:48
+I could go to app JS and wrap it here.
+0:51
+I could even create a separate component that renders as children and get a little more complicated that way.
+0:56
+For the sake of simplicity I'm just going to put my context here in App.
+1:00
+Js.
+1:00
+The very first thing we need to do is to create some context and fortunately we have something called create context that we can use.
+1:08
+So I'm going to create a theme context and set it equal to react dot create context.
+1:15
+You'll notice that I'm creating this context outside of any components.
+1:19
+This is just kind of the top level of my file here.
+1:22
+The reason is because I'm going to need to export this theme context so that other components can use it when we start talking about the use context hook.
+1:30
+But for now it's enough to just know that make sure you don't put this inside of your app component like we would if we were creating state.
+1:37
+If you remember from our diagram when we are adding context we will be wrapping our whole application in a provider And that provider actually lives inside of this theme context.
+1:49
+Let me show you what I mean.
+1:51
+I'm going to wrap around my entire div with my two components here, the theme context, but I'm going to access a property of it called dot provider.
+2:01
+This syntax might look a little different because we're using a dot in the middle of our component name, but this is totally normal and we're actually going to learn how we can do this with our own compound components in a little bit.
+2:12
+By wrapping my application in this theme context provider, I now have the ability to pass a value prop to my theme context which my components sitting inside as children or grandchildren or any level nested deeply inside can use the use context hook to grab whatever value I place here on this prop.
+2:32
+That'll make a little more sense, but for now I'm just going to hard code my value as the string light.
+2:37
+In essence, all I'm doing is providing this simple string light to all of my components underneath it, and then later we'll have the ability to change this value in just one place, which will update every child that needs access to whatever that value is.
+2:52
+Often you'll be providing more than just a simple string as your value.
+2:56
+You'll have an object that will have properties and maybe methods inside of it, but for now we're just gonna keep it simple.
+3:02
+And the very last thing that I want to make sure I do is to export my theme context.
+3:07
+Now in this case I need to use export and then these curly braces because I am already using a default export in this file with my app component.
+3:16
+If you were to create this context in a different file then you could obviously use export default.
+3:21
+It really doesn't matter that much.
+3:23
+Okay let's do a quick recap of everything we've done and I want you to pay close attention because I'm going to ask you to redo this whole thing.
+3:29
+Ready?
+3:30
+Okay.
+3:30
+So the first thing we did is we created a new context instance by using react dot create context.
+3:37
+Then we used this theme context to wrap our application code with a provider, and we can access that provider by using this dot syntax.
+3:45
+So we do theme context dot capital P provider.
+3:49
+Don't forget that we need a closing tag as well because under the hood it's just rendering the children that you put inside of it.
+3:55
+Again we could have done this whole thing here and just done theme context dot provider around the app component here, it really wouldn't have made that much of a difference, it should work exactly the same way.
+4:05
+Then we need to make sure that we add a prop to our provider called value.
+4:09
+The name of this prop does matter, it does have to be exactly spelled this way.
+4:13
+And then whatever value you provide, remember it doesn't have to be a string, that's just our use case right now, will be accessible to every component that we have inside of our provider.
+4:23
+And lastly, we need to make sure that we export it.
+4:25
+We're going to be importing this into a file, so we need to make sure we export it from this file.
+4:30
+Okay.
+4:30
+I hope you were paying attention.
+4:31
+If not, you can go listen to our recap again, but now it's time for a challenge.
+4:36
+Okay.
+4:36
+The time is yours.
+4:37
+Set up the context again on your own.
+4:39
+Pause now and work on this challenge.
+4:47
+Okay once again we will create our theme context by using react dot create context, then we will use the theme context provider, so theme context dot provider, to wrap our components here.
+5:02
+I'll just create my closing and put it down here and indent.
+5:06
+And then we need to pass a value.
+5:08
+In this case we're going to pass a string, maybe this time I'll pass dark, it really doesn't matter it's inconsequential.
+5:15
+Lastly we need to make sure that we export our theme context.
+5:20
+Okay I should be able to hit save and obviously nothing is hooked up yet per se but we don't have any errors so so that's a good sign.
+5:27
+If you want to keep practicing that, you can go through and delete all of the context lines that we just added and try it again, or I guess you could just rewind the scrim and redo the challenge when I set it up for you.
+5:37
+And then when you feel comfortable with this initial setup that we just did, we will keep moving forward.
