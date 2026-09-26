@@ -1,0 +1,58 @@
+
+Transcript
+0:00
+Let's try to get an overview of the compound components that we'll be including with our toggle.
+0:05
+We know our main toggle is going to be in charge of setting up state and of of course we'll be using context to speak to all of its children.
+0:12
+Any of the components that we add in sort of our ecosystem of toggle compound components are going to have a functionality associated with them.
+0:20
+As we go through these it's important to remember that this is a headless component meaning that the only thing these components will be doing is providing functionality to their children.
+0:29
+So first of all we're going to create a button component.
+0:32
+So it'll be toggle dot button.
+0:34
+The button will have the ability to listen for click events and when that happens it'll flip the state of the toggle.
+0:40
+The button will still render children and we'll be able to put any button that we want inside of it.
+0:45
+So think of it more as a component that is able to switch the state as opposed to an actual button that shows up on the screen.
+0:52
+Then something cool that we can do is create an on component and an off component.
+0:56
+Whatever children we put inside of our toggle dot on will get displayed when the toggle state is on, and whatever children we put in toggle dot off is what will get displayed if the toggle state is off.
+1:07
+The cool thing here is we'll be able to be flexible with these.
+1:10
+We don't necessarily have to include both on and off.
+1:13
+Maybe the goal is to not display anything when the state is off and therefore we will only include a toggle dot on.
+1:20
+But if you wanted to display something slightly different when it's off then you could do that too.
+1:25
+The last one is going to be a little more complicated.
+1:27
+I'm not going to dwell on it too much right now but we can call it toggle dot display and maybe it's important to point out that I'm just coming up with these names.
+1:34
+These have nothing to do with any kind of standard in react or anything like that.
+1:39
+We are essentially, as I reminded you earlier, just taking the cool tools that we've learned in react so far and applying them to different use cases.
+1:48
+The display component is going to give us a chance to learn something called called render props.
+1:52
+The idea being that we can expose to the outside world the on state of our toggle component so that we can maybe do something a little bit different if necessary.
+2:02
+As a quick reminder there's a million different ways to solve any given challenge in code.
+2:06
+This is also true of React.
+2:08
+So it's possible that the approach I take to this may not be your same approach, but as I've played around with this it's pretty exciting the flexibility that you can get by just creating these four components.
+2:19
+Well five if you include the parent toggle component.
+2:22
+Okay that's enough talking.
+2:23
+Let's get your hands on the keyboard.
+2:25
+We're going to do a series of challenges where you are going to get to build these components.
