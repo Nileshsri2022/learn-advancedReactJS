@@ -1,0 +1,58 @@
+
+Transcript
+0:00
+Okay.
+0:00
+We're back in our product app, and we have measured that there's a performance issue with our product components.
+0:05
+And one of our features, this counter feature, which everybody loves, is causing all of our components to re render.
+0:12
+These components are pretty complex as they are, and so we don't want to re render them if we really don't have to.
+0:17
+So your challenge is to combine the things that you've learned to make it so that clicking the counter doesn't act so janky like it currently is, where it takes a minute for everything to update.
+0:27
+Pause now and work on this challenge.
+0:34
+Okay.
+0:35
+This challenge takes us kind of silly.
+0:36
+We'll go ahead and get rid of it.
+0:38
+Okay.
+0:38
+Well our first go to might be to go to product and to memoize this component using react dot memo.
+0:44
+So we will pass the product in here, we'll export default, the thing that gets returned for memo, and get rid of this up here.
+0:52
+And okay, let's see if that fixes our problem.
+0:54
+We'll hit plus and oh no, it does not fix the problem.
+0:58 
+I guess this would be a little more dramatic if if we hadn't literally just done this exact same thing.
+1:03
+But as it turns out, this style prop that's being passed in is recreated every single time, even though its values are exactly the same as they were in the last render.
+1:12
+So that leads us back to here, and that means that we can memoize this product styles object so that React knows it's not changing if dark mode doesn't change.
+1:22
+So come down here and we'll say product styles is equal to react dot, and this time we're going to use the hook use memo.
+1:31
+Those can be a little bit tricky to remember but I promise with enough time it will start to make sense.
+1:36
+First parameter is the function and this is where we are going to return the value that we want it to remember.
+1:43
+So we'll just stuff that in there.
+1:45
+We only want it to recalculate it if dark mode changes.
+1:49
+Let's go ahead and delete these styles and I believe that should do it.
+1:54
+Let's hit plus and look at that.
+1:56
+Everything is running smooth again.
+1:58
+So this is an optimization that we will keep in our app, and I'm sure our users are going to be thrilled with this update.
+2:04
+We still have a bit of a lag when we click dark and light, but for this ticket it's a little bit outside the scope of what we were asked to fix.
+2:12
+So yeah, we're good to go.
