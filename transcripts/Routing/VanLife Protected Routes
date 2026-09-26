@@ -1,0 +1,73 @@
+Transcript
+0:00
+Okay.
+0:00
+Let's apply what we just learned by creating an auth required layout route which will protect all of the host routes.
+0:08
+That's all of these routes here.
+0:10
+I created a little extra separation so it was easier to see which ones we're trying to protect.
+0:15
+And for now just do what we did before where you will have a constant.
+0:18
+Maybe I guess before we called it authenticated, and we'll set it equal to just a boolean.
+0:23
+Just like before we will navigate them to the login route if they are not logged in.
+0:28
+And of course this time we actually have a login route set up.
+0:31
+Okay.
+0:32
+Pause now and work on the challenge.
+0:39
+Let's go ahead and create our auth required component first.
+0:43
+So I will create a new component called auth required dot JSX right here, and we'll get that set up.
+0:51
+And like before we will have really sophisticated authentication by having a constant that's called authenticated and we'll set it equal to false.
+1:00
+Just like before we will either render the outlet component, so we'll go ahead and import that, or we will render the navigate component.
+1:08
+So we'll import that as well from react router dom.
+1:12
+Okay.
+1:13
+And we will do a quick check that says if they're not authenticated, then we want to return the navigate component and send them to slash login.
+1:25
+And otherwise, we can simply return our outlet.
+1:29
+Okay.
+1:29
+Let's go back to our index page.
+1:32
+We will import our auth required component and that is coming from our components folder and just like before we will create a new route which will be a layout route for our host routes.
+1:45
+And we will wrap it around all of our host routes.
+1:49
+So we'll move this down to right here.
+1:53
+We'll go ahead and indent these other ones.
+1:55
+And we'll set the element for this route to be an instance of auth required.
+2:02
+Now I haven't hit save at all yet so let's see.
+2:05
+I'm currently on the host route so what I would expect because this is a protected route and I believe we said false for authenticated then when I hit refresh what it should do is see that I'm on the slash host route.
+2:18
+My route definitions would say here is the slash host route which requires react router to render this layout route as well.
+2:26
+And therefore it should just send me to the login page let's go ahead and see I'll hit refresh and sure enough it takes me directly to the login page and if I try to click host we can see it's not doing anything it's just immediately going to the login page.
+2:38
+I can still go to these other unprotected routes, but the host specifically takes me to the login page.
+2:44
+Now this is great functionality, but the user experience isn't ideal.
+2:48
+I suppose it's self explanatory enough that if you're clicking something like host and it takes you to a login page that the user can kind of figure out that they need to be logged in in order to get to the host page.
+2:58
+But it would be a nicer user experience if we had some sort of message here that said you need to log in first.
+3:04
+Now of course a user may first go to the login page instead of trying to get somewhere they're not supposed to be and then being redirected to the login page, which means we can't just hard code something into the login page that says you need to log in first.
+3:17
+So we need to learn a way that we can pass a message along with our navigate component right here.
+3:22
+And so that is what we're going to be working on next.
