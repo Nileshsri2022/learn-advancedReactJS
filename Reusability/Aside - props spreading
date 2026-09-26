@@ -1,0 +1,55 @@
+Transcript
+0:00
+Here you see an example of where me as the creator of this button component has attempted to at least support a lot of the different attributes that my user might be wanting to use, like a number of different attributes that my user might be wanting to use, like a number of different event handlers.
+0:12
+I added the style in case they want to do some inline styling.
+0:15
+I've added a class name in case they wanted to do some kind of class name modification.
+0:20
+Of course I'm not gonna get it all unless I really try to be exhaustive about it.
+0:24
+And honestly, there may be reasons where you want to limit the capabilities of your component to just a few handlers and a few props.
+0:32
+However, if you're looking to build something that's as flexible as possible, what we can do instead of trying to enumerate each one of these props one by one is allow my button to be used in a way that it will copy down any properties that we want to add.
+0:46
+Unfortunately, the way to do that is actually really simple.
+0:49
+To do this, I can use the spread syntax on the props of my component in order to pull in everything that the user of my component wants to do.
+0:59
+So So I'll get rid of all this other stuff.
+1:01
+And here I'll just use a set of curly braces and I will use the spread syntax to spread out the props that are coming in.
+1:09
+Remember props is an object and so when I spread the props it's essentially going to pull out and copy each one of the key value pairs from my object.
+1:20
+And in react, that's going to create each key of my object as the property that I'm adding to my button and the value of the object at that same key to be the value of the attribute that I'm adding here.
+1:33
+So let's see this in action.
+1:34
+I can go here.
+1:35
+We'll see I did add this on click and it has to use the exact same syntax that the native button is expecting.
+1:43
+Again, I can't say handle click because handle click is not a valid event listener.
+1:49
+So if this is on click, I'll hit save and I can click the button and we'll see that the click is passing through to my button just fine.
+1:57
+And also I can add something like the inline style attribute.
+2:02
+Let's say I want to change the color to green.
+2:06
+I'll hit refresh and the text of my button has turned green.
+2:09
+This is working because style is a valid prop that the native button is expecting and I'm taking this object of props which now has style which is this object with the color green and on click which is this function here.
+2:23
+I'm taking those, receiving them as props, and then spreading them out.
+2:28
+It's essentially the exact same thing as if I came in here, I copied everything, and then went to my button and pasted it in like that.
+2:37
+Now one slightly negative side effect of this is that if my button is also allowing in its API the user to do other things, like we are going to see an example where I might add a variant to my button, which is where we get things like the success warning and danger colors here.
+2:55
+Well, variant is not a valid button attribute, but because I'm just spreading in every prop that I'm passing in, my button element will receive a property called variant, but that's not gonna harm anything because it's not valid.
+3:10
+So that's just something to be aware of.
+3:13
+Now there's one little syntactic tweak that you will oftentimes see when it comes to how props is used inside of a component, but since that's a slightly different topic we're gonna talk about that in the next lesson.
