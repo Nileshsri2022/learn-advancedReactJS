@@ -1,0 +1,277 @@
+Transcript
+0:00
+Right.
+0:01
+Time to test this.
+0:01
+So I've saved, and I look in the console, and I see an empty array.
+0:06
+Oh, well, that makes sense, doesn't it?
+0:07
+Because we've not logged in.
+0:09
+And as I said in the past, scrim, the RLS policy we wrote only will allow authenticated users to select.
+0:17
+So let me log in as Dwight.
+0:21
+There we go.
+0:22
+And now I check the console again, and I can see that the session has changed.
+0:27
+So we now definitely have the session.
+0:28
+We're authenticated, but no new console log saying fetched users with the actual data from user profiles.
+0:37
+Now this is why I asked you this question.
+0:39
+Have a think why this is.
+0:44
+Let's have a look where we wrote this fetch users function.
+0:46
+Well, it's in our useEffect, and the useEffect has got the empty dependencies array.
+0:53
+So we think about what we've learned about useEffect in the past that will only run when the component mounts is first created or rendered, not on every rerender.
+1:05
+Ah, I'm starting to see the problem here.
+1:09
+So when we saved, it ran, but we weren't logged in.
+1:12
+So that's why we got this empty array here.
+1:15
+Then we logged in.
+1:17
+The app rerendered, but a use effect set up like this does not run again, does it?
+1:24
+Our on or state change radar CCTV picked up the session being created and updated session here, hence why we see the session change log.
+1:35
+And, of course, because there's been sign in success, we see this log, but we do not see a new fetched user's log with the data in an array.
+1:44
+So to make sure we're right here, if I were to refresh our app, meaning that the entire application is reloaded, a new initial render, fetched users would then run, and we should now, because we're authenticated, see the data back from this dot select.
+2:01
+Let's try that.
+2:03
+So I refresh in the browser.
+2:05
+I look in our console, and there we have it, fetched users.
+2:09
+And we've got an array of ID name account type objects.
+2:14
+So there's Pam, and we've got Dwight.
+2:17
+So we need fetch users to run after what changes?
+2:22
+If you're thinking session, yes.
+2:24
+Because remember, as soon as session is updated, we know we definitely are authenticated.
+2:31
+And that means we can run this, and we will definitely bypass the RLS bouncer and collect or fetch our data.
+2:39
+So how in React can we fire an effect when a specific value changes?
+2:45
+Now because of my wording there, I am implying, yes, a use effect.
+2:49
+But what has to be different to this use effect that we already have to make the effect run after something changes?
+2:57
+If your brain's going to dependencies array, that is correct.
+3:01
+If we add something to the dependencies array, then it will run after initial render, but also when that value changes.
+3:11
+So it's looking like we need a new use effect with the session state variable in the dependencies array.
+3:20
+So let me make that down here.
+3:23
+And we're gonna move all of this down into the new one, and then we add the session state variable in the dependencies array.
+3:32
+Okay.
+3:32
+We can get rid of this comment.
+3:34
+And remember I said that this new use effect will run after initial render and when session changes.
+3:40
+Well, after initial render is a little bit redundant because we already know that it's not going to fetch our data because we won't be authenticated.
+3:49
+So why don't we set a little if statement here to check and return if there's no session?
+3:56
+So we say, if there's no session, just return there and don't continue down the effect.
+4:04
+So that will mean that this doesn't run on initial render.
+4:07
+But because we've got session in the dependencies array, it will run again when the session object is full of data, meaning it will bypass this, run this, and we'll get our juicy data.
+4:20
+Okay.
+4:21
+Last thing to do, we need to do something with this because you see how it's gray?
+4:26
+That means we're not using this user's state array.
+4:30
+We need to add it down here to our context.
+4:33
+Yes.
+4:35
+So that we can access it through our app.
+4:39
+There we go.
+4:40
+And it's changed color.
+4:41
+Beautiful.
+4:42
+So let's save that.
+4:44
+Now let's test again.
+4:47
+We now don't see the empty array on initial render.
+4:51
+Thanks to this line.
+4:53
+I log in again.
+4:55
+We check the console, and there we have fetched users.
+5:01
+So thanks to this session in the dependencies array, because session has updated with the session object after login, this runs and updates our users.
+5:12
+Brilliant.
+5:13
+Another tick.
+5:15
+Next up, updating the form component.
+5:18
+See you in the next scrim.Transcript
+0:00
+Right.
+0:01
+Time to test this.
+0:01
+So I've saved, and I look in the console, and I see an empty array.
+0:06
+Oh, well, that makes sense, doesn't it?
+0:07
+Because we've not logged in.
+0:09
+And as I said in the past, scrim, the RLS policy we wrote only will allow authenticated users to select.
+0:17
+So let me log in as Dwight.
+0:21
+There we go.
+0:22
+And now I check the console again, and I can see that the session has changed.
+0:27
+So we now definitely have the session.
+0:28
+We're authenticated, but no new console log saying fetched users with the actual data from user profiles.
+0:37
+Now this is why I asked you this question.
+0:39
+Have a think why this is.
+0:44
+Let's have a look where we wrote this fetch users function.
+0:46
+Well, it's in our useEffect, and the useEffect has got the empty dependencies array.
+0:53
+So we think about what we've learned about useEffect in the past that will only run when the component mounts is first created or rendered, not on every rerender.
+1:05
+Ah, I'm starting to see the problem here.
+1:09
+So when we saved, it ran, but we weren't logged in.
+1:12
+So that's why we got this empty array here.
+1:15
+Then we logged in.
+1:17
+The app rerendered, but a use effect set up like this does not run again, does it?
+1:24
+Our on or state change radar CCTV picked up the session being created and updated session here, hence why we see the session change log.
+1:35
+And, of course, because there's been sign in success, we see this log, but we do not see a new fetched user's log with the data in an array.
+1:44
+So to make sure we're right here, if I were to refresh our app, meaning that the entire application is reloaded, a new initial render, fetched users would then run, and we should now, because we're authenticated, see the data back from this dot select.
+2:01
+Let's try that.
+2:03
+So I refresh in the browser.
+2:05
+I look in our console, and there we have it, fetched users.
+2:09
+And we've got an array of ID name account type objects.
+2:14
+So there's Pam, and we've got Dwight.
+2:17
+So we need fetch users to run after what changes?
+2:22
+If you're thinking session, yes.
+2:24
+Because remember, as soon as session is updated, we know we definitely are authenticated.
+2:31
+And that means we can run this, and we will definitely bypass the RLS bouncer and collect or fetch our data.
+2:39
+So how in React can we fire an effect when a specific value changes?
+2:45
+Now because of my wording there, I am implying, yes, a use effect.
+2:49
+But what has to be different to this use effect that we already have to make the effect run after something changes?
+2:57
+If your brain's going to dependencies array, that is correct.
+3:01
+If we add something to the dependencies array, then it will run after initial render, but also when that value changes.
+3:11
+So it's looking like we need a new use effect with the session state variable in the dependencies array.
+3:20
+So let me make that down here.
+3:23
+And we're gonna move all of this down into the new one, and then we add the session state variable in the dependencies array.
+3:32
+Okay.
+3:32
+We can get rid of this comment.
+3:34
+And remember I said that this new use effect will run after initial render and when session changes.
+3:40
+Well, after initial render is a little bit redundant because we already know that it's not going to fetch our data because we won't be authenticated.
+3:49
+So why don't we set a little if statement here to check and return if there's no session?
+3:56
+So we say, if there's no session, just return there and don't continue down the effect.
+4:04
+So that will mean that this doesn't run on initial render.
+4:07
+But because we've got session in the dependencies array, it will run again when the session object is full of data, meaning it will bypass this, run this, and we'll get our juicy data.
+4:20
+Okay.
+4:21
+Last thing to do, we need to do something with this because you see how it's gray?
+4:26
+That means we're not using this user's state array.
+4:30
+We need to add it down here to our context.
+4:33
+Yes.
+4:35
+So that we can access it through our app.
+4:39
+There we go.
+4:40
+And it's changed color.
+4:41
+Beautiful.
+4:42
+So let's save that.
+4:44
+Now let's test again.
+4:47
+We now don't see the empty array on initial render.
+4:51
+Thanks to this line.
+4:53
+I log in again.
+4:55
+We check the console, and there we have fetched users.
+5:01
+So thanks to this session in the dependencies array, because session has updated with the session object after login, this runs and updates our users.
+5:12
+Brilliant.
+5:13
+Another tick.
+5:15
+Next up, updating the form component.
+5:18
+See you in the next scrim.
